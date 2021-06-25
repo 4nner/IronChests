@@ -1,17 +1,25 @@
 package io.github.cyberanner.ironchests.blocks;
 
+import io.github.cyberanner.ironchests.blocks.blockentities.CopperChestBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 
 
 public class GenericChestBlock extends Block {
     public GenericChestBlock(FabricBlockSettings settings) {
         super(settings);
+    }
+
+    // A side effect of extending BlockWithEntity is it changes the render type to INVISIBLE, so we have to revert this
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
     }
 
     // Avoids adjacent blocks from hiding their faces.
