@@ -1,14 +1,10 @@
 package io.github.cyberanner.ironchests.blocks;
 
-import io.github.cyberanner.ironchests.blocks.blockentities.CopperChestBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
 
 
 public class GenericChestBlock extends Block {

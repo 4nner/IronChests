@@ -4,10 +4,7 @@ package io.github.cyberanner.ironchests.blocks.blockentities;
 import io.github.cyberanner.ironchests.registry.ModBlockEntityType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.BlockPos;
 
 public class CopperChestBlockEntity extends BlockEntity {
