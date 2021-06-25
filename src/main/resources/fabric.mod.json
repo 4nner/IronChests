@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "ironchests",
+  "version": "${version}",
+
+  "name": "Iron Chests for Fabric",
+  "description": "Iron Chests for Fabric Mod Loader.",
+  "authors": [
+    "Cyber Anner"
+  ],
+  "contact": {
+    "homepage": "https://github.com/cyberanner/ironchests",
+    "sources": "https://github.com/cyberanner/ironchests"
+  },
+
+  "license": "gpl-3.0",
+  "icon": "assets/ironchests/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.cyberanner.ironchests.IronChests"
+    ]
+  },
+  "mixins": [
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.17.x",
+    "java": ">=16"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
