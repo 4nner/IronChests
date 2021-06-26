@@ -1,5 +1,6 @@
 {
   "item.ironchests.wood_copper_upgrade": "Wooden Chest to Copper Upgrade",
   "block.ironchests.copper_chest": "Copper Chest",
+  "block.ironchests.iron_chest": "Iron Chest",
   "itemGroup.ironchests.general": "Iron Chests"
 }

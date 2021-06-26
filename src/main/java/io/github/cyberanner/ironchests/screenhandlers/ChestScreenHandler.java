@@ -1,13 +1,10 @@
 package io.github.cyberanner.ironchests.screenhandlers;
 
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
-import io.github.cottonmc.cotton.gui.widget.WGridPanel;
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
 import io.github.cottonmc.cotton.gui.widget.data.Insets;
 import io.github.cyberanner.ironchests.blocks.ChestTypes;
-import io.github.cyberanner.ironchests.blocks.blockentities.CopperChestEntity;
-import io.github.cyberanner.ironchests.registry.ModScreenHandlerType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;

@@ -1,9 +1,9 @@
 package io.github.cyberanner.ironchests.blocks;
 
 import io.github.cyberanner.ironchests.blocks.blockentities.CopperChestEntity;
-import io.github.cyberanner.ironchests.blocks.blockentities.GenericChestEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.enums.ChestType;
 import net.minecraft.entity.mob.PiglinBrain;
@@ -27,7 +27,7 @@ import net.minecraft.world.World;
 import java.util.function.Supplier;
 
 
-public class GenericChestBlock extends BlockWithEntity {
+public class GenericChestBlock extends BlockWithEntity implements BlockEntityProvider{
 
     public static final DirectionProperty FACING;
     public static final EnumProperty<ChestType> CHEST_TYPE;
@@ -147,5 +147,6 @@ public class GenericChestBlock extends BlockWithEntity {
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING, CHEST_TYPE);
     }
+
 }
 

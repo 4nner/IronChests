@@ -8,7 +8,6 @@ import net.minecraft.sound.BlockSoundGroup;
 
 
 public class CopperChestBlock extends GenericChestBlock{
-
     public CopperChestBlock() {
         super(FabricBlockSettings.of(Material.METAL)
                         .hardness(3.0F)
