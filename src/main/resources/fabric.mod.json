@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "io.github.cyberanner.ironchests.IronChests"
+    ],
+    "client": [
+      "io.github.cyberanner.ironchests.IronChestsClient"
     ]
   },
   "mixins": [

@@ -3,6 +3,7 @@ package io.github.cyberanner.ironchests;
 import io.github.cyberanner.ironchests.registry.ModBlockEntityType;
 import io.github.cyberanner.ironchests.registry.ModBlocks;
 import io.github.cyberanner.ironchests.registry.ModItems;
+import io.github.cyberanner.ironchests.registry.ModScreenHandlerType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
@@ -22,5 +23,6 @@ public class IronChests implements ModInitializer {
         ModItems.registerItems();
         ModBlocks.registerBlocks();
         ModBlockEntityType.registerBlockEntities();
+        ModScreenHandlerType.registerScreenHandlers();
     }
 }
