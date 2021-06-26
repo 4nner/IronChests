@@ -1,6 +1,7 @@
 package io.github.cyberanner.ironchests.registry;
 
 import io.github.cyberanner.ironchests.IronChests;
+import io.github.cyberanner.ironchests.blocks.ChestTypes;
 import io.github.cyberanner.ironchests.screenhandlers.ChestScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.screen.ScreenHandlerContext;
@@ -12,6 +13,6 @@ public class ModScreenHandlerType {
 
 
     public static void registerScreenHandlers() {
-        COPPER_CHEST = ScreenHandlerRegistry.registerSimple((new Identifier(IronChests.MOD_ID, "copper_chest")), (syncId, inventory) -> new ChestScreenHandler(syncId, inventory, ScreenHandlerContext.EMPTY));
+        COPPER_CHEST = ScreenHandlerRegistry.registerSimple(new Identifier(IronChests.MOD_ID, "copper_chest"), (syncId, inventory) -> new ChestScreenHandler(COPPER_CHEST, ChestTypes.COPPER, syncId, inventory, ScreenHandlerContext.EMPTY));
     }
 }

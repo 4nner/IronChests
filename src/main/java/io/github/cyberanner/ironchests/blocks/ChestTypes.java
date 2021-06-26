@@ -8,10 +8,10 @@ import net.minecraft.util.Identifier;
 
 public enum ChestTypes {
 
-    IRON(54, 9, 184, 222, new Identifier(IronChests.MOD_ID, "entity/chest/iron_chest"), 256, 256),
-    GOLD(81, 9, 184, 276, new Identifier(IronChests.MOD_ID, "entity/chest/gold_chest"), 256, 276),
+    COPPER(45, 9, 176, 204, new Identifier(IronChests.MOD_ID, "entity/chest/copper_chest"), 256, 256),
+    IRON(54, 9, 176, 222, new Identifier(IronChests.MOD_ID, "entity/chest/iron_chest"), 256, 256),
+    GOLD(81, 9, 176, 276, new Identifier(IronChests.MOD_ID, "entity/chest/gold_chest"), 256, 276),
     DIAMOND(108, 12, 238, 276, new Identifier(IronChests.MOD_ID, "entity/chest/diamond_chest"), 256, 276),
-    COPPER(45, 9, 184, 204, new Identifier(IronChests.MOD_ID, "entity/chest/copper_chest"), 256, 256),
     SILVER(72, 9, 184, 258, new Identifier(IronChests.MOD_ID, "entity/chest/silver_chest"), 256, 276),
     CRYSTAL(108, 12, 238, 276, new Identifier(IronChests.MOD_ID, "entity/chest/crystal_chest"), 256, 276),
     OBSIDIAN(108, 12, 238, 276, new Identifier(IronChests.MOD_ID,"entity/chest/obsidian_chest"), 256, 276),
@@ -49,5 +49,18 @@ public enum ChestTypes {
                 return Blocks.CHEST;
         }
     }
+
+    /*
+    public GenericChestEntity makeEntity() {
+        switch (this) {
+
+            case COPPER:
+                return new CopperChestEntity();
+            default:
+                return null;
+        }
+    }
+
+     */
 
 }

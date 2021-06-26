@@ -5,8 +5,12 @@ import io.github.cyberanner.ironchests.implementations.ImplementedInventory;
 import io.github.cyberanner.ironchests.registry.ModBlockEntityType;
 import io.github.cyberanner.ironchests.registry.ModScreenHandlerType;
 import io.github.cyberanner.ironchests.screenhandlers.ChestScreenHandler;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.EnvironmentInterface;
+import net.fabricmc.api.EnvironmentInterfaces;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.block.ChestAnimationProgress;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
@@ -20,10 +24,17 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 
-public class CopperChestEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
+
+@EnvironmentInterfaces({@EnvironmentInterface(
+        value = EnvType.CLIENT,
+        itf = ChestAnimationProgress.class
+)})
+public class GenericChestEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(getSize(), ItemStack.EMPTY);
 
-    public CopperChestEntity(BlockPos pos, BlockState state) {
+    public static ChestTypes type = ChestTypes.COPPER;
+
+    public GenericChestEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntityType.COPPER_CHEST, pos, state);
     }
 
@@ -64,6 +75,6 @@ public class CopperChestEntity extends BlockEntity implements NamedScreenHandler
     }
 
     public static int getSize() {
-        return 45;
+        return type.size;
     }
 }
