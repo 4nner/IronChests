@@ -25,87 +25,9 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 
-public class CopperChestEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
-    private final ChestTypes chestType = ChestTypes.COPPER;
-    public int numPlayersUsing;
 
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(chestType.size, ItemStack.EMPTY);
-
-
+public class CopperChestEntity extends GenericChestEntity {
     public CopperChestEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.COPPER_CHEST, pos, state);
-    }
-
-
-    //From the ImplementedInventory Interface
-    @Override
-    public DefaultedList<ItemStack> getItems() {
-        return inventory;
-    }
-
-    //These Methods are from the NamedScreenHandlerFactory Interface
-    //createMenu creates the ScreenHandler itself
-    //getDisplayName will Provide its name which is normally shown at the top
-    @Override
-    public Text getDisplayName() {
-        // Using the block name as the screen title
-        return new TranslatableText(getCachedState().getBlock().getTranslationKey());
-    }
-
-    @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {
-        return new ChestScreenHandler(ModScreenHandlerType.COPPER_CHEST, chestType, syncId, inventory, ScreenHandlerContext.create(world, pos));
-    }
-
-    // Reads and Saves Inventory Content
-    @Override
-    public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
-        Inventories.readNbt(nbt, this.inventory);
-    }
-
-    @Override
-    public NbtCompound writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
-        Inventories.writeNbt(nbt, this.inventory);
-        return nbt;
-    }
-
-    // Minecraft Stats Integration "Number of Chests opened"
-    @Override
-    public void onOpen(PlayerEntity player) {
-        if (!player.isSpectator()) {
-            if (this.numPlayersUsing < 0) {
-                this.numPlayersUsing = 0;
-            }
-            ++this.numPlayersUsing;
-            this.onInvOpenOrClose();
-            this.playSound(SoundEvents.BLOCK_CHEST_OPEN);
-        }
-    }
-
-    @Override
-    public void onClose(PlayerEntity player) {
-        if (!player.isSpectator()) {
-            --this.numPlayersUsing;
-            this.onInvOpenOrClose();
-            this.playSound(SoundEvents.BLOCK_CHEST_CLOSE);
-        }
-    }
-
-    protected void onInvOpenOrClose() {
-        Block block = this.getCachedState().getBlock();
-        if (block instanceof CopperChestBlock) {
-            this.world.addSyncedBlockEvent(this.pos, block, 1, this.numPlayersUsing);
-            this.world.updateNeighborsAlways(this.pos, block);
-        }
-    }
-
-
-    private void playSound(SoundEvent soundEvent) {
-        double d0 = (double) this.pos.getX() + 0.5D;
-        double d1 = (double) this.pos.getY() + 0.5D;
-        double d2 = (double) this.pos.getZ() + 0.5D;
-        this.world.playSound((PlayerEntity) null, d0, d1, d2, soundEvent, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
+        super(ModBlockEntityType.COPPER_CHEST, pos, state, ChestTypes.COPPER);
     }
 }

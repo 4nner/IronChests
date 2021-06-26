@@ -1,7 +1,8 @@
-/*
+
 package io.github.cyberanner.ironchests.blocks.blockentities;
 
 import io.github.cyberanner.ironchests.blocks.ChestTypes;
+import io.github.cyberanner.ironchests.blocks.CopperChestBlock;
 import io.github.cyberanner.ironchests.blocks.GenericChestBlock;
 import io.github.cyberanner.ironchests.implementations.ImplementedInventory;
 import io.github.cyberanner.ironchests.registry.ModBlockEntityType;
@@ -15,6 +16,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.client.block.ChestAnimationProgress;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -24,6 +26,9 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
@@ -37,35 +42,28 @@ import net.minecraft.world.World;
         value = EnvType.CLIENT,
         itf = ChestAnimationProgress.class
 )})
-public class GenericChestEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory, ChestAnimationProgress {
-
-    private DefaultedList<ItemStack> chestContents;
-    protected float lidAngle;
-    protected float prevLidAngle;
-    public int numPlayersUsing;
+public class GenericChestEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
+    private final DefaultedList<ItemStack> inventory;
+    private final ChestTypes chestType;
     private final int inventorySize;
-    ChestTypes type;
+    public int numPlayersUsing;
 
 
-    public GenericChestEntity(BlockPos pos, BlockState state, ChestTypes type) {
-        super(ModBlockEntityType.COPPER_CHEST, pos, state);
+
+
+    public GenericChestEntity(BlockEntityType<? extends GenericChestEntity> entity, BlockPos pos, BlockState state, ChestTypes type) {
+        super(entity, pos, state);
+        chestType = type;
         inventorySize = type.size;
-        this.type = type;
-        chestContents = DefaultedList.ofSize(inventorySize, ItemStack.EMPTY);
+        inventory = DefaultedList.ofSize(inventorySize, ItemStack.EMPTY);
     }
 
-    @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {
-        return new ChestScreenHandler(ModScreenHandlerType.IRON_CHEST, type, syncId, inventory, ScreenHandlerContext.create(world, pos));
-    }
+
     //From the ImplementedInventory Interface
     @Override
     public DefaultedList<ItemStack> getItems() {
-        return chestContents;
-
+        return inventory;
     }
-
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(size(), ItemStack.EMPTY);
 
     //These Methods are from the NamedScreenHandlerFactory Interface
     //createMenu creates the ScreenHandler itself
@@ -76,51 +74,26 @@ public class GenericChestEntity extends BlockEntity implements NamedScreenHandle
         return new TranslatableText(getCachedState().getBlock().getTranslationKey());
     }
 
-
     @Override
-    public int size() {
-        return inventorySize;
+    public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {
+        return new ChestScreenHandler(ModScreenHandlerType.COPPER_CHEST, chestType, syncId, inventory, ScreenHandlerContext.create(world, pos));
     }
 
-    @Environment(EnvType.CLIENT)
-    public float getAnimationProgress(float tickDelta) {
-        return MathHelper.lerp(tickDelta, this.prevLidAngle, this.lidAngle);
-    }
-
-    @Override
-    public boolean isEmpty() {
-        for (ItemStack itemstack : this.chestContents) {
-            if (!itemstack.isEmpty()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
+    // Reads and Saves Inventory Content
     @Override
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
-        Inventories.readNbt(nbt, this.chestContents);
+        Inventories.readNbt(nbt, this.inventory);
     }
 
     @Override
     public NbtCompound writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        Inventories.writeNbt(nbt, this.chestContents);
+        Inventories.writeNbt(nbt, this.inventory);
         return nbt;
     }
 
-
-    @Override
-    public boolean onSyncedBlockEvent(int type, int data) {
-        if (type == 1) {
-            this.numPlayersUsing = data;
-            return true;
-        } else {
-            return super.onSyncedBlockEvent(type, data);
-        }
-    }
-
+    // Minecraft Stats Integration "Number of Chests opened"
     @Override
     public void onOpen(PlayerEntity player) {
         if (!player.isSpectator()) {
@@ -129,6 +102,7 @@ public class GenericChestEntity extends BlockEntity implements NamedScreenHandle
             }
             ++this.numPlayersUsing;
             this.onInvOpenOrClose();
+            this.playSound(SoundEvents.BLOCK_CHEST_OPEN);
         }
     }
 
@@ -137,15 +111,23 @@ public class GenericChestEntity extends BlockEntity implements NamedScreenHandle
         if (!player.isSpectator()) {
             --this.numPlayersUsing;
             this.onInvOpenOrClose();
+            this.playSound(SoundEvents.BLOCK_CHEST_CLOSE);
         }
     }
 
     protected void onInvOpenOrClose() {
         Block block = this.getCachedState().getBlock();
-        if (block instanceof GenericChestBlock) {
+        if (block instanceof CopperChestBlock) {
             this.world.addSyncedBlockEvent(this.pos, block, 1, this.numPlayersUsing);
             this.world.updateNeighborsAlways(this.pos, block);
         }
     }
+
+
+    private void playSound(SoundEvent soundEvent) {
+        double d0 = (double) this.pos.getX() + 0.5D;
+        double d1 = (double) this.pos.getY() + 0.5D;
+        double d2 = (double) this.pos.getZ() + 0.5D;
+        this.world.playSound((PlayerEntity) null, d0, d1, d2, soundEvent, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
+    }
 }
- */
