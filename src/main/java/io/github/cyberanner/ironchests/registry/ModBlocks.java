@@ -9,11 +9,11 @@ import net.minecraft.util.registry.Registry;
 public class ModBlocks {
 
     public static final Block COPPER_CHEST = new CopperChestBlock();
-    //public static final Block IRON_CHEST = new IronChestBlock();
+    public static final Block IRON_CHEST = new IronChestBlock();
 
 
     public static void registerBlocks() {
         Registry.register(Registry.BLOCK, new Identifier(IronChests.MOD_ID, "copper_chest"), COPPER_CHEST);
-        //Registry.register(Registry.BLOCK, new Identifier(IronChests.MOD_ID, "iron_chest"), IRON_CHEST);
+        Registry.register(Registry.BLOCK, new Identifier(IronChests.MOD_ID, "iron_chest"), IRON_CHEST);
     }
 }

@@ -1,4 +1,3 @@
-/*
 package io.github.cyberanner.ironchests.blocks;
 
 
@@ -26,4 +25,3 @@ public class IronChestBlock extends GenericChestBlock{
         return new IronChestEntity(pos, state);
     }
 }
-*/
