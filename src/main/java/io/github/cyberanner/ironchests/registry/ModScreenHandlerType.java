@@ -13,6 +13,7 @@ public class ModScreenHandlerType {
     public static ScreenHandlerType<ChestScreenHandler> IRON_CHEST;
     public static ScreenHandlerType<ChestScreenHandler> GOLD_CHEST;
     public static ScreenHandlerType<ChestScreenHandler> DIAMOND_CHEST;
+    public static ScreenHandlerType<ChestScreenHandler> OBSIDIAN_CHEST;
 
 
     public static void registerScreenHandlers() {
@@ -20,5 +21,6 @@ public class ModScreenHandlerType {
         IRON_CHEST = ScreenHandlerRegistry.registerSimple(new Identifier(IronChests.MOD_ID, "iron_chest"), (syncId, inventory) -> new ChestScreenHandler(IRON_CHEST, ChestTypes.IRON, syncId, inventory, ScreenHandlerContext.EMPTY));
         GOLD_CHEST = ScreenHandlerRegistry.registerSimple(new Identifier(IronChests.MOD_ID, "gold_chest"), (syncId, inventory) -> new ChestScreenHandler(GOLD_CHEST, ChestTypes.GOLD, syncId, inventory, ScreenHandlerContext.EMPTY));
         DIAMOND_CHEST = ScreenHandlerRegistry.registerSimple(new Identifier(IronChests.MOD_ID, "diamond_chest"), (syncId, inventory) -> new ChestScreenHandler(DIAMOND_CHEST, ChestTypes.DIAMOND, syncId, inventory, ScreenHandlerContext.EMPTY));
+        OBSIDIAN_CHEST = ScreenHandlerRegistry.registerSimple(new Identifier(IronChests.MOD_ID, "obsidian_chest"), (syncId, inventory) -> new ChestScreenHandler(OBSIDIAN_CHEST, ChestTypes.OBSIDIAN, syncId, inventory, ScreenHandlerContext.EMPTY));
     }
 }

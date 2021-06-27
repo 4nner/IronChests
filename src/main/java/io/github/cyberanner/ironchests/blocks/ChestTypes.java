@@ -15,9 +15,9 @@ public enum ChestTypes {
     IRON(54, 9, 176, 222, new Identifier(IronChests.MOD_ID, "models/block/iron_chest"), 256, 256),
     GOLD(81, 9, 176, 276, new Identifier(IronChests.MOD_ID, "models/block/gold_chest"), 256, 276),
     DIAMOND(108, 12, 230, 276, new Identifier(IronChests.MOD_ID, "models/block/diamond_chest"), 256, 276),
+    OBSIDIAN(108, 12, 230, 276, new Identifier(IronChests.MOD_ID, "models/block/obsidian_chest"), 256, 276),
     SILVER(72, 9, 184, 258, new Identifier(IronChests.MOD_ID, "models/block/silver_chest"), 256, 276),
     CRYSTAL(108, 12, 238, 276, new Identifier(IronChests.MOD_ID, "models/block/crystal_chest"), 256, 276),
-    OBSIDIAN(108, 12, 238, 276, new Identifier(IronChests.MOD_ID, "models/block/obsidian_chest"), 256, 276),
     DIRT(1, 1, 184, 184, new Identifier(IronChests.MOD_ID, "models/block/dirt_chest"), 256, 256),
     HOLIDAY(27, 9, 0, 0, new Identifier("models/block/christmas"), 0, 0),
     WOOD(0, 0, 0, 0, new Identifier(IronChests.MOD_ID, ("models/block/dirt_chest")), 0, 0);
