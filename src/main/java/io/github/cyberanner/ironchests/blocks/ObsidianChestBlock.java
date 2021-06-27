@@ -14,8 +14,8 @@ import net.minecraft.util.math.BlockPos;
 public class ObsidianChestBlock extends GenericChestBlock{
     public ObsidianChestBlock() {
         super(FabricBlockSettings.of(Material.STONE)
-                .hardness(3.0F)
-                .resistance(6.0F)
+                .hardness(50.0F)
+                .resistance(1200.0F)
                 .sounds(BlockSoundGroup.STONE)
                 .breakByTool(FabricToolTags.PICKAXES, 3)
                 .requiresTool());

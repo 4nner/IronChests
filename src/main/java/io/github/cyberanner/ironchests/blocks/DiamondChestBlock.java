@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 public class DiamondChestBlock extends GenericChestBlock{
         public DiamondChestBlock() {
             super(FabricBlockSettings.of(Material.METAL)
-                    .hardness(3.0F)
+                    .hardness(5.0F)
                     .resistance(6.0F)
                     .sounds(BlockSoundGroup.AMETHYST_BLOCK)
                     .breakByTool(FabricToolTags.PICKAXES, 1)
