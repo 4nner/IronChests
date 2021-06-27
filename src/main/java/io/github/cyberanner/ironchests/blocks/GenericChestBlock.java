@@ -1,56 +1,58 @@
 package io.github.cyberanner.ironchests.blocks;
 
 import io.github.cyberanner.ironchests.blocks.blockentities.CopperChestEntity;
+import io.github.cyberanner.ironchests.blocks.blockentities.GenericChestEntity;
+import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.block.enums.ChestType;
+import net.minecraft.client.block.ChestAnimationProgress;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.mob.PiglinBrain;
+import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.stat.Stat;
 import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.*;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.function.BiPredicate;
 import java.util.function.Supplier;
 
 
-public class GenericChestBlock extends BlockWithEntity implements BlockEntityProvider{
+public class GenericChestBlock extends BlockWithEntity implements BlockEntityProvider {
 
-    public static final DirectionProperty FACING;
-    public static final EnumProperty<ChestType> CHEST_TYPE;
-    protected static final VoxelShape DOUBLE_NORTH_SHAPE;
-    protected static final VoxelShape DOUBLE_SOUTH_SHAPE;
-    protected static final VoxelShape DOUBLE_WEST_SHAPE;
-    protected static final VoxelShape DOUBLE_EAST_SHAPE;
-    protected static final VoxelShape SINGLE_SHAPE;
-
-
-    static {
-        FACING = HorizontalFacingBlock.FACING;
-        CHEST_TYPE = Properties.CHEST_TYPE;
-        DOUBLE_NORTH_SHAPE = Block.createCuboidShape(1.0D, 0.0D, 0.0D, 15.0D, 14.0D, 15.0D);
-        DOUBLE_SOUTH_SHAPE = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 16.0D);
-        DOUBLE_WEST_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D);
-        DOUBLE_EAST_SHAPE = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 16.0D, 14.0D, 15.0D);
-        SINGLE_SHAPE = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D);
-    }
 
     public GenericChestBlock(Settings settings) {
         super(settings);
+        setDefaultState(this.stateManager.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
     }
 
     @Override
@@ -63,6 +65,33 @@ public class GenericChestBlock extends BlockWithEntity implements BlockEntityPro
         //With inheriting from BlockWithEntity this defaults to INVISIBLE, so we need to change that!
         return BlockRenderType.MODEL;
     }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
+        stateManager.add(Properties.HORIZONTAL_FACING);
+    }
+
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext ctx) {
+        Direction dir = state.get(HorizontalFacingBlock.FACING);
+        switch(dir) {
+            case NORTH:
+                return Block.createCuboidShape(1.0D, 0.0D, 0.0D, 15.0D, 14.0D, 15.0D);
+            case SOUTH:
+                return Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 16.0D);
+            case EAST:
+                return Block.createCuboidShape(0.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D);
+            case WEST:
+                return Block.createCuboidShape(1.0D, 0.0D, 1.0D, 16.0D, 14.0D, 15.0D);
+            default:
+                return Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 14.0D, 15.0D);
+        }
+    }
+
+    public BlockState getPlacementState(ItemPlacementContext ctx) {
+        return (BlockState)this.getDefaultState().with(Properties.HORIZONTAL_FACING, ctx.getPlayerFacing().getOpposite());
+    }
+
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
@@ -107,45 +136,4 @@ public class GenericChestBlock extends BlockWithEntity implements BlockEntityPro
     public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
     }
-
-    // Face Chest in the right side
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        if (state.get(CHEST_TYPE) == ChestType.SINGLE) {
-            return SINGLE_SHAPE;
-        } else {
-            switch(getFacing(state)) {
-                case NORTH:
-                default:
-                    return DOUBLE_NORTH_SHAPE;
-                case SOUTH:
-                    return DOUBLE_SOUTH_SHAPE;
-                case WEST:
-                    return DOUBLE_WEST_SHAPE;
-                case EAST:
-                    return DOUBLE_EAST_SHAPE;
-            }
-        }
-    }
-
-    public static Direction getFacing(BlockState state) {
-        Direction direction = (Direction)state.get(FACING);
-        return state.get(CHEST_TYPE) == ChestType.LEFT ? direction.rotateYClockwise() : direction.rotateYCounterclockwise();
-    }
-
-    @Override
-    public BlockState rotate(BlockState state, BlockRotation rotation) {
-        return (BlockState)state.with(FACING, rotation.rotate((Direction)state.get(FACING)));
-    }
-
-    @Override
-    public BlockState mirror(BlockState state, BlockMirror mirror) {
-        return state.rotate(mirror.getRotation((Direction)state.get(FACING)));
-    }
-
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING, CHEST_TYPE);
-    }
-
 }

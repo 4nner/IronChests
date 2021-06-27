@@ -14,7 +14,7 @@ import net.minecraft.util.math.BlockPos;
 public class IronChestEntity extends GenericChestEntity {
 
     public IronChestEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntityType.IRON_CHEST, pos, state,ChestTypes.IRON);
+        super(ModBlockEntityType.IRON_CHEST, pos, state, ChestTypes.IRON);
     }
 
     @Override

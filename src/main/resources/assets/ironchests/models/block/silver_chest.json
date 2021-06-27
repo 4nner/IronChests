@@ -1,0 +1,7 @@
+{
+    "parent": "ironchests:block/chest_template",
+    "textures": {
+        "0": "ironchests:model/silver_chest",
+        "particle": "ironchests:block/silver_break"
+    }
+}

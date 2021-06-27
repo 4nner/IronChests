@@ -1,0 +1,7 @@
+{
+    "parent": "ironchests:block/chest_template",
+    "textures": {
+        "0": "minecraft:model/christmas",
+        "particle": "ironchests:block/holiday_break"
+    }
+}

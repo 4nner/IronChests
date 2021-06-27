@@ -14,8 +14,8 @@ public class ModBlockEntityType {;
     // Declaring Chest Block Entities
     public static final BlockEntityType<CopperChestEntity> COPPER_CHEST = FabricBlockEntityTypeBuilder.create(CopperChestEntity::new, ModBlocks.COPPER_CHEST).build(null);
     public static final BlockEntityType<IronChestEntity> IRON_CHEST = FabricBlockEntityTypeBuilder.create(IronChestEntity::new, ModBlocks.IRON_CHEST).build(null);
-    public static final BlockEntityType<IronChestEntity> GOLD_CHEST = FabricBlockEntityTypeBuilder.create(IronChestEntity::new, ModBlocks.GOLD_CHEST).build(null);
-    public static final BlockEntityType<IronChestEntity> DIAMOND_CHEST = FabricBlockEntityTypeBuilder.create(IronChestEntity::new, ModBlocks.DIAMOND_CHEST).build(null);
+    public static final BlockEntityType<GoldChestEntity> GOLD_CHEST = FabricBlockEntityTypeBuilder.create(GoldChestEntity::new, ModBlocks.GOLD_CHEST).build(null);
+    public static final BlockEntityType<DiamondChestEntity> DIAMOND_CHEST = FabricBlockEntityTypeBuilder.create(DiamondChestEntity::new, ModBlocks.DIAMOND_CHEST).build(null);
 
     public static void registerBlockEntities() {
         // Registering Chest Block Entities

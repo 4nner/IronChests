@@ -1,4 +1,3 @@
-
 package io.github.cyberanner.ironchests.blocks.blockentities;
 
 import io.github.cyberanner.ironchests.blocks.ChestTypes;

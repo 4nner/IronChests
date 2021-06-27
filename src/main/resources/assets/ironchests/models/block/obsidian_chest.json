@@ -1,0 +1,7 @@
+{
+    "parent": "ironchests:block/chest_template",
+    "textures": {
+        "0": "ironchests:model/obsidian_chest",
+        "particle": "minecraft:block/obsidian"
+    }
+}

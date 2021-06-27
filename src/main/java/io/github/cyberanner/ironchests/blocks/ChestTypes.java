@@ -1,23 +1,26 @@
 package io.github.cyberanner.ironchests.blocks;
 
 import io.github.cyberanner.ironchests.IronChests;
+import io.github.cyberanner.ironchests.blocks.blockentities.*;
 import io.github.cyberanner.ironchests.registry.ModBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 
 public enum ChestTypes {
 
-    COPPER(45, 9, 176, 204, new Identifier(IronChests.MOD_ID, "entity/chest/copper_chest"), 256, 256),
-    IRON(54, 9, 176, 222, new Identifier(IronChests.MOD_ID, "entity/chest/iron_chest"), 256, 256),
-    GOLD(81, 9, 176, 276, new Identifier(IronChests.MOD_ID, "entity/chest/gold_chest"), 256, 276),
-    DIAMOND(108, 12, 238, 276, new Identifier(IronChests.MOD_ID, "entity/chest/diamond_chest"), 256, 276),
-    SILVER(72, 9, 184, 258, new Identifier(IronChests.MOD_ID, "entity/chest/silver_chest"), 256, 276),
-    CRYSTAL(108, 12, 238, 276, new Identifier(IronChests.MOD_ID, "entity/chest/crystal_chest"), 256, 276),
-    OBSIDIAN(108, 12, 238, 276, new Identifier(IronChests.MOD_ID,"entity/chest/obsidian_chest"), 256, 276),
-    DIRT(1, 1, 184, 184, new Identifier(IronChests.MOD_ID, "entity/chest/dirt_chest"), 256, 256),
-    HOLIDAY(27, 9, 0, 0, new Identifier("entity/chest/christmas"), 0, 0),
-    WOOD(0, 0, 0, 0, new Identifier(IronChests.MOD_ID, ("entity/chest/dirt_chest")), 0, 0);
+    COPPER(45, 9, 176, 204, new Identifier(IronChests.MOD_ID, "models/block/copper_chest"), 256, 256),
+    IRON(54, 9, 176, 222, new Identifier(IronChests.MOD_ID, "models/block/iron_chest"), 256, 256),
+    GOLD(81, 9, 176, 276, new Identifier(IronChests.MOD_ID, "models/block/gold_chest"), 256, 276),
+    DIAMOND(108, 12, 230, 276, new Identifier(IronChests.MOD_ID, "models/block/diamond_chest"), 256, 276),
+    SILVER(72, 9, 184, 258, new Identifier(IronChests.MOD_ID, "models/block/silver_chest"), 256, 276),
+    CRYSTAL(108, 12, 238, 276, new Identifier(IronChests.MOD_ID, "models/block/crystal_chest"), 256, 276),
+    OBSIDIAN(108, 12, 238, 276, new Identifier(IronChests.MOD_ID, "models/block/obsidian_chest"), 256, 276),
+    DIRT(1, 1, 184, 184, new Identifier(IronChests.MOD_ID, "models/block/dirt_chest"), 256, 256),
+    HOLIDAY(27, 9, 0, 0, new Identifier("models/block/christmas"), 0, 0),
+    WOOD(0, 0, 0, 0, new Identifier(IronChests.MOD_ID, ("models/block/dirt_chest")), 0, 0);
 
     public final int size;
     public final int rowLength;
@@ -45,22 +48,34 @@ public enum ChestTypes {
         switch (type) {
             case COPPER:
                 return ModBlocks.COPPER_CHEST;
+            case IRON:
+                return ModBlocks.IRON_CHEST;
+            case GOLD:
+                return ModBlocks.GOLD_CHEST;
+            case DIAMOND:
+                return ModBlocks.DIAMOND_CHEST;
             default:
                 return Blocks.CHEST;
         }
     }
 
     /*
-    public GenericChestEntity makeEntity() {
+    // Used to implement Item Upgrades
+    public GenericChestEntity makeEntity(BlockPos pos, BlockState state) {
         switch (this) {
-
             case COPPER:
-                return new CopperChestEntity();
+                return new CopperChestEntity(pos, state);
+            case IRON:
+                return new IronChestEntity(pos, state);
+            case GOLD:
+                return new GoldChestEntity(pos, state);
+            case DIAMOND:
+                return new DiamondChestEntity(pos, state);
             default:
                 return null;
+
         }
     }
 
      */
-
 }
