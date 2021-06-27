@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "ironchests:block/gold_chest" },
+        "facing=east":  { "model": "ironchests:block/gold_chest", "y":  90},
+        "facing=south": { "model": "ironchests:block/gold_chest", "y": 180 },
+        "facing=west":  { "model": "ironchests:block/gold_chest", "y": 270 }
+    }
+}

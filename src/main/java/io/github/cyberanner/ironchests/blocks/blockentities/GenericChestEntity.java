@@ -6,14 +6,10 @@ import io.github.cyberanner.ironchests.blocks.CopperChestBlock;
 import io.github.cyberanner.ironchests.implementations.ImplementedInventory;
 import io.github.cyberanner.ironchests.registry.ModScreenHandlerType;
 import io.github.cyberanner.ironchests.screenhandlers.ChestScreenHandler;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.EnvironmentInterface;
-import net.fabricmc.api.EnvironmentInterfaces;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.block.ChestAnimationProgress;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
@@ -31,11 +27,7 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 
 
-@EnvironmentInterfaces({@EnvironmentInterface(
-        value = EnvType.CLIENT,
-        itf = ChestAnimationProgress.class
-)})
-public class GenericChestEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
+public abstract class GenericChestEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory;
     private final ChestTypes chestType;
     private final int inventorySize;
@@ -68,6 +60,8 @@ public class GenericChestEntity extends BlockEntity implements NamedScreenHandle
     public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {
         return new ChestScreenHandler(ModScreenHandlerType.COPPER_CHEST, chestType, syncId, inventory, ScreenHandlerContext.create(world, pos));
     }
+
+
 
     // Reads and Saves Inventory Content
     @Override
@@ -102,6 +96,7 @@ public class GenericChestEntity extends BlockEntity implements NamedScreenHandle
             --this.numPlayersUsing;
             this.onInvOpenOrClose();
             this.playSound(SoundEvents.BLOCK_CHEST_CLOSE);
+            //System.out.println(inventorySize);
         }
     }
 
@@ -112,7 +107,6 @@ public class GenericChestEntity extends BlockEntity implements NamedScreenHandle
             this.world.updateNeighborsAlways(this.pos, block);
         }
     }
-
 
     private void playSound(SoundEvent soundEvent) {
         double d0 = (double) this.pos.getX() + 0.5D;

@@ -2,5 +2,7 @@
   "item.ironchests.wood_copper_upgrade": "Wooden Chest to Copper Upgrade",
   "block.ironchests.copper_chest": "Copper Chest",
   "block.ironchests.iron_chest": "Iron Chest",
+  "block.ironchests.gold_chest": "Gold Chest",
+  "block.ironchests.diamond_chest": "Diamond Chest",
   "itemGroup.ironchests.general": "Iron Chests"
 }
