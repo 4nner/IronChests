@@ -49,6 +49,11 @@ import java.util.function.Supplier;
 
 public class GenericChestBlock extends BlockWithEntity implements BlockEntityProvider {
 
+    public static final DirectionProperty FACING;
+
+    static {
+        FACING = HorizontalFacingBlock.FACING;
+    }
 
     public GenericChestBlock(Settings settings) {
         super(settings);

@@ -24,10 +24,12 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.world.World;
 
 
 public abstract class GenericChestEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
-    private final DefaultedList<ItemStack> inventory;
+    private DefaultedList<ItemStack> inventory;
     private final ChestTypes chestType;
     private final int inventorySize;
     public int numPlayersUsing;
@@ -112,5 +114,45 @@ public abstract class GenericChestEntity extends BlockEntity implements NamedScr
         double d1 = (double) this.pos.getY() + 0.5D;
         double d2 = (double) this.pos.getZ() + 0.5D;
         this.world.playSound((PlayerEntity) null, d0, d1, d2, soundEvent, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
+    }
+
+    // Upgrade Items Methods
+    @Override
+    public int size() {
+        return inventorySize;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        for (ItemStack itemstack : this.inventory) {
+            if (!itemstack.isEmpty()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void setInvStackList(DefaultedList<ItemStack> list) {
+        this.inventory = DefaultedList.<ItemStack>ofSize(inventorySize, ItemStack.EMPTY);
+
+        for (int i = 0; i < list.size(); i++) {
+            if (i < this.inventory.size()) {
+                this.inventory.set(i, list.get(i));
+            }
+        }
+    }
+
+    public DefaultedList<ItemStack> getInvStackList() {
+        return inventory;
+    }
+
+    public static int countViewers(World world, int x, int y, int z) {
+        int i = 0;
+        for (PlayerEntity playerentity : world.getNonSpectatingEntities(PlayerEntity.class, new Box((double) ((float) x - 5.0F), (double) ((float) y - 5.0F), (double) ((float) z - 5.0F), (double) ((float) (x + 1) + 5.0F), (double) ((float) (y + 1) + 5.0F), (double) ((float) (z + 1) + 5.0F)))) {
+            if (playerentity.currentScreenHandler instanceof ChestScreenHandler) {
+                ++i;
+            }
+        }
+        return i;
     }
 }

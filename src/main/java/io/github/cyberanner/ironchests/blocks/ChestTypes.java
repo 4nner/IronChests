@@ -54,12 +54,14 @@ public enum ChestTypes {
                 return ModBlocks.GOLD_CHEST;
             case DIAMOND:
                 return ModBlocks.DIAMOND_CHEST;
+            case OBSIDIAN:
+                return ModBlocks.OBSIDIAN_CHEST;
             default:
                 return Blocks.CHEST;
         }
     }
 
-    /*
+
     // Used to implement Item Upgrades
     public GenericChestEntity makeEntity(BlockPos pos, BlockState state) {
         switch (this) {
@@ -71,11 +73,12 @@ public enum ChestTypes {
                 return new GoldChestEntity(pos, state);
             case DIAMOND:
                 return new DiamondChestEntity(pos, state);
+            case OBSIDIAN:
+                return new ObsidianChestEntity(pos, state);
             default:
                 return null;
 
         }
     }
 
-     */
 }

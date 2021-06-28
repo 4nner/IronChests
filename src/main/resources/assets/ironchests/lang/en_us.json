@@ -1,8 +1,14 @@
 {
   "item.ironchests.wood_copper_upgrade": "Wooden Chest to Copper Upgrade",
+  "item.ironchests.wood_iron_upgrade": "Wooden Chest to Iron Upgrade",
+  "item.ironchests.copper_iron_upgrade": "Copper Chest to Iron Upgrade",
+  "item.ironchests.iron_gold_upgrade": "Iron Chest to Gold Upgrade",
+  "item.ironchests.gold_diamond_upgrade": "Gold Chest to Diamond Upgrade",
+  "item.ironchests.diamond_obsidian_upgrade": "Diamond Chest to Obsidian Upgrade",
   "block.ironchests.copper_chest": "Copper Chest",
   "block.ironchests.iron_chest": "Iron Chest",
   "block.ironchests.gold_chest": "Gold Chest",
   "block.ironchests.diamond_chest": "Diamond Chest",
+  "block.ironchests.obsidian_chest": "Obsidian Chest",
   "itemGroup.ironchests.general": "Iron Chests"
 }
