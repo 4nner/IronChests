@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "ironchests",
-  "version": "1.0.0",
+  "version": "${version}",
 
   "name": "Iron Chests for Fabric",
   "description": "Iron Chests for Fabric Mod Loader.",
