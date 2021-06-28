@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"MGM",
+		"GSG",
+		"MGM"
+	],
+	"key": {
+		"M": {
+			"item": "minecraft:iron_ingot"
+		},
+		"S": {
+			"item": "minecraft:copper_ingot"
+		},
+		"G": {
+			"item": "minecraft:glass"
+		}
+	},
+	"result": {
+		"item": "ironchests:copper_iron_upgrade"
+	}
+}
