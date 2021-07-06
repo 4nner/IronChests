@@ -1,0 +1,8 @@
+{
+  "block.ironchests.copper_chest": "Cassa di Rame",
+  "block.ironchests.iron_chest": "Cassa di Ferro",
+  "block.ironchests.gold_chest": "Cassa d'oro",
+  "block.ironchests.diamond_chest": "Cassa di Diamante",
+  "block.ironchests.obsidian_chest": "Cassa d'Ossidiana",
+  "itemGroup.ironchests.general": "Casse di Ferro"
+}
