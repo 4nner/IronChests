@@ -1,4 +1,9 @@
 {
+  "item.ironchests.wood_copper_upgrade": "Cassa di Legno -> Cassa di Rame",
+  "item.ironchests.copper_iron_upgrade": "Cassa di Rame -> Cassa di Ferro",
+  "item.ironchests.iron_gold_upgrade": "Cassa di Ferro -> Cassa d'Oro",
+  "item.ironchests.gold_diamond_upgrade": "Cassa d'Oro -> Cassa di Diamante",
+  "item.ironchests.diamond_obsidian_upgrade": "Cassa di Diamante -> Cassa d'Ossidiana",
   "block.ironchests.copper_chest": "Cassa di Rame",
   "block.ironchests.iron_chest": "Cassa di Ferro",
   "block.ironchests.gold_chest": "Cassa d'oro",
