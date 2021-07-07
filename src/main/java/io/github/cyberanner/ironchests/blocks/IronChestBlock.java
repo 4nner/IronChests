@@ -1,8 +1,6 @@
 package io.github.cyberanner.ironchests.blocks;
 
-
 import io.github.cyberanner.ironchests.blocks.blockentities.IronChestEntity;
-import io.github.cyberanner.ironchests.registry.ModBlockEntityType;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.BlockState;
@@ -10,7 +8,6 @@ import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
-
 
 public class IronChestBlock extends GenericChestBlock{
     public IronChestBlock() {

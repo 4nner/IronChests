@@ -27,7 +27,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
-
 public abstract class GenericChestEntity extends BlockEntity implements NamedScreenHandlerFactory, ImplementedInventory {
     private DefaultedList<ItemStack> inventory;
     private final ChestTypes chestType;
@@ -61,8 +60,6 @@ public abstract class GenericChestEntity extends BlockEntity implements NamedScr
     public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {
         return new ChestScreenHandler(ModScreenHandlerType.COPPER_CHEST, chestType, syncId, inventory, ScreenHandlerContext.create(world, pos));
     }
-
-
 
     // Reads and Saves Inventory Content
     @Override

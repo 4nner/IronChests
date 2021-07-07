@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "facing=north": { "model": "ironchests:block/holiday_chest" },
-        "facing=east":  { "model": "ironchests:block/holiday_chest", "y":  90},
-        "facing=south": { "model": "ironchests:block/holiday_chest", "y": 180 },
-        "facing=west":  { "model": "ironchests:block/holiday_chest", "y": 270 }
-    }
-}

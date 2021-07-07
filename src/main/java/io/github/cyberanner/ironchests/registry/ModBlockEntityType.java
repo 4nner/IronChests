@@ -17,6 +17,7 @@ public class ModBlockEntityType {;
     public static final BlockEntityType<GoldChestEntity> GOLD_CHEST = FabricBlockEntityTypeBuilder.create(GoldChestEntity::new, ModBlocks.GOLD_CHEST).build(null);
     public static final BlockEntityType<DiamondChestEntity> DIAMOND_CHEST = FabricBlockEntityTypeBuilder.create(DiamondChestEntity::new, ModBlocks.DIAMOND_CHEST).build(null);
     public static final BlockEntityType<ObsidianChestEntity> OBSIDIAN_CHEST = FabricBlockEntityTypeBuilder.create(ObsidianChestEntity::new, ModBlocks.OBSIDIAN_CHEST).build(null);
+    public static final BlockEntityType<ChristmasChestEntity> CHRISTMAS_CHEST = FabricBlockEntityTypeBuilder.create(ChristmasChestEntity::new, ModBlocks.CHRISTMAS_CHEST).build(null);
 
     public static void registerBlockEntities() {
         // Registering Chest Block Entities
@@ -25,5 +26,6 @@ public class ModBlockEntityType {;
         Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(IronChests.MOD_ID, "gold_chest"), GOLD_CHEST);
         Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(IronChests.MOD_ID, "diamond_chest"), DIAMOND_CHEST);
         Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(IronChests.MOD_ID, "obsidian_chest"), OBSIDIAN_CHEST);
+        Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(IronChests.MOD_ID, "christmas_chest"), CHRISTMAS_CHEST);
     }
 }

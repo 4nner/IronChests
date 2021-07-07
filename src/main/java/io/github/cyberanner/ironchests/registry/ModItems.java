@@ -23,6 +23,7 @@ public class ModItems {
     public static final BlockItem GOLD_CHEST = new BlockItem(ModBlocks.GOLD_CHEST, new Item.Settings().group(IronChests.TAB));
     public static final BlockItem DIAMOND_CHEST = new BlockItem(ModBlocks.DIAMOND_CHEST, new Item.Settings().group(IronChests.TAB));
     public static final BlockItem OBSIDIAN_CHEST = new BlockItem(ModBlocks.OBSIDIAN_CHEST, new Item.Settings().group(IronChests.TAB));
+    public static final BlockItem CHRISTMAS_CHEST = new BlockItem(ModBlocks.CHRISTMAS_CHEST, new Item.Settings().group(IronChests.TAB));
 
     public static void registerItems() {
         // Item
@@ -38,5 +39,6 @@ public class ModItems {
         Registry.register(Registry.ITEM, new Identifier(IronChests.MOD_ID, "gold_chest"), GOLD_CHEST);
         Registry.register(Registry.ITEM, new Identifier(IronChests.MOD_ID, "diamond_chest"), DIAMOND_CHEST);
         Registry.register(Registry.ITEM, new Identifier(IronChests.MOD_ID, "obsidian_chest"), OBSIDIAN_CHEST);
+        Registry.register(Registry.ITEM, new Identifier(IronChests.MOD_ID, "christmas_chest"), CHRISTMAS_CHEST);
     }
 }

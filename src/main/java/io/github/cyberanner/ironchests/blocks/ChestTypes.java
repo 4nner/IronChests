@@ -19,7 +19,7 @@ public enum ChestTypes {
     SILVER(72, 9, 184, 258, new Identifier(IronChests.MOD_ID, "models/block/silver_chest"), 256, 276),
     CRYSTAL(108, 12, 238, 276, new Identifier(IronChests.MOD_ID, "models/block/crystal_chest"), 256, 276),
     DIRT(1, 1, 184, 184, new Identifier(IronChests.MOD_ID, "models/block/dirt_chest"), 256, 256),
-    HOLIDAY(27, 9, 0, 0, new Identifier("models/block/christmas"), 0, 0),
+    CHRISTMAS(27, 9, 0, 0, new Identifier("models/block/christmas"), 0, 0),
     WOOD(0, 0, 0, 0, new Identifier(IronChests.MOD_ID, ("models/block/dirt_chest")), 0, 0);
 
     public final int size;
@@ -56,6 +56,8 @@ public enum ChestTypes {
                 return ModBlocks.DIAMOND_CHEST;
             case OBSIDIAN:
                 return ModBlocks.OBSIDIAN_CHEST;
+            case CHRISTMAS:
+                return ModBlocks.CHRISTMAS_CHEST;
             default:
                 return Blocks.CHEST;
         }
@@ -75,6 +77,8 @@ public enum ChestTypes {
                 return new DiamondChestEntity(pos, state);
             case OBSIDIAN:
                 return new ObsidianChestEntity(pos, state);
+            case CHRISTMAS:
+                return new ChristmasChestEntity(pos, state);
             default:
                 return null;
 
