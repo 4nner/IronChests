@@ -12,7 +12,6 @@ public class ModItems {
 
     // Upgrade Items
     public static final Item WOOD_COPPER_UPGRADE = new UpgradeItem(UpgradeTypes.WOOD_TO_COPPER);
-    public static final Item WOOD_IRON_UPGRADE = new UpgradeItem(UpgradeTypes.WOOD_TO_IRON);
     public static final Item COPPER_IRON_UPGRADE = new UpgradeItem(UpgradeTypes.COPPER_TO_IRON);
     public static final Item IRON_GOLD_UPGRADE = new UpgradeItem(UpgradeTypes.IRON_TO_GOLD);
     public static final Item GOLD_DIAMOND_UPGRADE = new UpgradeItem(UpgradeTypes.GOLD_TO_DIAMOND);
@@ -28,7 +27,6 @@ public class ModItems {
     public static void registerItems() {
         // Item
         Registry.register(Registry.ITEM, new Identifier(IronChests.MOD_ID, "wood_copper_upgrade"), WOOD_COPPER_UPGRADE);
-        Registry.register(Registry.ITEM, new Identifier(IronChests.MOD_ID, "wood_iron_upgrade"), WOOD_IRON_UPGRADE);
         Registry.register(Registry.ITEM, new Identifier(IronChests.MOD_ID, "copper_iron_upgrade"), COPPER_IRON_UPGRADE);
         Registry.register(Registry.ITEM, new Identifier(IronChests.MOD_ID, "iron_gold_upgrade"), IRON_GOLD_UPGRADE);
         Registry.register(Registry.ITEM, new Identifier(IronChests.MOD_ID, "gold_diamond_upgrade"), GOLD_DIAMOND_UPGRADE);
