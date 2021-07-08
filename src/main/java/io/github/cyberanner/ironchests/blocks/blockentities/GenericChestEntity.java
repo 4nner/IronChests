@@ -58,7 +58,6 @@ public class GenericChestEntity extends ChestBlockEntity {
     public void onClose(PlayerEntity player) {
         if (!player.isSpectator()) {
             this.playSound(SoundEvents.BLOCK_CHEST_CLOSE);
-            //System.out.println(inventorySize);
         }
     }
 

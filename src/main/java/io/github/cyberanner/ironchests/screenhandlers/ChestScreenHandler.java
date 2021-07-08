@@ -8,11 +8,9 @@ import io.github.cyberanner.ironchests.blocks.ChestTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.screen.slot.Slot;
 
 public class ChestScreenHandler extends SyncedGuiDescription {
     Inventory inventory;
@@ -44,26 +42,18 @@ public class ChestScreenHandler extends SyncedGuiDescription {
         }
 
         // Sets the correct GUI Size
-        //root.setSize(chestType.xSize, chestType.ySize);
         root.setInsets(Insets.ROOT_PANEL);
 
         int height = 15;
         height += 18 * (chestType.size / length);
-
         int width = 0;
+
         if (chestType.rowLength > 9) {
             width = 9 * (chestType.rowLength - 9);
         }
 
         root.add(this.createPlayerInventoryPanel(), width, height);
-
         root.validate(this);
-    }
-
-
-    @Override
-    public boolean canInsertIntoSlot(ItemStack stack, Slot slot) {
-        return stack.getItem() == Items.DIRT;
     }
 
     @Override

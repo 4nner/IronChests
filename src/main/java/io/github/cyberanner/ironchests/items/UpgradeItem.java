@@ -30,14 +30,10 @@ public class UpgradeItem extends Item {
     public ActionResult useOnBlock(ItemUsageContext context) {
 
         World world = context.getWorld();
-        if (world.isClient) {
-            return ActionResult.PASS;
-        }
+        if (world.isClient) { return ActionResult.PASS; }
 
         PlayerEntity entityPlayer = context.getPlayer();
-        if (entityPlayer == null) {
-            return ActionResult.PASS;
-        }
+        if (entityPlayer == null) { return ActionResult.PASS; }
 
         BlockPos blockPos = context.getBlockPos();
         if (this.type.canUpgrade(ChestTypes.WOOD)) {
@@ -65,13 +61,8 @@ public class UpgradeItem extends Item {
         if (blockEntity != null) {
             ChestBlockEntity chest = (ChestBlockEntity) blockEntity;
 
-            if (ChestBlockEntity.getPlayersLookingInChestCount(world, blockPos) > 0) {
-                return ActionResult.PASS;
-            }
-
-            if (!chest.canPlayerUse(entityPlayer)) {
-                return ActionResult.PASS;
-            }
+            if (ChestBlockEntity.getPlayersLookingInChestCount(world, blockPos) > 0) { return ActionResult.PASS; }
+            if (!chest.canPlayerUse(entityPlayer)) { return ActionResult.PASS; }
 
             chestFacing = world.getBlockState(blockPos).get(ChestBlock.FACING);
             customName = chest.getCustomName();
@@ -84,7 +75,7 @@ public class UpgradeItem extends Item {
             world.setBlockState(blockPos, blockState, 3);
             world.updateListeners(blockPos, blockState, blockState, 3);
 
-            ((ChestBlockEntity) world.getBlockEntity(blockPos)).readNbt(oldChestTag); // blockState, oldChestTag
+            ((ChestBlockEntity) world.getBlockEntity(blockPos)).readNbt(oldChestTag);
             itemStack.decrement(1);
 
             if (customName != null) {

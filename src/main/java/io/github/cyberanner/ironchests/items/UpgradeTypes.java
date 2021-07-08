@@ -5,6 +5,7 @@ import static io.github.cyberanner.ironchests.blocks.ChestTypes.*;
 
 public enum UpgradeTypes {
     WOOD_TO_COPPER(WOOD, COPPER),
+    WOOD_TO_CHRISTMAS(WOOD, CHRISTMAS),
     COPPER_TO_IRON(COPPER, IRON),
     IRON_TO_GOLD(IRON, GOLD),
     GOLD_TO_DIAMOND(GOLD, DIAMOND),

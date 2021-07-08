@@ -17,7 +17,6 @@ public class IronChests implements ModInitializer {
     public static final String MOD_ID = "ironchests";
     public static final ItemGroup TAB = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "general"), () -> new ItemStack(ModBlocks.COPPER_CHEST));
 
-
     @Override
     public void onInitialize() {
         ModItems.registerItems();
