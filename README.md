@@ -11,6 +11,7 @@ This Changelog also contains plans for future releases, which might change!
 - Added Emerald Chest (?) - Diamond Chest Equivalent
 
 ### 1.1.2
+- Fixed Menu Icon (It was a Copper Chest, it is now an Iron Chest)
 - Updated Korean Translation
 - Updated Italian Translation
 
