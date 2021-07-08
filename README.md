@@ -21,6 +21,7 @@ This Changelog also contains plans for future releases, which might change!
 - Performed a major code cleanup and rework
 - Custom Named Chests now maintain the name when upgraded
 - Iron Chests are now waterloggable
+- Fixed a typo that made the Christmas Chest blastproof. Now it behaves like a normal chest
 
 ### 1.0.5
 - Removed Wooden to Iron Chest Upgrade
