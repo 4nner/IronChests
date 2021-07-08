@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 
-public class ModBlockEntityType {;
+public class ModBlockEntityType {
 
     // Declaring Chest Block Entities
     public static final BlockEntityType<CopperChestEntity> COPPER_CHEST = FabricBlockEntityTypeBuilder.create(CopperChestEntity::new, ModBlocks.COPPER_CHEST).build(null);

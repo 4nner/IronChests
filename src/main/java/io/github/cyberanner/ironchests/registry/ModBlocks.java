@@ -8,12 +8,12 @@ import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
 
-    public static final Block COPPER_CHEST = new CopperChestBlock();
-    public static final Block IRON_CHEST = new IronChestBlock();
-    public static final Block GOLD_CHEST = new GoldChestBlock();
-    public static final Block DIAMOND_CHEST = new DiamondChestBlock();
-    public static final Block OBSIDIAN_CHEST = new ObsidianChestBlock();
-    public static final Block CHRISTMAS_CHEST = new ChristmasChestBlock();
+    public static final Block COPPER_CHEST = new GenericChestBlock(CopperChestBlock.settings(), ChestTypes.COPPER);
+    public static final Block IRON_CHEST = new GenericChestBlock(IronChestBlock.settings(), ChestTypes.IRON);
+    public static final Block GOLD_CHEST = new GenericChestBlock(GoldChestBlock.settings(), ChestTypes.GOLD);
+    public static final Block DIAMOND_CHEST = new GenericChestBlock(DiamondChestBlock.settings(), ChestTypes.DIAMOND);;
+    public static final Block OBSIDIAN_CHEST = new GenericChestBlock(ObsidianChestBlock.settings(), ChestTypes.OBSIDIAN);
+    public static final Block CHRISTMAS_CHEST = new GenericChestBlock(ChristmasChestBlock.settings(), ChestTypes.CHRISTMAS);
 
 
     public static void registerBlocks() {
