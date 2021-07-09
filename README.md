@@ -17,6 +17,7 @@ This Changelog also contains plans for future releases, which might change!
 
 ### 1.1.1
 - Added Wooden Chest to Christmas Chest Upgrade
+- Updated LibGui from 4.1.1 to 4.1.2
 
 ### 1.1.0
 - Performed a major code cleanup and rework
