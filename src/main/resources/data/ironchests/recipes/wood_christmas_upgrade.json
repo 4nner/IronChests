@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " B ",
+    "RCW",
+    " S "
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:oak_planks"
+    },
+    "W": {
+      "item": "minecraft:yellow_dye"
+    },
+    "R": {
+      "item": "minecraft:red_dye"
+    },
+    "B": {
+      "item": "minecraft:sweet_berries"
+    },
+    "S": {
+      "item": "minecraft:spruce_sapling"
+    }
+  },
+  "result": {
+    "item": "ironchests:wood_christmas_upgrade"
+  }
+}

@@ -33,8 +33,8 @@ dependencies {
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
-	modImplementation "io.github.cottonmc:LibGui:4.1.1+1.17.1-rc1"
-	include "io.github.cottonmc:LibGui:4.1.1+1.17.1-rc1"
+	modImplementation "io.github.cottonmc:LibGui:${project.libgui_version}"
+	include "io.github.cottonmc:LibGui:${project.libgui_version}"
 }
 
 processResources {

@@ -2,6 +2,8 @@ package io.github.cyberanner.ironchests.blocks.blockentities;
 
 import io.github.cyberanner.ironchests.blocks.ChestTypes;
 import io.github.cyberanner.ironchests.screenhandlers.ChestScreenHandler;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -38,7 +40,6 @@ public class GenericChestEntity extends ChestBlockEntity {
 
     @Override
     protected Text getContainerName() {
-        // Using the block name as the screen title
         return new TranslatableText(getCachedState().getBlock().getTranslationKey());
     }
 
@@ -48,6 +49,7 @@ public class GenericChestEntity extends ChestBlockEntity {
     }
 
     @Override
+    @Environment(EnvType.CLIENT)
     public void onOpen(PlayerEntity player) {
         if (!player.isSpectator()) {
             this.playSound(SoundEvents.BLOCK_CHEST_OPEN);
@@ -55,12 +57,14 @@ public class GenericChestEntity extends ChestBlockEntity {
     }
 
     @Override
+    @Environment(EnvType.CLIENT)
     public void onClose(PlayerEntity player) {
         if (!player.isSpectator()) {
             this.playSound(SoundEvents.BLOCK_CHEST_CLOSE);
         }
     }
 
+    @Environment(EnvType.CLIENT)
     private void playSound(SoundEvent soundEvent) {
         double d0 = (double) this.pos.getX() + 0.5D;
         double d1 = (double) this.pos.getY() + 0.5D;
