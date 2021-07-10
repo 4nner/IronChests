@@ -11,16 +11,19 @@ This Changelog also contains plans for future releases, which might change!
 - Added Emerald Chest (?) - Diamond Chest Equivalent
 
 ### 1.1.2
+- Fixed Menu Icon (It was a Copper Chest, it is now an Iron Chest)
 - Updated Korean Translation
 - Updated Italian Translation
 
 ### 1.1.1
 - Added Wooden Chest to Christmas Chest Upgrade
+- Updated LibGui from 4.1.1 to 4.1.2
 
 ### 1.1.0
 - Performed a major code cleanup and rework
 - Custom Named Chests now maintain the name when upgraded
 - Iron Chests are now waterloggable
+- Fixed a typo that made the Christmas Chest blastproof. Now it behaves like a normal chest
 
 ### 1.0.5
 - Removed Wooden to Iron Chest Upgrade
