@@ -4,8 +4,11 @@ import io.github.cyberanner.ironchests.blocks.ChestTypes;
 import io.github.cyberanner.ironchests.screenhandlers.ChestScreenHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.api.EnvironmentInterface;
+import net.fabricmc.api.EnvironmentInterfaces;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.client.block.ChestAnimationProgress;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -19,6 +22,11 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 
+
+@EnvironmentInterfaces({@EnvironmentInterface(
+        value = EnvType.CLIENT,
+        itf = ChestAnimationProgress.class
+)})
 public class GenericChestEntity extends ChestBlockEntity {
     ChestTypes type;
 
@@ -46,6 +54,10 @@ public class GenericChestEntity extends ChestBlockEntity {
     @Override
     public int size() {
         return type.size;
+    }
+
+    public ChestTypes type() {
+        return type;
     }
 
     @Override

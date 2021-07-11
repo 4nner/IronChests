@@ -17,14 +17,14 @@ import net.minecraft.util.math.BlockPos;
 
 public enum ChestTypes {
 
-    COPPER(45, 9, new Identifier(IronChests.MOD_ID, "models/block/copper_chest")),
-    IRON(54, 9, new Identifier(IronChests.MOD_ID, "models/block/iron_chest")),
-    GOLD(81, 9, new Identifier(IronChests.MOD_ID, "models/block/gold_chest")),
-    DIAMOND(108, 12, new Identifier(IronChests.MOD_ID, "models/block/diamond_chest")),
-    OBSIDIAN(108, 12, new Identifier(IronChests.MOD_ID, "models/block/obsidian_chest")),
-    SILVER(72, 9, new Identifier(IronChests.MOD_ID, "models/block/silver_chest")),
-    CRYSTAL(108, 12, new Identifier(IronChests.MOD_ID, "models/block/crystal_chest")),
-    CHRISTMAS(27, 9, new Identifier("models/block/christmas")),
+    COPPER(45, 9, new Identifier(IronChests.MOD_ID, "model/copper_chest")),
+    IRON(54, 9, new Identifier(IronChests.MOD_ID, "model/iron_chest")),
+    GOLD(81, 9, new Identifier(IronChests.MOD_ID, "model/gold_chest")),
+    DIAMOND(108, 12, new Identifier(IronChests.MOD_ID, "model/diamond_chest")),
+    OBSIDIAN(108, 12, new Identifier(IronChests.MOD_ID, "model/obsidian_chest")),
+    //SILVER(72, 9, new Identifier(IronChests.MOD_ID, "model/silver_chest")),
+    CRYSTAL(108, 12, new Identifier(IronChests.MOD_ID, "model/crystal_chest")),
+    CHRISTMAS(27, 9, new Identifier("model/christmas")),
     WOOD(27, 9, new Identifier("entity/chest/normal"));
 
     public final int size;
