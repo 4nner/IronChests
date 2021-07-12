@@ -42,9 +42,7 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestBlockE
 
     @Override
     public void render(T entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        GenericChestEntity blockEntity = (GenericChestEntity) entity;
         World world = entity.getWorld();
-
 
         BlockState blockState = world != null ? entity.getCachedState() : (BlockState) Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
         Block block = blockState.getBlock();
@@ -75,33 +73,9 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestBlockE
 
             renderMatrices(matrices, vertexConsumer, this.chestLid, this.chestLock, this.chestBottom, g, i, overlay);
 
-            /*
-            VertexConsumer vertexConsumer = getVertexConsumer(vertexConsumers);
-            float openFactor = computeOpenFactor(properties, entity, tickDelta);
-            int lightFactor = computeLight(properties, light);
-            renderMatrices(matrices, vertexConsumer, this.chestLid, this.chestLock, this.chestBottom, openFactor, lightFactor, overlay);
-             */
             matrices.pop();
-        } else {
-            //super.render(entity, tickDelta, matrices, vertexConsumers, light, overlay);
         }
     }
-
-
-    /*
-    private static VertexConsumer getVertexConsumer(VertexConsumerProvider vertexConsumers) {
-        return vertexConsumers.getBuffer(RenderLayer.getEntityCutout(TexturedRenderLayers.CHEST_ATLAS_TEXTURE));
-    }
-
-    private static float computeOpenFactor(DoubleBlockProperties.PropertySource<? extends ChestBlockEntity> propertySource, ChestAnimationProgress chestBlockEntity, float tickDelta) {
-        float factor = 1.0F - propertySource.apply(ChestBlock.getAnimationProgressRetriever(chestBlockEntity)).get(tickDelta);
-        return 1.0F - factor * factor * factor;
-    }
-
-    private static int computeLight(DoubleBlockProperties.PropertySource<? extends ChestBlockEntity> propertySource, int light) {
-        return propertySource.apply(new LightmapCoordinatesRetriever<ChestBlockEntity>()).applyAsInt(light);
-    }
-     */
 
     private static void renderMatrices(MatrixStack matrices, VertexConsumer vertices, ModelPart lid, ModelPart latch, ModelPart base, float openFactor, int light, int overlay) {
         lid.pitch = -openFactor * 1.5707964F;

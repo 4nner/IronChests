@@ -4,13 +4,13 @@ import io.github.cyberanner.ironchests.blocks.ChestTypes;
 import io.github.cyberanner.ironchests.screenhandlers.ChestScreenHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.block.entity.ChestLidAnimator;
-import net.minecraft.block.entity.ChestStateManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.sound.SoundCategory;
@@ -20,34 +20,12 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.util.math.MathHelper;
 
-public class GenericChestEntity extends ChestBlockEntity {
-    private static final int VIEWER_COUNT_UPDATE_EVENT = 1;
+public class GenericChestEntity extends ChestBlockEntity implements BlockEntityClientSerializable {
     ChestTypes type;
-    /*
-    private final ChestLidAnimator lidAnimator = new ChestLidAnimator();
-    private final ChestStateManager stateManager = new ChestStateManager() {
-        boolean isChestOpen;
-        protected void onChestOpened(World world, BlockPos pos, BlockState state) {
-            isChestOpen = true;
-            playSound(world, pos, SoundEvents.BLOCK_CHEST_OPEN);
-        }
+    int viewerCount = 0;
 
-        protected void onChestClosed(World world, BlockPos pos, BlockState state) {
-            isChestOpen = false;
-            playSound(world, pos, SoundEvents.BLOCK_CHEST_CLOSE);
-        }
-
-        protected void onInteracted(World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
-            world.addSyncedBlockEvent(GenericChestEntity.this.pos, ChestTypes.get(type), VIEWER_COUNT_UPDATE_EVENT, newViewerCount);
-        }
-
-        protected boolean isPlayerViewing(PlayerEntity player) {
-            return isChestOpen;
-        }
-    };
-*/
     public GenericChestEntity(ChestTypes type, BlockPos pos, BlockState state) {
         super(type.getBlockEntityType(), pos, state);
         this.type = type;
@@ -78,47 +56,66 @@ public class GenericChestEntity extends ChestBlockEntity {
         return type;
     }
 
-/*
-    public static void clientTick(World world, BlockPos pos, BlockState state, GenericChestEntity blockEntity) {
-        blockEntity.lidAnimator.step();
-    }
-    public boolean onSyncedBlockEvent(int type, int data) {
-        if (type == VIEWER_COUNT_UPDATE_EVENT) {
-            this.lidAnimator.setOpen(data > 0);
-            return true;
-        } else {
-            return super.onSyncedBlockEvent(type, data);
-        }
+    @Environment(EnvType.CLIENT)
+    public int countViewers() {
+        return viewerCount;
     }
 
     public void onOpen(PlayerEntity player) {
-        if (!this.removed && !player.isSpectator()) {
-            this.stateManager.openChest(player, this.getWorld(), this.getPos(), this.getCachedState());
+        if (!player.isSpectator()) {
+            ++this.viewerCount;
+            sync();
         }
     }
 
     public void onClose(PlayerEntity player) {
-        if (!this.removed && !player.isSpectator()) {
-            this.stateManager.closeChest(player, this.getWorld(), this.getPos(), this.getCachedState());
-        }
-
-    }
-
-    public void onScheduledTick() {
-        if (!this.removed) {
-            this.stateManager.updateViewerCount(this.getWorld(), this.getPos(), this.getCachedState());
+        if (!player.isSpectator()) {
+            --this.viewerCount;
+            sync();
         }
     }
 
-    public float getAnimationProgress(float tickDelta) {
-        return this.lidAnimator.getProgress(tickDelta);
+    @Override
+    public void fromClientTag(NbtCompound compoundTag) {
+        this.viewerCount = compoundTag.getInt("viewers");
     }
 
- */
+    @Override
+    public NbtCompound toClientTag(NbtCompound compoundTag) {
+        compoundTag.putInt("viewers", viewerCount);
+        return compoundTag;
+    }
+
+    @Override
+    @Environment(EnvType.CLIENT)
+    public float getAnimationProgress(float f) {
+        return MathHelper.lerp(f, lastAnimationAngle, animationAngle);
+    }
+
+    private float animationAngle;
+    private float lastAnimationAngle;
 
     @Environment(EnvType.CLIENT)
-    private void playSound(World world, BlockPos pos, SoundEvent sound) {
-        world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, sound, SoundCategory.BLOCKS, 0.5F, world.random.nextFloat() * 0.1F + 0.9F);
+    public void clientTick() {
+        if (world != null && world.isClient) {
+            int viewerCount = countViewers();
+            lastAnimationAngle = animationAngle;
+            if (viewerCount > 0 && animationAngle == 0.0F) playSound(SoundEvents.BLOCK_CHEST_OPEN);
+            if (viewerCount == 0 && animationAngle > 0.0F || viewerCount > 0 && animationAngle < 1.0F) {
+                float float_2 = animationAngle;
+                if (viewerCount > 0) animationAngle += 0.1F;
+                else animationAngle -= 0.1F;
+                animationAngle = MathHelper.clamp(animationAngle, 0, 1);
+                if (animationAngle < 0.5F && float_2 >= 0.5F) playSound(SoundEvents.BLOCK_CHEST_CLOSE);
+            }
+        }
     }
 
+    @Environment(EnvType.CLIENT)
+    private void playSound(SoundEvent soundEvent) {
+        double d = (double) this.pos.getX() + 0.5D;
+        double e = (double) this.pos.getY() + 0.5D;
+        double f = (double) this.pos.getZ() + 0.5D;
+        this.world.playSound(d, e, f, soundEvent, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F, false);
+    }
 }

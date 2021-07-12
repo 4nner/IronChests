@@ -5,7 +5,6 @@ import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
 import io.github.cottonmc.cotton.gui.widget.data.Insets;
 import io.github.cyberanner.ironchests.blocks.ChestTypes;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Items;
@@ -18,7 +17,6 @@ public class ChestScreenHandler extends SyncedGuiDescription {
     public ChestScreenHandler(ScreenHandlerType<?> type, ChestTypes chestType, int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
         super(type, syncId, playerInventory, getBlockInventory(context, chestType.size), null);
         inventory = blockInventory;
-        inventory.onOpen(playerInventory.player);
         int rows = chestType.getRowCount();
         int length = chestType.rowLength;
 
@@ -54,11 +52,5 @@ public class ChestScreenHandler extends SyncedGuiDescription {
 
         root.add(this.createPlayerInventoryPanel(), width, height);
         root.validate(this);
-    }
-
-    @Override
-    public void close(PlayerEntity player) {
-        super.close(player);
-        this.inventory.onClose(player);
     }
 }
