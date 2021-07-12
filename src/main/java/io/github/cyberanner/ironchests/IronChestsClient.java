@@ -13,7 +13,6 @@ import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegi
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.minecraft.client.render.TexturedRenderLayers;
-import net.minecraft.util.Identifier;
 
 
 @Environment(EnvType.CLIENT)

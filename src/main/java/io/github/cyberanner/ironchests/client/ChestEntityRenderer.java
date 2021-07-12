@@ -1,10 +1,7 @@
 package io.github.cyberanner.ironchests.client;
 
-
-import io.github.cyberanner.ironchests.IronChests;
 import io.github.cyberanner.ironchests.blocks.GenericChestBlock;
 import io.github.cyberanner.ironchests.blocks.blockentities.GenericChestEntity;
-import io.github.cyberanner.ironchests.registry.ModBlocks;
 import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
 import it.unimi.dsi.fastutil.ints.Int2IntFunction;
 import net.fabricmc.api.EnvType;
@@ -23,7 +20,6 @@ import net.minecraft.client.render.block.entity.LightmapCoordinatesRetriever;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
@@ -92,6 +88,7 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestBlockE
     }
 
 
+    /*
     private static VertexConsumer getVertexConsumer(VertexConsumerProvider vertexConsumers) {
         return vertexConsumers.getBuffer(RenderLayer.getEntityCutout(TexturedRenderLayers.CHEST_ATLAS_TEXTURE));
     }
@@ -104,6 +101,7 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestBlockE
     private static int computeLight(DoubleBlockProperties.PropertySource<? extends ChestBlockEntity> propertySource, int light) {
         return propertySource.apply(new LightmapCoordinatesRetriever<ChestBlockEntity>()).applyAsInt(light);
     }
+     */
 
     private static void renderMatrices(MatrixStack matrices, VertexConsumer vertices, ModelPart lid, ModelPart latch, ModelPart base, float openFactor, int light, int overlay) {
         lid.pitch = -openFactor * 1.5707964F;
