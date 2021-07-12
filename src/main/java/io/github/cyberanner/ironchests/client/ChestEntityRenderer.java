@@ -1,8 +1,10 @@
 package io.github.cyberanner.ironchests.client;
 
-import io.github.cyberanner.ironchests.blocks.ChestTypes;
+
+import io.github.cyberanner.ironchests.IronChests;
 import io.github.cyberanner.ironchests.blocks.GenericChestBlock;
 import io.github.cyberanner.ironchests.blocks.blockentities.GenericChestEntity;
+import io.github.cyberanner.ironchests.registry.ModBlocks;
 import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
 import it.unimi.dsi.fastutil.ints.Int2IntFunction;
 import net.fabricmc.api.EnvType;
@@ -44,17 +46,18 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestBlockE
 
     @Override
     public void render(T entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        GenericChestEntity blockEntity = (GenericChestEntity) entity;
         World world = entity.getWorld();
 
 
-        BlockState blockState = world != null ? entity.getCachedState() : Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
+        BlockState blockState = world != null ? entity.getCachedState() : (BlockState) Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
         Block block = blockState.getBlock();
 
         if (block instanceof GenericChestBlock) {
             GenericChestBlock chest = (GenericChestBlock)block;
 
             matrices.push();
-            float rotation = blockState.get(ChestBlock.FACING).asRotation();
+            float rotation = ((Direction)blockState.get(ChestBlock.FACING)).asRotation();
             matrices.translate(0.5D, 0.5D, 0.5D);
             matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-rotation));
             matrices.translate(-0.5D, -0.5D, -0.5D);
@@ -65,12 +68,7 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestBlockE
             } else {
                 properties = chest.getBlockEntitySource(blockState, world, entity.getPos(), true);
             }
-/*
-            VertexConsumer vertexConsumer = getVertexConsumer(vertexConsumers);
-            float openFactor = computeOpenFactor(properties, entity, tickDelta);
-            int lightFactor = computeLight(properties, light);
-            renderMatrices(matrices, vertexConsumer, this.chestLid, this.chestLock, this.chestBottom, openFactor, lightFactor, overlay);
-            */
+
             float g = ((Float2FloatFunction)properties.apply(GenericChestBlock.getAnimationProgressRetriever((ChestAnimationProgress)entity))).get(tickDelta);
             g = 1.0F - g;
             g = 1.0F - g * g * g;
@@ -81,9 +79,15 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestBlockE
 
             renderMatrices(matrices, vertexConsumer, this.chestLid, this.chestLock, this.chestBottom, g, i, overlay);
 
+            /*
+            VertexConsumer vertexConsumer = getVertexConsumer(vertexConsumers);
+            float openFactor = computeOpenFactor(properties, entity, tickDelta);
+            int lightFactor = computeLight(properties, light);
+            renderMatrices(matrices, vertexConsumer, this.chestLid, this.chestLock, this.chestBottom, openFactor, lightFactor, overlay);
+             */
             matrices.pop();
         } else {
-            super.render(entity, tickDelta, matrices, vertexConsumers, light, overlay);
+            //super.render(entity, tickDelta, matrices, vertexConsumers, light, overlay);
         }
     }
 

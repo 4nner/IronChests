@@ -9,13 +9,12 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
-
 public class GenericChestBlock extends ChestBlock {
 
     private final ChestTypes type;
 
     public GenericChestBlock(FabricBlockSettings settings, ChestTypes type) {
-        super(settings, () -> type.getBlockEntityType());
+        super(settings, type::getBlockEntityType);
         this.type = type;
     }
 
@@ -32,11 +31,5 @@ public class GenericChestBlock extends ChestBlock {
 
     public ChestTypes getType() {
         return type;
-    }
-
-    @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        //With inheriting from BlockWithEntity this defaults to INVISIBLE, so we need to change that!
-        return BlockRenderType.MODEL;
     }
 }

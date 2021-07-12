@@ -2,31 +2,18 @@ package io.github.cyberanner.ironchests.blocks.blockentities;
 
 import io.github.cyberanner.ironchests.blocks.ChestTypes;
 import io.github.cyberanner.ironchests.screenhandlers.ChestScreenHandler;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.api.EnvironmentInterface;
-import net.fabricmc.api.EnvironmentInterfaces;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.client.block.ChestAnimationProgress;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 
-
-@EnvironmentInterfaces({@EnvironmentInterface(
-        value = EnvType.CLIENT,
-        itf = ChestAnimationProgress.class
-)})
 public class GenericChestEntity extends ChestBlockEntity {
     ChestTypes type;
 
@@ -60,6 +47,7 @@ public class GenericChestEntity extends ChestBlockEntity {
         return type;
     }
 
+    /*
     @Override
     @Environment(EnvType.CLIENT)
     public void onOpen(PlayerEntity player) {
@@ -83,4 +71,5 @@ public class GenericChestEntity extends ChestBlockEntity {
         double d2 = (double) this.pos.getZ() + 0.5D;
         this.world.playSound((PlayerEntity) null, d0, d1, d2, soundEvent, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
     }
+     */
 }
