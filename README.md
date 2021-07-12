@@ -7,13 +7,19 @@ This Changelog also contains plans for future releases, which might change!
 - Texture Rework. Textures are now up-to-date with the newest style.
 - Added Netherite Chest
 
-### 1.2.0
-- Added Emerald Chest (?) - Diamond Chest Equivalent
+### 1.3.0
+- Added Emerald Chest - Diamond Chest Equivalent (1 Emerald to Craft / Compared to the 2 Diamonds)
 
-### 1.1.2
+### 1.2.1
 - Fixed Menu Icon (It was a Copper Chest, it is now an Iron Chest)
 - Updated Korean Translation
 - Updated Italian Translation
+
+### 1.2.0
+- Implemented Animations on Chests
+- Updated LibGui from 4.1.2 to 4.1.4
+- Assets Cleanup
+- Code Cleanup
 
 ### 1.1.1
 - Added Wooden Chest to Christmas Chest Upgrade
