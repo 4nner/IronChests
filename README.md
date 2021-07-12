@@ -7,6 +7,12 @@ This Changelog also contains plans for future releases, which might change!
 - Texture Rework. Textures are now up-to-date with the newest style.
 - Added Netherite Chest
 
+### 1.5.0 - ETA: TBA
+- Added Dash Loader Support
+
+### 1.4.0 - ETA: TBA
+- Added Crystal Chest
+
 ### 1.3.1 - ETA: TBA
 - Emerald Chest to Obsidian Chest Upgrade
 - Obsidian Chest crafting with Emerald Upgrade
