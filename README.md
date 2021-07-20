@@ -32,11 +32,11 @@ This Changelog also contains plans for future releases, which might change!
 - Assets Cleanup
 - Code Cleanup
 
-### 1.1.1 - ETA: 17th July 2021
+### 1.1.1 - Current Release
 - Added Wooden Chest to Christmas Chest Upgrade
 - Updated LibGui from 4.1.1 to 4.1.2
 
-### 1.1.0 - Current Release
+### 1.1.0
 - Performed a major code cleanup and rework
 - Custom Named Chests now maintain the name when upgraded
 - Iron Chests are now waterloggable
