@@ -27,8 +27,9 @@ This Changelog also contains plans for future releases, which might change!
 
 ### 1.2.0 - ETA: 24th July 2021
 - Implemented Animations on Chests
-- Updated LibGui from 4.1.2 to 4.1.4
-- Updated Yarn from 1.7.1-build.1 to 1.7.1-build.10
+- Updated LibGui from 4.1.2 to 4.1.5
+- Updated Yarn from 1.7.1-build.1 to 1.7.1-build.23
+- Updated Fabric API from 0.36.1 to 0.37.0
 - Assets Cleanup
 - Code Cleanup
 
