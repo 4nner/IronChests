@@ -25,7 +25,7 @@ This Changelog also contains plans for future releases, which might change!
 - Updated Korean Translation
 - Updated Italian Translation
 
-### 1.2.0 - ETA: 24th July 2021
+### 1.2.0 - Current Release
 - Implemented Animations on Chests
 - Updated LibGui from 4.1.2 to 4.1.5
 - Updated Yarn from 1.7.1-build.1 to 1.7.1-build.23
