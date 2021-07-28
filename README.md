@@ -10,22 +10,22 @@ This Changelog also contains plans for future releases, which might change!
 ### 1.5.0 - ETA: TBA
 - Added Dash Loader Support
 
-### 1.4.0 - ETA: TBA
+### 1.4.0 - Current Release
 - Added Crystal Chest
 
-### 1.3.1 - ETA: TBA
+### 1.3.1 - This Release has been skipped.
 - Emerald Chest to Obsidian Chest Upgrade
 - Obsidian Chest crafting with Emerald Upgrade
 
-### 1.3.0 - ETA: TBA 
+### 1.3.0 - This Release has been skipped.
 - Added Emerald Chest - Diamond Chest Equivalent (1 Emerald to Craft / Compared to the 2 Diamonds)
 
-### 1.2.1 - ETA: 31st July 2021
+### 1.2.1 - This Release has been skipped.
 - Fixed Menu Icon (It was a Copper Chest, it is now an Iron Chest)
 - Updated Korean Translation
 - Updated Italian Translation
 
-### 1.2.0 - ETA: 24th July 2021
+### 1.2.0 
 - Implemented Animations on Chests
 - Updated LibGui from 4.1.2 to 4.1.5
 - Updated Yarn from 1.7.1-build.1 to 1.7.1-build.23
@@ -33,7 +33,7 @@ This Changelog also contains plans for future releases, which might change!
 - Assets Cleanup
 - Code Cleanup
 
-### 1.1.1 - Current Release
+### 1.1.1
 - Added Wooden Chest to Christmas Chest Upgrade
 - Updated LibGui from 4.1.1 to 4.1.2
 
