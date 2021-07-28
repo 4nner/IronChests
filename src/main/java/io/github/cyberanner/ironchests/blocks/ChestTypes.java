@@ -21,6 +21,7 @@ public enum ChestTypes {
     IRON(54, 9, new Identifier(IronChests.MOD_ID, "model/iron_chest")),
     GOLD(81, 9, new Identifier(IronChests.MOD_ID, "model/gold_chest")),
     DIAMOND(108, 12, new Identifier(IronChests.MOD_ID, "model/diamond_chest")),
+    EMERALD(108, 12, new Identifier(IronChests.MOD_ID, "model/emerald_chest")),
     OBSIDIAN(108, 12, new Identifier(IronChests.MOD_ID, "model/obsidian_chest")),
     CRYSTAL(108, 12, new Identifier(IronChests.MOD_ID, "model/crystal_chest")),
     CHRISTMAS(27, 9, new Identifier("entity/chest/christmas")),
@@ -46,6 +47,8 @@ public enum ChestTypes {
             case IRON -> ModBlocks.IRON_CHEST;
             case GOLD -> ModBlocks.GOLD_CHEST;
             case DIAMOND -> ModBlocks.DIAMOND_CHEST;
+            case EMERALD -> ModBlocks.EMERALD_CHEST;
+            case CRYSTAL -> ModBlocks.CRYSTAL_CHEST;
             case OBSIDIAN -> ModBlocks.OBSIDIAN_CHEST;
             case CHRISTMAS -> ModBlocks.CHRISTMAS_CHEST;
             default -> Blocks.CHEST;
@@ -59,6 +62,8 @@ public enum ChestTypes {
             case IRON -> ModBlockEntityType.IRON_CHEST.instantiate(pos, state);
             case GOLD -> ModBlockEntityType.GOLD_CHEST.instantiate(pos, state);
             case DIAMOND -> ModBlockEntityType.DIAMOND_CHEST.instantiate(pos, state);
+            case EMERALD -> ModBlockEntityType.EMERALD_CHEST.instantiate(pos, state);
+            case CRYSTAL -> ModBlockEntityType.CRYSTAL_CHEST.instantiate(pos, state);
             case OBSIDIAN -> ModBlockEntityType.OBSIDIAN_CHEST.instantiate(pos, state);
             case CHRISTMAS -> ModBlockEntityType.CHRISTMAS_CHEST.instantiate(pos, state);
             default -> new ChestBlockEntity(pos, state);
@@ -71,6 +76,8 @@ public enum ChestTypes {
             case IRON -> ModScreenHandlerType.IRON_CHEST;
             case GOLD -> ModScreenHandlerType.GOLD_CHEST;
             case DIAMOND -> ModScreenHandlerType.DIAMOND_CHEST;
+            case EMERALD -> ModScreenHandlerType.EMERALD_CHEST;
+            case CRYSTAL -> ModScreenHandlerType.CRYSTAL_CHEST;
             case OBSIDIAN -> ModScreenHandlerType.OBSIDIAN_CHEST;
             default -> ModScreenHandlerType.CHRISTMAS_CHEST;
         };
@@ -82,6 +89,8 @@ public enum ChestTypes {
             case IRON -> ModBlockEntityType.IRON_CHEST;
             case GOLD -> ModBlockEntityType.GOLD_CHEST;
             case DIAMOND -> ModBlockEntityType.DIAMOND_CHEST;
+            case EMERALD -> ModBlockEntityType.EMERALD_CHEST;
+            case CRYSTAL -> ModBlockEntityType.CRYSTAL_CHEST;
             case OBSIDIAN -> ModBlockEntityType.OBSIDIAN_CHEST;
             case CHRISTMAS -> ModBlockEntityType.CHRISTMAS_CHEST;
             default -> BlockEntityType.CHEST;

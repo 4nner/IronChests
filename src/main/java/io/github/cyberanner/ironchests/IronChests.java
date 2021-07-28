@@ -15,6 +15,7 @@ import net.minecraft.util.Identifier;
 public class IronChests implements ModInitializer {
 
     public static final String MOD_ID = "ironchests";
+    public static final Identifier UPDATE_INV_PACKET_ID = new Identifier(MOD_ID, "update");
     public static final ItemGroup TAB = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "general"), () -> new ItemStack(ModBlocks.IRON_CHEST));
 
     @Override

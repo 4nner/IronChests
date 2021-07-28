@@ -1,6 +1,7 @@
 package io.github.cyberanner.ironchests.client;
 
 import io.github.cyberanner.ironchests.blocks.GenericChestBlock;
+import io.github.cyberanner.ironchests.blocks.blockentities.CrystalChestEntity;
 import io.github.cyberanner.ironchests.blocks.blockentities.GenericChestEntity;
 import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
 import it.unimi.dsi.fastutil.ints.Int2IntFunction;
@@ -8,6 +9,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.block.ChestAnimationProgress;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.RenderLayer;
@@ -18,8 +20,11 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.block.entity.ChestBlockEntityRenderer;
 import net.minecraft.client.render.block.entity.LightmapCoordinatesRetriever;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
+import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
@@ -73,9 +78,45 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestBlockE
 
             renderMatrices(matrices, vertexConsumer, this.chestLid, this.chestLock, this.chestBottom, g, i, overlay);
 
+            if (entity instanceof CrystalChestEntity) {
+                renderItems(matrices, (CrystalChestEntity) entity, tickDelta, vertexConsumers, light, overlay);
+            }
+
             matrices.pop();
         }
     }
+
+    private void renderItems(MatrixStack matrices, CrystalChestEntity chestEntity, float tickDelta, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        DefaultedList<ItemStack> inv = chestEntity.getInvStackList();
+        int counter = 0;
+        for (int j = 0; j < 3; j++) {
+            renderItem(0.55, 0.3 + (j * 0.5), 0.7, inv, counter, matrices, chestEntity, tickDelta, vertexConsumers, light, overlay);
+            counter++;
+        }
+        for (int j = 0; j < 3; j++) {
+            renderItem(1.4, 0.3 + (j * 0.5), 0.7, inv, counter, matrices, chestEntity, tickDelta, vertexConsumers, light, overlay);
+            counter++;
+        }
+        for (int j = 0; j < 3; j++) {
+            renderItem(0.55, 0.3 + (j * 0.5), 1.4, inv, counter, matrices, chestEntity, tickDelta, vertexConsumers, light, overlay);
+            counter++;
+        }
+        for (int j = 0; j < 3; j++) {
+            renderItem(1.4, 0.3 + (j * 0.5), 1.4, inv, counter, matrices, chestEntity, tickDelta, vertexConsumers, light, overlay);
+            counter++;
+        }
+    }
+
+    private void renderItem(double x, double y, double z, DefaultedList<ItemStack> inv, int counter, MatrixStack matrices, CrystalChestEntity chestEntity, float tickDelta, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        matrices.pop();
+        matrices.push();
+        ItemStack item = inv.get(counter);
+        matrices.scale(0.5f, 0.5f, 0.5f);
+        matrices.translate(x, y, z);
+        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(chestEntity.getWorld().getTime() + tickDelta));
+        MinecraftClient.getInstance().getItemRenderer().renderItem(item, ModelTransformation.Mode.GROUND, light, overlay, matrices, vertexConsumers, 0); //(int) chestEntity.getPos().asLong()
+    }
+
 
     private static void renderMatrices(MatrixStack matrices, VertexConsumer vertices, ModelPart lid, ModelPart latch, ModelPart base, float openFactor, int light, int overlay) {
         lid.pitch = -openFactor * 1.5707964F;
