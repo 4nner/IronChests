@@ -2,7 +2,6 @@ package io.github.cyberanner.ironchests.client;
 
 import io.github.cyberanner.ironchests.blocks.GenericChestBlock;
 import io.github.cyberanner.ironchests.blocks.blockentities.CrystalChestEntity;
-import io.github.cyberanner.ironchests.blocks.blockentities.GenericChestEntity;
 import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
 import it.unimi.dsi.fastutil.ints.Int2IntFunction;
 import net.fabricmc.api.EnvType;

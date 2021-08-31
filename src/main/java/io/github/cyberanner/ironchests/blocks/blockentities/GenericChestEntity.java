@@ -33,11 +33,6 @@ public class GenericChestEntity extends ChestBlockEntity implements BlockEntityC
     }
 
     @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {
-        return new ChestScreenHandler(type.getScreenHandlerType(), type, syncId, inventory, ScreenHandlerContext.create(world, pos));
-    }
-
-    @Override
     protected ScreenHandler createScreenHandler(int syncId, PlayerInventory inventory) {
         return new ChestScreenHandler(type.getScreenHandlerType(), type, syncId, inventory, ScreenHandlerContext.create(world, pos));
     }
