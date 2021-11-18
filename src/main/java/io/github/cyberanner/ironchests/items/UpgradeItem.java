@@ -55,8 +55,8 @@ public class UpgradeItem extends Item {
         }
 
         ItemStack itemStack = context.getStack();
-        Text customName = null;
-        Direction chestFacing = Direction.NORTH;
+        Text customName;
+        Direction chestFacing;
 
         if (blockEntity != null) {
             ChestBlockEntity chest = (ChestBlockEntity) blockEntity;
@@ -75,7 +75,7 @@ public class UpgradeItem extends Item {
             world.setBlockState(blockPos, blockState, 3);
             world.updateListeners(blockPos, blockState, blockState, 3);
 
-            ((ChestBlockEntity) world.getBlockEntity(blockPos)).readNbt(oldChestTag);
+            world.getBlockEntity(blockPos).readNbt(oldChestTag);
             itemStack.decrement(1);
 
             if (customName != null) {

@@ -11,10 +11,9 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
-import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.item.ItemStack;
@@ -36,14 +35,14 @@ public class IronChestsClient implements ClientModInitializer {
         ScreenRegistry.<ChestScreenHandler, CottonInventoryScreen<ChestScreenHandler>>register(ModScreenHandlerType.OBSIDIAN_CHEST, (desc, inventory, title) -> new CottonInventoryScreen<>(desc, inventory.player, title));
         ScreenRegistry.<ChestScreenHandler, CottonInventoryScreen<ChestScreenHandler>>register(ModScreenHandlerType.CHRISTMAS_CHEST, (desc, inventory, title) -> new CottonInventoryScreen<>(desc, inventory.player, title));
 
-        BlockEntityRendererRegistry.INSTANCE.register(ModBlockEntityType.COPPER_CHEST, ChestEntityRenderer::new);
-        BlockEntityRendererRegistry.INSTANCE.register(ModBlockEntityType.IRON_CHEST, ChestEntityRenderer::new);
-        BlockEntityRendererRegistry.INSTANCE.register(ModBlockEntityType.GOLD_CHEST, ChestEntityRenderer::new);
-        BlockEntityRendererRegistry.INSTANCE.register(ModBlockEntityType.DIAMOND_CHEST, ChestEntityRenderer::new);
-        BlockEntityRendererRegistry.INSTANCE.register(ModBlockEntityType.EMERALD_CHEST, ChestEntityRenderer::new);
-        BlockEntityRendererRegistry.INSTANCE.register(ModBlockEntityType.CRYSTAL_CHEST, ChestEntityRenderer::new);
-        BlockEntityRendererRegistry.INSTANCE.register(ModBlockEntityType.OBSIDIAN_CHEST, ChestEntityRenderer::new);
-        BlockEntityRendererRegistry.INSTANCE.register(ModBlockEntityType.CHRISTMAS_CHEST, ChestEntityRenderer::new);
+        BlockEntityRendererRegistry.register(ModBlockEntityType.COPPER_CHEST, ChestEntityRenderer::new);
+        BlockEntityRendererRegistry.register(ModBlockEntityType.IRON_CHEST, ChestEntityRenderer::new);
+        BlockEntityRendererRegistry.register(ModBlockEntityType.GOLD_CHEST, ChestEntityRenderer::new);
+        BlockEntityRendererRegistry.register(ModBlockEntityType.DIAMOND_CHEST, ChestEntityRenderer::new);
+        BlockEntityRendererRegistry.register(ModBlockEntityType.EMERALD_CHEST, ChestEntityRenderer::new);
+        BlockEntityRendererRegistry.register(ModBlockEntityType.CRYSTAL_CHEST, ChestEntityRenderer::new);
+        BlockEntityRendererRegistry.register(ModBlockEntityType.OBSIDIAN_CHEST, ChestEntityRenderer::new);
+        BlockEntityRendererRegistry.register(ModBlockEntityType.CHRISTMAS_CHEST, ChestEntityRenderer::new);
 
         //Register Textures to Chest Atlas
         ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((texture, registry) -> {
