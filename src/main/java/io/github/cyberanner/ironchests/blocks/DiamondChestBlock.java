@@ -11,7 +11,6 @@ public class DiamondChestBlock {
                     .hardness(5.0F)
                     .resistance(6.0F)
                     .sounds(BlockSoundGroup.STONE)
-                    .breakByTool(FabricToolTags.PICKAXES, 1)
                     .requiresTool());
     }
 }

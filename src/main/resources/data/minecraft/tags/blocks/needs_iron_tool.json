@@ -1,0 +1,8 @@
+{
+"replace": false,
+"values": [
+  "ironchests:diamond_chest",
+  "ironchests:emerald_chest",
+  "ironchests:crystal_chest"
+]
+}

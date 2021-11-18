@@ -12,7 +12,6 @@ public class ObsidianChestBlock {
                 .hardness(50.0F)
                 .resistance(1200.0F)
                 .sounds(BlockSoundGroup.STONE)
-                .breakByTool(FabricToolTags.PICKAXES, 3)
                 .requiresTool());
     }
 }

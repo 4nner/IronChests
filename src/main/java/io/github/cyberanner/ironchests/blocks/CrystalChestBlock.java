@@ -18,7 +18,6 @@ public class CrystalChestBlock extends GenericChestBlock {
                 .hardness(3.0F)
                 .resistance(3.0F)
                 .sounds(BlockSoundGroup.AMETHYST_BLOCK)
-                .breakByTool(FabricToolTags.PICKAXES, 1)
                 .requiresTool(),
                 ChestTypes.CRYSTAL);
     }

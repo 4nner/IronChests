@@ -11,7 +11,6 @@ public class CopperChestBlock{
                         .hardness(3.0F)
                         .resistance(6.0F)
                         .sounds(BlockSoundGroup.COPPER)
-                        .breakByTool(FabricToolTags.PICKAXES, 1)
                         .requiresTool());
     }
 }

@@ -11,8 +11,6 @@ public class ChristmasChestBlock {
         return(FabricBlockSettings.of(Material.WOOD)
                 .hardness(3.0F)
                 .resistance(3.0F)
-                .sounds(BlockSoundGroup.WOOD)
-                .breakByTool(FabricToolTags.AXES, 0)
-                .requiresTool());
+                .sounds(BlockSoundGroup.WOOD));
     }
 }
