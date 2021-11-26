@@ -2,6 +2,7 @@ package io.github.cyberanner.ironchests.items;
 
 import io.github.cyberanner.ironchests.IronChests;
 import io.github.cyberanner.ironchests.blocks.ChestTypes;
+import io.github.cyberanner.ironchests.blocks.blockentities.GenericChestEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.entity.BlockEntity;
@@ -59,7 +60,7 @@ public class UpgradeItem extends Item {
         Direction chestFacing;
 
         if (blockEntity != null) {
-            ChestBlockEntity chest = (ChestBlockEntity) blockEntity;
+            GenericChestEntity chest = (GenericChestEntity) blockEntity;
 
             if (ChestBlockEntity.getPlayersLookingInChestCount(world, blockPos) > 0) { return ActionResult.PASS; }
             if (!chest.canPlayerUse(entityPlayer)) { return ActionResult.PASS; }

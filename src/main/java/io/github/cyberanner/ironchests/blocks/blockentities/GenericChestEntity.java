@@ -4,15 +4,18 @@ import io.github.cyberanner.ironchests.blocks.ChestTypes;
 import io.github.cyberanner.ironchests.screenhandlers.ChestScreenHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.Packet;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -21,8 +24,10 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import org.jetbrains.annotations.Nullable;
 
-public class GenericChestEntity extends ChestBlockEntity implements BlockEntityClientSerializable {
+
+public class GenericChestEntity extends ChestBlockEntity {
     ChestTypes type;
     int viewerCount = 0;
 
@@ -59,26 +64,47 @@ public class GenericChestEntity extends ChestBlockEntity implements BlockEntityC
     public void onOpen(PlayerEntity player) {
         if (!player.isSpectator()) {
             ++this.viewerCount;
-            sync();
+            markDirty();
         }
     }
 
     public void onClose(PlayerEntity player) {
         if (!player.isSpectator()) {
             --this.viewerCount;
-            sync();
+            markDirty();
         }
     }
 
     @Override
-    public void fromClientTag(NbtCompound compoundTag) {
-        this.viewerCount = compoundTag.getInt("viewers");
+    public void readNbt(NbtCompound tag) {
+        super.readNbt(tag);
+        this.viewerCount = tag.getInt("viewers");
     }
 
     @Override
-    public NbtCompound toClientTag(NbtCompound compoundTag) {
-        compoundTag.putInt("viewers", viewerCount);
-        return compoundTag;
+    public void writeNbt(NbtCompound tag) {
+        super.writeNbt(tag);
+        tag.putInt("viewers", viewerCount);
+    }
+
+    @Override
+    public void markDirty() {
+        super.markDirty();
+
+        if (this.getWorld() != null && !this.getWorld().isClient()) {
+            ((ServerWorld) world).getChunkManager().markForUpdate(getPos());
+        }
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return this.createNbt();
     }
 
     @Override
