@@ -50,7 +50,7 @@ public class UpgradeItem extends Item {
         BlockEntity blockEntity = world.getBlockEntity(blockPos);
 
         if (this.type.canUpgrade(ChestTypes.WOOD)) {
-            if (!(blockEntity instanceof ChestBlockEntity)) {
+            if (!(blockEntity instanceof GenericChestEntity)) {
                 return ActionResult.PASS;
             }
         }
@@ -75,7 +75,6 @@ public class UpgradeItem extends Item {
             chest.writeNbt(oldChestTag);
             world.setBlockState(blockPos, blockState, 3);
             world.updateListeners(blockPos, blockState, blockState, 3);
-
             world.getBlockEntity(blockPos).readNbt(oldChestTag);
             itemStack.decrement(1);
 
