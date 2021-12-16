@@ -1,0 +1,21 @@
+{
+  "item.ironchests.wood_copper_upgrade": "[WIP] 木箱升級成銅箱",
+  "item.ironchests.copper_iron_upgrade": "銅箱升級成鐵箱",
+  "item.ironchests.iron_gold_upgrade": "鐵箱升級成金箱",
+  "item.ironchests.gold_diamond_upgrade": "金箱升級成鑽石箱",
+  "item.ironchests.gold_emerald_upgrade": "金箱升級成綠寶石箱",
+  "item.ironchests.diamond_obsidian_upgrade": "鑽石箱升級成黑曜石箱",
+  "item.ironchests.diamond_crystal_upgrade": "鑽石箱升級成水晶箱",
+  "item.ironchests.emerald_obsidian_upgrade": "綠寶石箱升級成黑曜石箱",
+  "item.ironchests.emerald_crystal_upgrade": "綠寶石箱升級成水晶箱",
+  "item.ironchests.wood_christmas_upgrade": "木箱升級成聖誕箱",
+  "block.ironchests.copper_chest": "銅箱",
+  "block.ironchests.iron_chest": "鐵箱",
+  "block.ironchests.gold_chest": "金箱",
+  "block.ironchests.diamond_chest": "鑽石箱",
+  "block.ironchests.emerald_chest": "綠寶石箱",
+  "block.ironchests.crystal_chest": "水晶箱",
+  "block.ironchests.obsidian_chest": "黑曜石箱",
+  "block.ironchests.christmas_chest": "聖誕箱",
+  "itemGroup.ironchests.general": "Iron Chests"
+}
