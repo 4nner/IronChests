@@ -7,7 +7,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
-
     public static final Block COPPER_CHEST = new GenericChestBlock(ChestTypes.COPPER.setting(), ChestTypes.COPPER);
     public static final Block IRON_CHEST = new GenericChestBlock(ChestTypes.IRON.setting(), ChestTypes.IRON);
     public static final Block GOLD_CHEST = new GenericChestBlock(ChestTypes.GOLD.setting(), ChestTypes.GOLD);
@@ -16,7 +15,6 @@ public class ModBlocks {
     public static final Block CRYSTAL_CHEST = new CrystalChestBlock();
     public static final Block OBSIDIAN_CHEST = new GenericChestBlock(ChestTypes.OBSIDIAN.setting(), ChestTypes.OBSIDIAN);
     public static final Block CHRISTMAS_CHEST = new GenericChestBlock(ChestTypes.CHRISTMAS.setting(), ChestTypes.CHRISTMAS);
-
 
     public static void registerBlocks() {
         Registry.register(Registry.BLOCK, new Identifier(IronChests.MOD_ID, "copper_chest"), COPPER_CHEST);
