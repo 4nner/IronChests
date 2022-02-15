@@ -2,7 +2,8 @@ package io.github.cyberanner.ironchests.blocks;
 
 import io.github.cyberanner.ironchests.blocks.blockentities.GenericChestEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ChestBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
@@ -14,7 +15,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 public class GenericChestBlock extends ChestBlock {
-
     private final ChestTypes type;
 
     public GenericChestBlock(FabricBlockSettings settings, ChestTypes type) {
