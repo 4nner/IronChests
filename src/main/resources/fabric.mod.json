@@ -3,14 +3,14 @@
   "id": "ironchests",
   "version": "${version}",
 
-  "name": "Iron Chests for Fabric",
+  "name": "Iron Chests",
   "description": "Iron Chests for Fabric Mod Loader.",
   "authors": [
-    "Cyber Anner"
+    "anner"
   ],
   "contact": {
-    "homepage": "https://github.com/cyberanner/ironchests",
-    "sources": "https://github.com/cyberanner/ironchests"
+    "homepage": "https://github.com/4nner/ironchests",
+    "sources": "https://github.com/4nner/ironchests"
   },
 
   "license": "gpl-3.0",
