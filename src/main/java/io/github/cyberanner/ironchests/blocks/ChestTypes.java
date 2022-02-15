@@ -6,12 +6,15 @@ import io.github.cyberanner.ironchests.registry.ModBlocks;
 import io.github.cyberanner.ironchests.registry.ModScreenHandlerType;
 import io.github.cyberanner.ironchests.screenhandlers.ChestScreenHandler;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.screen.ScreenHandlerType;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
@@ -94,6 +97,40 @@ public enum ChestTypes {
             case OBSIDIAN -> ModBlockEntityType.OBSIDIAN_CHEST;
             case CHRISTMAS -> ModBlockEntityType.CHRISTMAS_CHEST;
             default -> BlockEntityType.CHEST;
+        };
+    }
+    public FabricBlockSettings setting() {
+        return switch (this) {
+            case COPPER, GOLD -> FabricBlockSettings.of(Material.METAL)
+                    .hardness(3.0F)
+                    .resistance(6.0F)
+                    .sounds(BlockSoundGroup.COPPER)
+                    .requiresTool();
+            case IRON -> FabricBlockSettings.of(Material.METAL)
+                    .hardness(5.0F)
+                    .resistance(6.0F)
+                    .sounds(BlockSoundGroup.COPPER)
+                    .requiresTool();
+            case DIAMOND, EMERALD -> FabricBlockSettings.of(Material.METAL)
+                    .hardness(5.0F)
+                    .resistance(6.0F)
+                    .sounds(BlockSoundGroup.STONE)
+                    .requiresTool();
+            case CRYSTAL -> FabricBlockSettings.of(Material.GLASS)
+                    .hardness(3.0F)
+                    .resistance(3.0F)
+                    .sounds(BlockSoundGroup.AMETHYST_BLOCK)
+                    .requiresTool();
+            case OBSIDIAN -> FabricBlockSettings.of(Material.STONE)
+                    .hardness(50.0F)
+                    .resistance(1200.0F)
+                    .sounds(BlockSoundGroup.STONE)
+                    .requiresTool();
+            case CHRISTMAS -> FabricBlockSettings.of(Material.WOOD)
+                    .hardness(3.0F)
+                    .resistance(3.0F)
+                    .sounds(BlockSoundGroup.WOOD);
+            default -> FabricBlockSettings.of(Material.WOOD);
         };
     }
 }
