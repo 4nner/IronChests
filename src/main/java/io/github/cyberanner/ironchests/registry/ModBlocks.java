@@ -7,16 +7,14 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ModBlocks {
-
-    public static final Block COPPER_CHEST = new GenericChestBlock(CopperChestBlock.settings(), ChestTypes.COPPER);
-    public static final Block IRON_CHEST = new GenericChestBlock(IronChestBlock.settings(), ChestTypes.IRON);
-    public static final Block GOLD_CHEST = new GenericChestBlock(GoldChestBlock.settings(), ChestTypes.GOLD);
-    public static final Block DIAMOND_CHEST = new GenericChestBlock(DiamondChestBlock.settings(), ChestTypes.DIAMOND);
-    public static final Block EMERALD_CHEST = new GenericChestBlock(EmeraldChestBlock.settings(), ChestTypes.EMERALD);
+    public static final Block COPPER_CHEST = new GenericChestBlock(ChestTypes.COPPER.setting(), ChestTypes.COPPER);
+    public static final Block IRON_CHEST = new GenericChestBlock(ChestTypes.IRON.setting(), ChestTypes.IRON);
+    public static final Block GOLD_CHEST = new GenericChestBlock(ChestTypes.GOLD.setting(), ChestTypes.GOLD);
+    public static final Block DIAMOND_CHEST = new GenericChestBlock(ChestTypes.DIAMOND.setting(), ChestTypes.DIAMOND);
+    public static final Block EMERALD_CHEST = new GenericChestBlock(ChestTypes.EMERALD.setting(), ChestTypes.EMERALD);
     public static final Block CRYSTAL_CHEST = new CrystalChestBlock();
-    public static final Block OBSIDIAN_CHEST = new GenericChestBlock(ObsidianChestBlock.settings(), ChestTypes.OBSIDIAN);
-    public static final Block CHRISTMAS_CHEST = new GenericChestBlock(ChristmasChestBlock.settings(), ChestTypes.CHRISTMAS);
-
+    public static final Block OBSIDIAN_CHEST = new GenericChestBlock(ChestTypes.OBSIDIAN.setting(), ChestTypes.OBSIDIAN);
+    public static final Block CHRISTMAS_CHEST = new GenericChestBlock(ChestTypes.CHRISTMAS.setting(), ChestTypes.CHRISTMAS);
 
     public static void registerBlocks() {
         Registry.register(Registry.BLOCK, new Identifier(IronChests.MOD_ID, "copper_chest"), COPPER_CHEST);
