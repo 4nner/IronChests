@@ -7,6 +7,7 @@ import net.minecraft.client.render.TexturedRenderLayers;
 public class ModTextures {
     public static void registerTextures() {
         ClientSpriteRegistryCallback.event(TexturedRenderLayers.CHEST_ATLAS_TEXTURE).register((texture, registry) -> {
+            registry.register(ChestTypes.WOOD.texture);
             registry.register(ChestTypes.COPPER.texture);
             registry.register(ChestTypes.IRON.texture);
             registry.register(ChestTypes.GOLD.texture);
