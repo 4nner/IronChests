@@ -2,6 +2,6 @@
     "parent": "ironchests:block/chest_template",
     "textures": {
         "0": "minecraft:entity/chest/christmas",
-        "particle": "ironchests:block/christmas_break"
+        "particle": "minecraft:block/red_wool"
     }
 }

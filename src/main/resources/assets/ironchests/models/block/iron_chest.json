@@ -2,6 +2,6 @@
     "parent": "ironchests:block/chest_template",
     "textures": {
         "0": "ironchests:model/iron_chest",
-        "particle": "ironchests:block/iron_break"
+        "particle": "minecraft:block/iron_block"
     }
 }

@@ -2,6 +2,6 @@
   "parent": "ironchests:block/chest_template",
   "textures": {
     "0": "ironchests:model/emerald_chest",
-    "particle": "ironchests:block/emerald_break"
+    "particle": "minecraft:block/emerald_block"
   }
 }
