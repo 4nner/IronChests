@@ -1,0 +1,12 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item":"minecraft:chest"
+    }
+  ],
+  "result":
+  {
+    "item": "ironchests:wooden_chest"
+  }
+}

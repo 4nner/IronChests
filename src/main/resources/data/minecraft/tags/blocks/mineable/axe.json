@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "ironchests:christmas_chest"
+    "ironchests:christmas_chest",
+    "ironchests:wooden_chest"
   ]
 }

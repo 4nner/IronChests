@@ -19,14 +19,14 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
 public enum ChestTypes {
-
-    COPPER(45, 9, new Identifier(IronChests.MOD_ID, "model/copper_chest")),
-    IRON(54, 9, new Identifier(IronChests.MOD_ID, "model/iron_chest")),
-    GOLD(81, 9, new Identifier(IronChests.MOD_ID, "model/gold_chest")),
-    DIAMOND(108, 12, new Identifier(IronChests.MOD_ID, "model/diamond_chest")),
-    EMERALD(108, 12, new Identifier(IronChests.MOD_ID, "model/emerald_chest")),
+    NETHERITE(108, 12, new Identifier(IronChests.MOD_ID, "model/obsidian_chest")),
     OBSIDIAN(108, 12, new Identifier(IronChests.MOD_ID, "model/obsidian_chest")),
     CRYSTAL(108, 12, new Identifier(IronChests.MOD_ID, "model/crystal_chest")),
+    DIAMOND(108, 12, new Identifier(IronChests.MOD_ID, "model/diamond_chest")),
+    EMERALD(108, 12, new Identifier(IronChests.MOD_ID, "model/emerald_chest")),
+    GOLD(81, 9, new Identifier(IronChests.MOD_ID, "model/gold_chest")),
+    IRON(54, 9, new Identifier(IronChests.MOD_ID, "model/iron_chest")),
+    COPPER(45, 9, new Identifier(IronChests.MOD_ID, "model/copper_chest")),
     CHRISTMAS(27, 9, new Identifier("entity/chest/christmas")),
     WOOD(27, 9, new Identifier("entity/chest/normal"));
 
@@ -46,6 +46,7 @@ public enum ChestTypes {
 
     public static Block get(ChestTypes type) {
         return switch (type) {
+            case WOOD -> ModBlocks.WOODEN_CHEST;
             case COPPER -> ModBlocks.COPPER_CHEST;
             case IRON -> ModBlocks.IRON_CHEST;
             case GOLD -> ModBlocks.GOLD_CHEST;
@@ -61,6 +62,7 @@ public enum ChestTypes {
     // Used to implement Item Upgrades
     public ChestBlockEntity makeEntity(BlockPos pos, BlockState state) {
         return switch (this) {
+            case WOOD -> ModBlockEntityType.WOODEN_CHEST.instantiate(pos, state);
             case COPPER -> ModBlockEntityType.COPPER_CHEST.instantiate(pos, state);
             case IRON -> ModBlockEntityType.IRON_CHEST.instantiate(pos, state);
             case GOLD -> ModBlockEntityType.GOLD_CHEST.instantiate(pos, state);
@@ -75,6 +77,7 @@ public enum ChestTypes {
 
     public ScreenHandlerType<ChestScreenHandler> getScreenHandlerType() {
         return switch (this) {
+            case WOOD -> ModScreenHandlerType.WOODEN_CHEST;
             case COPPER -> ModScreenHandlerType.COPPER_CHEST;
             case IRON -> ModScreenHandlerType.IRON_CHEST;
             case GOLD -> ModScreenHandlerType.GOLD_CHEST;
@@ -88,6 +91,7 @@ public enum ChestTypes {
 
     public BlockEntityType<? extends ChestBlockEntity> getBlockEntityType() {
         return switch (this) {
+            case WOOD -> ModBlockEntityType.WOODEN_CHEST;
             case COPPER -> ModBlockEntityType.COPPER_CHEST;
             case IRON -> ModBlockEntityType.IRON_CHEST;
             case GOLD -> ModBlockEntityType.GOLD_CHEST;
@@ -126,7 +130,7 @@ public enum ChestTypes {
                     .resistance(1200.0F)
                     .sounds(BlockSoundGroup.STONE)
                     .requiresTool();
-            case CHRISTMAS -> FabricBlockSettings.of(Material.WOOD)
+            case WOOD, CHRISTMAS -> FabricBlockSettings.of(Material.WOOD)
                     .hardness(3.0F)
                     .resistance(3.0F)
                     .sounds(BlockSoundGroup.WOOD);
