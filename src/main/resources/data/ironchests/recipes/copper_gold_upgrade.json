@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"MMM",
+		"MSM",
+		"MMM"
+	],
+	"key": {
+		"M": {
+			"item": "minecraft:gold_ingot"
+		},
+		"S": {
+			"item": "ironchests:copper_iron_upgrade"
+		}
+	},
+	"result": {
+		"item": "ironchests:copper_gold_upgrade"
+	}
+}
