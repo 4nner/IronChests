@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 
 public class ModBlockEntityRenderer {
     public static void registerBlockEntityRenderer() {
-        BlockEntityRendererRegistry.register(ModBlockEntityType.WOODEN_CHEST, ChestEntityRenderer::new);
         BlockEntityRendererRegistry.register(ModBlockEntityType.COPPER_CHEST, ChestEntityRenderer::new);
         BlockEntityRendererRegistry.register(ModBlockEntityType.IRON_CHEST, ChestEntityRenderer::new);
         BlockEntityRendererRegistry.register(ModBlockEntityType.GOLD_CHEST, ChestEntityRenderer::new);

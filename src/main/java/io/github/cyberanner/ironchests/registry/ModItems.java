@@ -23,7 +23,6 @@ public class ModItems {
     public static final Item WOOD_CHRISTMAS_UPGRADE = new UpgradeItem(UpgradeTypes.WOOD_TO_CHRISTMAS);
 
     // Chest Items
-    public static final BlockItem WOODEN_CHEST = new BlockItem(ModBlocks.WOODEN_CHEST, new Item.Settings().group(IronChests.TAB));
     public static final BlockItem COPPER_CHEST = new BlockItem(ModBlocks.COPPER_CHEST, new Item.Settings().group(IronChests.TAB));
     public static final BlockItem IRON_CHEST = new BlockItem(ModBlocks.IRON_CHEST, new Item.Settings().group(IronChests.TAB));
     public static final BlockItem GOLD_CHEST = new BlockItem(ModBlocks.GOLD_CHEST, new Item.Settings().group(IronChests.TAB));
@@ -47,7 +46,6 @@ public class ModItems {
         Registry.register(Registry.ITEM, new Identifier(IronChests.MOD_ID, "wood_christmas_upgrade"), WOOD_CHRISTMAS_UPGRADE);
 
         // Block Items
-        Registry.register(Registry.ITEM, new Identifier(IronChests.MOD_ID, "wooden_chest"), WOODEN_CHEST);
         Registry.register(Registry.ITEM, new Identifier(IronChests.MOD_ID, "copper_chest"), COPPER_CHEST);
         Registry.register(Registry.ITEM, new Identifier(IronChests.MOD_ID, "iron_chest"), IRON_CHEST);
         Registry.register(Registry.ITEM, new Identifier(IronChests.MOD_ID, "gold_chest"), GOLD_CHEST);

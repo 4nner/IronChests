@@ -49,18 +49,18 @@ public class UpgradeItem extends Item {
 
         BlockEntity blockEntity = world.getBlockEntity(blockPos);
 
-        if (this.type.canUpgrade(ChestTypes.WOOD)) {
-            if (!(blockEntity instanceof GenericChestEntity)) {
-                return ActionResult.PASS;
-            }
-        }
+//        if (this.type.canUpgrade(ChestTypes.WOOD)) {
+//            if (!(blockEntity instanceof GenericChestEntity)) {
+//                return ActionResult.PASS;
+//            }
+//        }
 
         ItemStack itemStack = context.getStack();
         Text customName;
         Direction chestFacing;
 
         if (blockEntity != null) {
-            GenericChestEntity chest = (GenericChestEntity) blockEntity;
+            ChestBlockEntity chest = (ChestBlockEntity) blockEntity;
 
             if (ChestBlockEntity.getPlayersLookingInChestCount(world, blockPos) > 0) { return ActionResult.PASS; }
             if (!chest.canPlayerUse(entityPlayer)) { return ActionResult.PASS; }
@@ -71,8 +71,7 @@ public class UpgradeItem extends Item {
             world.removeBlock(blockPos, false);
 
             BlockState blockState = ChestTypes.get(type.target).getDefaultState().with(ChestBlock.FACING, chestFacing).with(ChestBlock.WATERLOGGED, false);
-            NbtCompound oldChestTag = new NbtCompound();
-            chest.writeNbt(oldChestTag);
+            NbtCompound oldChestTag = chest.createNbt();
             world.setBlockState(blockPos, blockState, 3);
             world.updateListeners(blockPos, blockState, blockState, 3);
             world.getBlockEntity(blockPos).readNbt(oldChestTag);
