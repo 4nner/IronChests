@@ -12,7 +12,6 @@ import net.minecraft.util.registry.Registry;
 public class ModBlockEntityType {
 
     // Declaring Chest Block Entities
-    public static final BlockEntityType<WoodenChestEntity> WOODEN_CHEST = FabricBlockEntityTypeBuilder.create(WoodenChestEntity::new, ModBlocks.WOODEN_CHEST).build(null);
     public static final BlockEntityType<CopperChestEntity> COPPER_CHEST = FabricBlockEntityTypeBuilder.create(CopperChestEntity::new, ModBlocks.COPPER_CHEST).build(null);
     public static final BlockEntityType<IronChestEntity> IRON_CHEST = FabricBlockEntityTypeBuilder.create(IronChestEntity::new, ModBlocks.IRON_CHEST).build(null);
     public static final BlockEntityType<GoldChestEntity> GOLD_CHEST = FabricBlockEntityTypeBuilder.create(GoldChestEntity::new, ModBlocks.GOLD_CHEST).build(null);
@@ -24,7 +23,6 @@ public class ModBlockEntityType {
 
     public static void registerBlockEntities() {
         // Registering Chest Block Entities
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(IronChests.MOD_ID, "wooden_chest"), WOODEN_CHEST);
         Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(IronChests.MOD_ID, "copper_chest"), COPPER_CHEST);
         Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(IronChests.MOD_ID, "iron_chest"), IRON_CHEST);
         Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(IronChests.MOD_ID, "gold_chest"), GOLD_CHEST);

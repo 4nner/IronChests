@@ -46,7 +46,6 @@ public enum ChestTypes {
 
     public static Block get(ChestTypes type) {
         return switch (type) {
-            case WOOD -> ModBlocks.WOODEN_CHEST;
             case COPPER -> ModBlocks.COPPER_CHEST;
             case IRON -> ModBlocks.IRON_CHEST;
             case GOLD -> ModBlocks.GOLD_CHEST;
@@ -62,7 +61,6 @@ public enum ChestTypes {
     // Used to implement Item Upgrades
     public ChestBlockEntity makeEntity(BlockPos pos, BlockState state) {
         return switch (this) {
-            case WOOD -> ModBlockEntityType.WOODEN_CHEST.instantiate(pos, state);
             case COPPER -> ModBlockEntityType.COPPER_CHEST.instantiate(pos, state);
             case IRON -> ModBlockEntityType.IRON_CHEST.instantiate(pos, state);
             case GOLD -> ModBlockEntityType.GOLD_CHEST.instantiate(pos, state);
@@ -77,7 +75,6 @@ public enum ChestTypes {
 
     public ScreenHandlerType<ChestScreenHandler> getScreenHandlerType() {
         return switch (this) {
-            case WOOD -> ModScreenHandlerType.WOODEN_CHEST;
             case COPPER -> ModScreenHandlerType.COPPER_CHEST;
             case IRON -> ModScreenHandlerType.IRON_CHEST;
             case GOLD -> ModScreenHandlerType.GOLD_CHEST;
@@ -91,7 +88,6 @@ public enum ChestTypes {
 
     public BlockEntityType<? extends ChestBlockEntity> getBlockEntityType() {
         return switch (this) {
-            case WOOD -> ModBlockEntityType.WOODEN_CHEST;
             case COPPER -> ModBlockEntityType.COPPER_CHEST;
             case IRON -> ModBlockEntityType.IRON_CHEST;
             case GOLD -> ModBlockEntityType.GOLD_CHEST;

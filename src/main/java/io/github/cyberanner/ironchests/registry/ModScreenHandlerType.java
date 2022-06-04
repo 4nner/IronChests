@@ -9,7 +9,6 @@ import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 
 public class ModScreenHandlerType {
-    public static ScreenHandlerType<ChestScreenHandler> WOODEN_CHEST;
     public static ScreenHandlerType<ChestScreenHandler> COPPER_CHEST;
     public static ScreenHandlerType<ChestScreenHandler> IRON_CHEST;
     public static ScreenHandlerType<ChestScreenHandler> GOLD_CHEST;
@@ -21,7 +20,6 @@ public class ModScreenHandlerType {
 
 
     public static void registerScreenHandlers() {
-        WOODEN_CHEST = ScreenHandlerRegistry.registerSimple(new Identifier(IronChests.MOD_ID, "wooden_chest"), (syncId, inventory) -> new ChestScreenHandler(WOODEN_CHEST, ChestTypes.WOOD, syncId, inventory, ScreenHandlerContext.EMPTY));
         COPPER_CHEST = ScreenHandlerRegistry.registerSimple(new Identifier(IronChests.MOD_ID, "copper_chest"), (syncId, inventory) -> new ChestScreenHandler(COPPER_CHEST, ChestTypes.COPPER, syncId, inventory, ScreenHandlerContext.EMPTY));
         IRON_CHEST = ScreenHandlerRegistry.registerSimple(new Identifier(IronChests.MOD_ID, "iron_chest"), (syncId, inventory) -> new ChestScreenHandler(IRON_CHEST, ChestTypes.IRON, syncId, inventory, ScreenHandlerContext.EMPTY));
         GOLD_CHEST = ScreenHandlerRegistry.registerSimple(new Identifier(IronChests.MOD_ID, "gold_chest"), (syncId, inventory) -> new ChestScreenHandler(GOLD_CHEST, ChestTypes.GOLD, syncId, inventory, ScreenHandlerContext.EMPTY));
