@@ -49,12 +49,6 @@ public class UpgradeItem extends Item {
 
         BlockEntity blockEntity = world.getBlockEntity(blockPos);
 
-//        if (this.type.canUpgrade(ChestTypes.WOOD)) {
-//            if (!(blockEntity instanceof GenericChestEntity)) {
-//                return ActionResult.PASS;
-//            }
-//        }
-
         ItemStack itemStack = context.getStack();
         Text customName;
         Direction chestFacing;
