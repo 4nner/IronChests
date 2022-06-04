@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"GGG",
+		"DSD",
+		"GGG"
+	],
+	"key": {
+		"D": {
+			"item": "minecraft:diamond"
+		},
+		"S": {
+			"item": "ironchests:copper_gold_upgrade"
+		},
+		"G": {
+			"item": "minecraft:glass"
+		}
+	},
+	"result": {
+		"item": "ironchests:copper_diamond_upgrade"
+	}
+}

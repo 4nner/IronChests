@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OOO",
+    "OGO",
+    "OOO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:glass"
+    },
+    "G": {
+      "item": "ironchests:wood_emerald_upgrade"
+    }
+  },
+  "result": {
+    "item": "ironchests:wood_crystal_upgrade"
+  }
+}

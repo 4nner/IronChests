@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GEG",
+    "GSG",
+    "GGG"
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:emerald"
+    },
+    "S": {
+      "item": "ironchests:iron_gold_upgrade"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "ironchests:iron_emerald_upgrade"
+  }
+}
