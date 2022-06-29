@@ -1,7 +1,19 @@
 {
- "variants": {
-   "": {
-     "model": "ironchests:block/crystal_chest"
-   }
- }
+  "variants": {
+    "facing=north": {
+      "model": "ironchests:block/crystal_chest"
+    },
+    "facing=east": {
+      "model": "ironchests:block/crystal_chest",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "ironchests:block/crystal_chest",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "ironchests:block/crystal_chest",
+      "y": 270
+    }
+  }
 }
