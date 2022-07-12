@@ -1,69 +1,21 @@
 # Iron Chests
+[![FabricAPI](https://img.shields.io/static/v1?label=modloader&message=fabric&color=brightgreen)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
+![Mod Environment](https://img.shields.io/static/v1?label=environment&message=client%2Fserver&color=yellow)
+[![Downloads](https://raw.githubusercontent.com/Aton-Kish/mcmod-stats/main/reinforced-chests/downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/iron-chests-for-fabric)
+[![License](https://img.shields.io/static/v1?label=licence&message=GPL-3.0&color=blue)](./LICENSE)
 
-## ChangeLog
-This Changelog also contains plans for future releases, which might change!
+Iron Chests for Fabric is a simple mod that enhances your Minecraft Gameplay by adding new, upgradable chests, that will allow you to store more items in a single block.
+Each Chest can be upgraded, starting from the Wooden Chest (Vanilla Minecraft). By doing so you will just need to craft a Chest Upgrade, and SHIFT + RIGHT_CLICK the chest you want to upgrade. 
+This will avoid the need to break the already placed chest. Do not worry, the chest will keep its inventory.
 
-### 2.0.0 - ETA: Minecraft 1.18 Release
-- Texture Rework. Textures are now up-to-date with the newest style.
-- Added Netherite Chest
+[<img alt="Requires Fabric API" src="https://i.imgur.com/Ol1Tcf8.png" width="128"/>](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
 
-### 1.5.0 - ETA: TBA
-- Added Dash Loader Support
+## Special Thanks
+TechnoVision: Initial port of Iron Chests to Fabric
+foul-fortune-feline: Fix Wooden Upgrades, added upgrades from-to any chest tier.
+FakeDomi: Fix incompatibility with FastChests
+ARES: Korean Translation
+yichifauzi: Chinese Translation
 
-### 1.4.0 - Current Release
-- Added Crystal Chest
-
-### 1.3.1 - This Release has been skipped.
-- Emerald Chest to Obsidian Chest Upgrade
-- Obsidian Chest crafting with Emerald Upgrade
-
-### 1.3.0 - This Release has been skipped.
-- Added Emerald Chest - Diamond Chest Equivalent (1 Emerald to Craft / Compared to the 2 Diamonds)
-
-### 1.2.1 - This Release has been skipped.
-- Fixed Menu Icon (It was a Copper Chest, it is now an Iron Chest)
-- Updated Korean Translation
-- Updated Italian Translation
-
-### 1.2.0 
-- Implemented Animations on Chests
-- Updated LibGui from 4.1.2 to 4.1.5
-- Updated Yarn from 1.7.1-build.1 to 1.7.1-build.23
-- Updated Fabric API from 0.36.1 to 0.37.0
-- Assets Cleanup
-- Code Cleanup
-
-### 1.1.1
-- Added Wooden Chest to Christmas Chest Upgrade
-- Updated LibGui from 4.1.1 to 4.1.2
-
-### 1.1.0
-- Performed a major code cleanup and rework
-- Custom Named Chests now maintain the name when upgraded
-- Iron Chests are now waterloggable
-- Fixed a typo that made the Christmas Chest blastproof. Now it behaves like a normal chest
-
-### 1.0.5
-- Removed Wooden to Iron Chest Upgrade
-- Added Christmas Chest
-- Updated Italian Translation
-- Performed a Code Cleanup
-
-### 1.0.4
-- Ported Iron Chests to Minecraft 1.17.1
-- Fixed Crash on startup with Minecraft 1.17.1
-- Updated LibGui from 4.1.0 to 4.1.1
-
-### 1.0.3
-- Added Partial Italian Translation
-- Updated LibGui from 4.0.0 to 4.1.0
-- Updated Fabric from 0.36.0 to 0.36.1
-
-### 1.0.2
-- Added Korean Translation kindly provided by ARES!#0001
-
-### 1.0.1
-- Fixed Diamond Chest Crafting (It required 4 Diamonds, while the right amount should be 2)
-
-### 1.0.0 
-- Initial release for Minecraft 1.17
+## License
+Iron Chests is licensed under GPL-3.0, see [LICENSE](./LICENSE).
