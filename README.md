@@ -1,7 +1,6 @@
 # Iron Chests
 [![FabricAPI](https://img.shields.io/static/v1?label=modloader&message=fabric&color=brightgreen)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
 ![Mod Environment](https://img.shields.io/static/v1?label=environment&message=client%2Fserver&color=yellow)
-[![Downloads](https://raw.githubusercontent.com/Aton-Kish/mcmod-stats/main/reinforced-chests/downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/iron-chests-for-fabric)
 [![License](https://img.shields.io/static/v1?label=licence&message=GPL-3.0&color=blue)](./LICENSE)
 
 Iron Chests for Fabric is a simple mod that enhances your Minecraft Gameplay by adding new, upgradable chests, that will allow you to store more items in a single block. \
