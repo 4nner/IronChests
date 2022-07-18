@@ -2,7 +2,6 @@ package io.github.cyberanner.ironchests.items;
 
 import io.github.cyberanner.ironchests.IronChests;
 import io.github.cyberanner.ironchests.blocks.ChestTypes;
-import io.github.cyberanner.ironchests.blocks.blockentities.GenericChestEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.entity.BlockEntity;
