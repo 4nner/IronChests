@@ -1,16 +1,16 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
-		"MMM",
-		"MSM",
-		"MMM"
+		"CCC",
+		"CPC",
+		"CCC"
 	],
 	"key": {
-		"M": {
+		"C": {
 			"item": "minecraft:copper_ingot"
 		},
-		"S": {
-			"item": "minecraft:oak_planks"
+		"P": {
+			"tag": "minecraft:planks"
 		}
 	},
 	"result": {
