@@ -2,14 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     " B ",
-    "RCW",
+    "RPY",
     " S "
   ],
   "key": {
-    "C": {
-      "item": "minecraft:oak_planks"
+    "P": {
+      "tag": "minecraft:planks"
     },
-    "W": {
+    "Y": {
       "item": "minecraft:yellow_dye"
     },
     "R": {
