@@ -90,7 +90,7 @@ public class GenericChestEntity extends ChestBlockEntity {
     public void markDirty() {
         super.markDirty();
 
-        if (this.getWorld() != null && !this.getWorld().isClient()) {
+        if (this.getWorld() != null && !this.getWorld().isClient() && this.getWorld() instanceof ServerWorld) {
             ((ServerWorld) world).getChunkManager().markForUpdate(getPos());
         }
     }
