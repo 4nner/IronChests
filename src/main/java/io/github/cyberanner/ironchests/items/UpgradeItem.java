@@ -2,6 +2,7 @@ package io.github.cyberanner.ironchests.items;
 
 import io.github.cyberanner.ironchests.IronChests;
 import io.github.cyberanner.ironchests.blocks.ChestTypes;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.entity.BlockEntity;
@@ -26,7 +27,8 @@ public class UpgradeItem extends Item {
     UpgradeTypes type;
 
     public UpgradeItem(UpgradeTypes type) {
-        super(new Item.Settings().group(IronChests.TAB));
+        super(new Item.Settings());
+	ItemGroupEvents.modifyEntriesEvent(IronChests.TAB).register(entries -> entries.add(this));
         this.type = type;
     }
 

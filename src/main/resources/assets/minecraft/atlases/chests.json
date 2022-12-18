@@ -1,0 +1,13 @@
+{
+    "sources": [
+	{ "type": "single", "resource": "ironchests:model/copper_chest" },
+	{ "type": "single", "resource": "ironchests:model/iron_chest" },
+	{ "type": "single", "resource": "ironchests:model/gold_chest" },
+	{ "type": "single", "resource": "ironchests:model/diamond_chest" },
+	{ "type": "single", "resource": "ironchests:model/emerald_chest" },
+	{ "type": "single", "resource": "ironchests:model/crystal_chest" },
+	{ "type": "single", "resource": "ironchests:model/obsidian_chest" },
+	{ "type": "single", "resource": "minecraft:entity/chest/christmas" }
+    ]
+}
+

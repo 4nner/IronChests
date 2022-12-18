@@ -19,7 +19,6 @@ public class IronChestsClient implements ClientModInitializer {
     public void onInitializeClient() {
         ModScreenHandlers.registerScreenHandlers();
         ModBlockEntityRenderer.registerBlockEntityRenderer();
-        ModTextures.registerTextures();
 
         // Crystal Chest Rendering
         ClientPlayNetworking.registerGlobalReceiver(IronChests.UPDATE_INV_PACKET_ID, (client, handler, buf, responseSender) -> {

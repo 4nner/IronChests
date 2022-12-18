@@ -23,7 +23,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.World;
 
 @Environment(EnvType.CLIENT)
@@ -55,7 +55,7 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestBlockE
             matrices.push();
             float rotation = blockState.get(ChestBlock.FACING).asRotation();
             matrices.translate(0.5D, 0.5D, 0.5D);
-            matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-rotation));
+            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-rotation));
             matrices.translate(-0.5D, -0.5D, -0.5D);
 
             DoubleBlockProperties.PropertySource<? extends ChestBlockEntity> properties;
@@ -110,7 +110,7 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestBlockE
         ItemStack item = inv.get(counter);
         matrices.scale(0.5f, 0.5f, 0.5f);
         matrices.translate(x, y, z);
-        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(chestEntity.getWorld().getTime() + tickDelta));
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(chestEntity.getWorld().getTime() + tickDelta));
         MinecraftClient.getInstance().getItemRenderer().renderItem(item, ModelTransformation.Mode.GROUND, light, overlay, matrices, vertexConsumers, 0); //(int) chestEntity.getPos().asLong()
     }
 
