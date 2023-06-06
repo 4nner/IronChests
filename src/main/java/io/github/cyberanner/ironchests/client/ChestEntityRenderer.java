@@ -17,13 +17,13 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.block.entity.ChestBlockEntityRenderer;
 import net.minecraft.client.render.block.entity.LightmapCoordinatesRetriever;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
-import net.minecraft.client.render.model.json.ModelTransformation;
+import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 import net.minecraft.world.World;
 
 @Environment(EnvType.CLIENT)
@@ -45,6 +45,7 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestBlockE
     @Override
     public void render(T entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         World world = entity.getWorld();
+        int seed = 1;
 
         BlockState blockState = world != null ? entity.getCachedState() : Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
         Block block = blockState.getBlock();
@@ -55,7 +56,7 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestBlockE
             matrices.push();
             float rotation = blockState.get(ChestBlock.FACING).asRotation();
             matrices.translate(0.5D, 0.5D, 0.5D);
-            matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-rotation));
+            matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-rotation));
             matrices.translate(-0.5D, -0.5D, -0.5D);
 
             DoubleBlockProperties.PropertySource<? extends ChestBlockEntity> properties;
@@ -76,42 +77,42 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestBlockE
             renderMatrices(matrices, vertexConsumer, this.chestLid, this.chestLock, this.chestBottom, g, i, overlay);
 
             if (entity instanceof CrystalChestEntity) {
-                renderItems(matrices, (CrystalChestEntity) entity, tickDelta, vertexConsumers, light, overlay);
+                renderItems(matrices, (CrystalChestEntity) entity, tickDelta, vertexConsumers, light, overlay, world, seed);
             }
 
             matrices.pop();
         }
     }
 
-    private void renderItems(MatrixStack matrices, CrystalChestEntity chestEntity, float tickDelta, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+    private void renderItems(MatrixStack matrices, CrystalChestEntity chestEntity, float tickDelta, VertexConsumerProvider vertexConsumers, int light, int overlay, World world, int seed) {
         DefaultedList<ItemStack> inv = chestEntity.getInvStackList();
         int counter = 0;
         for (int j = 0; j < 3; j++) {
-            renderItem(0.55, 0.3 + (j * 0.5), 0.7, inv, counter, matrices, chestEntity, tickDelta, vertexConsumers, light, overlay);
+            renderItem(0.55, 0.3 + (j * 0.5), 0.7, inv, counter, matrices, chestEntity, tickDelta, vertexConsumers, light, overlay, seed, world);
             counter++;
         }
         for (int j = 0; j < 3; j++) {
-            renderItem(1.4, 0.3 + (j * 0.5), 0.7, inv, counter, matrices, chestEntity, tickDelta, vertexConsumers, light, overlay);
+            renderItem(1.4, 0.3 + (j * 0.5), 0.7, inv, counter, matrices, chestEntity, tickDelta, vertexConsumers, light, overlay, seed, world);
             counter++;
         }
         for (int j = 0; j < 3; j++) {
-            renderItem(0.55, 0.3 + (j * 0.5), 1.4, inv, counter, matrices, chestEntity, tickDelta, vertexConsumers, light, overlay);
+            renderItem(0.55, 0.3 + (j * 0.5), 1.4, inv, counter, matrices, chestEntity, tickDelta, vertexConsumers, light, overlay, seed, world);
             counter++;
         }
         for (int j = 0; j < 3; j++) {
-            renderItem(1.4, 0.3 + (j * 0.5), 1.4, inv, counter, matrices, chestEntity, tickDelta, vertexConsumers, light, overlay);
+            renderItem(1.4, 0.3 + (j * 0.5), 1.4, inv, counter, matrices, chestEntity, tickDelta, vertexConsumers, light, overlay,  seed, world);
             counter++;
         }
     }
 
-    private void renderItem(double x, double y, double z, DefaultedList<ItemStack> inv, int counter, MatrixStack matrices, CrystalChestEntity chestEntity, float tickDelta, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+    private void renderItem(double x, double y, double z, DefaultedList<ItemStack> inv, int counter, MatrixStack matrices, CrystalChestEntity chestEntity, float tickDelta, VertexConsumerProvider vertexConsumers, int light, int overlay, int seed, World world) {
         matrices.pop();
         matrices.push();
         ItemStack item = inv.get(counter);
         matrices.scale(0.5f, 0.5f, 0.5f);
         matrices.translate(x, y, z);
-        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(chestEntity.getWorld().getTime() + tickDelta));
-        MinecraftClient.getInstance().getItemRenderer().renderItem(item, ModelTransformation.Mode.GROUND, light, overlay, matrices, vertexConsumers, 0); //(int) chestEntity.getPos().asLong()
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(chestEntity.getWorld().getTime() + tickDelta));
+        MinecraftClient.getInstance().getItemRenderer().renderItem(item, ModelTransformationMode.GROUND, light, overlay, matrices, vertexConsumers, world, seed); //(int) chestEntity.getPos().asLong()
     }
 
 
