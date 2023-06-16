@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "ironchest:block/obsidian_chest"
+    },
+    "facing=east": {
+      "model": "ironchest:block/obsidian_chest",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "ironchest:block/obsidian_chest",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "ironchest:block/obsidian_chest",
+      "y": 270
+    }
+  }
+}

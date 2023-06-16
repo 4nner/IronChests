@@ -1,0 +1,13 @@
+{
+  "item.ironchest.wood_copper_upgrade": "나무 -> 구리 상자 업그레이드",
+  "item.ironchest.copper_iron_upgrade": "구리 -> 철 상자 업그레이드",
+  "item.ironchest.iron_gold_upgrade": "철 -> 금 상자 업그레이드",
+  "item.ironchest.gold_diamond_upgrade": "금 -> 다이아몬드 상자 업그레이드",
+  "item.ironchest.diamond_obsidian_upgrade": "다이아몬드 -> 흑요석 상자 업그레이드",
+  "block.ironchest.copper_chest": "구리 상자",
+  "block.ironchest.iron_chest": "철 상자",
+  "block.ironchest.gold_chest": "금 상자",
+  "block.ironchest.diamond_chest": "다이아몬드 상자",
+  "block.ironchest.obsidian_chest": "흑요석 상자",
+  "itemGroup.ironchest.general": "강철의 상자들"
+}

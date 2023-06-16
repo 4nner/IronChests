@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "ironchest:block/emerald_chest"
+    },
+    "facing=east": {
+      "model": "ironchest:block/emerald_chest",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "ironchest:block/emerald_chest",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "ironchest:block/emerald_chest",
+      "y": 270
+    }
+  }
+}

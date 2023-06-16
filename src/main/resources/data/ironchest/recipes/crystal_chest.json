@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GCG",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "C": {
+      "item": "ironchest:diamond_chest"
+    }
+  },
+  "result": {
+    "item": "ironchest:crystal_chest",
+    "count": 1
+  }
+}
+

@@ -1,8 +1,8 @@
 {
 "replace": false,
 "values": [
-  "ironchests:diamond_chest",
-  "ironchests:emerald_chest",
-  "ironchests:crystal_chest"
+  "ironchest:diamond_chest",
+  "ironchest:emerald_chest",
+  "ironchest:crystal_chest"
 ]
 }

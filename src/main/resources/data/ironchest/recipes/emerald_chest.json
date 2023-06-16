@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GMG",
+    "GSG",
+    "GGG"
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:emerald"
+    },
+    "S": {
+      "item": "ironchest:gold_chest"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "ironchest:emerald_chest"
+  }
+}

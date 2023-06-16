@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OOO",
+    "OGO",
+    "OOO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:glass"
+    },
+    "G": {
+      "item": "ironchest:iron_diamond_upgrade"
+    }
+  },
+  "result": {
+    "item": "ironchest:iron_crystal_upgrade"
+  }
+}

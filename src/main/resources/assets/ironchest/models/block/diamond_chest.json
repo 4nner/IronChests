@@ -1,0 +1,7 @@
+{
+    "parent": "ironchest:block/chest_template",
+    "textures": {
+        "0": "ironchest:model/diamond_chest",
+        "particle": "minecraft:block/diamond_block"
+    }
+}

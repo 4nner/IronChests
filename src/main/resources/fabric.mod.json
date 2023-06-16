@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "ironchests",
+  "id": "ironchest",
   "version": "${version}",
   "name": "Iron Chests",
   "description": "Bigger Chests for Minecraft",
@@ -13,14 +13,14 @@
   },
 
   "license": "gpl-3.0",
-  "icon": "assets/ironchests/icon.png",
+  "icon": "assets/ironchest/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.cyberanner.ironchests.IronChests"
+      "anner.ironchest.IronChests"
     ],
     "client": [
-      "io.github.cyberanner.ironchests.IronChestsClient"
+      "anner.ironchest.IronChestsClient"
     ]
   },
   "mixins": [

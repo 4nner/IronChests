@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"GGG",
+		"DSD",
+		"GGG"
+	],
+	"key": {
+		"D": {
+			"item": "minecraft:diamond"
+		},
+		"S": {
+			"item": "ironchest:iron_gold_upgrade"
+		},
+		"G": {
+			"item": "minecraft:glass"
+		}
+	},
+	"result": {
+		"item": "ironchest:iron_diamond_upgrade"
+	}
+}

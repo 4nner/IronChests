@@ -1,7 +1,0 @@
-{
-  "parent": "ironchests:block/chest_template",
-  "textures": {
-    "0": "ironchests:model/emerald_chest",
-    "particle": "minecraft:block/emerald_block"
-  }
-}

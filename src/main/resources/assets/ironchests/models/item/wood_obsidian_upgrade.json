@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "ironchests:item/wood_obsidian_upgrade"
-  }
-}
