@@ -1,17 +1,17 @@
 package anner.ironchest.registry;
 
 import anner.ironchest.client.ChestEntityRenderer;
-import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 
 public class ModBlockEntityRenderer {
     public static void registerBlockEntityRenderer() {
-        BlockEntityRendererRegistry.register(ModBlockEntityType.COPPER_CHEST, ChestEntityRenderer::new);
-        BlockEntityRendererRegistry.register(ModBlockEntityType.IRON_CHEST, ChestEntityRenderer::new);
-        BlockEntityRendererRegistry.register(ModBlockEntityType.GOLD_CHEST, ChestEntityRenderer::new);
-        BlockEntityRendererRegistry.register(ModBlockEntityType.DIAMOND_CHEST, ChestEntityRenderer::new);
-        BlockEntityRendererRegistry.register(ModBlockEntityType.EMERALD_CHEST, ChestEntityRenderer::new);
-        BlockEntityRendererRegistry.register(ModBlockEntityType.CRYSTAL_CHEST, ChestEntityRenderer::new);
-        BlockEntityRendererRegistry.register(ModBlockEntityType.OBSIDIAN_CHEST, ChestEntityRenderer::new);
-        BlockEntityRendererRegistry.register(ModBlockEntityType.CHRISTMAS_CHEST, ChestEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntityType.COPPER_CHEST, ChestEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntityType.IRON_CHEST, ChestEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntityType.GOLD_CHEST, ChestEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntityType.DIAMOND_CHEST, ChestEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntityType.EMERALD_CHEST, ChestEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntityType.CRYSTAL_CHEST, ChestEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntityType.OBSIDIAN_CHEST, ChestEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntityType.CHRISTMAS_CHEST, ChestEntityRenderer::new);
     }
 }
