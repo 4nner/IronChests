@@ -20,6 +20,7 @@ public class ModBlockEntityType {
     public static final BlockEntityType<EmeraldChestEntity> EMERALD_CHEST = FabricBlockEntityTypeBuilder.create(EmeraldChestEntity::new, ModBlocks.EMERALD_CHEST).build(null);
     public static final BlockEntityType<CrystalChestEntity> CRYSTAL_CHEST = FabricBlockEntityTypeBuilder.create(CrystalChestEntity::new, ModBlocks.CRYSTAL_CHEST).build(null);
     public static final BlockEntityType<ObsidianChestEntity> OBSIDIAN_CHEST = FabricBlockEntityTypeBuilder.create(ObsidianChestEntity::new, ModBlocks.OBSIDIAN_CHEST).build(null);
+    public static final BlockEntityType<NetheriteChestEntity> NETHERITE_CHEST = FabricBlockEntityTypeBuilder.create(NetheriteChestEntity::new, ModBlocks.NETHERITE_CHEST).build(null);
     public static final BlockEntityType<ChristmasChestEntity> CHRISTMAS_CHEST = FabricBlockEntityTypeBuilder.create(ChristmasChestEntity::new, ModBlocks.CHRISTMAS_CHEST).build(null);
 
     public static void registerBlockEntities() {
@@ -31,6 +32,7 @@ public class ModBlockEntityType {
         Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(IronChests.MOD_ID, "emerald_chest"), EMERALD_CHEST);
         Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(IronChests.MOD_ID, "crystal_chest"), CRYSTAL_CHEST);
         Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(IronChests.MOD_ID, "obsidian_chest"), OBSIDIAN_CHEST);
+        Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(IronChests.MOD_ID, "netherite_chest"), NETHERITE_CHEST);
         Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(IronChests.MOD_ID, "christmas_chest"), CHRISTMAS_CHEST);
     }
 }

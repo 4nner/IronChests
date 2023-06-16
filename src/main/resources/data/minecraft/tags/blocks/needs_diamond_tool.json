@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "ironchest:obsidian_chest"
+    "ironchest:obsidian_chest",
+    "ironchest:netherite_chest"
   ]
 }

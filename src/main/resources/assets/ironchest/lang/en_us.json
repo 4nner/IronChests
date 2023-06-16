@@ -60,6 +60,7 @@
   "block.ironchest.emerald_chest": "Emerald Chest",
   "block.ironchest.crystal_chest": "Crystal Chest",
   "block.ironchest.obsidian_chest": "Obsidian Chest",
+  "block.ironchest.netherite_chest": "Netherite Chest",
   "block.ironchest.christmas_chest": "Christmas Chest",
   "itemGroup.ironchest.general": "Iron Chests"
 }

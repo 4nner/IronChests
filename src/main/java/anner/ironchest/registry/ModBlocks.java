@@ -17,6 +17,7 @@ public class ModBlocks {
     public static final Block EMERALD_CHEST = new GenericChestBlock(ChestTypes.EMERALD.setting(), ChestTypes.EMERALD);
     public static final Block CRYSTAL_CHEST = new CrystalChestBlock();
     public static final Block OBSIDIAN_CHEST = new GenericChestBlock(ChestTypes.OBSIDIAN.setting(), ChestTypes.OBSIDIAN);
+    public static final Block NETHERITE_CHEST = new GenericChestBlock(ChestTypes.NETHERITE.setting(), ChestTypes.NETHERITE);
     public static final Block CHRISTMAS_CHEST = new GenericChestBlock(ChestTypes.CHRISTMAS.setting(), ChestTypes.CHRISTMAS);
 
     public static void registerBlocks() {
@@ -27,6 +28,7 @@ public class ModBlocks {
         Registry.register(Registries.BLOCK, new Identifier(IronChests.MOD_ID, "emerald_chest"), EMERALD_CHEST);
         Registry.register(Registries.BLOCK, new Identifier(IronChests.MOD_ID, "crystal_chest"), CRYSTAL_CHEST);
         Registry.register(Registries.BLOCK, new Identifier(IronChests.MOD_ID, "obsidian_chest"), OBSIDIAN_CHEST);
+        Registry.register(Registries.BLOCK, new Identifier(IronChests.MOD_ID, "netherite_chest"), NETHERITE_CHEST);
         Registry.register(Registries.BLOCK, new Identifier(IronChests.MOD_ID, "christmas_chest"), CHRISTMAS_CHEST);
     }
 }

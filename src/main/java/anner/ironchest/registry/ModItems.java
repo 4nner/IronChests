@@ -55,6 +55,7 @@ public class ModItems {
     public static final BlockItem EMERALD_CHEST = new BlockItem(ModBlocks.EMERALD_CHEST, new Item.Settings());
     public static final BlockItem CRYSTAL_CHEST = new BlockItem(ModBlocks.CRYSTAL_CHEST, new Item.Settings());
     public static final BlockItem OBSIDIAN_CHEST = new BlockItem(ModBlocks.OBSIDIAN_CHEST, new Item.Settings());
+    public static final BlockItem NETHERITE_CHEST = new BlockItem(ModBlocks.NETHERITE_CHEST, new Item.Settings());
     public static final BlockItem CHRISTMAS_CHEST = new BlockItem(ModBlocks.CHRISTMAS_CHEST, new Item.Settings());
 
     public static void registerItems() {
@@ -101,6 +102,7 @@ public class ModItems {
         Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "emerald_chest"), EMERALD_CHEST);
         Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "crystal_chest"), CRYSTAL_CHEST);
         Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "obsidian_chest"), OBSIDIAN_CHEST);
+        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "netherite_chest"), NETHERITE_CHEST);
         Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "christmas_chest"), CHRISTMAS_CHEST);
 
 	ItemGroupEvents.modifyEntriesEvent(IronChests.TAB).register(entries -> {
@@ -111,6 +113,7 @@ public class ModItems {
 		entries.add(EMERALD_CHEST);
 		entries.add(CRYSTAL_CHEST);
 		entries.add(OBSIDIAN_CHEST);
+		entries.add(NETHERITE_CHEST);
 		entries.add(CHRISTMAS_CHEST);
 	});
     }

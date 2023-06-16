@@ -17,7 +17,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
 public enum ChestTypes {
-    NETHERITE(108, 12, new Identifier(IronChests.MOD_ID, "model/obsidian_chest")),
+    NETHERITE(126, 14, new Identifier(IronChests.MOD_ID, "model/netherite_chest")),
     OBSIDIAN(108, 12, new Identifier(IronChests.MOD_ID, "model/obsidian_chest")),
     CRYSTAL(108, 12, new Identifier(IronChests.MOD_ID, "model/crystal_chest")),
     DIAMOND(108, 12, new Identifier(IronChests.MOD_ID, "model/diamond_chest")),
@@ -51,6 +51,7 @@ public enum ChestTypes {
             case EMERALD -> ModBlocks.EMERALD_CHEST;
             case CRYSTAL -> ModBlocks.CRYSTAL_CHEST;
             case OBSIDIAN -> ModBlocks.OBSIDIAN_CHEST;
+            case NETHERITE -> ModBlocks.NETHERITE_CHEST;
             case CHRISTMAS -> ModBlocks.CHRISTMAS_CHEST;
             default -> Blocks.CHEST;
         };
@@ -66,6 +67,7 @@ public enum ChestTypes {
             case EMERALD -> ModBlockEntityType.EMERALD_CHEST.instantiate(pos, state);
             case CRYSTAL -> ModBlockEntityType.CRYSTAL_CHEST.instantiate(pos, state);
             case OBSIDIAN -> ModBlockEntityType.OBSIDIAN_CHEST.instantiate(pos, state);
+            case NETHERITE -> ModBlockEntityType.NETHERITE_CHEST.instantiate(pos, state);
             case CHRISTMAS -> ModBlockEntityType.CHRISTMAS_CHEST.instantiate(pos, state);
             default -> new ChestBlockEntity(pos, state);
         };
@@ -80,6 +82,7 @@ public enum ChestTypes {
             case EMERALD -> ModScreenHandlerType.EMERALD_CHEST;
             case CRYSTAL -> ModScreenHandlerType.CRYSTAL_CHEST;
             case OBSIDIAN -> ModScreenHandlerType.OBSIDIAN_CHEST;
+            case NETHERITE -> ModScreenHandlerType.NETHERITE_CHEST;
             default -> ModScreenHandlerType.CHRISTMAS_CHEST;
         };
     }
@@ -93,6 +96,7 @@ public enum ChestTypes {
             case EMERALD -> ModBlockEntityType.EMERALD_CHEST;
             case CRYSTAL -> ModBlockEntityType.CRYSTAL_CHEST;
             case OBSIDIAN -> ModBlockEntityType.OBSIDIAN_CHEST;
+            case NETHERITE -> ModBlockEntityType.NETHERITE_CHEST;
             case CHRISTMAS -> ModBlockEntityType.CHRISTMAS_CHEST;
             default -> BlockEntityType.CHEST;
         };
@@ -123,6 +127,11 @@ public enum ChestTypes {
                     .hardness(50.0F)
                     .resistance(1200.0F)
                     .sounds(BlockSoundGroup.STONE)
+                    .requiresTool();
+            case NETHERITE -> FabricBlockSettings.create()
+                    .hardness(50.0F)
+                    .resistance(1200.0F)
+                    .sounds(BlockSoundGroup.COPPER)
                     .requiresTool();
             case WOOD, CHRISTMAS -> FabricBlockSettings.create()
                     .hardness(3.0F)

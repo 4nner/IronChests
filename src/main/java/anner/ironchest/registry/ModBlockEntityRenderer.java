@@ -12,6 +12,7 @@ public class ModBlockEntityRenderer {
         BlockEntityRendererFactories.register(ModBlockEntityType.EMERALD_CHEST, ChestEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntityType.CRYSTAL_CHEST, ChestEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntityType.OBSIDIAN_CHEST, ChestEntityRenderer::new);
+        BlockEntityRendererFactories.register(ModBlockEntityType.NETHERITE_CHEST, ChestEntityRenderer::new);
         BlockEntityRendererFactories.register(ModBlockEntityType.CHRISTMAS_CHEST, ChestEntityRenderer::new);
     }
 }
