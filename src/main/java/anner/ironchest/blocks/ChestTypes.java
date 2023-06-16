@@ -100,36 +100,36 @@ public enum ChestTypes {
     }
     public FabricBlockSettings setting() {
         return switch (this) {
-            case COPPER, GOLD -> FabricBlockSettings.of()
+            case COPPER, GOLD -> FabricBlockSettings.create()
                     .hardness(3.0F)
                     .resistance(6.0F)
                     .sounds(BlockSoundGroup.COPPER)
                     .requiresTool();
-            case IRON -> FabricBlockSettings.of()
+            case IRON -> FabricBlockSettings.create()
                     .hardness(5.0F)
                     .resistance(6.0F)
                     .sounds(BlockSoundGroup.COPPER)
                     .requiresTool();
-            case DIAMOND, EMERALD -> FabricBlockSettings.of()
+            case DIAMOND, EMERALD -> FabricBlockSettings.create()
                     .hardness(5.0F)
                     .resistance(6.0F)
                     .sounds(BlockSoundGroup.STONE)
                     .requiresTool();
-            case CRYSTAL -> FabricBlockSettings.of()
+            case CRYSTAL -> FabricBlockSettings.create()
                     .hardness(3.0F)
                     .resistance(3.0F)
                     .sounds(BlockSoundGroup.AMETHYST_BLOCK)
                     .requiresTool();
-            case OBSIDIAN -> FabricBlockSettings.of()
+            case OBSIDIAN -> FabricBlockSettings.create()
                     .hardness(50.0F)
                     .resistance(1200.0F)
                     .sounds(BlockSoundGroup.STONE)
                     .requiresTool();
-            case WOOD, CHRISTMAS -> FabricBlockSettings.of()
+            case WOOD, CHRISTMAS -> FabricBlockSettings.create()
                     .hardness(3.0F)
                     .resistance(3.0F)
                     .sounds(BlockSoundGroup.WOOD);
-            default -> FabricBlockSettings.of();
+            default -> FabricBlockSettings.create();
         };
     }
 }

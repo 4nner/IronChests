@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 public class CrystalChestBlock extends GenericChestBlock {
     public CrystalChestBlock() {
-        super(FabricBlockSettings.of()
+        super(FabricBlockSettings.create()
                 .hardness(3.0F)
                 .resistance(3.0F)
                 .sounds(BlockSoundGroup.AMETHYST_BLOCK)
