@@ -11,7 +11,7 @@ public class ModItemGroup {
     public static void registerItemGroup() {
         Registry.register(Registries.ITEM_GROUP, IronChests.TAB, FabricItemGroup.builder()
             .icon(() -> new ItemStack(ModBlocks.IRON_CHEST))
-            .displayName(Text.translatable("itemGroup.ironchests.general"))
+            .displayName(Text.translatable("itemGroup.ironchest.general"))
             .build());
     }
 }

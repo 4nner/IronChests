@@ -5,7 +5,6 @@ import anner.ironchest.registry.ModBlockEntityType;
 import anner.ironchest.registry.ModBlocks;
 import anner.ironchest.registry.ModScreenHandlerType;
 import anner.ironchest.screenhandlers.ChestScreenHandler;
-
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
