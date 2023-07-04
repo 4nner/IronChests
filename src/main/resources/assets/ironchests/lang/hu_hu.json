@@ -1,0 +1,21 @@
+{
+  "item.ironchests.wood_copper_upgrade": "Faládából rézre fejlesztés",
+  "item.ironchests.copper_iron_upgrade": "Rézládáról Iron fejlesztés",
+  "item.ironchests.iron_gold_upgrade": "Vasládából aranyra fejlesztés",
+  "item.ironchests.gold_diamond_upgrade": "Aranyládáról gyémántra fejlesztés",
+  "item.ironchests.gold_emerald_upgrade": "Aranyládáról emeráldra fejlesztés",
+  "item.ironchests.diamond_obsidian_upgrade": "Gyémántládáról obszidiánra fejlesztés",
+  "item.ironchests.diamond_crystal_upgrade": "Gyémántládáról kristályra fejlesztés",
+  "item.ironchests.emerald_obsidian_upgrade": "Emeráldládáról obszidiánra fejlesztés",
+  "item.ironchests.emerald_crystal_upgrade": "Emeráldládáról kristályra fejlesztés",
+  "block.ironchests.copper_chest": "Rézláda",
+  "block.ironchests.iron_chest": "Vasláda",
+  "block.ironchests.gold_chest": "Aranyláda",
+  "block.ironchests.diamond_chest": "Gyémántláda",
+  "block.ironchests.emerald_chest": "Emeráldláda",
+  "block.ironchests.crystal_chest": "Kristályláda",
+  "block.ironchests.obsidian_chest": "Obszidiánláda",
+  "block.ironchests.netherite_chest": "Netheritláda",
+  "block.ironchests.christmas_chest": "Karácsonyi láda",
+  "itemGroup.ironchests.general": "Iron Chests"
+}
