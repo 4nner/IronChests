@@ -14,7 +14,8 @@ TechnoVision: Initial port of Iron Chests to Fabric \
 foul-fortune-feline: Fix Wooden Upgrades, added upgrades from-to any chest tier \
 FakeDomi: Fix incompatibility with FastChests \
 ARES: Korean Translation \
-yichifauzi: Chinese Translation 
+yichifauzi: Chinese Translation
+XenoshiYT: German Translation
 
 ## License
 Iron Chests is licensed under GPL-3.0, see [LICENSE](./LICENSE).
