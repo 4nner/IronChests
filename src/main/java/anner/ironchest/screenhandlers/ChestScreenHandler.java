@@ -27,7 +27,7 @@ public class ChestScreenHandler extends SyncedGuiDescription {
         int counter = 0;
         if (chestType.rowLength == 1) {
             itemSlot = WItemSlot.of(blockInventory, 0);
-            itemSlot.setFilter(stack -> stack.getItem() == Items.DIRT);
+            itemSlot.setInputFilter(stack -> stack.getItem() == Items.DIRT);
             root.add(itemSlot, (18 * 4), 12);
         } else {
             for (int j = 0; j < rows; j++) {
