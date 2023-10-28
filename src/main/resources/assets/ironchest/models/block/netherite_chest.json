@@ -2,6 +2,6 @@
   "parent": "ironchest:block/chest_template",
   "textures": {
     "0": "ironchest:model/netherite_chest",
-    "particle": "minecraft:block/netherite"
+    "particle": "minecraft:block/netherite_block"
   }
 }
