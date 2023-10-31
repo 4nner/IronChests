@@ -62,6 +62,5 @@
   "block.ironchest.obsidian_chest": "Obsidiantruhe",
   "block.ironchest.netherite_chest": "Netherittruhe",
   "block.ironchest.christmas_chest": "Weihnachtstruhe",
-  "itemGroup.ironchest.general": "Iron Chests",
-
+  "itemGroup.ironchest.general": "Iron Chests"
 }
