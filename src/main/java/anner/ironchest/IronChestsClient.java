@@ -22,15 +22,15 @@ public class IronChestsClient implements ClientModInitializer {
         ModBlockEntityRenderer.registerBlockEntityRenderer();
 
         // Crystal Chest Rendering
-        ClientPlayNetworking.registerGlobalReceiver(IronChests.UPDATE_INV_PACKET_ID, (client, handler, buf, responseSender) -> {
-            BlockPos pos = buf.readBlockPos();
+        ClientPlayNetworking.registerGlobalReceiver(IronChests.UpdateInventory.UPDATE_INV_PACKET_ID, (payload, context) -> {
+            BlockPos pos = payload.blockPos();
             DefaultedList<ItemStack> inv = DefaultedList.ofSize(12, ItemStack.EMPTY);
             for (int i = 0; i < 12; i++) {
-                inv.set(i, buf.readItemStack());
+                inv.set(i, payload.itemStacks().get(i));
             }
-            client.execute(() -> {
+            context.client().execute(() -> {
                 CrystalChestEntity blockEntity = (CrystalChestEntity) MinecraftClient.getInstance().world.getBlockEntity(pos);
-                blockEntity.setInvStackList(inv);
+                blockEntity.setHeldStacks(inv);
             });
         });
     }

@@ -2,14 +2,12 @@ package anner.ironchest.blocks.blockentities;
 
 import anner.ironchest.IronChests;
 import anner.ironchest.blocks.ChestTypes;
-import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
@@ -31,17 +29,18 @@ public class CrystalChestEntity extends GenericChestEntity {
     public void tick() {
         if (world != null && !world.isClient && this.inventoryTouched) {
             Collection<ServerPlayerEntity> viewers = PlayerLookup.tracking(this);
-            PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-            buf.writeBlockPos(pos);
             getTopStacks();
+            DefaultedList<ItemStack> itemStacks = DefaultedList.ofSize(12, ItemStack.EMPTY);
             for (int i = 0; i < 12; i++) {
-                buf.writeItemStack(topStacks.get(i));
+                itemStacks.set(i, topStacks.get(i));
             }
-            viewers.forEach(player -> ServerPlayNetworking.send(player, IronChests.UPDATE_INV_PACKET_ID, buf));
+            IronChests.UpdateInventory payload = new IronChests.UpdateInventory(pos, itemStacks);
+            viewers.forEach(player -> ServerPlayNetworking.send(player, payload));
             inventoryTouched = false;
             topStacks.clear();
         }
     }
+
     private void getTopStacks() {
         int startIndex = 0;
         for (int i = 0; i < 12; i++) {
@@ -49,9 +48,11 @@ public class CrystalChestEntity extends GenericChestEntity {
             for (int j = startIndex; j < inv.size(); j++) {
                 ItemStack stack = inv.get(j);
                 if (stack.getItem() != Items.AIR) {
-                    startIndex = j+1;
+                    startIndex = j + 1;
                     topStacks.set(i, stack);
-                    if (startIndex > inv.size()) { return; }
+                    if (startIndex > inv.size()) {
+                        return;
+                    }
                     break;
                 }
             }
@@ -59,18 +60,18 @@ public class CrystalChestEntity extends GenericChestEntity {
     }
 
     private DefaultedList<ItemStack> getInventory() {
-        return super.getInvStackList();
+        return super.getHeldStacks();
     }
 
     @Override
-    public DefaultedList<ItemStack> getInvStackList() {
+    public DefaultedList<ItemStack> getHeldStacks() {
         this.inventoryTouched = true;
-        return super.getInvStackList();
+        return super.getHeldStacks();
     }
 
     @Override
-    public void setInvStackList(DefaultedList<ItemStack> list) {
-        super.setInvStackList(list);
+    public void setHeldStacks(DefaultedList<ItemStack> list) {
+        super.setHeldStacks(list);
         this.inventoryTouched = true;
     }
 

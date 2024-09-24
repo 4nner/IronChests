@@ -5,10 +5,10 @@ import anner.ironchest.registry.ModBlockEntityType;
 import anner.ironchest.registry.ModBlocks;
 import anner.ironchest.registry.ModScreenHandlerType;
 import anner.ironchest.screenhandlers.ChestScreenHandler;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.ChestBlockEntity;
 import net.minecraft.screen.ScreenHandlerType;
@@ -17,16 +17,16 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
 public enum ChestTypes {
-    NETHERITE(126, 14, new Identifier(IronChests.MOD_ID, "model/netherite_chest")),
-    OBSIDIAN(108, 12, new Identifier(IronChests.MOD_ID, "model/obsidian_chest")),
-    CRYSTAL(108, 12, new Identifier(IronChests.MOD_ID, "model/crystal_chest")),
-    DIAMOND(108, 12, new Identifier(IronChests.MOD_ID, "model/diamond_chest")),
-    EMERALD(108, 12, new Identifier(IronChests.MOD_ID, "model/emerald_chest")),
-    GOLD(81, 9, new Identifier(IronChests.MOD_ID, "model/gold_chest")),
-    IRON(54, 9, new Identifier(IronChests.MOD_ID, "model/iron_chest")),
-    COPPER(45, 9, new Identifier(IronChests.MOD_ID, "model/copper_chest")),
-    CHRISTMAS(27, 9, new Identifier("entity/chest/christmas")),
-    WOOD(27, 9, new Identifier("entity/chest/normal"));
+    NETHERITE(126, 14, Identifier.of(IronChests.MOD_ID, "model/netherite_chest")),
+    OBSIDIAN(108, 12, Identifier.of(IronChests.MOD_ID, "model/obsidian_chest")),
+    CRYSTAL(108, 12, Identifier.of(IronChests.MOD_ID, "model/crystal_chest")),
+    DIAMOND(108, 12, Identifier.of(IronChests.MOD_ID, "model/diamond_chest")),
+    EMERALD(108, 12, Identifier.of(IronChests.MOD_ID, "model/emerald_chest")),
+    GOLD(81, 9, Identifier.of(IronChests.MOD_ID, "model/gold_chest")),
+    IRON(54, 9, Identifier.of(IronChests.MOD_ID, "model/iron_chest")),
+    COPPER(45, 9, Identifier.of(IronChests.MOD_ID, "model/copper_chest")),
+    CHRISTMAS(27, 9, Identifier.of("entity/chest/christmas")),
+    WOOD(27, 9, Identifier.of("entity/chest/normal"));
 
     public final int size;
     public final int rowLength;
@@ -101,43 +101,44 @@ public enum ChestTypes {
             default -> BlockEntityType.CHEST;
         };
     }
-    public FabricBlockSettings setting() {
+
+    public AbstractBlock.Settings setting() {
         return switch (this) {
-            case COPPER, GOLD -> FabricBlockSettings.create()
+            case COPPER, GOLD -> AbstractBlock.Settings.create()
                     .hardness(3.0F)
                     .resistance(6.0F)
                     .sounds(BlockSoundGroup.COPPER)
                     .requiresTool();
-            case IRON -> FabricBlockSettings.create()
+            case IRON -> AbstractBlock.Settings.create()
                     .hardness(5.0F)
                     .resistance(6.0F)
                     .sounds(BlockSoundGroup.COPPER)
                     .requiresTool();
-            case DIAMOND, EMERALD -> FabricBlockSettings.create()
+            case DIAMOND, EMERALD -> AbstractBlock.Settings.create()
                     .hardness(5.0F)
                     .resistance(6.0F)
                     .sounds(BlockSoundGroup.STONE)
                     .requiresTool();
-            case CRYSTAL -> FabricBlockSettings.create()
+            case CRYSTAL -> AbstractBlock.Settings.create()
                     .hardness(3.0F)
                     .resistance(3.0F)
                     .sounds(BlockSoundGroup.AMETHYST_BLOCK)
                     .requiresTool();
-            case OBSIDIAN -> FabricBlockSettings.create()
+            case OBSIDIAN -> AbstractBlock.Settings.create()
                     .hardness(50.0F)
                     .resistance(1200.0F)
                     .sounds(BlockSoundGroup.STONE)
                     .requiresTool();
-            case NETHERITE -> FabricBlockSettings.create()
+            case NETHERITE -> AbstractBlock.Settings.create()
                     .hardness(50.0F)
                     .resistance(1200.0F)
                     .sounds(BlockSoundGroup.COPPER)
                     .requiresTool();
-            case WOOD, CHRISTMAS -> FabricBlockSettings.create()
+            case WOOD, CHRISTMAS -> AbstractBlock.Settings.create()
                     .hardness(3.0F)
                     .resistance(3.0F)
                     .sounds(BlockSoundGroup.WOOD);
-            default -> FabricBlockSettings.create();
+            default -> AbstractBlock.Settings.create();
         };
     }
 }
