@@ -10,9 +10,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.packet.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.server.world.ServerWorld;
@@ -33,7 +34,7 @@ public class GenericChestEntity extends ChestBlockEntity {
     public GenericChestEntity(ChestTypes type, BlockPos pos, BlockState state) {
         super(type.getBlockEntityType(), pos, state);
         this.type = type;
-        this.setInvStackList(DefaultedList.ofSize(this.size(), ItemStack.EMPTY));
+        this.setHeldStacks(DefaultedList.ofSize(this.size(), ItemStack.EMPTY));
     }
 
     @Override
@@ -75,14 +76,14 @@ public class GenericChestEntity extends ChestBlockEntity {
     }
 
     @Override
-    public void readNbt(NbtCompound tag) {
-        super.readNbt(tag);
+    public void readNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
+        super.readNbt(tag, registryLookup);
         this.viewerCount = tag.getInt("viewers");
     }
 
     @Override
-    public void writeNbt(NbtCompound tag) {
-        super.writeNbt(tag);
+    public void writeNbt(NbtCompound tag, RegistryWrapper.WrapperLookup registryLookup) {
+        super.writeNbt(tag, registryLookup);
         tag.putInt("viewers", viewerCount);
     }
 
@@ -102,8 +103,8 @@ public class GenericChestEntity extends ChestBlockEntity {
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt() {
-        return this.createNbt();
+    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
+        return this.createNbt(registryLookup);
     }
 
     @Override

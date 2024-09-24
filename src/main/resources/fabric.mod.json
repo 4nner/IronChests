@@ -11,7 +11,6 @@
     "homepage": "https://github.com/4nner/ironchests",
     "sources": "https://github.com/4nner/ironchests"
   },
-
   "license": "gpl-3.0",
   "icon": "assets/ironchest/icon.png",
   "environment": "*",
@@ -25,11 +24,10 @@
   },
   "mixins": [
   ],
-
   "depends": {
-    "fabricloader": ">=0.14.21",
-    "fabric-api": ">=0.83.0",
-    "minecraft": "~1.20",
-    "java": ">=17"
+    "fabricloader": ">=0.15.11",
+    "fabric-api": ">=0.100.1",
+    "minecraft": "~1.21.1",
+    "java": ">=21"
   }
 }

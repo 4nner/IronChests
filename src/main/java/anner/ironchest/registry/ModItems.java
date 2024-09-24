@@ -60,50 +60,50 @@ public class ModItems {
 
     public static void registerItems() {
         // Item
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "wood_copper_upgrade"), WOOD_COPPER_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "wood_iron_upgrade"), WOOD_IRON_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "wood_gold_upgrade"), WOOD_GOLD_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "wood_diamond_upgrade"), WOOD_DIAMOND_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "wood_emerald_upgrade"), WOOD_EMERALD_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "wood_crystal_upgrade"), WOOD_CRYSTAL_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "wood_obsidian_upgrade"), WOOD_OBSIDIAN_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "wood_copper_upgrade"), WOOD_COPPER_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "wood_iron_upgrade"), WOOD_IRON_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "wood_gold_upgrade"), WOOD_GOLD_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "wood_diamond_upgrade"), WOOD_DIAMOND_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "wood_emerald_upgrade"), WOOD_EMERALD_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "wood_crystal_upgrade"), WOOD_CRYSTAL_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "wood_obsidian_upgrade"), WOOD_OBSIDIAN_UPGRADE);
 
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "copper_iron_upgrade"), COPPER_IRON_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "copper_gold_upgrade"), COPPER_GOLD_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "copper_diamond_upgrade"), COPPER_DIAMOND_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "copper_emerald_upgrade"), COPPER_EMERALD_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "copper_crystal_upgrade"), COPPER_CRYSTAL_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "copper_obsidian_upgrade"), COPPER_OBSIDIAN_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "copper_iron_upgrade"), COPPER_IRON_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "copper_gold_upgrade"), COPPER_GOLD_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "copper_diamond_upgrade"), COPPER_DIAMOND_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "copper_emerald_upgrade"), COPPER_EMERALD_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "copper_crystal_upgrade"), COPPER_CRYSTAL_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "copper_obsidian_upgrade"), COPPER_OBSIDIAN_UPGRADE);
 
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "iron_gold_upgrade"), IRON_GOLD_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "iron_diamond_upgrade"), IRON_DIAMOND_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "iron_emerald_upgrade"), IRON_EMERALD_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "iron_crystal_upgrade"), IRON_CRYSTAL_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "iron_obsidian_upgrade"), IRON_OBSIDIAN_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "iron_gold_upgrade"), IRON_GOLD_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "iron_diamond_upgrade"), IRON_DIAMOND_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "iron_emerald_upgrade"), IRON_EMERALD_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "iron_crystal_upgrade"), IRON_CRYSTAL_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "iron_obsidian_upgrade"), IRON_OBSIDIAN_UPGRADE);
 
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "gold_diamond_upgrade"), GOLD_DIAMOND_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "gold_emerald_upgrade"), GOLD_EMERALD_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "gold_crystal_upgrade"), GOLD_CRYSTAL_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "gold_obsidian_upgrade"), GOLD_OBSIDIAN_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "gold_diamond_upgrade"), GOLD_DIAMOND_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "gold_emerald_upgrade"), GOLD_EMERALD_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "gold_crystal_upgrade"), GOLD_CRYSTAL_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "gold_obsidian_upgrade"), GOLD_OBSIDIAN_UPGRADE);
 
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "diamond_crystal_upgrade"), DIAMOND_CRYSTAL_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "diamond_obsidian_upgrade"), DIAMOND_OBSIDIAN_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "diamond_crystal_upgrade"), DIAMOND_CRYSTAL_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "diamond_obsidian_upgrade"), DIAMOND_OBSIDIAN_UPGRADE);
 
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "emerald_crystal_upgrade"), EMERALD_CRYSTAL_UPGRADE);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "emerald_obsidian_upgrade"), EMERALD_OBSIDIAN_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "emerald_crystal_upgrade"), EMERALD_CRYSTAL_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "emerald_obsidian_upgrade"), EMERALD_OBSIDIAN_UPGRADE);
 
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "wood_christmas_upgrade"), WOOD_CHRISTMAS_UPGRADE);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "wood_christmas_upgrade"), WOOD_CHRISTMAS_UPGRADE);
 
         // Block Items
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "copper_chest"), COPPER_CHEST);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "iron_chest"), IRON_CHEST);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "gold_chest"), GOLD_CHEST);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "diamond_chest"), DIAMOND_CHEST);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "emerald_chest"), EMERALD_CHEST);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "crystal_chest"), CRYSTAL_CHEST);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "obsidian_chest"), OBSIDIAN_CHEST);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "netherite_chest"), NETHERITE_CHEST);
-        Registry.register(Registries.ITEM, new Identifier(IronChests.MOD_ID, "christmas_chest"), CHRISTMAS_CHEST);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "copper_chest"), COPPER_CHEST);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "iron_chest"), IRON_CHEST);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "gold_chest"), GOLD_CHEST);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "diamond_chest"), DIAMOND_CHEST);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "emerald_chest"), EMERALD_CHEST);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "crystal_chest"), CRYSTAL_CHEST);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "obsidian_chest"), OBSIDIAN_CHEST);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "netherite_chest"), NETHERITE_CHEST);
+        Registry.register(Registries.ITEM, Identifier.of(IronChests.MOD_ID, "christmas_chest"), CHRISTMAS_CHEST);
 
 	ItemGroupEvents.modifyEntriesEvent(IronChests.TAB).register(entries -> {
 		entries.add(COPPER_CHEST);

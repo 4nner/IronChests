@@ -1,7 +1,6 @@
 package anner.ironchest.blocks;
 
 import anner.ironchest.blocks.blockentities.GenericChestEntity;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
 import net.minecraft.block.entity.BlockEntity;
@@ -17,7 +16,7 @@ import net.minecraft.world.World;
 public class GenericChestBlock extends ChestBlock {
     private final ChestTypes type;
 
-    public GenericChestBlock(FabricBlockSettings settings, ChestTypes type) {
+    public GenericChestBlock(Settings settings, ChestTypes type) {
         super(settings, type::getBlockEntityType);
         this.type = type;
     }
@@ -39,6 +38,6 @@ public class GenericChestBlock extends ChestBlock {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return world.isClient  & type == this.type.getBlockEntityType() ? (world1, pos, state1, blockEntity) -> ((GenericChestEntity)blockEntity).clientTick() : null;
+        return world.isClient & type == this.type.getBlockEntityType() ? (world1, pos, state1, blockEntity) -> ((GenericChestEntity) blockEntity).clientTick() : null;
     }
 }

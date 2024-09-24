@@ -21,14 +21,14 @@ public class ModBlocks {
     public static final Block CHRISTMAS_CHEST = new GenericChestBlock(ChestTypes.CHRISTMAS.setting(), ChestTypes.CHRISTMAS);
 
     public static void registerBlocks() {
-        Registry.register(Registries.BLOCK, new Identifier(IronChests.MOD_ID, "copper_chest"), COPPER_CHEST);
-        Registry.register(Registries.BLOCK, new Identifier(IronChests.MOD_ID, "iron_chest"), IRON_CHEST);
-        Registry.register(Registries.BLOCK, new Identifier(IronChests.MOD_ID, "gold_chest"), GOLD_CHEST);
-        Registry.register(Registries.BLOCK, new Identifier(IronChests.MOD_ID, "diamond_chest"), DIAMOND_CHEST);
-        Registry.register(Registries.BLOCK, new Identifier(IronChests.MOD_ID, "emerald_chest"), EMERALD_CHEST);
-        Registry.register(Registries.BLOCK, new Identifier(IronChests.MOD_ID, "crystal_chest"), CRYSTAL_CHEST);
-        Registry.register(Registries.BLOCK, new Identifier(IronChests.MOD_ID, "obsidian_chest"), OBSIDIAN_CHEST);
-        Registry.register(Registries.BLOCK, new Identifier(IronChests.MOD_ID, "netherite_chest"), NETHERITE_CHEST);
-        Registry.register(Registries.BLOCK, new Identifier(IronChests.MOD_ID, "christmas_chest"), CHRISTMAS_CHEST);
+        Registry.register(Registries.BLOCK, Identifier.of(IronChests.MOD_ID, "copper_chest"), COPPER_CHEST);
+        Registry.register(Registries.BLOCK, Identifier.of(IronChests.MOD_ID, "iron_chest"), IRON_CHEST);
+        Registry.register(Registries.BLOCK, Identifier.of(IronChests.MOD_ID, "gold_chest"), GOLD_CHEST);
+        Registry.register(Registries.BLOCK, Identifier.of(IronChests.MOD_ID, "diamond_chest"), DIAMOND_CHEST);
+        Registry.register(Registries.BLOCK, Identifier.of(IronChests.MOD_ID, "emerald_chest"), EMERALD_CHEST);
+        Registry.register(Registries.BLOCK, Identifier.of(IronChests.MOD_ID, "crystal_chest"), CRYSTAL_CHEST);
+        Registry.register(Registries.BLOCK, Identifier.of(IronChests.MOD_ID, "obsidian_chest"), OBSIDIAN_CHEST);
+        Registry.register(Registries.BLOCK, Identifier.of(IronChests.MOD_ID, "netherite_chest"), NETHERITE_CHEST);
+        Registry.register(Registries.BLOCK, Identifier.of(IronChests.MOD_ID, "christmas_chest"), CHRISTMAS_CHEST);
     }
 }

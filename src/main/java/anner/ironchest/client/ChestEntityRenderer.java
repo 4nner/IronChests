@@ -2,7 +2,6 @@ package anner.ironchest.client;
 
 import anner.ironchest.blocks.GenericChestBlock;
 import anner.ironchest.blocks.blockentities.CrystalChestEntity;
-import it.unimi.dsi.fastutil.ints.Int2IntFunction;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.*;
@@ -50,9 +49,7 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestBlockE
         BlockState blockState = world != null ? entity.getCachedState() : Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
         Block block = blockState.getBlock();
 
-        if (block instanceof GenericChestBlock) {
-            GenericChestBlock chest = (GenericChestBlock)block;
-
+        if (block instanceof GenericChestBlock chest) {
             matrices.push();
             float rotation = blockState.get(ChestBlock.FACING).asRotation();
             matrices.translate(0.5D, 0.5D, 0.5D);
@@ -69,7 +66,7 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestBlockE
             float g = properties.apply(GenericChestBlock.getAnimationProgressRetriever(entity)).get(tickDelta);
             g = 1.0F - g;
             g = 1.0F - g * g * g;
-            int i = ((Int2IntFunction)properties.apply(new LightmapCoordinatesRetriever())).applyAsInt(light);
+            int i = properties.apply(new LightmapCoordinatesRetriever<>()).applyAsInt(light);
 
             SpriteIdentifier spriteIdentifier = new SpriteIdentifier(TexturedRenderLayers.CHEST_ATLAS_TEXTURE, chest.getType().texture);
             VertexConsumer vertexConsumer = spriteIdentifier.getVertexConsumer(vertexConsumers, RenderLayer::getEntityCutout);
@@ -85,7 +82,7 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestBlockE
     }
 
     private void renderItems(MatrixStack matrices, CrystalChestEntity chestEntity, float tickDelta, VertexConsumerProvider vertexConsumers, int light, int overlay, World world, int seed) {
-        DefaultedList<ItemStack> inv = chestEntity.getInvStackList();
+        DefaultedList<ItemStack> inv = chestEntity.getHeldStacks();
         int counter = 0;
         for (int j = 0; j < 3; j++) {
             renderItem(0.55, 0.3 + (j * 0.5), 0.7, inv, counter, matrices, chestEntity, tickDelta, vertexConsumers, light, overlay, seed, world);
@@ -100,7 +97,7 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestBlockE
             counter++;
         }
         for (int j = 0; j < 3; j++) {
-            renderItem(1.4, 0.3 + (j * 0.5), 1.4, inv, counter, matrices, chestEntity, tickDelta, vertexConsumers, light, overlay,  seed, world);
+            renderItem(1.4, 0.3 + (j * 0.5), 1.4, inv, counter, matrices, chestEntity, tickDelta, vertexConsumers, light, overlay, seed, world);
             counter++;
         }
     }
