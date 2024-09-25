@@ -1,7 +1,7 @@
 package anner.ironchest.blocks.blockentities;
 
-import anner.ironchest.IronChests;
 import anner.ironchest.blocks.ChestTypes;
+import anner.ironchest.registry.ModPayloads;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BlockState;
@@ -16,7 +16,7 @@ import java.util.Collection;
 
 public class CrystalChestEntity extends GenericChestEntity {
 
-    private DefaultedList<ItemStack> topStacks;
+    private final DefaultedList<ItemStack> topStacks;
     private boolean inventoryTouched;
 
     public CrystalChestEntity(BlockPos pos, BlockState state) {
@@ -34,7 +34,7 @@ public class CrystalChestEntity extends GenericChestEntity {
             for (int i = 0; i < 12; i++) {
                 itemStacks.set(i, topStacks.get(i));
             }
-            IronChests.UpdateInventory payload = new IronChests.UpdateInventory(pos, itemStacks);
+            ModPayloads.CrystalChestBlockPayload payload = new ModPayloads.CrystalChestBlockPayload(pos, itemStacks);
             viewers.forEach(player -> ServerPlayNetworking.send(player, payload));
             inventoryTouched = false;
             topStacks.clear();
