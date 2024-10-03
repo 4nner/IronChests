@@ -2,14 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     " B ",
-    "RCW",
+    "RCY",
     " S "
   ],
   "key": {
     "C": {
       "item": "minecraft:chest"
     },
-    "W": {
+    "Y": {
       "item": "minecraft:yellow_dye"
     },
     "R": {
@@ -23,6 +23,7 @@
     }
   },
   "result": {
-    "item": "ironchest:christmas_chest"
+    "id": "ironchest:christmas_chest",
+    "count": 1
   }
 }

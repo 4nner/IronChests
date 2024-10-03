@@ -1,19 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "OOO",
-    "OGO",
-    "OOO"
+    "ggg",
+    "gUg",
+    "ggg"
   ],
   "key": {
-    "O": {
+    "g": {
       "item": "minecraft:glass"
     },
-    "G": {
+    "U": {
       "item": "ironchest:copper_diamond_upgrade"
     }
   },
   "result": {
-    "item": "ironchest:copper_crystal_upgrade"
+    "id": "ironchest:copper_crystal_upgrade",
+    "count": 1
   }
 }

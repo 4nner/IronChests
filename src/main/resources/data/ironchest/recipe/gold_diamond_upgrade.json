@@ -17,6 +17,7 @@
 		}
 	},
 	"result": {
-		"item": "ironchest:gold_diamond_upgrade"
+		"id": "ironchest:gold_diamond_upgrade",
+		"count": 1
 	}
 }

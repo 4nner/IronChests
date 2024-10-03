@@ -1,19 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "OOO",
-    "GOG",
-    "OOO"
+    "ggg",
+    "lgl",
+    "ggg"
   ],
   "key": {
-    "O": {
+    "g": {
       "item": "minecraft:glass"
     },
-    "G": {
+    "l": {
       "item": "minecraft:lapis_lazuli"
     }
   },
   "result": {
-    "item": "ironchest:diamond_crystal_upgrade"
+    "id": "ironchest:diamond_crystal_upgrade",
+    "count": 1
   }
 }

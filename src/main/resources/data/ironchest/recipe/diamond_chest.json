@@ -2,14 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "GGG",
-    "MSM",
+    "dCd",
     "GGG"
   ],
   "key": {
-    "M": {
+    "d": {
       "item": "minecraft:diamond"
     },
-    "S": {
+    "C": {
       "item": "ironchest:gold_chest"
     },
     "G": {
@@ -17,6 +17,7 @@
     }
   },
   "result": {
-    "item": "ironchest:diamond_chest"
+    "id": "ironchest:diamond_chest",
+    "count": 1
   }
 }

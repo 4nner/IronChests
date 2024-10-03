@@ -17,6 +17,7 @@
     }
   },
   "result": {
-    "item": "ironchest:iron_emerald_upgrade"
+    "id": "ironchest:iron_emerald_upgrade",
+    "count": 1
   }
 }

@@ -1,5 +1,8 @@
 {
   "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  },
   "base": {
     "item": "ironchest:diamond_chest"
   },
@@ -7,9 +10,7 @@
     "item": "minecraft:netherite_ingot"
   },
   "result": {
-    "item": "ironchest:netherite_chest"
-  },
-  "template": {
-    "item": "minecraft:netherite_upgrade_smithing_template"
+    "id": "ironchest:netherite_chest",
+    "count": 1
   }
 }

@@ -17,6 +17,7 @@
 		}
 	},
 	"result": {
-		"item": "ironchest:wood_iron_upgrade"
+		"id": "ironchest:wood_iron_upgrade",
+		"count": 1
 	}
 }

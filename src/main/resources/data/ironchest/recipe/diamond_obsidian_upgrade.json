@@ -2,18 +2,19 @@
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		"OOO",
-		"OGO",
+		"OlO",
 		"OOO"
 	],
 	"key": {
 		"O": {
 			"item": "minecraft:obsidian"
 		},
-		"G": {
+		"l": {
 			"item": "minecraft:lapis_lazuli"
 		}
 	},
 	"result": {
-		"item": "ironchest:diamond_obsidian_upgrade"
+		"id": "ironchest:diamond_obsidian_upgrade",
+		"count": 1
 	}
 }

@@ -2,14 +2,14 @@
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		"GGG",
-		"DSD",
+		"DUD",
 		"GGG"
 	],
 	"key": {
 		"D": {
 			"item": "minecraft:diamond"
 		},
-		"S": {
+		"U": {
 			"item": "ironchest:copper_gold_upgrade"
 		},
 		"G": {
@@ -17,6 +17,7 @@
 		}
 	},
 	"result": {
-		"item": "ironchest:copper_diamond_upgrade"
+		"id": "ironchest:copper_diamond_upgrade",
+		"count": 1
 	}
 }

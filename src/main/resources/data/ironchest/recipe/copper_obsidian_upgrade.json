@@ -2,18 +2,19 @@
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		"OOO",
-		"OGO",
+		"OUO",
 		"OOO"
 	],
 	"key": {
 		"O": {
 			"item": "minecraft:obsidian"
 		},
-		"G": {
+		"U": {
 			"item": "ironchest:copper_diamond_upgrade"
 		}
 	},
 	"result": {
-		"item": "ironchest:copper_obsidian_upgrade"
+		"id": "ironchest:copper_obsidian_upgrade",
+		"count": 1
 	}
 }
