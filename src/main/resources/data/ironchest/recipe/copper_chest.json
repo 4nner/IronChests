@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "ccc",
-    "cCc",
-    "ccc"
+    "iii",
+    "iCi",
+    "iii"
   ],
   "key": {
-    "c": {
+    "i": {
       "item": "minecraft:copper_ingot"
     },
     "C": {
@@ -14,7 +14,7 @@
     }
   },
   "result": {
-    "item": "ironchest:copper_chest",
+    "id": "ironchest:copper_chest",
     "count": 1
   }
 }

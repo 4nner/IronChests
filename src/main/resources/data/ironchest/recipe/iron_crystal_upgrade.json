@@ -14,6 +14,7 @@
     }
   },
   "result": {
-    "item": "ironchest:iron_crystal_upgrade"
+    "id": "ironchest:iron_crystal_upgrade",
+    "count": 1
   }
 }

@@ -17,6 +17,7 @@
 		}
 	},
 	"result": {
-		"item": "ironchest:wood_diamond_upgrade"
+		"id": "ironchest:wood_diamond_upgrade",
+		"count": 1
 	}
 }

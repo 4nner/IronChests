@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "ccc",
-    "cCc",
-    "ccc"
+    "iii",
+    "iCi",
+    "iii"
   ],
   "key": {
-    "c": {
+    "i": {
       "item": "minecraft:gold_ingot"
     },
     "C": {
@@ -14,7 +14,7 @@
     }
   },
   "result": {
-    "item": "ironchest:gold_chest",
+    "id": "ironchest:gold_chest",
     "count": 1
   }
 }

@@ -1,15 +1,15 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
-		"MGM",
-		"GSG",
-		"MGM"
+		"iGi",
+		"GUG",
+		"iGi"
 	],
 	"key": {
-		"M": {
+		"i": {
 			"item": "minecraft:iron_ingot"
 		},
-		"S": {
+		"U": {
 			"item": "minecraft:copper_ingot"
 		},
 		"G": {
@@ -17,6 +17,7 @@
 		}
 	},
 	"result": {
-		"item": "ironchest:copper_iron_upgrade"
+		"id": "ironchest:copper_iron_upgrade",
+		"count": 1
 	}
 }

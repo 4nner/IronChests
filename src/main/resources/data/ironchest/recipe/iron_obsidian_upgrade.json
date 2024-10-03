@@ -14,6 +14,7 @@
 		}
 	},
 	"result": {
-		"item": "ironchest:iron_obsidian_upgrade"
+		"id": "ironchest:iron_obsidian_upgrade",
+		"count": 1
 	}
 }

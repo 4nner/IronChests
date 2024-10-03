@@ -23,6 +23,7 @@
     }
   },
   "result": {
-    "item": "ironchest:wood_christmas_upgrade"
+    "id": "ironchest:wood_christmas_upgrade",
+    "count": 1
   }
 }

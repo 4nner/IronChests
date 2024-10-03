@@ -17,6 +17,7 @@
     }
   },
   "result": {
-    "item": "ironchest:iron_chest"
+    "id": "ironchest:iron_chest",
+    "count": 1
   }
 }
