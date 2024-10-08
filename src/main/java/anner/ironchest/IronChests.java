@@ -20,6 +20,5 @@ public class IronChests implements ModInitializer {
         ModItemGroup.registerItemGroup();
         ModBlockEntityType.registerBlockEntities();
         ModScreenHandlerType.registerScreenHandlers();
-        ModPayloads.registerPayloads();
     }
 }

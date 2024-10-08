@@ -1,6 +1,5 @@
 package anner.ironchest.blocks;
 
-import anner.ironchest.blocks.blockentities.CrystalChestEntity;
 import anner.ironchest.blocks.blockentities.GenericChestEntity;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
@@ -22,9 +21,9 @@ public class CrystalChestBlock extends GenericChestBlock {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        if (type != this.getType().getBlockEntityType()) {
+        if (type != this.getType().getBlockEntityType() || !world.isClient) {
             return null;
         }
-        return world.isClient ? (world1, pos, state1, blockEntity) -> ((GenericChestEntity) blockEntity).clientTick() : (world1, pos, state1, blockEntity) -> ((CrystalChestEntity) blockEntity).tick();
+        return (world1, pos, state1, blockEntity) -> ((GenericChestEntity) blockEntity).clientTick();
     }
 }
