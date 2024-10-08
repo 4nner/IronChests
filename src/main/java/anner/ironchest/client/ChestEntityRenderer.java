@@ -82,7 +82,7 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestBlockE
     }
 
     private void renderItems(MatrixStack matrices, CrystalChestEntity chestEntity, float tickDelta, VertexConsumerProvider vertexConsumers, int light, int overlay, World world, int seed) {
-        DefaultedList<ItemStack> inv = chestEntity.getHeldStacks();
+        DefaultedList<ItemStack> inv = chestEntity.getTopStacks();
         int counter = 0;
         for (int j = 0; j < 3; j++) {
             renderItem(0.55, 0.3 + (j * 0.5), 0.7, inv, counter, matrices, chestEntity, tickDelta, vertexConsumers, light, overlay, seed, world);
