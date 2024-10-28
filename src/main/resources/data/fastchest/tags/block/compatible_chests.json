@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "ironchest:christmas_chest",
+    "ironchest:copper_chest",
+    "ironchest:diamond_chest",
+    "ironchest:emerald_chest",
+    "ironchest:gold_chest",
+    "ironchest:iron_chest",
+    "ironchest:netherite_chest",
+    "ironchest:obsidian_chest"
+  ]
+}
