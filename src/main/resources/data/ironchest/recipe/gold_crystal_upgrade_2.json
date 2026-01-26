@@ -6,12 +6,8 @@
     "OOO"
   ],
   "key": {
-    "O": {
-      "item": "minecraft:glass"
-    },
-    "G": {
-      "item": "ironchest:gold_emerald_upgrade"
-    }
+    "O": "minecraft:glass",
+    "G": "ironchest:gold_emerald_upgrade"
   },
   "result": {
     "id": "ironchest:gold_crystal_upgrade",

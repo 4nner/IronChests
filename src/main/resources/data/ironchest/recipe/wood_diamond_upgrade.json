@@ -1,23 +1,17 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern": [
-		"GGG",
-		"DSD",
-		"GGG"
-	],
-	"key": {
-		"D": {
-			"item": "minecraft:diamond"
-		},
-		"S": {
-			"item": "ironchest:wood_gold_upgrade"
-		},
-		"G": {
-			"item": "minecraft:glass"
-		}
-	},
-	"result": {
-		"id": "ironchest:wood_diamond_upgrade",
-		"count": 1
-	}
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "DSD",
+    "GGG"
+  ],
+  "key": {
+    "D": "minecraft:diamond_block",
+    "S": "ironchest:wood_gold_upgrade",
+    "G": "minecraft:glass"
+  },
+  "result": {
+    "id": "ironchest:wood_diamond_upgrade",
+    "count": 1
+  }
 }

@@ -6,21 +6,11 @@
     " S "
   ],
   "key": {
-    "P": {
-      "tag": "minecraft:planks"
-    },
-    "Y": {
-      "item": "minecraft:yellow_dye"
-    },
-    "R": {
-      "item": "minecraft:red_dye"
-    },
-    "B": {
-      "item": "minecraft:sweet_berries"
-    },
-    "S": {
-      "item": "minecraft:spruce_sapling"
-    }
+    "P": "#minecraft:planks",
+    "Y": "minecraft:yellow_dye",
+    "R": "minecraft:red_dye",
+    "B": "minecraft:sweet_berries",
+    "S": "minecraft:spruce_sapling"
   },
   "result": {
     "id": "ironchest:wood_christmas_upgrade",

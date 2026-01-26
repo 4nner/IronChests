@@ -1,23 +1,17 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern": [
-		"iGi",
-		"GUG",
-		"iGi"
-	],
-	"key": {
-		"i": {
-			"item": "minecraft:iron_ingot"
-		},
-		"U": {
-			"item": "minecraft:copper_ingot"
-		},
-		"G": {
-			"item": "minecraft:glass"
-		}
-	},
-	"result": {
-		"id": "ironchest:copper_iron_upgrade",
-		"count": 1
-	}
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iGi",
+    "GUG",
+    "iGi"
+  ],
+  "key": {
+    "i": "minecraft:iron_block",
+    "U": "minecraft:copper_block",
+    "G": "minecraft:glass"
+  },
+  "result": {
+    "id": "ironchest:copper_iron_upgrade",
+    "count": 1
+  }
 }

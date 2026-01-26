@@ -1,20 +1,16 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern": [
-		"MMM",
-		"MSM",
-		"MMM"
-	],
-	"key": {
-		"M": {
-			"item": "minecraft:gold_ingot"
-		},
-		"S": {
-			"item": "minecraft:iron_ingot"
-		}
-	},
-	"result": {
-		"id": "ironchest:iron_gold_upgrade",
-		"count": 1
-	}
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "MSM",
+    "MMM"
+  ],
+  "key": {
+    "M": "minecraft:gold_block",
+    "S": "minecraft:iron_block"
+  },
+  "result": {
+    "id": "ironchest:iron_gold_upgrade",
+    "count": 1
+  }
 }

@@ -1,20 +1,16 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern": [
-		"OOO",
-		"OGO",
-		"OOO"
-	],
-	"key": {
-		"O": {
-			"item": "minecraft:obsidian"
-		},
-		"G": {
-			"item": "ironchest:wood_diamond_upgrade"
-		}
-	},
-	"result": {
-		"id": "ironchest:wood_obsidian_upgrade",
-		"count": 1
-	}
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OOO",
+    "OGO",
+    "OOO"
+  ],
+  "key": {
+    "O": "minecraft:obsidian",
+    "G": "ironchest:wood_diamond_upgrade"
+  },
+  "result": {
+    "id": "ironchest:wood_obsidian_upgrade",
+    "count": 1
+  }
 }

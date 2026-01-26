@@ -1,3 +1,6 @@
 {
-    "parent": "ironchest:block/crystal_chest"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "ironchest:item/crystal_chest"
+  }
 }

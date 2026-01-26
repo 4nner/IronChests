@@ -6,12 +6,8 @@
     "iii"
   ],
   "key": {
-    "i": {
-      "item": "minecraft:copper_ingot"
-    },
-    "C": {
-      "item": "minecraft:chest"
-    }
+    "i": "minecraft:copper_block",
+    "C": "minecraft:chest"
   },
   "result": {
     "id": "ironchest:copper_chest",
