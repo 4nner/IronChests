@@ -6,15 +6,9 @@
     "GGG"
   ],
   "key": {
-    "E": {
-      "item": "minecraft:emerald"
-    },
-    "S": {
-      "item": "ironchest:iron_gold_upgrade"
-    },
-    "G": {
-      "item": "minecraft:glass"
-    }
+    "E": "minecraft:emerald_block",
+    "S": "ironchest:iron_gold_upgrade",
+    "G": "minecraft:glass"
   },
   "result": {
     "id": "ironchest:iron_emerald_upgrade",

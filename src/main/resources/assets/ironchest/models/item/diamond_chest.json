@@ -1,3 +1,6 @@
 {
-    "parent": "ironchest:block/diamond_chest"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "ironchest:item/diamond_chest"
+  }
 }

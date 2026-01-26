@@ -1,20 +1,16 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern": [
-		"CCC",
-		"CPC",
-		"CCC"
-	],
-	"key": {
-		"C": {
-			"item": "minecraft:copper_ingot"
-		},
-		"P": {
-			"tag": "minecraft:planks"
-		}
-	},
-	"result": {
-		"id": "ironchest:wood_copper_upgrade",
-		"count": 1
-	}
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CPC",
+    "CCC"
+  ],
+  "key": {
+    "C": "minecraft:copper_block",
+    "P": "#minecraft:planks"
+  },
+  "result": {
+    "id": "ironchest:wood_copper_upgrade",
+    "count": 1
+  }
 }

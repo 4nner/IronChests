@@ -6,12 +6,8 @@
     "MMM"
   ],
   "key": {
-    "M": {
-      "item": "minecraft:obsidian"
-    },
-    "S": {
-      "item": "ironchest:emerald_chest"
-    }
+    "M": "minecraft:obsidian",
+    "S": "ironchest:emerald_chest"
   },
   "result": {
     "id": "ironchest:obsidian_chest",

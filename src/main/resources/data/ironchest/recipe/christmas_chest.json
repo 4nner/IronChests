@@ -6,21 +6,11 @@
     " S "
   ],
   "key": {
-    "C": {
-      "item": "minecraft:chest"
-    },
-    "Y": {
-      "item": "minecraft:yellow_dye"
-    },
-    "R": {
-      "item": "minecraft:red_dye"
-    },
-    "B": {
-      "item": "minecraft:sweet_berries"
-    },
-    "S": {
-      "item": "minecraft:spruce_sapling"
-    }
+    "C": "minecraft:chest",
+    "Y": "minecraft:yellow_dye",
+    "R": "minecraft:red_dye",
+    "B": "minecraft:sweet_berries",
+    "S": "minecraft:spruce_sapling"
   },
   "result": {
     "id": "ironchest:christmas_chest",

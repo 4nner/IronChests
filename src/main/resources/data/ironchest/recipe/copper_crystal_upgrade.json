@@ -6,12 +6,8 @@
     "ggg"
   ],
   "key": {
-    "g": {
-      "item": "minecraft:glass"
-    },
-    "U": {
-      "item": "ironchest:copper_diamond_upgrade"
-    }
+    "g": "minecraft:glass",
+    "U": "ironchest:copper_diamond_upgrade"
   },
   "result": {
     "id": "ironchest:copper_crystal_upgrade",

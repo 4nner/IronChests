@@ -1,3 +1,6 @@
 {
-  "parent": "ironchest:block/copper_chest"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "ironchest:item/copper_chest"
+  }
 }

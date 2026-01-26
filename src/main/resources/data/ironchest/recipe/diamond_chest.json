@@ -6,15 +6,9 @@
     "GGG"
   ],
   "key": {
-    "d": {
-      "item": "minecraft:diamond"
-    },
-    "C": {
-      "item": "ironchest:gold_chest"
-    },
-    "G": {
-      "item": "minecraft:glass"
-    }
+    "d": "minecraft:diamond_block",
+    "C": "ironchest:gold_chest",
+    "G": "minecraft:glass"
   },
   "result": {
     "id": "ironchest:diamond_chest",

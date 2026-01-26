@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "anner.ironchest.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ChestBlockEntityViewerCountMixin",
+    "PlayerEntityViewingMixin"
+  ],
+  "client": [
+    "ChestModelRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

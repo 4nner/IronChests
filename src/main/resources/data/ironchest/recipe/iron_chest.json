@@ -6,15 +6,9 @@
     "MGM"
   ],
   "key": {
-    "M": {
-      "item": "minecraft:iron_ingot"
-    },
-    "S": {
-      "item": "ironchest:copper_chest"
-    },
-    "G": {
-      "item": "minecraft:glass"
-    }
+    "M": "minecraft:iron_block",
+    "S": "ironchest:copper_chest",
+    "G": "minecraft:glass"
   },
   "result": {
     "id": "ironchest:iron_chest",
