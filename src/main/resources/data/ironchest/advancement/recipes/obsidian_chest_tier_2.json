@@ -1,0 +1,116 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironchest:emerald_chest"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_upgrade": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironchest:wood_emerald_upgrade"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_upgrade_2": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironchest:copper_emerald_upgrade"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_upgrade_3": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironchest:iron_emerald_upgrade"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_upgrade_4": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironchest:gold_emerald_upgrade"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_chest_recipe": {
+      "conditions": {
+        "recipe": "ironchest:obsidian_chest"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_upgrade_recipe": {
+      "conditions": {
+        "recipe": "ironchest:wood_obsidian_upgrade"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_upgrade_recipe_2": {
+      "conditions": {
+        "recipe": "ironchest:copper_obsidian_upgrade"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_upgrade_recipe_3": {
+      "conditions": {
+        "recipe": "ironchest:iron_obsidian_upgrade"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_upgrade_recipe_4": {
+      "conditions": {
+        "recipe": "ironchest:gold_obsidian_upgrade"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_upgrade_recipe_5": {
+      "conditions": {
+        "recipe": "ironchest:emerald_obsidian_upgrade"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_chest_recipe",
+      "has_upgrade_recipe",
+      "has_upgrade_recipe_2",
+      "has_upgrade_recipe_3",
+      "has_upgrade_recipe_4",
+      "has_upgrade_recipe_5",
+      "has_chest",
+      "has_upgrade",
+      "has_upgrade_2",
+      "has_upgrade_3",
+      "has_upgrade_4"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ironchest:obsidian_chest_2",
+      "ironchest:wood_obsidian_upgrade_2",
+      "ironchest:copper_obsidian_upgrade_2",
+      "ironchest:iron_obsidian_upgrade_2",
+      "ironchest:gold_obsidian_upgrade_2",
+      "ironchest:emerald_obsidian_upgrade_2"
+    ]
+  }
+}
