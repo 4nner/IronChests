@@ -1,45 +1,42 @@
 package anner.ironchest.blocks;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ChestBlock;
-import net.minecraft.block.DoubleBlockProperties;
-import net.minecraft.block.enums.ChestType;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.WorldView;
-import net.minecraft.world.tick.ScheduledTickView;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.ChestType;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 
 public class GenericChestBlock extends ChestBlock {
     private final ChestTypes type;
 
-    public GenericChestBlock(Settings settings, ChestTypes type) {
-        super(type::getBlockEntityType, getOpenSound(type), getCloseSound(type), settings);
+    public GenericChestBlock(BlockBehaviour.Properties properties, ChestTypes type) {
+        super(type::getBlockEntityType, getOpenSound(type), getCloseSound(type), properties);
         this.type = type;
     }
 
     @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return this.type.makeEntity(pos, state);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return this.type.createBlockEntity(pos, state);
     }
 
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        Direction direction = ctx.getHorizontalPlayerFacing().getOpposite();
-        FluidState fluidState = ctx.getWorld().getFluidState(ctx.getBlockPos());
-        return this.getDefaultState()
-            .with(FACING, direction)
-            .with(CHEST_TYPE, ChestType.SINGLE)
-            .with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        Direction direction = context.getHorizontalDirection().getOpposite();
+        FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
+        return this.defaultBlockState()
+            .setValue(FACING, direction)
+            .setValue(TYPE, ChestType.SINGLE)
+            .setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
     }
 
     public ChestTypes getType() {
@@ -47,11 +44,11 @@ public class GenericChestBlock extends ChestBlock {
     }
 
     private static SoundEvent getOpenSound(ChestTypes type) {
-        return usesCopperChestSound(type) ? SoundEvents.BLOCK_COPPER_CHEST_OPEN : SoundEvents.BLOCK_CHEST_OPEN;
+        return usesCopperChestSound(type) ? SoundEvents.COPPER_CHEST_OPEN : SoundEvents.CHEST_OPEN;
     }
 
     private static SoundEvent getCloseSound(ChestTypes type) {
-        return usesCopperChestSound(type) ? SoundEvents.BLOCK_COPPER_CHEST_CLOSE : SoundEvents.BLOCK_CHEST_CLOSE;
+        return usesCopperChestSound(type) ? SoundEvents.COPPER_CHEST_CLOSE : SoundEvents.CHEST_CLOSE;
     }
 
     private static boolean usesCopperChestSound(ChestTypes type) {
@@ -62,32 +59,8 @@ public class GenericChestBlock extends ChestBlock {
     }
 
     @Override
-    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
-        BlockState updatedState = super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
-        return updatedState.with(CHEST_TYPE, ChestType.SINGLE);
-    }
-
-    @Override
-    public boolean canMergeWith(BlockState state) {
-        return false;
-    }
-
-    @Override
-    public DoubleBlockProperties.PropertySource<? extends ChestBlockEntity> getBlockEntitySource(BlockState state, World world, BlockPos pos, boolean ignoreBlocked) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof ChestBlockEntity chest) {
-            return new DoubleBlockProperties.PropertySource.Single<>(chest);
-        }
-        return new DoubleBlockProperties.PropertySource<ChestBlockEntity>() {
-            @Override
-            public <T> T apply(DoubleBlockProperties.PropertyRetriever<? super ChestBlockEntity, T> retriever) {
-                return retriever.getFallback();
-            }
-        };
-    }
-
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return super.getTicker(world, state, type);
+    protected BlockState updateShape(BlockState state, LevelReader level, net.minecraft.world.level.ScheduledTickAccess tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+        return super.updateShape(state, level, tickView, pos, direction, neighborPos, neighborState, random)
+            .setValue(TYPE, ChestType.SINGLE);
     }
 }

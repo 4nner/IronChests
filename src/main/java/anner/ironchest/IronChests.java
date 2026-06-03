@@ -1,22 +1,27 @@
 package anner.ironchest;
 
-import anner.ironchest.registry.*;
+import anner.ironchest.registry.ModBlockEntityType;
+import anner.ironchest.registry.ModBlocks;
+import anner.ironchest.registry.ModItemGroup;
+import anner.ironchest.registry.ModItems;
+import anner.ironchest.registry.ModScreenHandlerType;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.CreativeModeTab;
 
 public class IronChests implements ModInitializer {
-
     public static final String MOD_ID = "ironchest";
-    public static final RegistryKey<ItemGroup> TAB = RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(MOD_ID, "general"));
+    public static final ResourceKey<CreativeModeTab> TAB = ResourceKey.create(
+        Registries.CREATIVE_MODE_TAB,
+        Identifier.fromNamespaceAndPath(MOD_ID, "general")
+    );
 
     @Override
     public void onInitialize() {
-        ModItems.registerItems();
         ModBlocks.registerBlocks();
+        ModItems.registerItems();
         ModItemGroup.registerItemGroup();
         ModBlockEntityType.registerBlockEntities();
         ModScreenHandlerType.registerScreenHandlers();
