@@ -1,14 +1,18 @@
 {
-    "sources": [
-	{ "type": "single", "resource": "ironchest:model/copper_chest" },
-	{ "type": "single", "resource": "ironchest:model/iron_chest" },
-	{ "type": "single", "resource": "ironchest:model/gold_chest" },
-	{ "type": "single", "resource": "ironchest:model/diamond_chest" },
-	{ "type": "single", "resource": "ironchest:model/emerald_chest" },
-	{ "type": "single", "resource": "ironchest:model/crystal_chest" },
-	{ "type": "single", "resource": "ironchest:model/obsidian_chest" },
-	{ "type": "single", "resource": "ironchest:model/netherite_chest" },
-	{ "type": "single", "resource": "minecraft:entity/chest/christmas" }
-    ]
+  "sources": [
+    {
+      "type": "minecraft:directory",
+      "prefix": "entity/chest/",
+      "source": "entity/chest"
+    },
+    { "type": "single", "resource": "ironchest:entity/chest/copper_chest" },
+    { "type": "single", "resource": "ironchest:entity/chest/iron_chest" },
+    { "type": "single", "resource": "ironchest:entity/chest/gold_chest" },
+    { "type": "single", "resource": "ironchest:entity/chest/diamond_chest" },
+    { "type": "single", "resource": "ironchest:entity/chest/emerald_chest" },
+    { "type": "single", "resource": "ironchest:entity/chest/crystal_chest" },
+    { "type": "single", "resource": "ironchest:entity/chest/obsidian_chest" },
+    { "type": "single", "resource": "ironchest:entity/chest/netherite_chest" },
+    { "type": "single", "resource": "minecraft:entity/chest/christmas" }
+  ]
 }
-

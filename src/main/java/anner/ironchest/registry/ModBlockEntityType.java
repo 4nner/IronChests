@@ -1,38 +1,55 @@
 package anner.ironchest.registry;
 
-
 import anner.ironchest.IronChests;
-import anner.ironchest.blocks.blockentities.*;
+import anner.ironchest.blocks.ChestTypes;
+import anner.ironchest.blocks.blockentities.CrystalChestEntity;
+import anner.ironchest.blocks.blockentities.GenericChestEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 
 public class ModBlockEntityType {
+    public static final BlockEntityType<GenericChestEntity> COPPER_CHEST = create(ChestTypes.COPPER);
+    public static final BlockEntityType<GenericChestEntity> IRON_CHEST = create(ChestTypes.IRON);
+    public static final BlockEntityType<GenericChestEntity> GOLD_CHEST = create(ChestTypes.GOLD);
+    public static final BlockEntityType<GenericChestEntity> DIAMOND_CHEST = create(ChestTypes.DIAMOND);
+    public static final BlockEntityType<GenericChestEntity> EMERALD_CHEST = create(ChestTypes.EMERALD);
+    public static final BlockEntityType<CrystalChestEntity> CRYSTAL_CHEST = FabricBlockEntityTypeBuilder.create(
+        CrystalChestEntity::new, ModBlocks.CRYSTAL_CHEST
+    ).build();
+    public static final BlockEntityType<GenericChestEntity> OBSIDIAN_CHEST = create(ChestTypes.OBSIDIAN);
+    public static final BlockEntityType<GenericChestEntity> NETHERITE_CHEST = create(ChestTypes.NETHERITE);
+    public static final BlockEntityType<GenericChestEntity> CHRISTMAS_CHEST = create(ChestTypes.CHRISTMAS);
 
-    // Declaring Chest Block Entities
-    public static final BlockEntityType<CopperChestEntity> COPPER_CHEST = FabricBlockEntityTypeBuilder.create(CopperChestEntity::new, ModBlocks.COPPER_CHEST).build();
-    public static final BlockEntityType<IronChestEntity> IRON_CHEST = FabricBlockEntityTypeBuilder.create(IronChestEntity::new, ModBlocks.IRON_CHEST).build();
-    public static final BlockEntityType<GoldChestEntity> GOLD_CHEST = FabricBlockEntityTypeBuilder.create(GoldChestEntity::new, ModBlocks.GOLD_CHEST).build();
-    public static final BlockEntityType<DiamondChestEntity> DIAMOND_CHEST = FabricBlockEntityTypeBuilder.create(DiamondChestEntity::new, ModBlocks.DIAMOND_CHEST).build();
-    public static final BlockEntityType<EmeraldChestEntity> EMERALD_CHEST = FabricBlockEntityTypeBuilder.create(EmeraldChestEntity::new, ModBlocks.EMERALD_CHEST).build();
-    public static final BlockEntityType<CrystalChestEntity> CRYSTAL_CHEST = FabricBlockEntityTypeBuilder.create(CrystalChestEntity::new, ModBlocks.CRYSTAL_CHEST).build();
-    public static final BlockEntityType<ObsidianChestEntity> OBSIDIAN_CHEST = FabricBlockEntityTypeBuilder.create(ObsidianChestEntity::new, ModBlocks.OBSIDIAN_CHEST).build();
-    public static final BlockEntityType<NetheriteChestEntity> NETHERITE_CHEST = FabricBlockEntityTypeBuilder.create(NetheriteChestEntity::new, ModBlocks.NETHERITE_CHEST).build();
-    public static final BlockEntityType<ChristmasChestEntity> CHRISTMAS_CHEST = FabricBlockEntityTypeBuilder.create(ChristmasChestEntity::new, ModBlocks.CHRISTMAS_CHEST).build();
+    static {
+        ChestTypes.COPPER.bindBlockEntityType(COPPER_CHEST);
+        ChestTypes.IRON.bindBlockEntityType(IRON_CHEST);
+        ChestTypes.GOLD.bindBlockEntityType(GOLD_CHEST);
+        ChestTypes.DIAMOND.bindBlockEntityType(DIAMOND_CHEST);
+        ChestTypes.EMERALD.bindBlockEntityType(EMERALD_CHEST);
+        ChestTypes.CRYSTAL.bindBlockEntityType(CRYSTAL_CHEST);
+        ChestTypes.OBSIDIAN.bindBlockEntityType(OBSIDIAN_CHEST);
+        ChestTypes.NETHERITE.bindBlockEntityType(NETHERITE_CHEST);
+        ChestTypes.CHRISTMAS.bindBlockEntityType(CHRISTMAS_CHEST);
+    }
+
+    private static BlockEntityType<GenericChestEntity> create(ChestTypes type) {
+        return FabricBlockEntityTypeBuilder.create(
+            (pos, state) -> new GenericChestEntity(type, pos, state),
+            type.getBlock()
+        ).build();
+    }
 
     public static void registerBlockEntities() {
-        // Registering Chest Block Entities
-        Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(IronChests.MOD_ID, "copper_chest"), COPPER_CHEST);
-        Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(IronChests.MOD_ID, "iron_chest"), IRON_CHEST);
-        Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(IronChests.MOD_ID, "gold_chest"), GOLD_CHEST);
-        Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(IronChests.MOD_ID, "diamond_chest"), DIAMOND_CHEST);
-        Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(IronChests.MOD_ID, "emerald_chest"), EMERALD_CHEST);
-        Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(IronChests.MOD_ID, "crystal_chest"), CRYSTAL_CHEST);
-        Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(IronChests.MOD_ID, "obsidian_chest"), OBSIDIAN_CHEST);
-        Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(IronChests.MOD_ID, "netherite_chest"), NETHERITE_CHEST);
-        Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(IronChests.MOD_ID, "christmas_chest"), CHRISTMAS_CHEST);
+        for (ChestTypes type : ChestTypes.PLAYABLE) {
+            Registry.register(
+                BuiltInRegistries.BLOCK_ENTITY_TYPE,
+                Identifier.fromNamespaceAndPath(IronChests.MOD_ID, type.registryId),
+                type.getBlockEntityType()
+            );
+        }
     }
 }

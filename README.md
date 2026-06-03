@@ -1,5 +1,6 @@
 # Iron Chests
 [![FabricAPI](https://img.shields.io/static/v1?label=modloader&message=fabric&color=brightgreen)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
+![Minecraft](https://img.shields.io/static/v1?label=minecraft&message=26.1.2&color=gray)
 ![Mod Environment](https://img.shields.io/static/v1?label=environment&message=client%2Fserver&color=yellow)
 [![License](https://img.shields.io/static/v1?label=licence&message=GPL-3.0&color=blue)](./LICENSE)
 
@@ -7,7 +8,7 @@ Iron Chests for Fabric is a simple mod that enhances your Minecraft Gameplay by 
 Each Chest can be upgraded, starting from the Wooden Chest (Vanilla Minecraft). By doing so you will just need to craft a Chest Upgrade, and SHIFT + RIGHT_CLICK the chest you want to upgrade. \
 This will avoid the need to break the already placed chest. Do not worry, the chest will keep its inventory. 
 
-[<img alt="Requires Fabric API" src="https://i.imgur.com/Ol1Tcf8.png" width="110"/>](https://www.curseforge.com/minecraft/mc-mods/fabric-api) [<img alt="Requires LibGUI" src="https://i.imgur.com/nyTuFNg.png" width="128"/>](https://github.com/CottonMC/LibGui)
+[<img alt="Requires Fabric API" src="https://i.imgur.com/Ol1Tcf8.png" width="110"/>](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
 
 ## Special Thanks
 TechnoVision: Initial port of Iron Chests to Fabric \

@@ -1,10 +1,10 @@
 package anner.ironchest.blocks.blockentities;
 
 import anner.ironchest.blocks.ChestTypes;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class CrystalChestEntity extends GenericChestEntity {
 
@@ -12,13 +12,17 @@ public class CrystalChestEntity extends GenericChestEntity {
         super(ChestTypes.CRYSTAL, pos, state);
     }
 
-    public DefaultedList<ItemStack> getTopStacks() {
-        DefaultedList<ItemStack> topStacks = DefaultedList.ofSize(12, ItemStack.EMPTY);
+    public NonNullList<ItemStack> getTopStacks() {
+        NonNullList<ItemStack> topStacks = NonNullList.withSize(12, ItemStack.EMPTY);
         int itemCount = 0;
-        for (ItemStack stack : getHeldStacks()) {
-            if (stack.isEmpty()) continue;
+        for (ItemStack stack : this.getItems()) {
+            if (stack.isEmpty()) {
+                continue;
+            }
             topStacks.set(itemCount++, stack);
-            if (itemCount >= 12) break;
+            if (itemCount >= 12) {
+                break;
+            }
         }
         return topStacks;
     }

@@ -1,7 +1,0 @@
-{
-  "parent": "ironchest:block/chest_template",
-  "textures": {
-    "0": "minecraft:entity/chest/normal",
-    "particle": "minecraft:block/oak_planks"
-  }
-}

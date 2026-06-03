@@ -1,61 +1,122 @@
 package anner.ironchest.screenhandlers;
 
 import anner.ironchest.blocks.ChestTypes;
-import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
-import io.github.cottonmc.cotton.gui.widget.WItemSlot;
-import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
-import io.github.cottonmc.cotton.gui.widget.data.Insets;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.Items;
-import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.screen.ScreenHandlerType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import org.jspecify.annotations.Nullable;
 
-public class ChestScreenHandler extends SyncedGuiDescription {
-    Inventory inventory;
+public class ChestScreenHandler extends AbstractContainerMenu {
+    private final Container container;
+    private final ChestTypes chestType;
+    private final @Nullable BlockPos chestBlockPos;
 
-    public ChestScreenHandler(ScreenHandlerType<?> type, ChestTypes chestType, int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
-        super(type, syncId, playerInventory, getBlockInventory(context, chestType.size), null);
-        inventory = blockInventory;
+    public ChestScreenHandler(MenuType<?> menuType, ChestTypes chestType, int syncId, Inventory playerInventory, Container container) {
+        super(menuType, syncId);
+        checkContainerSize(container, chestType.size);
+        this.chestType = chestType;
+        this.container = container;
+        this.chestBlockPos = container instanceof ChestBlockEntity blockEntity ? blockEntity.getBlockPos() : null;
+        container.startOpen(playerInventory.player);
+
+        int columns = chestType.rowLength;
         int rows = chestType.getRowCount();
-        int length = chestType.rowLength;
+        int slotIndex = 0;
+        int chestSlotX = ChestGuiLayout.chestSlotStartX(columns);
 
-        WPlainPanel root = new WPlainPanel();
-        setRootPanel(root);
-
-        WItemSlot itemSlot;
-        int counter = 0;
-        if (chestType.rowLength == 1) {
-            itemSlot = WItemSlot.of(blockInventory, 0);
-            itemSlot.setInputFilter(stack -> stack.getItem() == Items.DIRT);
-            root.add(itemSlot, (18 * 4), 12);
-        } else {
-            for (int j = 0; j < rows; j++) {
-                for (int i = 0; i < length; i++) {
-                    itemSlot = WItemSlot.of(blockInventory, counter);
-                    root.add(itemSlot, (18 * i), 12 + (18 * j));
-                    counter++;
-                }
+        for (int row = 0; row < rows; row++) {
+            for (int column = 0; column < columns; column++) {
+                this.addSlot(new Slot(
+                    container,
+                    slotIndex++,
+                    chestSlotX + column * ChestGuiLayout.SLOT_SIZE,
+                    ChestGuiLayout.SLOT_SIZE + row * ChestGuiLayout.SLOT_SIZE
+                ));
             }
         }
 
-        // Sets the correct GUI Size
-        root.setInsets(Insets.ROOT_PANEL);
-
-        int height = 15;
-        height += 18 * (chestType.size / length);
-        int width = 0;
-
-        if (chestType.rowLength > 9) {
-            width = 9 * (chestType.rowLength - 9);
+        int playerInventoryX = ChestGuiLayout.playerInventoryX(columns);
+        int playerInventoryY = ChestGuiLayout.playerInventoryY(rows);
+        for (int row = 0; row < 3; row++) {
+            for (int column = 0; column < 9; column++) {
+                this.addSlot(new Slot(
+                    playerInventory,
+                    column + row * 9 + 9,
+                    playerInventoryX + column * ChestGuiLayout.SLOT_SIZE,
+                    playerInventoryY + row * ChestGuiLayout.SLOT_SIZE
+                ));
+            }
         }
-
-        root.add(this.createPlayerInventoryPanel(), width, height);
-        root.validate(this);
+        for (int column = 0; column < 9; column++) {
+            this.addSlot(new Slot(
+                playerInventory,
+                column,
+                playerInventoryX + column * ChestGuiLayout.SLOT_SIZE,
+                playerInventoryY + ChestGuiLayout.HOTBAR_OFFSET
+            ));
+        }
     }
 
-    public Inventory getBlockInventory() {
-        return inventory;
+    public int getChestRows() {
+        return chestType.getRowCount();
     }
 
+    public int getChestColumns() {
+        return chestType.rowLength;
+    }
+
+    public Container getBlockInventory() {
+        return container;
+    }
+
+    public @Nullable BlockPos getChestBlockPos() {
+        return chestBlockPos;
+    }
+
+    @Override
+    public ItemStack quickMoveStack(Player player, int slotIndex) {
+        ItemStack movedStack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(slotIndex);
+        if (slot != null && slot.hasItem()) {
+            ItemStack stackInSlot = slot.getItem();
+            movedStack = stackInSlot.copy();
+            int chestSlots = chestType.size;
+            if (slotIndex < chestSlots) {
+                if (!this.moveItemStackTo(stackInSlot, chestSlots, this.slots.size(), true)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (!this.moveItemStackTo(stackInSlot, 0, chestSlots, false)) {
+                return ItemStack.EMPTY;
+            }
+
+            if (stackInSlot.isEmpty()) {
+                slot.setByPlayer(ItemStack.EMPTY);
+            } else {
+                slot.setChanged();
+            }
+        }
+        return movedStack;
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return container.stillValid(player);
+    }
+
+    @Override
+    public void removed(Player player) {
+        super.removed(player);
+        container.stopOpen(player);
+    }
+
+    public static Container createClientContainer(ChestTypes chestType) {
+        return new SimpleContainer(chestType.size);
+    }
 }
