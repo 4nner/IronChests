@@ -5,12 +5,7 @@ import anner.ironchest.screenhandlers.ChestScreenHandler;
 import anner.ironchest.util.ChestInventorySanitizer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -20,7 +15,6 @@ import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import org.jspecify.annotations.Nullable;
 
 public class GenericChestEntity extends ChestBlockEntity {
     private final ChestTypes type;
@@ -99,25 +93,5 @@ public class GenericChestEntity extends ChestBlockEntity {
         if (level != null) {
             Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), stack);
         }
-    }
-
-    @Override
-    public void setChanged() {
-        super.setChanged();
-        if (this.level instanceof ServerLevel serverLevel) {
-            serverLevel.getChunkSource().blockChanged(this.worldPosition);
-        }
-    }
-
-    @Nullable
-    @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
-
-    @Override
-    public CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.Provider registries) {
-        ChestInventorySanitizer.sanitize(this.getItems());
-        return this.saveWithoutMetadata(registries);
     }
 }
