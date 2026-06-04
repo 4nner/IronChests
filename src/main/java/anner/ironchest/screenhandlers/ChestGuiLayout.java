@@ -16,6 +16,7 @@ public final class ChestGuiLayout {
     public static final int ROW_HEIGHT = 18;
     public static final int TEXTURE_SIZE = 256;
     public static final int PLAYER_PANEL_HEIGHT = 96;
+    public static final int WIDE_FOOTER_FRAME_HEIGHT = 7;
     public static final float PLAYER_PANEL_V = 126.0F;
     public static final int VANILLA_CHEST_ROWS = 6;
     public static final int VANILLA_CHEST_COLUMNS = 9;

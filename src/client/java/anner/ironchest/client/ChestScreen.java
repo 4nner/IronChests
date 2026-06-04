@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
 public class ChestScreen extends AbstractContainerScreen<ChestScreenHandler> {
@@ -45,7 +46,7 @@ public class ChestScreen extends AbstractContainerScreen<ChestScreenHandler> {
     }
 
     private void blitVanillaFullPanel(GuiGraphicsExtractor graphics, int xo, int yo) {
-        int bodyHeight = this.containerRows * ChestGuiLayout.ROW_HEIGHT + ChestGuiLayout.TITLE_HEIGHT;
+        int bodyHeight = bodyHeight();
         blitVanillaRegion(graphics, xo, yo, this.imageWidth, bodyHeight, 0.0F, 0.0F);
         blitVanillaPlayerFooter(graphics, xo, yo + bodyHeight, this.imageWidth, this.imageHeight - bodyHeight);
     }
@@ -67,56 +68,37 @@ public class ChestScreen extends AbstractContainerScreen<ChestScreenHandler> {
 
     private void renderWideStripLayout(GuiGraphicsExtractor graphics, int xo, int yo) {
         int panelWidth = this.imageWidth;
-        int bodyHeight = this.containerRows * ChestGuiLayout.ROW_HEIGHT + ChestGuiLayout.TITLE_HEIGHT;
-        int footerY = yo + bodyHeight;
 
-        graphics.blit(
-            RenderPipelines.GUI_TEXTURED,
-            ChestGuiLayout.wideTitleTexture(this.containerColumns),
-            xo,
-            yo,
-            0.0F,
-            0.0F,
-            panelWidth,
-            ChestGuiLayout.TITLE_HEIGHT,
-            panelWidth,
-            ChestGuiLayout.TITLE_HEIGHT
-        );
+        blitWideStrip(graphics, ChestGuiLayout.wideTitleTexture(this.containerColumns), xo, yo, panelWidth, ChestGuiLayout.TITLE_HEIGHT);
 
         for (int row = 0; row < this.containerRows; row++) {
             int rowY = yo + ChestGuiLayout.TITLE_HEIGHT + row * ChestGuiLayout.ROW_HEIGHT;
-            graphics.blit(
-                RenderPipelines.GUI_TEXTURED,
-                ChestGuiLayout.wideRowTexture(this.containerColumns),
-                xo,
-                rowY,
-                0.0F,
-                0.0F,
-                panelWidth,
-                ChestGuiLayout.ROW_HEIGHT,
-                panelWidth,
-                ChestGuiLayout.ROW_HEIGHT
-            );
+            blitWideStrip(graphics, ChestGuiLayout.wideRowTexture(this.containerColumns), xo, rowY, panelWidth, ChestGuiLayout.ROW_HEIGHT);
         }
 
-        graphics.blit(
-            RenderPipelines.GUI_TEXTURED,
-            ChestGuiLayout.widePlayerTexture(this.containerColumns),
-            xo,
-            footerY,
-            0.0F,
-            0.0F,
-            panelWidth,
-            ChestGuiLayout.PLAYER_PANEL_HEIGHT,
-            panelWidth,
-            ChestGuiLayout.PLAYER_PANEL_HEIGHT
-        );
+        renderWidePlayerFooter(graphics, xo, yo + bodyHeight(), panelWidth);
+    }
+
+    private void renderWidePlayerFooter(GuiGraphicsExtractor graphics, int xo, int footerY, int panelWidth) {
+        blitVanillaPlayerFooter(graphics, playerFooterX(xo), footerY, ChestGuiLayout.VANILLA_PANEL_WIDTH, ChestGuiLayout.PLAYER_PANEL_HEIGHT);
+        blitWideStrip(graphics, ChestGuiLayout.widePlayerTexture(this.containerColumns), xo, footerY, panelWidth, ChestGuiLayout.WIDE_FOOTER_FRAME_HEIGHT);
     }
 
     private void blitTallPlayerFooter(GuiGraphicsExtractor graphics, int xo, int yo) {
-        int bodyHeight = this.containerRows * ChestGuiLayout.ROW_HEIGHT + ChestGuiLayout.TITLE_HEIGHT;
-        int playerBgX = xo + ChestGuiLayout.playerInventoryX(this.containerColumns) - ChestGuiLayout.LEFT_INSET;
-        blitVanillaPlayerFooter(graphics, playerBgX, yo + bodyHeight, ChestGuiLayout.VANILLA_PANEL_WIDTH, this.imageHeight - bodyHeight);
+        int bodyHeight = bodyHeight();
+        blitVanillaPlayerFooter(graphics, playerFooterX(xo), yo + bodyHeight, ChestGuiLayout.VANILLA_PANEL_WIDTH, this.imageHeight - bodyHeight);
+    }
+
+    private int bodyHeight() {
+        return this.containerRows * ChestGuiLayout.ROW_HEIGHT + ChestGuiLayout.TITLE_HEIGHT;
+    }
+
+    private int playerFooterX(int xo) {
+        return xo + ChestGuiLayout.playerInventoryX(this.containerColumns) - ChestGuiLayout.LEFT_INSET;
+    }
+
+    private static void blitWideStrip(GuiGraphicsExtractor graphics, Identifier texture, int x, int y, int width, int height) {
+        graphics.blit(RenderPipelines.GUI_TEXTURED, texture, x, y, 0.0F, 0.0F, width, height, width, height);
     }
 
     private static void blitVanillaRegion(GuiGraphicsExtractor graphics, int x, int y, int width, int height, float u, float v) {
@@ -135,17 +117,6 @@ public class ChestScreen extends AbstractContainerScreen<ChestScreenHandler> {
     }
 
     private static void blitVanillaPlayerFooter(GuiGraphicsExtractor graphics, int x, int y, int width, int height) {
-        graphics.blit(
-            RenderPipelines.GUI_TEXTURED,
-            ChestGuiLayout.VANILLA_BACKGROUND,
-            x,
-            y,
-            0.0F,
-            ChestGuiLayout.PLAYER_PANEL_V,
-            width,
-            height,
-            ChestGuiLayout.TEXTURE_SIZE,
-            ChestGuiLayout.TEXTURE_SIZE
-        );
+        blitVanillaRegion(graphics, x, y, width, height, 0.0F, ChestGuiLayout.PLAYER_PANEL_V);
     }
 }

@@ -46,6 +46,10 @@ public class UpgradeItem extends Item {
             return InteractionResult.PASS;
         }
 
+        if (!player.mayBuild()) {
+            return InteractionResult.PASS;
+        }
+
         if (!canUpgrade(state)) {
             return InteractionResult.PASS;
         }
@@ -85,7 +89,9 @@ public class UpgradeItem extends Item {
 
         level.playSound(null, blockPos, oldState.getSoundType().getBreakSound(), SoundSource.BLOCKS, oldState.getSoundType().getVolume(), oldState.getSoundType().getPitch());
         level.playSound(null, blockPos, newState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, newState.getSoundType().getVolume(), newState.getSoundType().getPitch());
-        context.getItemInHand().shrink(1);
+        if (!player.getAbilities().instabuild) {
+            context.getItemInHand().shrink(1);
+        }
         return InteractionResult.SUCCESS;
     }
 
