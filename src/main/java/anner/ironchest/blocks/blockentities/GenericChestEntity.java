@@ -16,8 +16,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GenericChestEntity extends ChestBlockEntity {
     private final ChestTypes type;
+    private final List<ItemStack> pendingOverflow = new ArrayList<>();
 
     public GenericChestEntity(ChestTypes type, BlockPos pos, BlockState state) {
         super(type.getBlockEntityType(), pos, state);
@@ -62,6 +66,7 @@ public class GenericChestEntity extends ChestBlockEntity {
         NonNullList<ItemStack> items = this.getItems();
         if (items.size() == capacity) {
             ChestInventorySanitizer.sanitize(items);
+            this.setChanged();
             return;
         }
 
@@ -81,6 +86,7 @@ public class GenericChestEntity extends ChestBlockEntity {
 
         this.setItems(clamped);
         ChestInventorySanitizer.sanitize(clamped);
+        this.setChanged();
     }
 
     private void placeOverflow(NonNullList<ItemStack> inventory, ItemStack stack, int capacity, Level level, BlockPos pos) {
@@ -92,6 +98,21 @@ public class GenericChestEntity extends ChestBlockEntity {
         }
         if (level != null) {
             Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), stack);
+        } else {
+            this.pendingOverflow.add(stack);
         }
+    }
+
+    @Override
+    public void setLevel(Level level) {
+        super.setLevel(level);
+        if (level == null || level.isClientSide() || this.pendingOverflow.isEmpty()) {
+            return;
+        }
+        BlockPos pos = this.getBlockPos();
+        for (ItemStack stack : this.pendingOverflow) {
+            Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), stack);
+        }
+        this.pendingOverflow.clear();
     }
 }
