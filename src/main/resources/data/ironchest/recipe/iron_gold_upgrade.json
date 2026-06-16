@@ -6,8 +6,8 @@
     "MMM"
   ],
   "key": {
-    "M": "minecraft:gold_block",
-    "S": "minecraft:iron_block"
+    "M": "minecraft:gold_ingot",
+    "S": "minecraft:iron_ingot"
   },
   "result": {
     "id": "ironchest:iron_gold_upgrade",
