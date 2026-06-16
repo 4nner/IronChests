@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import org.jspecify.annotations.Nullable;
 
-public class ChestScreenHandler extends AbstractContainerMenu {
+public final class ChestScreenHandler extends AbstractContainerMenu {
     private final Container container;
     private final ChestTypes chestType;
     private final @Nullable BlockPos chestBlockPos;
@@ -32,12 +32,13 @@ public class ChestScreenHandler extends AbstractContainerMenu {
         int chestSlotX = ChestGuiLayout.chestSlotStartX(columns);
 
         for (int row = 0; row < rows; row++) {
+            int slotY = ChestGuiLayout.SLOT_SIZE + row * ChestGuiLayout.SLOT_SIZE;
             for (int column = 0; column < columns; column++) {
                 this.addSlot(new Slot(
                     container,
                     slotIndex++,
                     chestSlotX + column * ChestGuiLayout.SLOT_SIZE,
-                    ChestGuiLayout.SLOT_SIZE + row * ChestGuiLayout.SLOT_SIZE
+                    slotY
                 ));
             }
         }

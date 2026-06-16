@@ -10,18 +10,19 @@ import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
 
 public class ModScreenHandlerType {
-    @SuppressWarnings("unchecked")
     public static void registerScreenHandlers() {
         for (ChestTypes type : ChestTypes.PLAYABLE) {
-            MenuType<ChestScreenHandler>[] holder = new MenuType[1];
-            holder[0] = Registry.register(
+            MenuType<ChestScreenHandler> menuType = new MenuType<>((syncId, inventory) -> new ChestScreenHandler(
+                type.getMenuType(), type, syncId, inventory, ChestScreenHandler.createClientContainer(type)
+            ), FeatureFlags.VANILLA_SET);
+
+            MenuType<ChestScreenHandler> registered = Registry.register(
                 BuiltInRegistries.MENU,
                 Identifier.fromNamespaceAndPath(IronChests.MOD_ID, type.registryId),
-                new MenuType<>((syncId, inventory) -> new ChestScreenHandler(
-                    holder[0], type, syncId, inventory, ChestScreenHandler.createClientContainer(type)
-                ), FeatureFlags.VANILLA_SET)
+                menuType
             );
-            type.bindMenuType(holder[0]);
+            
+            type.bindMenuType(registered);
         }
     }
 }

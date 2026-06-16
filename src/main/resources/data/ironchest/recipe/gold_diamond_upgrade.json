@@ -6,8 +6,8 @@
     "GGG"
   ],
   "key": {
-    "D": "minecraft:diamond_block",
-    "S": "minecraft:gold_block",
+    "D": "minecraft:diamond",
+    "S": "minecraft:gold_ingot",
     "G": "minecraft:glass"
   },
   "result": {

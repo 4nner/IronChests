@@ -6,7 +6,7 @@
     "MMM"
   ],
   "key": {
-    "M": "minecraft:gold_block",
+    "M": "minecraft:gold_ingot",
     "S": "ironchest:wood_iron_upgrade"
   },
   "result": {

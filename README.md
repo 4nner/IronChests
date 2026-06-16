@@ -1,6 +1,6 @@
 # Iron Chests
-[![FabricAPI](https://img.shields.io/static/v1?label=modloader&message=fabric&color=brightgreen)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
-![Minecraft](https://img.shields.io/static/v1?label=minecraft&message=26.1.2&color=gray)
+[![FabricAPI](https://img.shields.io/static/v1?label=modloader&message=fabric&color=yellowgreen)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
+![Minecraft](https://img.shields.io/static/v1?label=minecraft&message=26.2&color=brightgreen)
 ![Mod Environment](https://img.shields.io/static/v1?label=environment&message=client%2Fserver&color=yellow)
 [![License](https://img.shields.io/static/v1?label=licence&message=GPL-3.0&color=blue)](./LICENSE)
 

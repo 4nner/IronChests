@@ -23,10 +23,13 @@ public class GenericChestEntity extends ChestBlockEntity {
     private final ChestTypes type;
     private final List<ItemStack> pendingOverflow = new ArrayList<>();
 
+    // setItems() resolves to ChestBlockEntity.setItems() — a plain field assignment,
+    // no virtual dispatch into subclass code. Safe to call before subclass is fully initialized.
+    @SuppressWarnings("this-escape")
     public GenericChestEntity(ChestTypes type, BlockPos pos, BlockState state) {
         super(type.getBlockEntityType(), pos, state);
         this.type = type;
-        this.setItems(NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY));
+        setItems(NonNullList.withSize(type.size, ItemStack.EMPTY));
     }
 
     @Override

@@ -6,8 +6,8 @@
     "iGi"
   ],
   "key": {
-    "i": "minecraft:iron_block",
-    "U": "minecraft:copper_block",
+    "i": "minecraft:iron_ingot",
+    "U": "minecraft:copper_ingot",
     "G": "minecraft:glass"
   },
   "result": {

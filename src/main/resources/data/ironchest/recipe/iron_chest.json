@@ -6,7 +6,7 @@
     "MGM"
   ],
   "key": {
-    "M": "minecraft:iron_block",
+    "M": "minecraft:iron_ingot",
     "S": "ironchest:copper_chest",
     "G": "minecraft:glass"
   },

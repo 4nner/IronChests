@@ -99,49 +99,30 @@ public class ChestEntityRenderer<T extends BlockEntity & LidBlockEntity> extends
     }
 
     private void renderItems(PoseStack poseStack, NonNullList<ItemStack> items, SubmitNodeCollector collector, int light, int seed) {
-        int counter = 0;
-        for (int j = 0; j < 3; j++) {
-            renderItem(0.55, 0.3 + j * 0.5, 0.7, items, counter++, poseStack, collector, light, seed);
-        }
-        for (int j = 0; j < 3; j++) {
-            renderItem(1.4, 0.3 + j * 0.5, 0.7, items, counter++, poseStack, collector, light, seed);
-        }
-        for (int j = 0; j < 3; j++) {
-            renderItem(0.55, 0.3 + j * 0.5, 1.4, items, counter++, poseStack, collector, light, seed);
-        }
-        for (int j = 0; j < 3; j++) {
-            renderItem(1.4, 0.3 + j * 0.5, 1.4, items, counter++, poseStack, collector, light, seed);
-        }
+        Minecraft mc = Minecraft.getInstance();
+        Level level = mc.level;
+        if (level == null) return;
+        float rotation = level.getGameTime() + mc.getDeltaTracker().getGameTimeDeltaPartialTick(false);
+        int i = 0;
+        for (int j = 0; j < 3; j++) renderItem(0.55, 0.3 + j * 0.5, 0.7, items.get(i++), poseStack, collector, light, seed, mc, level, rotation);
+        for (int j = 0; j < 3; j++) renderItem(1.4, 0.3 + j * 0.5, 0.7, items.get(i++), poseStack, collector, light, seed, mc, level, rotation);
+        for (int j = 0; j < 3; j++) renderItem(0.55, 0.3 + j * 0.5, 1.4, items.get(i++), poseStack, collector, light, seed, mc, level, rotation);
+        for (int j = 0; j < 3; j++) renderItem(1.4, 0.3 + j * 0.5, 1.4, items.get(i++), poseStack, collector, light, seed, mc, level, rotation);
     }
 
     private void renderItem(
-        double x,
-        double y,
-        double z,
-        NonNullList<ItemStack> items,
-        int counter,
-        PoseStack poseStack,
-        SubmitNodeCollector collector,
-        int light,
-        int seed
+        double x, double y, double z, ItemStack item,
+        PoseStack poseStack, SubmitNodeCollector collector, int light, int seed,
+        Minecraft mc, Level level, float rotation
     ) {
+        if (item.isEmpty()) return;
         poseStack.pushPose();
-        ItemStack item = items.get(counter);
-        if (item.isEmpty()) {
-            poseStack.popPose();
-            return;
-        }
         poseStack.scale(0.5F, 0.5F, 0.5F);
         poseStack.translate((float) x, (float) y, (float) z);
-        Level level = Minecraft.getInstance().level;
-        float tickDelta = Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false);
-        long time = level != null ? level.getGameTime() : 0L;
-        poseStack.mulPose(Axis.YP.rotationDegrees(time + tickDelta));
-        if (level != null) {
-            ItemStackRenderState itemRenderState = new ItemStackRenderState();
-            Minecraft.getInstance().getItemModelResolver().updateForTopItem(itemRenderState, item, ItemDisplayContext.GROUND, level, null, seed);
-            itemRenderState.submit(poseStack, collector, light, OverlayTexture.NO_OVERLAY, 0);
-        }
+        poseStack.mulPose(Axis.YP.rotationDegrees(rotation));
+        ItemStackRenderState itemRenderState = new ItemStackRenderState();
+        mc.getItemModelResolver().updateForTopItem(itemRenderState, item, ItemDisplayContext.GROUND, level, null, seed);
+        itemRenderState.submit(poseStack, collector, light, OverlayTexture.NO_OVERLAY, 0);
         poseStack.popPose();
     }
 
