@@ -82,7 +82,17 @@ in
   '';
 
   # https://devenv.sh/git-hooks/
-  # git-hooks.hooks.shellcheck.enable = true;
+  git-hooks.hooks = {
+    convco.enable = true;
+    nixfmt-rfc-style.enable = true;
+    google-java-format.enable = true;
+    end-of-file-fixer.enable = true;
+    trim-trailing-whitespace.enable = true;
+    mixed-line-endings.enable = true;
+    check-merge-conflicts.enable = true;
+    detect-private-keys.enable = true;
+    check-added-large-files.enable = true;
+  };
 
   # See full reference at https://devenv.sh/reference/options/
 }

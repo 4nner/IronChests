@@ -42,6 +42,14 @@ Then build/test with:
 ./gradlew runServer   # or: run-server
 ```
 
+### Conventions
+
+- Java and nix sources are formatted (`google-java-format`, `nixfmt`)
+- Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/)
+
+Both are enforced by git hooks, installed automatically with the shell
+(see `git-hooks` in `devenv.nix`).
+
 ## Special Thanks
 TechnoVision: Initial port of Iron Chests to Fabric \
 foul-fortune-feline: Fix Wooden Upgrades, added upgrades from-to any chest tier \
