@@ -1,0 +1,40 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:chest"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_chest_recipe": {
+      "conditions": {
+        "recipe": "ironchest:copper_chest"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_upgrade_recipe": {
+      "conditions": {
+        "recipe": "ironchest:wood_copper_upgrade"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_chest_recipe",
+      "has_upgrade_recipe",
+      "has_chest"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ironchest:copper_chest",
+      "ironchest:wood_copper_upgrade"
+    ]
+  }
+}
