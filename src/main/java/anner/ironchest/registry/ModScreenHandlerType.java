@@ -10,19 +10,26 @@ import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
 
 public class ModScreenHandlerType {
-    public static void registerScreenHandlers() {
-        for (ChestTypes type : ChestTypes.PLAYABLE) {
-            MenuType<ChestScreenHandler> menuType = new MenuType<>((syncId, inventory) -> new ChestScreenHandler(
-                type.getMenuType(), type, syncId, inventory, ChestScreenHandler.createClientContainer(type)
-            ), FeatureFlags.VANILLA_SET);
+  public static void registerScreenHandlers() {
+    for (ChestTypes type : ChestTypes.PLAYABLE) {
+      MenuType<ChestScreenHandler> menuType =
+          new MenuType<>(
+              (syncId, inventory) ->
+                  new ChestScreenHandler(
+                      type.getMenuType(),
+                      type,
+                      syncId,
+                      inventory,
+                      ChestScreenHandler.createClientContainer(type)),
+              FeatureFlags.VANILLA_SET);
 
-            MenuType<ChestScreenHandler> registered = Registry.register(
-                BuiltInRegistries.MENU,
-                Identifier.fromNamespaceAndPath(IronChests.MOD_ID, type.registryId),
-                menuType
-            );
-            
-            type.bindMenuType(registered);
-        }
+      MenuType<ChestScreenHandler> registered =
+          Registry.register(
+              BuiltInRegistries.MENU,
+              Identifier.fromNamespaceAndPath(IronChests.MOD_ID, type.registryId),
+              menuType);
+
+      type.bindMenuType(registered);
     }
+  }
 }
