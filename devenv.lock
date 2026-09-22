@@ -17,22 +17,54 @@
         "type": "github"
       }
     },
-    "nixpkgs": {
+    "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767039857,
+        "narHash": "sha256-vNpUSpF5Nuw8xvDLj2KCwwksIbjua2LZCqhV1LNRDns=",
+        "owner": "NixOS",
+        "repo": "flake-compat",
+        "rev": "5edf11c44bc78a0d334f6334cdaf7d60d732daab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "git-hooks": {
       "inputs": {
-        "nixpkgs-src": "nixpkgs-src"
+        "flake-compat": "flake-compat",
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1789506231,
-        "narHash": "sha256-vNkJbtmqyBfFhn/HnzQo4ROuoyYWuy/allqTfJb4kMY=",
+        "lastModified": 1790091288,
+        "narHash": "sha256-2dUuLTiQrf2gUFVLlayDq/hgluitplAMv6Y9bYwQQ+c=",
         "owner": "cachix",
-        "repo": "devenv-nixpkgs",
-        "rev": "c2f38fe7f9e04d9aadd354d380f2bd40531d9737",
+        "repo": "git-hooks.nix",
+        "rev": "0d3997c4d3253505f77c9bcea63904bb575da3c5",
         "type": "github"
       },
       "original": {
         "owner": "cachix",
-        "ref": "rolling",
-        "repo": "devenv-nixpkgs",
+        "repo": "git-hooks.nix",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1787631388,
+        "narHash": "sha256-vMiXptXarfSdJb1Gkc+FYVOAibuBRj7qxGa8z68q1Uw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ac6b2166e7a9375683b8e98f860f273222337b16",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -53,10 +85,30 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "inputs": {
+        "nixpkgs-src": "nixpkgs-src"
+      },
+      "locked": {
+        "lastModified": 1789506231,
+        "narHash": "sha256-vNkJbtmqyBfFhn/HnzQo4ROuoyYWuy/allqTfJb4kMY=",
+        "owner": "cachix",
+        "repo": "devenv-nixpkgs",
+        "rev": "c2f38fe7f9e04d9aadd354d380f2bd40531d9737",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cachix",
+        "ref": "rolling",
+        "repo": "devenv-nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "devenv": "devenv",
-        "nixpkgs": "nixpkgs"
+        "git-hooks": "git-hooks",
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },
