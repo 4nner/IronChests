@@ -31,6 +31,17 @@ Then build/test with:
 
 `devenv test` runs the build as well.
 
+### Run the game client
+
+`devenv.nix` puts the native libs Minecraft needs (GLFW/OpenGL via
+`libGL`, X11/Wayland, OpenAL/audio, `udev`) on `LD_LIBRARY_PATH`, so
+`runClient` works from any devenv shell:
+
+```sh
+./gradlew runClient   # or: run-client
+./gradlew runServer   # or: run-server
+```
+
 ## Special Thanks
 TechnoVision: Initial port of Iron Chests to Fabric \
 foul-fortune-feline: Fix Wooden Upgrades, added upgrades from-to any chest tier \
