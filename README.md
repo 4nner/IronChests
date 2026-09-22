@@ -10,6 +10,27 @@ This will avoid the need to break the already placed chest. Do not worry, the ch
 
 **Requires:** [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
 
+## Dev environment (nix + devenv)
+
+Requires [nix](https://nixos.org/download/) with flakes enabled and [devenv](https://devenv.sh/getting-started/).
+
+```sh
+# optional, for auto-activation on cd:
+# once per machine: devenv direnvrc >> ~/.config/direnv/direnvrc
+direnv allow
+# or without direnv:
+devenv shell
+```
+
+Then build/test with:
+
+```sh
+./gradlew build
+./gradlew check
+```
+
+`devenv test` runs the build as well.
+
 ## Special Thanks
 TechnoVision: Initial port of Iron Chests to Fabric \
 foul-fortune-feline: Fix Wooden Upgrades, added upgrades from-to any chest tier \
