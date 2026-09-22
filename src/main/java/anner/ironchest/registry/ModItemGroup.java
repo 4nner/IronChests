@@ -8,14 +8,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
 public class ModItemGroup {
-    public static void registerItemGroup() {
-        Registry.register(
-            BuiltInRegistries.CREATIVE_MODE_TAB,
-            IronChests.TAB,
-            FabricCreativeModeTab.builder()
-                .icon(() -> new ItemStack(ModBlocks.IRON_CHEST))
-                .title(Component.translatable("itemGroup.ironchest.general"))
-                .build()
-        );
-    }
+  public static void registerItemGroup() {
+    Registry.register(
+        BuiltInRegistries.CREATIVE_MODE_TAB,
+        IronChests.TAB,
+        FabricCreativeModeTab.builder()
+            .icon(() -> new ItemStack(ModBlocks.IRON_CHEST))
+            .title(Component.translatable("itemGroup.ironchest.general"))
+            .build());
+  }
 }
