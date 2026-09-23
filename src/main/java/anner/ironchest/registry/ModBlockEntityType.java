@@ -41,7 +41,10 @@ public class ModBlockEntityType {
 
   private static BlockEntityType<GenericChestEntity> create(ChestTypes type) {
     return FabricBlockEntityTypeBuilder.create(
-            (pos, state) -> new GenericChestEntity(type, pos, state), type.getBlock())
+            (pos, state) ->
+                new GenericChestEntity(
+                    type, type.getBlockEntityType(), type.getMenuType(), pos, state),
+            type.getBlock())
         .build();
   }
 
