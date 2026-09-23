@@ -1,6 +1,6 @@
 package anner.ironchest.screenhandlers;
 
-import anner.ironchest.blocks.ChestTypes;
+import anner.ironchest.blocks.TierSpec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -15,25 +15,25 @@ import org.jspecify.annotations.Nullable;
 
 public final class ChestScreenHandler extends AbstractContainerMenu {
   private final Container container;
-  private final ChestTypes chestType;
+  private final TierSpec tier;
   private final @Nullable BlockPos chestBlockPos;
 
   public ChestScreenHandler(
       MenuType<?> menuType,
-      ChestTypes chestType,
+      TierSpec tier,
       int syncId,
       Inventory playerInventory,
       Container container) {
     super(menuType, syncId);
-    checkContainerSize(container, chestType.size);
-    this.chestType = chestType;
+    checkContainerSize(container, tier.size());
+    this.tier = tier;
     this.container = container;
     this.chestBlockPos =
         container instanceof ChestBlockEntity blockEntity ? blockEntity.getBlockPos() : null;
     container.startOpen(playerInventory.player);
 
-    int columns = chestType.rowLength;
-    int rows = chestType.getRowCount();
+    int columns = tier.rowLength();
+    int rows = tier.rowCount();
     int slotIndex = 0;
     int chestSlotX = ChestGuiLayout.chestSlotStartX(columns);
 
@@ -69,11 +69,11 @@ public final class ChestScreenHandler extends AbstractContainerMenu {
   }
 
   public int getChestRows() {
-    return chestType.getRowCount();
+    return tier.rowCount();
   }
 
   public int getChestColumns() {
-    return chestType.rowLength;
+    return tier.rowLength();
   }
 
   public Container getBlockInventory() {
@@ -91,7 +91,7 @@ public final class ChestScreenHandler extends AbstractContainerMenu {
     if (slot != null && slot.hasItem()) {
       ItemStack stackInSlot = slot.getItem();
       movedStack = stackInSlot.copy();
-      int chestSlots = chestType.size;
+      int chestSlots = tier.size();
       if (slotIndex < chestSlots) {
         if (!this.moveItemStackTo(stackInSlot, chestSlots, this.slots.size(), true)) {
           return ItemStack.EMPTY;
@@ -120,7 +120,7 @@ public final class ChestScreenHandler extends AbstractContainerMenu {
     container.stopOpen(player);
   }
 
-  public static Container createClientContainer(ChestTypes chestType) {
-    return new SimpleContainer(chestType.size);
+  public static Container createClientContainer(TierSpec tier) {
+    return new SimpleContainer(tier.size());
   }
 }

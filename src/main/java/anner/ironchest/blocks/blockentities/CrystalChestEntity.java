@@ -16,7 +16,12 @@ import org.jspecify.annotations.Nullable;
 public class CrystalChestEntity extends GenericChestEntity {
 
   public CrystalChestEntity(BlockPos pos, BlockState state) {
-    super(ChestTypes.CRYSTAL, pos, state);
+    super(
+        ChestTypes.CRYSTAL,
+        ChestTypes.CRYSTAL.getBlockEntityType(),
+        ChestTypes.CRYSTAL.getMenuType(),
+        pos,
+        state);
   }
 
   public NonNullList<ItemStack> getTopStacks() {

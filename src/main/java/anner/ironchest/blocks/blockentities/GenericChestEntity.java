@@ -1,6 +1,6 @@
 package anner.ironchest.blocks.blockentities;
 
-import anner.ironchest.blocks.ChestTypes;
+import anner.ironchest.blocks.TierSpec;
 import anner.ironchest.screenhandlers.ChestScreenHandler;
 import anner.ironchest.util.ChestInventorySanitizer;
 import java.util.ArrayList;
@@ -11,29 +11,38 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
 public class GenericChestEntity extends ChestBlockEntity {
-  private final ChestTypes type;
+  private final TierSpec tier;
+  private final MenuType<ChestScreenHandler> menuType;
   private final List<ItemStack> pendingOverflow = new ArrayList<>();
 
   // setItems() resolves to ChestBlockEntity.setItems() — a plain field assignment,
   // no virtual dispatch into subclass code. Safe to call before subclass is fully initialized.
   @SuppressWarnings("this-escape")
-  public GenericChestEntity(ChestTypes type, BlockPos pos, BlockState state) {
-    super(type.getBlockEntityType(), pos, state);
-    this.type = type;
-    setItems(NonNullList.withSize(type.size, ItemStack.EMPTY));
+  public GenericChestEntity(
+      TierSpec tier,
+      BlockEntityType<?> blockEntityType,
+      MenuType<ChestScreenHandler> menuType,
+      BlockPos pos,
+      BlockState state) {
+    super(blockEntityType, pos, state);
+    this.tier = tier;
+    this.menuType = menuType;
+    setItems(NonNullList.withSize(tier.size(), ItemStack.EMPTY));
   }
 
   @Override
   protected AbstractContainerMenu createMenu(int syncId, Inventory inventory) {
-    return new ChestScreenHandler(this.type.getMenuType(), this.type, syncId, inventory, this);
+    return new ChestScreenHandler(this.menuType, this.tier, syncId, inventory, this);
   }
 
   @Override
@@ -43,7 +52,7 @@ public class GenericChestEntity extends ChestBlockEntity {
 
   @Override
   public int getContainerSize() {
-    return this.type.size;
+    return this.tier.size();
   }
 
   @Override

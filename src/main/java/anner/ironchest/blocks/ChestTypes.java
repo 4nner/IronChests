@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.Nullable;
 
-public enum ChestTypes {
+public enum ChestTypes implements TierSpec {
   NETHERITE(
       126,
       14,
@@ -81,8 +81,14 @@ public enum ChestTypes {
     this.texture = texture;
   }
 
-  public int getRowCount() {
-    return this.size / this.rowLength;
+  @Override
+  public int size() {
+    return this.size;
+  }
+
+  @Override
+  public int rowLength() {
+    return this.rowLength;
   }
 
   public void bindBlock(Block block) {
@@ -109,7 +115,7 @@ public enum ChestTypes {
     if (this == CRYSTAL) {
       return new CrystalChestEntity(pos, state);
     }
-    return new GenericChestEntity(this, pos, state);
+    return new GenericChestEntity(this, this.getBlockEntityType(), this.getMenuType(), pos, state);
   }
 
   public BlockEntityType<? extends ChestBlockEntity> getBlockEntityType() {
