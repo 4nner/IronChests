@@ -1,10 +1,13 @@
-# Build on pushes to main and on trusted-approved pull requests.
-# Outsider approvals are ignored to save runner time.
+# Build on pushes to main, on owner PRs, and on trusted-approved PRs.
+# All other PR activity is skipped to save runner time.
 
 name: build
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
   pull_request_review:
     types: [submitted]
   workflow_dispatch:
@@ -19,8 +22,15 @@ concurrency:
 jobs:
   build:
     if: >
-      github.event_name != 'pull_request_review' ||
+      github.event_name == 'push' ||
+      github.event_name == 'workflow_dispatch' ||
       (
+        github.event_name == 'pull_request' &&
+        contains(fromJSON('["OWNER", "MEMBER"]'),
+          github.event.pull_request.author_association)
+      ) ||
+      (
+        github.event_name == 'pull_request_review' &&
         github.event.review.state == 'approved' &&
         contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'),
           github.event.review.author_association)
