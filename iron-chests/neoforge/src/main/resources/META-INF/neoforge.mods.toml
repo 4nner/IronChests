@@ -1,0 +1,30 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "gpl-3.0"
+
+[[mods]]
+modId = "ironchest"
+version = "${mod_version}"
+displayName = "Iron Chests"
+authors = "anner"
+description = "Bigger Chests for Minecraft"
+
+[[dependencies.ironchest]]
+modId = "neoforge"
+type = "required"
+versionRange = "[26.2.0.88,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.ironchest]]
+modId = "minecraft"
+type = "required"
+versionRange = "[26.2,26.3)"
+ordering = "NONE"
+side = "BOTH"
+
+[[accessTransformers]]
+file = "META-INF/accesstransformer.cfg"
+
+[[mixins]]
+config = "ironchest.mixins.json"

@@ -68,6 +68,8 @@ in
     clean.exec = "./gradlew clean";
     run-client.exec = "./gradlew :iron-chests:fabric:runClient";
     run-server.exec = "./gradlew :iron-chests:fabric:runServer";
+    run-client-neoforge.exec = "./gradlew :iron-chests:neoforge:runClient";
+    run-server-neoforge.exec = "./gradlew :iron-chests:neoforge:runServer";
   };
 
   enterShell = ''
