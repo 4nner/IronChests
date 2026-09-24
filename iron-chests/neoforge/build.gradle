@@ -1,0 +1,97 @@
+plugins {
+  alias(libs.plugins.neogradle.moddev)
+  id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+  archivesName = "IronChests-neoforge"
+}
+
+neoForge {
+  version = libs.versions.neoforge.get()
+
+  // Fail the build on invalid AT targets instead of silently ignoring them.
+  validateAccessTransformers = true
+
+  mods {
+    ironchest {
+      sourceSet sourceSets.main
+      // Common classes load as part of this mod in dev runs.
+      sourceSet project(":iron-chests:common").sourceSets.main
+    }
+  }
+
+  runs {
+    client {
+      client()
+    }
+    server {
+      server()
+    }
+  }
+}
+
+repositories {
+  maven {
+    name = "NeoForge"
+    url = "https://maven.neoforged.net/releases/"
+  }
+}
+
+dependencies {
+  implementation libs.neoforge
+
+  // implementation: compile against common; jarJar: nest common into the mod jar.
+  implementation(project(":iron-chests:common"))
+  jarJar(project(":iron-chests:common"))
+}
+
+processResources {
+  def version = project.version
+  inputs.property "version", version
+
+  filesMatching("META-INF/neoforge.mods.toml") {
+    expand "mod_version": version
+  }
+}
+
+tasks.withType(JavaCompile).configureEach {
+  it.options.release = 25
+}
+
+java {
+  withSourcesJar()
+
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(25)
+  }
+
+  sourceCompatibility = JavaVersion.VERSION_25
+  targetCompatibility = JavaVersion.VERSION_25
+}
+
+jar {
+  from(rootProject.file("LICENSE")) {
+    rename { "LICENSE_IronChests-neoforge" }
+  }
+}
+
+// configure the maven publication
+publishing {
+  publications {
+    create("mavenJava", MavenPublication) {
+      from components.java
+    }
+  }
+
+  // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+  repositories {
+    // Add repositories to publish to here.
+    // Notice: This block does NOT have the same function as the block in the top level.
+    // The repositories here will be used for publishing your artifact, not for
+    // retrieving dependencies.
+  }
+}

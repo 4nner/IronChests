@@ -9,7 +9,13 @@ pluginManagement {
 	}
 }
 
+plugins {
+  // Auto-provision Java toolchains (ModDevGradle run tasks need one).
+  id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+}
+
 rootProject.name = 'IronChests'
 
 include("iron-chests:common")
 include("iron-chests:fabric")
+include("iron-chests:neoforge")

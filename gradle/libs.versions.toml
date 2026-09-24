@@ -3,11 +3,15 @@ minecraft = "26.2"
 fabric-loader = "0.19.3"
 fabric-loom = "1.17-SNAPSHOT"
 fabric-api = "0.155.2+26.2"
+neoforge = "26.2.0.88"
+neogradle-moddev = "2.0.147"
 
 [libraries]
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
 fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric-loader" }
 fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api" }
+neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
 
 [plugins]
 fabric-loom = { id = "net.fabricmc.fabric-loom", version.ref = "fabric-loom" }
+neogradle-moddev = { id = "net.neoforged.moddev", version.ref = "neogradle-moddev" }
