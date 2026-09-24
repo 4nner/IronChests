@@ -3,6 +3,7 @@ package anner.ironchest.registry;
 import anner.ironchest.IronChests;
 import anner.ironchest.blocks.ChestTypes;
 import anner.ironchest.screenhandlers.ChestScreenHandler;
+import anner.ironchest.screenhandlers.SizedContainerMenu;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -20,7 +21,7 @@ public class ModScreenHandlerType {
                       type,
                       syncId,
                       inventory,
-                      ChestScreenHandler.createClientContainer(type)),
+                      SizedContainerMenu.createClientContainer(type)),
               FeatureFlags.VANILLA_SET);
 
       MenuType<ChestScreenHandler> registered =
