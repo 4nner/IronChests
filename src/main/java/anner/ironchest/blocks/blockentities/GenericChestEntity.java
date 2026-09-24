@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
-public class GenericChestEntity extends ChestBlockEntity {
+public class GenericChestEntity extends ChestBlockEntity implements ResizingContainer {
   private final TierSpec tier;
   private final MenuType<ChestScreenHandler> menuType;
   private final List<ItemStack> pendingOverflow = new ArrayList<>();
@@ -72,6 +72,7 @@ public class GenericChestEntity extends ChestBlockEntity {
     super.saveAdditional(output);
   }
 
+  @Override
   public void clampInventoryToCapacity() {
     int capacity = this.getContainerSize();
     NonNullList<ItemStack> items = this.getItems();
