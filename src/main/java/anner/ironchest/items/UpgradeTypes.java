@@ -1,8 +1,12 @@
 package anner.ironchest.items;
 
 import anner.ironchest.blocks.ChestTypes;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
-public enum UpgradeTypes {
+public enum UpgradeTypes implements UpgradeStrategy {
   WOOD_TO_COPPER(ChestTypes.WOOD, ChestTypes.COPPER, "item.ironchest.wood_copper_upgrade.tooltip"),
   WOOD_TO_CHRISTMAS(
       ChestTypes.WOOD, ChestTypes.CHRISTMAS, "item.ironchest.wood_christmas_upgrade.tooltip"),
@@ -60,5 +64,23 @@ public enum UpgradeTypes {
     this.source = source;
     this.target = target;
     this.tooltipKey = tooltipKey;
+  }
+
+  @Override
+  public boolean canUpgrade(BlockState state) {
+    if (this.source == ChestTypes.WOOD) {
+      return state.is(Blocks.CHEST) || state.is(Blocks.TRAPPED_CHEST);
+    }
+    return state.is(this.source.getBlock());
+  }
+
+  @Override
+  public BlockState resultState(BlockState oldState) {
+    Direction chestFacing = oldState.getValue(ChestBlock.FACING);
+    return this.target
+        .getBlock()
+        .defaultBlockState()
+        .setValue(ChestBlock.FACING, chestFacing)
+        .setValue(ChestBlock.WATERLOGGED, oldState.getValue(ChestBlock.WATERLOGGED));
   }
 }

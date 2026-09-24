@@ -1,9 +1,7 @@
 package anner.ironchest.items;
 
-import anner.ironchest.blocks.ChestTypes;
-import anner.ironchest.blocks.blockentities.GenericChestEntity;
+import anner.ironchest.blocks.blockentities.ResizingContainer;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ProblemReporter;
@@ -13,8 +11,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
@@ -23,11 +19,11 @@ import net.minecraft.world.level.storage.TagValueInput;
 import net.minecraft.world.level.storage.ValueInput;
 
 public class UpgradeItem extends Item {
-  private final UpgradeTypes type;
+  private final UpgradeStrategy strategy;
 
-  public UpgradeItem(UpgradeTypes type, Properties properties) {
+  public UpgradeItem(UpgradeStrategy strategy, Properties properties) {
     super(properties);
-    this.type = type;
+    this.strategy = strategy;
   }
 
   @Override
@@ -49,7 +45,7 @@ public class UpgradeItem extends Item {
       return InteractionResult.PASS;
     }
 
-    if (!canUpgrade(state)) {
+    if (!this.strategy.canUpgrade(state)) {
       return InteractionResult.PASS;
     }
 
@@ -63,20 +59,13 @@ public class UpgradeItem extends Item {
     }
 
     BlockState oldState = state;
-    Direction chestFacing = oldState.getValue(ChestBlock.FACING);
     CompoundTag oldChestTag = chest.saveWithoutMetadata(level.registryAccess());
 
     level.removeBlockEntity(blockPos);
     level.removeBlock(blockPos, false);
     level.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, blockPos, Block.getId(oldState));
 
-    BlockState newState =
-        this.type
-            .target
-            .getBlock()
-            .defaultBlockState()
-            .setValue(ChestBlock.FACING, chestFacing)
-            .setValue(ChestBlock.WATERLOGGED, oldState.getValue(ChestBlock.WATERLOGGED));
+    BlockState newState = this.strategy.resultState(oldState);
     level.setBlock(blockPos, newState, 3);
     level.sendBlockUpdated(blockPos, newState, newState, 3);
 
@@ -85,8 +74,8 @@ public class UpgradeItem extends Item {
       ValueInput valueInput =
           TagValueInput.create(ProblemReporter.DISCARDING, level.registryAccess(), oldChestTag);
       newBlockEntity.loadWithComponents(valueInput);
-      if (newBlockEntity instanceof GenericChestEntity genericChest) {
-        genericChest.clampInventoryToCapacity();
+      if (newBlockEntity instanceof ResizingContainer resizing) {
+        resizing.clampInventoryToCapacity();
       }
       newBlockEntity.setChanged();
     }
@@ -109,12 +98,5 @@ public class UpgradeItem extends Item {
       context.getItemInHand().shrink(1);
     }
     return InteractionResult.SUCCESS;
-  }
-
-  private boolean canUpgrade(BlockState state) {
-    if (this.type.source == ChestTypes.WOOD) {
-      return state.is(Blocks.CHEST) || state.is(Blocks.TRAPPED_CHEST);
-    }
-    return state.is(this.type.source.getBlock());
   }
 }
