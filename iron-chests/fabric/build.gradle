@@ -31,6 +31,15 @@ dependencies {
   include(project(":iron-chests:common"))
 }
 
+sourceSets {
+  // Shared mod assets and data; loader-specific files stay in src/main/resources.
+  main {
+    resources {
+      srcDir("../resources")
+    }
+  }
+}
+
 processResources {
   def version = project.version
   inputs.property "version", version
