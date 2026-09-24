@@ -10,3 +10,6 @@ pluginManagement {
 }
 
 rootProject.name = 'IronChests'
+
+include("iron-chests:common")
+include("iron-chests:fabric")

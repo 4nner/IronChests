@@ -1,6 +1,6 @@
 package anner.ironchest.screenhandlers;
 
-import anner.ironchest.IronChests;
+import anner.ironchest.IronChestsCommon;
 import net.minecraft.resources.Identifier;
 
 public final class ChestGuiLayout {
@@ -106,7 +106,7 @@ public final class ChestGuiLayout {
 
   private static Identifier wideTexture(String baseName, int columns) {
     return Identifier.fromNamespaceAndPath(
-        IronChests.MOD_ID, WIDE_TEXTURE_BASE + baseName + "_" + columns + ".png");
+        IronChestsCommon.MOD_ID, WIDE_TEXTURE_BASE + baseName + "_" + columns + ".png");
   }
 
   private static Identifier wideGuiTexture(String baseName, int columns) {

@@ -1,6 +1,6 @@
 package anner.ironchest.blocks;
 
-import anner.ironchest.IronChests;
+import anner.ironchest.IronChestsCommon;
 import anner.ironchest.blocks.blockentities.CrystalChestEntity;
 import anner.ironchest.blocks.blockentities.GenericChestEntity;
 import anner.ironchest.screenhandlers.ChestScreenHandler;
@@ -22,42 +22,42 @@ public enum ChestTypes implements TierSpec {
       126,
       14,
       "netherite_chest",
-      Identifier.fromNamespaceAndPath(IronChests.MOD_ID, "entity/chest/netherite_chest")),
+      Identifier.fromNamespaceAndPath(IronChestsCommon.MOD_ID, "entity/chest/netherite_chest")),
   OBSIDIAN(
       108,
       12,
       "obsidian_chest",
-      Identifier.fromNamespaceAndPath(IronChests.MOD_ID, "entity/chest/obsidian_chest")),
+      Identifier.fromNamespaceAndPath(IronChestsCommon.MOD_ID, "entity/chest/obsidian_chest")),
   CRYSTAL(
       108,
       12,
       "crystal_chest",
-      Identifier.fromNamespaceAndPath(IronChests.MOD_ID, "entity/chest/crystal_chest")),
+      Identifier.fromNamespaceAndPath(IronChestsCommon.MOD_ID, "entity/chest/crystal_chest")),
   DIAMOND(
       108,
       12,
       "diamond_chest",
-      Identifier.fromNamespaceAndPath(IronChests.MOD_ID, "entity/chest/diamond_chest")),
+      Identifier.fromNamespaceAndPath(IronChestsCommon.MOD_ID, "entity/chest/diamond_chest")),
   EMERALD(
       108,
       12,
       "emerald_chest",
-      Identifier.fromNamespaceAndPath(IronChests.MOD_ID, "entity/chest/emerald_chest")),
+      Identifier.fromNamespaceAndPath(IronChestsCommon.MOD_ID, "entity/chest/emerald_chest")),
   GOLD(
       81,
       9,
       "gold_chest",
-      Identifier.fromNamespaceAndPath(IronChests.MOD_ID, "entity/chest/gold_chest")),
+      Identifier.fromNamespaceAndPath(IronChestsCommon.MOD_ID, "entity/chest/gold_chest")),
   IRON(
       54,
       9,
       "iron_chest",
-      Identifier.fromNamespaceAndPath(IronChests.MOD_ID, "entity/chest/iron_chest")),
+      Identifier.fromNamespaceAndPath(IronChestsCommon.MOD_ID, "entity/chest/iron_chest")),
   COPPER(
       45,
       9,
       "copper_chest",
-      Identifier.fromNamespaceAndPath(IronChests.MOD_ID, "entity/chest/copper_chest")),
+      Identifier.fromNamespaceAndPath(IronChestsCommon.MOD_ID, "entity/chest/copper_chest")),
   CHRISTMAS(27, 9, "christmas_chest", Identifier.withDefaultNamespace("entity/chest/christmas")),
   WOOD(27, 9, null, Identifier.withDefaultNamespace("entity/chest/normal"));
 

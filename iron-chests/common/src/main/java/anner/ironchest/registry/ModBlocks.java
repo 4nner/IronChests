@@ -1,6 +1,6 @@
 package anner.ironchest.registry;
 
-import anner.ironchest.IronChests;
+import anner.ironchest.IronChestsCommon;
 import anner.ironchest.blocks.ChestTypes;
 import anner.ironchest.blocks.GenericChestBlock;
 import net.minecraft.core.Registry;
@@ -42,7 +42,7 @@ public class ModBlocks {
     for (ChestTypes type : ChestTypes.PLAYABLE) {
       Registry.register(
           BuiltInRegistries.BLOCK,
-          Identifier.fromNamespaceAndPath(IronChests.MOD_ID, type.registryId),
+          Identifier.fromNamespaceAndPath(IronChestsCommon.MOD_ID, type.registryId),
           type.getBlock());
     }
   }
@@ -52,6 +52,6 @@ public class ModBlocks {
         .setId(
             ResourceKey.create(
                 Registries.BLOCK,
-                Identifier.fromNamespaceAndPath(IronChests.MOD_ID, type.registryId)));
+                Identifier.fromNamespaceAndPath(IronChestsCommon.MOD_ID, type.registryId)));
   }
 }

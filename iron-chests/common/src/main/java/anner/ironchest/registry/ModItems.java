@@ -1,6 +1,6 @@
 package anner.ironchest.registry;
 
-import anner.ironchest.IronChests;
+import anner.ironchest.IronChestsCommon;
 import anner.ironchest.items.UpgradeItem;
 import anner.ironchest.items.UpgradeTypes;
 import anner.ironchest.platform.Platforms;
@@ -231,7 +231,7 @@ public class ModItems {
         (id, item) ->
             Registry.register(
                 BuiltInRegistries.ITEM,
-                Identifier.fromNamespaceAndPath(IronChests.MOD_ID, id),
+                Identifier.fromNamespaceAndPath(IronChestsCommon.MOD_ID, id),
                 item));
   }
 
@@ -287,7 +287,7 @@ public class ModItems {
     return new Item.Properties()
         .setId(
             ResourceKey.create(
-                Registries.ITEM, Identifier.fromNamespaceAndPath(IronChests.MOD_ID, name)));
+                Registries.ITEM, Identifier.fromNamespaceAndPath(IronChestsCommon.MOD_ID, name)));
   }
 
   private static Item.Properties blockItemSettings(String name) {
