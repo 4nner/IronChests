@@ -3,10 +3,10 @@ package anner.ironchest.registry;
 import anner.ironchest.IronChests;
 import anner.ironchest.items.UpgradeItem;
 import anner.ironchest.items.UpgradeTypes;
+import anner.ironchest.platform.Platforms;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
@@ -16,6 +16,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.ItemLore;
 
@@ -232,47 +233,49 @@ public class ModItems {
                 BuiltInRegistries.ITEM,
                 Identifier.fromNamespaceAndPath(IronChests.MOD_ID, id),
                 item));
+  }
 
-    CreativeModeTabEvents.modifyOutputEvent(IronChests.TAB)
-        .register(
-            output -> {
-              output.accept(COPPER_CHEST);
-              output.accept(IRON_CHEST);
-              output.accept(GOLD_CHEST);
-              output.accept(DIAMOND_CHEST);
-              output.accept(EMERALD_CHEST);
-              output.accept(CRYSTAL_CHEST);
-              output.accept(OBSIDIAN_CHEST);
-              output.accept(NETHERITE_CHEST);
-              output.accept(CHRISTMAS_CHEST);
-              output.accept(WOOD_COPPER_UPGRADE);
-              output.accept(WOOD_IRON_UPGRADE);
-              output.accept(WOOD_GOLD_UPGRADE);
-              output.accept(WOOD_DIAMOND_UPGRADE);
-              output.accept(WOOD_EMERALD_UPGRADE);
-              output.accept(WOOD_CRYSTAL_UPGRADE);
-              output.accept(WOOD_OBSIDIAN_UPGRADE);
-              output.accept(COPPER_IRON_UPGRADE);
-              output.accept(COPPER_GOLD_UPGRADE);
-              output.accept(COPPER_DIAMOND_UPGRADE);
-              output.accept(COPPER_EMERALD_UPGRADE);
-              output.accept(COPPER_CRYSTAL_UPGRADE);
-              output.accept(COPPER_OBSIDIAN_UPGRADE);
-              output.accept(IRON_GOLD_UPGRADE);
-              output.accept(IRON_DIAMOND_UPGRADE);
-              output.accept(IRON_EMERALD_UPGRADE);
-              output.accept(IRON_CRYSTAL_UPGRADE);
-              output.accept(IRON_OBSIDIAN_UPGRADE);
-              output.accept(GOLD_DIAMOND_UPGRADE);
-              output.accept(GOLD_EMERALD_UPGRADE);
-              output.accept(GOLD_CRYSTAL_UPGRADE);
-              output.accept(GOLD_OBSIDIAN_UPGRADE);
-              output.accept(DIAMOND_CRYSTAL_UPGRADE);
-              output.accept(DIAMOND_OBSIDIAN_UPGRADE);
-              output.accept(EMERALD_CRYSTAL_UPGRADE);
-              output.accept(EMERALD_OBSIDIAN_UPGRADE);
-              output.accept(WOOD_CHRISTMAS_UPGRADE);
-            });
+  public static void addTabItems(ResourceKey<CreativeModeTab> tab) {
+    Platforms.registry()
+        .addTabItems(
+            tab,
+            List.of(
+                COPPER_CHEST,
+                IRON_CHEST,
+                GOLD_CHEST,
+                DIAMOND_CHEST,
+                EMERALD_CHEST,
+                CRYSTAL_CHEST,
+                OBSIDIAN_CHEST,
+                NETHERITE_CHEST,
+                CHRISTMAS_CHEST,
+                WOOD_COPPER_UPGRADE,
+                WOOD_IRON_UPGRADE,
+                WOOD_GOLD_UPGRADE,
+                WOOD_DIAMOND_UPGRADE,
+                WOOD_EMERALD_UPGRADE,
+                WOOD_CRYSTAL_UPGRADE,
+                WOOD_OBSIDIAN_UPGRADE,
+                COPPER_IRON_UPGRADE,
+                COPPER_GOLD_UPGRADE,
+                COPPER_DIAMOND_UPGRADE,
+                COPPER_EMERALD_UPGRADE,
+                COPPER_CRYSTAL_UPGRADE,
+                COPPER_OBSIDIAN_UPGRADE,
+                IRON_GOLD_UPGRADE,
+                IRON_DIAMOND_UPGRADE,
+                IRON_EMERALD_UPGRADE,
+                IRON_CRYSTAL_UPGRADE,
+                IRON_OBSIDIAN_UPGRADE,
+                GOLD_DIAMOND_UPGRADE,
+                GOLD_EMERALD_UPGRADE,
+                GOLD_CRYSTAL_UPGRADE,
+                GOLD_OBSIDIAN_UPGRADE,
+                DIAMOND_CRYSTAL_UPGRADE,
+                DIAMOND_OBSIDIAN_UPGRADE,
+                EMERALD_CRYSTAL_UPGRADE,
+                EMERALD_OBSIDIAN_UPGRADE,
+                WOOD_CHRISTMAS_UPGRADE));
   }
 
   private static <T extends Item> T register(String id, T item) {

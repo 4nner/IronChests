@@ -1,10 +1,5 @@
 package anner.ironchest;
 
-import anner.ironchest.registry.ModBlockEntityType;
-import anner.ironchest.registry.ModBlocks;
-import anner.ironchest.registry.ModItemGroup;
-import anner.ironchest.registry.ModItems;
-import anner.ironchest.registry.ModScreenHandlerType;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
@@ -19,10 +14,6 @@ public class IronChests implements ModInitializer {
 
   @Override
   public void onInitialize() {
-    ModBlocks.registerBlocks();
-    ModItems.registerItems();
-    ModItemGroup.registerItemGroup();
-    ModBlockEntityType.registerBlockEntities();
-    ModScreenHandlerType.registerScreenHandlers();
+    IronChestsCommon.init();
   }
 }
