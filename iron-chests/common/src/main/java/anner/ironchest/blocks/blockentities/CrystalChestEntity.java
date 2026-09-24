@@ -18,8 +18,8 @@ public class CrystalChestEntity extends GenericChestEntity {
   public CrystalChestEntity(BlockPos pos, BlockState state) {
     super(
         ChestTypes.CRYSTAL,
-        ChestTypes.CRYSTAL.getBlockEntityType(),
-        ChestTypes.CRYSTAL.getMenuType(),
+        ChestTypes.CRYSTAL::getBlockEntityType,
+        ChestTypes.CRYSTAL::getMenuType,
         pos,
         state);
   }

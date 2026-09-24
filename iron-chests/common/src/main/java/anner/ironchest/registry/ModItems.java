@@ -1,14 +1,15 @@
 package anner.ironchest.registry;
 
 import anner.ironchest.IronChestsCommon;
+import anner.ironchest.blocks.ChestTypes;
 import anner.ironchest.items.UpgradeItem;
 import anner.ironchest.items.UpgradeTypes;
 import anner.ironchest.platform.Platforms;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -22,265 +23,262 @@ import net.minecraft.world.item.component.ItemLore;
 
 public class ModItems {
 
-  private static final Map<String, Item> ITEMS_BY_ID = new LinkedHashMap<>();
+  private static final Map<String, Supplier<Item>> ITEMS = new LinkedHashMap<>();
+  private static final Map<String, Supplier<Item>> BOUND = new LinkedHashMap<>();
 
-  public static final Item WOOD_COPPER_UPGRADE =
-      register(
-          "wood_copper_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.WOOD_TO_COPPER,
-              upgradeItemSettings("wood_copper_upgrade", UpgradeTypes.WOOD_TO_COPPER)));
-  public static final Item WOOD_IRON_UPGRADE =
-      register(
-          "wood_iron_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.WOOD_TO_IRON,
-              upgradeItemSettings("wood_iron_upgrade", UpgradeTypes.WOOD_TO_IRON)));
-  public static final Item WOOD_GOLD_UPGRADE =
-      register(
-          "wood_gold_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.WOOD_TO_GOLD,
-              upgradeItemSettings("wood_gold_upgrade", UpgradeTypes.WOOD_TO_GOLD)));
-  public static final Item WOOD_DIAMOND_UPGRADE =
-      register(
-          "wood_diamond_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.WOOD_TO_DIAMOND,
-              upgradeItemSettings("wood_diamond_upgrade", UpgradeTypes.WOOD_TO_DIAMOND)));
-  public static final Item WOOD_EMERALD_UPGRADE =
-      register(
-          "wood_emerald_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.WOOD_TO_EMERALD,
-              upgradeItemSettings("wood_emerald_upgrade", UpgradeTypes.WOOD_TO_EMERALD)));
-  public static final Item WOOD_CRYSTAL_UPGRADE =
-      register(
-          "wood_crystal_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.WOOD_TO_CRYSTAL,
-              upgradeItemSettings("wood_crystal_upgrade", UpgradeTypes.WOOD_TO_CRYSTAL)));
-  public static final Item WOOD_OBSIDIAN_UPGRADE =
-      register(
-          "wood_obsidian_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.WOOD_TO_OBSIDIAN,
-              upgradeItemSettings("wood_obsidian_upgrade", UpgradeTypes.WOOD_TO_OBSIDIAN)));
-
-  public static final Item COPPER_IRON_UPGRADE =
-      register(
-          "copper_iron_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.COPPER_TO_IRON,
-              upgradeItemSettings("copper_iron_upgrade", UpgradeTypes.COPPER_TO_IRON)));
-  public static final Item COPPER_GOLD_UPGRADE =
-      register(
-          "copper_gold_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.COPPER_TO_GOLD,
-              upgradeItemSettings("copper_gold_upgrade", UpgradeTypes.COPPER_TO_GOLD)));
-  public static final Item COPPER_DIAMOND_UPGRADE =
-      register(
-          "copper_diamond_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.COPPER_TO_DIAMOND,
-              upgradeItemSettings("copper_diamond_upgrade", UpgradeTypes.COPPER_TO_DIAMOND)));
-  public static final Item COPPER_EMERALD_UPGRADE =
-      register(
-          "copper_emerald_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.COPPER_TO_EMERALD,
-              upgradeItemSettings("copper_emerald_upgrade", UpgradeTypes.COPPER_TO_EMERALD)));
-  public static final Item COPPER_CRYSTAL_UPGRADE =
-      register(
-          "copper_crystal_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.COPPER_TO_CRYSTAL,
-              upgradeItemSettings("copper_crystal_upgrade", UpgradeTypes.COPPER_TO_CRYSTAL)));
-  public static final Item COPPER_OBSIDIAN_UPGRADE =
-      register(
-          "copper_obsidian_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.COPPER_TO_OBSIDIAN,
-              upgradeItemSettings("copper_obsidian_upgrade", UpgradeTypes.COPPER_TO_OBSIDIAN)));
-
-  public static final Item IRON_GOLD_UPGRADE =
-      register(
-          "iron_gold_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.IRON_TO_GOLD,
-              upgradeItemSettings("iron_gold_upgrade", UpgradeTypes.IRON_TO_GOLD)));
-  public static final Item IRON_DIAMOND_UPGRADE =
-      register(
-          "iron_diamond_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.IRON_TO_DIAMOND,
-              upgradeItemSettings("iron_diamond_upgrade", UpgradeTypes.IRON_TO_DIAMOND)));
-  public static final Item IRON_EMERALD_UPGRADE =
-      register(
-          "iron_emerald_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.IRON_TO_EMERALD,
-              upgradeItemSettings("iron_emerald_upgrade", UpgradeTypes.IRON_TO_EMERALD)));
-  public static final Item IRON_CRYSTAL_UPGRADE =
-      register(
-          "iron_crystal_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.IRON_TO_CRYSTAL,
-              upgradeItemSettings("iron_crystal_upgrade", UpgradeTypes.IRON_TO_CRYSTAL)));
-  public static final Item IRON_OBSIDIAN_UPGRADE =
-      register(
-          "iron_obsidian_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.IRON_TO_OBSIDIAN,
-              upgradeItemSettings("iron_obsidian_upgrade", UpgradeTypes.IRON_TO_OBSIDIAN)));
-
-  public static final Item GOLD_DIAMOND_UPGRADE =
-      register(
-          "gold_diamond_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.GOLD_TO_DIAMOND,
-              upgradeItemSettings("gold_diamond_upgrade", UpgradeTypes.GOLD_TO_DIAMOND)));
-  public static final Item GOLD_EMERALD_UPGRADE =
-      register(
-          "gold_emerald_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.GOLD_TO_EMERALD,
-              upgradeItemSettings("gold_emerald_upgrade", UpgradeTypes.GOLD_TO_EMERALD)));
-  public static final Item GOLD_CRYSTAL_UPGRADE =
-      register(
-          "gold_crystal_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.GOLD_TO_CRYSTAL,
-              upgradeItemSettings("gold_crystal_upgrade", UpgradeTypes.GOLD_TO_CRYSTAL)));
-  public static final Item GOLD_OBSIDIAN_UPGRADE =
-      register(
-          "gold_obsidian_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.GOLD_TO_OBSIDIAN,
-              upgradeItemSettings("gold_obsidian_upgrade", UpgradeTypes.GOLD_TO_OBSIDIAN)));
-
-  public static final Item DIAMOND_OBSIDIAN_UPGRADE =
-      register(
-          "diamond_obsidian_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.DIAMOND_TO_OBSIDIAN,
-              upgradeItemSettings("diamond_obsidian_upgrade", UpgradeTypes.DIAMOND_TO_OBSIDIAN)));
-  public static final Item DIAMOND_CRYSTAL_UPGRADE =
-      register(
-          "diamond_crystal_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.DIAMOND_TO_CRYSTAL,
-              upgradeItemSettings("diamond_crystal_upgrade", UpgradeTypes.DIAMOND_TO_CRYSTAL)));
-
-  public static final Item EMERALD_OBSIDIAN_UPGRADE =
-      register(
-          "emerald_obsidian_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.EMERALD_TO_OBSIDIAN,
-              upgradeItemSettings("emerald_obsidian_upgrade", UpgradeTypes.EMERALD_TO_OBSIDIAN)));
-  public static final Item EMERALD_CRYSTAL_UPGRADE =
-      register(
-          "emerald_crystal_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.EMERALD_TO_CRYSTAL,
-              upgradeItemSettings("emerald_crystal_upgrade", UpgradeTypes.EMERALD_TO_CRYSTAL)));
-
-  public static final Item WOOD_CHRISTMAS_UPGRADE =
-      register(
-          "wood_christmas_upgrade",
-          new UpgradeItem(
-              UpgradeTypes.WOOD_TO_CHRISTMAS,
-              upgradeItemSettings("wood_christmas_upgrade", UpgradeTypes.WOOD_TO_CHRISTMAS)));
-
-  public static final BlockItem COPPER_CHEST =
-      register(
-          "copper_chest", new BlockItem(ModBlocks.COPPER_CHEST, blockItemSettings("copper_chest")));
-  public static final BlockItem IRON_CHEST =
-      register("iron_chest", new BlockItem(ModBlocks.IRON_CHEST, blockItemSettings("iron_chest")));
-  public static final BlockItem GOLD_CHEST =
-      register("gold_chest", new BlockItem(ModBlocks.GOLD_CHEST, blockItemSettings("gold_chest")));
-  public static final BlockItem DIAMOND_CHEST =
-      register(
+  private static final List<String> TAB_ORDER =
+      List.of(
+          "copper_chest",
+          "iron_chest",
+          "gold_chest",
           "diamond_chest",
-          new BlockItem(ModBlocks.DIAMOND_CHEST, blockItemSettings("diamond_chest")));
-  public static final BlockItem EMERALD_CHEST =
-      register(
           "emerald_chest",
-          new BlockItem(ModBlocks.EMERALD_CHEST, blockItemSettings("emerald_chest")));
-  public static final BlockItem CRYSTAL_CHEST =
-      register(
           "crystal_chest",
-          new BlockItem(ModBlocks.CRYSTAL_CHEST, blockItemSettings("crystal_chest")));
-  public static final BlockItem OBSIDIAN_CHEST =
-      register(
           "obsidian_chest",
-          new BlockItem(ModBlocks.OBSIDIAN_CHEST, blockItemSettings("obsidian_chest")));
-  public static final BlockItem NETHERITE_CHEST =
-      register(
           "netherite_chest",
-          new BlockItem(
-              ModBlocks.NETHERITE_CHEST, blockItemSettings("netherite_chest").fireResistant()));
-  public static final BlockItem CHRISTMAS_CHEST =
-      register(
           "christmas_chest",
-          new BlockItem(ModBlocks.CHRISTMAS_CHEST, blockItemSettings("christmas_chest")));
+          "wood_copper_upgrade",
+          "wood_iron_upgrade",
+          "wood_gold_upgrade",
+          "wood_diamond_upgrade",
+          "wood_emerald_upgrade",
+          "wood_crystal_upgrade",
+          "wood_obsidian_upgrade",
+          "copper_iron_upgrade",
+          "copper_gold_upgrade",
+          "copper_diamond_upgrade",
+          "copper_emerald_upgrade",
+          "copper_crystal_upgrade",
+          "copper_obsidian_upgrade",
+          "iron_gold_upgrade",
+          "iron_diamond_upgrade",
+          "iron_emerald_upgrade",
+          "iron_crystal_upgrade",
+          "iron_obsidian_upgrade",
+          "gold_diamond_upgrade",
+          "gold_emerald_upgrade",
+          "gold_crystal_upgrade",
+          "gold_obsidian_upgrade",
+          "diamond_crystal_upgrade",
+          "diamond_obsidian_upgrade",
+          "emerald_crystal_upgrade",
+          "emerald_obsidian_upgrade",
+          "wood_christmas_upgrade");
+
+  static {
+    register(
+        "wood_copper_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.WOOD_TO_COPPER,
+                upgradeItemSettings("wood_copper_upgrade", UpgradeTypes.WOOD_TO_COPPER)));
+    register(
+        "wood_iron_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.WOOD_TO_IRON,
+                upgradeItemSettings("wood_iron_upgrade", UpgradeTypes.WOOD_TO_IRON)));
+    register(
+        "wood_gold_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.WOOD_TO_GOLD,
+                upgradeItemSettings("wood_gold_upgrade", UpgradeTypes.WOOD_TO_GOLD)));
+    register(
+        "wood_diamond_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.WOOD_TO_DIAMOND,
+                upgradeItemSettings("wood_diamond_upgrade", UpgradeTypes.WOOD_TO_DIAMOND)));
+    register(
+        "wood_emerald_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.WOOD_TO_EMERALD,
+                upgradeItemSettings("wood_emerald_upgrade", UpgradeTypes.WOOD_TO_EMERALD)));
+    register(
+        "wood_crystal_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.WOOD_TO_CRYSTAL,
+                upgradeItemSettings("wood_crystal_upgrade", UpgradeTypes.WOOD_TO_CRYSTAL)));
+    register(
+        "wood_obsidian_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.WOOD_TO_OBSIDIAN,
+                upgradeItemSettings("wood_obsidian_upgrade", UpgradeTypes.WOOD_TO_OBSIDIAN)));
+    register(
+        "copper_iron_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.COPPER_TO_IRON,
+                upgradeItemSettings("copper_iron_upgrade", UpgradeTypes.COPPER_TO_IRON)));
+    register(
+        "copper_gold_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.COPPER_TO_GOLD,
+                upgradeItemSettings("copper_gold_upgrade", UpgradeTypes.COPPER_TO_GOLD)));
+    register(
+        "copper_diamond_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.COPPER_TO_DIAMOND,
+                upgradeItemSettings("copper_diamond_upgrade", UpgradeTypes.COPPER_TO_DIAMOND)));
+    register(
+        "copper_emerald_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.COPPER_TO_EMERALD,
+                upgradeItemSettings("copper_emerald_upgrade", UpgradeTypes.COPPER_TO_EMERALD)));
+    register(
+        "copper_crystal_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.COPPER_TO_CRYSTAL,
+                upgradeItemSettings("copper_crystal_upgrade", UpgradeTypes.COPPER_TO_CRYSTAL)));
+    register(
+        "copper_obsidian_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.COPPER_TO_OBSIDIAN,
+                upgradeItemSettings("copper_obsidian_upgrade", UpgradeTypes.COPPER_TO_OBSIDIAN)));
+    register(
+        "iron_gold_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.IRON_TO_GOLD,
+                upgradeItemSettings("iron_gold_upgrade", UpgradeTypes.IRON_TO_GOLD)));
+    register(
+        "iron_diamond_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.IRON_TO_DIAMOND,
+                upgradeItemSettings("iron_diamond_upgrade", UpgradeTypes.IRON_TO_DIAMOND)));
+    register(
+        "iron_emerald_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.IRON_TO_EMERALD,
+                upgradeItemSettings("iron_emerald_upgrade", UpgradeTypes.IRON_TO_EMERALD)));
+    register(
+        "iron_crystal_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.IRON_TO_CRYSTAL,
+                upgradeItemSettings("iron_crystal_upgrade", UpgradeTypes.IRON_TO_CRYSTAL)));
+    register(
+        "iron_obsidian_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.IRON_TO_OBSIDIAN,
+                upgradeItemSettings("iron_obsidian_upgrade", UpgradeTypes.IRON_TO_OBSIDIAN)));
+    register(
+        "gold_diamond_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.GOLD_TO_DIAMOND,
+                upgradeItemSettings("gold_diamond_upgrade", UpgradeTypes.GOLD_TO_DIAMOND)));
+    register(
+        "gold_emerald_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.GOLD_TO_EMERALD,
+                upgradeItemSettings("gold_emerald_upgrade", UpgradeTypes.GOLD_TO_EMERALD)));
+    register(
+        "gold_crystal_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.GOLD_TO_CRYSTAL,
+                upgradeItemSettings("gold_crystal_upgrade", UpgradeTypes.GOLD_TO_CRYSTAL)));
+    register(
+        "gold_obsidian_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.GOLD_TO_OBSIDIAN,
+                upgradeItemSettings("gold_obsidian_upgrade", UpgradeTypes.GOLD_TO_OBSIDIAN)));
+    register(
+        "diamond_obsidian_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.DIAMOND_TO_OBSIDIAN,
+                upgradeItemSettings("diamond_obsidian_upgrade", UpgradeTypes.DIAMOND_TO_OBSIDIAN)));
+    register(
+        "diamond_crystal_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.DIAMOND_TO_CRYSTAL,
+                upgradeItemSettings("diamond_crystal_upgrade", UpgradeTypes.DIAMOND_TO_CRYSTAL)));
+    register(
+        "emerald_obsidian_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.EMERALD_TO_OBSIDIAN,
+                upgradeItemSettings("emerald_obsidian_upgrade", UpgradeTypes.EMERALD_TO_OBSIDIAN)));
+    register(
+        "emerald_crystal_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.EMERALD_TO_CRYSTAL,
+                upgradeItemSettings("emerald_crystal_upgrade", UpgradeTypes.EMERALD_TO_CRYSTAL)));
+    register(
+        "wood_christmas_upgrade",
+        () ->
+            new UpgradeItem(
+                UpgradeTypes.WOOD_TO_CHRISTMAS,
+                upgradeItemSettings("wood_christmas_upgrade", UpgradeTypes.WOOD_TO_CHRISTMAS)));
+    register(
+        "copper_chest",
+        () -> new BlockItem(ChestTypes.COPPER.getBlock(), blockItemSettings("copper_chest")));
+    register(
+        "iron_chest",
+        () -> new BlockItem(ChestTypes.IRON.getBlock(), blockItemSettings("iron_chest")));
+    register(
+        "gold_chest",
+        () -> new BlockItem(ChestTypes.GOLD.getBlock(), blockItemSettings("gold_chest")));
+    register(
+        "diamond_chest",
+        () -> new BlockItem(ChestTypes.DIAMOND.getBlock(), blockItemSettings("diamond_chest")));
+    register(
+        "emerald_chest",
+        () -> new BlockItem(ChestTypes.EMERALD.getBlock(), blockItemSettings("emerald_chest")));
+    register(
+        "crystal_chest",
+        () -> new BlockItem(ChestTypes.CRYSTAL.getBlock(), blockItemSettings("crystal_chest")));
+    register(
+        "obsidian_chest",
+        () -> new BlockItem(ChestTypes.OBSIDIAN.getBlock(), blockItemSettings("obsidian_chest")));
+    register(
+        "netherite_chest",
+        () ->
+            new BlockItem(
+                ChestTypes.NETHERITE.getBlock(),
+                blockItemSettings("netherite_chest").fireResistant()));
+    register(
+        "christmas_chest",
+        () -> new BlockItem(ChestTypes.CHRISTMAS.getBlock(), blockItemSettings("christmas_chest")));
+  }
 
   public static void registerItems() {
-    ITEMS_BY_ID.forEach(
-        (id, item) ->
-            Registry.register(
-                BuiltInRegistries.ITEM,
-                Identifier.fromNamespaceAndPath(IronChestsCommon.MOD_ID, id),
-                item));
+    ITEMS.forEach(
+        (id, supplier) ->
+            BOUND.put(
+                id,
+                Platforms.registry()
+                    .register(
+                        BuiltInRegistries.ITEM,
+                        Identifier.fromNamespaceAndPath(IronChestsCommon.MOD_ID, id),
+                        supplier)));
   }
 
   public static void addTabItems(ResourceKey<CreativeModeTab> tab) {
     Platforms.registry()
-        .addTabItems(
-            tab,
-            List.of(
-                COPPER_CHEST,
-                IRON_CHEST,
-                GOLD_CHEST,
-                DIAMOND_CHEST,
-                EMERALD_CHEST,
-                CRYSTAL_CHEST,
-                OBSIDIAN_CHEST,
-                NETHERITE_CHEST,
-                CHRISTMAS_CHEST,
-                WOOD_COPPER_UPGRADE,
-                WOOD_IRON_UPGRADE,
-                WOOD_GOLD_UPGRADE,
-                WOOD_DIAMOND_UPGRADE,
-                WOOD_EMERALD_UPGRADE,
-                WOOD_CRYSTAL_UPGRADE,
-                WOOD_OBSIDIAN_UPGRADE,
-                COPPER_IRON_UPGRADE,
-                COPPER_GOLD_UPGRADE,
-                COPPER_DIAMOND_UPGRADE,
-                COPPER_EMERALD_UPGRADE,
-                COPPER_CRYSTAL_UPGRADE,
-                COPPER_OBSIDIAN_UPGRADE,
-                IRON_GOLD_UPGRADE,
-                IRON_DIAMOND_UPGRADE,
-                IRON_EMERALD_UPGRADE,
-                IRON_CRYSTAL_UPGRADE,
-                IRON_OBSIDIAN_UPGRADE,
-                GOLD_DIAMOND_UPGRADE,
-                GOLD_EMERALD_UPGRADE,
-                GOLD_CRYSTAL_UPGRADE,
-                GOLD_OBSIDIAN_UPGRADE,
-                DIAMOND_CRYSTAL_UPGRADE,
-                DIAMOND_OBSIDIAN_UPGRADE,
-                EMERALD_CRYSTAL_UPGRADE,
-                EMERALD_OBSIDIAN_UPGRADE,
-                WOOD_CHRISTMAS_UPGRADE));
+        .addTabItems(tab, () -> TAB_ORDER.stream().map(id -> BOUND.get(id).get()).toList());
   }
 
-  private static <T extends Item> T register(String id, T item) {
-    ITEMS_BY_ID.put(id, item);
-    return item;
+  private static void register(String id, Supplier<Item> item) {
+    ITEMS.put(id, item);
   }
 
   private static Item.Properties settings(String name) {
