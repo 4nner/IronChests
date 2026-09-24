@@ -1,6 +1,6 @@
 package anner.ironchest.registry;
 
-import anner.ironchest.IronChests;
+import anner.ironchest.IronChestsCommon;
 import anner.ironchest.blocks.ChestTypes;
 import anner.ironchest.blocks.blockentities.CrystalChestEntity;
 import anner.ironchest.blocks.blockentities.GenericChestEntity;
@@ -52,7 +52,7 @@ public class ModBlockEntityType {
     for (ChestTypes type : ChestTypes.PLAYABLE) {
       Registry.register(
           BuiltInRegistries.BLOCK_ENTITY_TYPE,
-          Identifier.fromNamespaceAndPath(IronChests.MOD_ID, type.registryId),
+          Identifier.fromNamespaceAndPath(IronChestsCommon.MOD_ID, type.registryId),
           type.getBlockEntityType());
     }
   }

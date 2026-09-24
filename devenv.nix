@@ -66,14 +66,14 @@ in
     build.exec = "./gradlew build";
     check.exec = "./gradlew check";
     clean.exec = "./gradlew clean";
-    run-client.exec = "./gradlew runClient";
-    run-server.exec = "./gradlew runServer";
+    run-client.exec = "./gradlew :iron-chests:fabric:runClient";
+    run-server.exec = "./gradlew :iron-chests:fabric:runServer";
   };
 
   enterShell = ''
     echo "IronChests devenv: $(java -version 2>&1 | head -1)"
     echo "Build with './gradlew build' (or 'build'), test with './gradlew check' (or 'check')."
-    echo "Run the game with './gradlew runClient' (or 'run-client')."
+    echo "Run the game with './gradlew :iron-chests:fabric:runClient' (or 'run-client')."
   '';
 
   # https://devenv.sh/tests/

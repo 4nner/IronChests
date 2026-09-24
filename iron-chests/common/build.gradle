@@ -1,0 +1,25 @@
+plugins {
+  alias(libs.plugins.fabric.loom)
+}
+
+loom {
+  accessWidenerPath = file("src/main/resources/ironchest.accesswidener")
+}
+
+version = project.mod_version
+group = project.maven_group
+
+dependencies {
+  minecraft libs.minecraft
+}
+
+tasks.withType(JavaCompile).configureEach {
+  it.options.release = 25
+}
+
+java {
+  withSourcesJar()
+
+  sourceCompatibility = JavaVersion.VERSION_25
+  targetCompatibility = JavaVersion.VERSION_25
+}

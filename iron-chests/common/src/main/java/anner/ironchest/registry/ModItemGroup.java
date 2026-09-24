@@ -1,6 +1,6 @@
 package anner.ironchest.registry;
 
-import anner.ironchest.IronChests;
+import anner.ironchest.IronChestsCommon;
 import anner.ironchest.platform.Platforms;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -15,6 +15,6 @@ public class ModItemGroup {
             .creativeTab(
                 () -> new ItemStack(ModBlocks.IRON_CHEST),
                 Component.translatable("itemGroup.ironchest.general"));
-    Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, IronChests.TAB, tab);
+    Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, IronChestsCommon.TAB, tab);
   }
 }

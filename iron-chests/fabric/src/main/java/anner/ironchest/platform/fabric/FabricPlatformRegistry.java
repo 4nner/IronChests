@@ -19,9 +19,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 public final class FabricPlatformRegistry implements PlatformRegistry {
-  public static final FabricPlatformRegistry INSTANCE = new FabricPlatformRegistry();
-
-  private FabricPlatformRegistry() {}
+  // Public no-arg constructor required by ServiceLoader.
+  public FabricPlatformRegistry() {}
 
   @Override
   public <T extends BlockEntity> BlockEntityType<T> blockEntityType(

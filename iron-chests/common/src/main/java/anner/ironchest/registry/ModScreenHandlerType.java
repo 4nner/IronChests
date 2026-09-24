@@ -1,6 +1,6 @@
 package anner.ironchest.registry;
 
-import anner.ironchest.IronChests;
+import anner.ironchest.IronChestsCommon;
 import anner.ironchest.blocks.ChestTypes;
 import anner.ironchest.screenhandlers.ChestScreenHandler;
 import anner.ironchest.screenhandlers.SizedContainerMenu;
@@ -27,7 +27,7 @@ public class ModScreenHandlerType {
       MenuType<ChestScreenHandler> registered =
           Registry.register(
               BuiltInRegistries.MENU,
-              Identifier.fromNamespaceAndPath(IronChests.MOD_ID, type.registryId),
+              Identifier.fromNamespaceAndPath(IronChestsCommon.MOD_ID, type.registryId),
               menuType);
 
       type.bindMenuType(registered);
