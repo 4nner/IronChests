@@ -4,7 +4,7 @@ import anner.ironchest.IronChests;
 import anner.ironchest.blocks.ChestTypes;
 import anner.ironchest.blocks.blockentities.CrystalChestEntity;
 import anner.ironchest.blocks.blockentities.GenericChestEntity;
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import anner.ironchest.platform.Platforms;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -19,7 +19,7 @@ public class ModBlockEntityType {
   public static final BlockEntityType<GenericChestEntity> EMERALD_CHEST =
       create(ChestTypes.EMERALD);
   public static final BlockEntityType<CrystalChestEntity> CRYSTAL_CHEST =
-      FabricBlockEntityTypeBuilder.create(CrystalChestEntity::new, ModBlocks.CRYSTAL_CHEST).build();
+      Platforms.registry().blockEntityType(CrystalChestEntity::new, ModBlocks.CRYSTAL_CHEST);
   public static final BlockEntityType<GenericChestEntity> OBSIDIAN_CHEST =
       create(ChestTypes.OBSIDIAN);
   public static final BlockEntityType<GenericChestEntity> NETHERITE_CHEST =
@@ -40,12 +40,12 @@ public class ModBlockEntityType {
   }
 
   private static BlockEntityType<GenericChestEntity> create(ChestTypes type) {
-    return FabricBlockEntityTypeBuilder.create(
+    return Platforms.registry()
+        .blockEntityType(
             (pos, state) ->
                 new GenericChestEntity(
                     type, type.getBlockEntityType(), type.getMenuType(), pos, state),
-            type.getBlock())
-        .build();
+            type.getBlock());
   }
 
   public static void registerBlockEntities() {
