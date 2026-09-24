@@ -5,6 +5,7 @@ import anner.ironchest.screenhandlers.ChestScreenHandler;
 import anner.ironchest.util.ChestInventorySanitizer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
@@ -22,7 +23,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 
 public class GenericChestEntity extends ChestBlockEntity implements ResizingContainer {
   private final TierSpec tier;
-  private final MenuType<ChestScreenHandler> menuType;
+  private final Supplier<MenuType<ChestScreenHandler>> menuType;
   private final List<ItemStack> pendingOverflow = new ArrayList<>();
 
   // setItems() resolves to ChestBlockEntity.setItems() — a plain field assignment,
@@ -30,11 +31,11 @@ public class GenericChestEntity extends ChestBlockEntity implements ResizingCont
   @SuppressWarnings("this-escape")
   public GenericChestEntity(
       TierSpec tier,
-      BlockEntityType<?> blockEntityType,
-      MenuType<ChestScreenHandler> menuType,
+      Supplier<BlockEntityType<?>> blockEntityType,
+      Supplier<MenuType<ChestScreenHandler>> menuType,
       BlockPos pos,
       BlockState state) {
-    super(blockEntityType, pos, state);
+    super(blockEntityType.get(), pos, state);
     this.tier = tier;
     this.menuType = menuType;
     setItems(NonNullList.withSize(tier.size(), ItemStack.EMPTY));
@@ -42,7 +43,7 @@ public class GenericChestEntity extends ChestBlockEntity implements ResizingCont
 
   @Override
   protected AbstractContainerMenu createMenu(int syncId, Inventory inventory) {
-    return new ChestScreenHandler(this.menuType, this.tier, syncId, inventory, this);
+    return new ChestScreenHandler(this.menuType.get(), this.tier, syncId, inventory, this);
   }
 
   @Override

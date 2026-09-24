@@ -4,6 +4,7 @@ import anner.ironchest.IronChestsCommon;
 import anner.ironchest.blocks.blockentities.CrystalChestEntity;
 import anner.ironchest.blocks.blockentities.GenericChestEntity;
 import anner.ironchest.screenhandlers.ChestScreenHandler;
+import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.inventory.MenuType;
@@ -70,9 +71,9 @@ public enum ChestTypes implements TierSpec {
   public final String registryId;
   public final Identifier texture;
 
-  private @Nullable Block block;
-  private @Nullable BlockEntityType<? extends ChestBlockEntity> blockEntityType;
-  private MenuType<ChestScreenHandler> menuType;
+  private @Nullable Supplier<Block> block;
+  private @Nullable Supplier<? extends BlockEntityType<? extends ChestBlockEntity>> blockEntityType;
+  private @Nullable Supplier<MenuType<ChestScreenHandler>> menuType;
 
   ChestTypes(int size, int rowLength, String registryId, Identifier texture) {
     this.size = size;
@@ -91,35 +92,36 @@ public enum ChestTypes implements TierSpec {
     return this.rowLength;
   }
 
-  public void bindBlock(Block block) {
+  public void bindBlock(Supplier<Block> block) {
     this.block = block;
   }
 
-  public void bindBlockEntityType(BlockEntityType<? extends ChestBlockEntity> blockEntityType) {
+  public void bindBlockEntityType(
+      Supplier<? extends BlockEntityType<? extends ChestBlockEntity>> blockEntityType) {
     this.blockEntityType = blockEntityType;
   }
 
-  public void bindMenuType(MenuType<ChestScreenHandler> menuType) {
+  public void bindMenuType(Supplier<MenuType<ChestScreenHandler>> menuType) {
     this.menuType = menuType;
   }
 
-  public MenuType<ChestScreenHandler> getMenuType() {
-    return this.menuType;
+  public @Nullable MenuType<ChestScreenHandler> getMenuType() {
+    return this.menuType != null ? this.menuType.get() : null;
   }
 
   public Block getBlock() {
-    return this.block != null ? this.block : Blocks.CHEST;
+    return this.block != null ? this.block.get() : Blocks.CHEST;
   }
 
   public ChestBlockEntity createBlockEntity(BlockPos pos, BlockState state) {
     if (this == CRYSTAL) {
       return new CrystalChestEntity(pos, state);
     }
-    return new GenericChestEntity(this, this.getBlockEntityType(), this.getMenuType(), pos, state);
+    return new GenericChestEntity(this, this::getBlockEntityType, this::getMenuType, pos, state);
   }
 
   public BlockEntityType<? extends ChestBlockEntity> getBlockEntityType() {
-    return this.blockEntityType != null ? this.blockEntityType : BlockEntityTypes.CHEST;
+    return this.blockEntityType != null ? this.blockEntityType.get() : BlockEntityTypes.CHEST;
   }
 
   public BlockBehaviour.Properties blockProperties() {

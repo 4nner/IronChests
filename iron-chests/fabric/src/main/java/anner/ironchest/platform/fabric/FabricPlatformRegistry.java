@@ -8,7 +8,9 @@ import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -21,6 +23,14 @@ import net.minecraft.world.level.block.state.BlockState;
 public final class FabricPlatformRegistry implements PlatformRegistry {
   // Public no-arg constructor required by ServiceLoader.
   public FabricPlatformRegistry() {}
+
+  @Override
+  public <T> Supplier<T> register(
+      Registry<? super T> registry, Identifier id, Supplier<T> supplier) {
+    T value = supplier.get();
+    Registry.register(registry, id, value);
+    return () -> value;
+  }
 
   @Override
   public <T extends BlockEntity> BlockEntityType<T> blockEntityType(
@@ -36,11 +46,12 @@ public final class FabricPlatformRegistry implements PlatformRegistry {
   }
 
   @Override
-  public void addTabItems(ResourceKey<CreativeModeTab> tab, List<? extends ItemLike> items) {
+  public void addTabItems(
+      ResourceKey<CreativeModeTab> tab, Supplier<List<? extends ItemLike>> itemsSupplier) {
     CreativeModeTabEvents.modifyOutputEvent(tab)
         .register(
             output -> {
-              for (ItemLike item : items) {
+              for (ItemLike item : itemsSupplier.get()) {
                 output.accept(item);
               }
             });
