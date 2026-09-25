@@ -5,8 +5,6 @@ import anner.ironchest.blocks.blockentities.CrystalChestEntity;
 import anner.ironchest.blocks.blockentities.GenericChestEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.object.chest.ChestModel;
 import net.minecraft.client.renderer.MultiblockChestResources;
@@ -30,7 +28,6 @@ import net.minecraft.world.level.block.entity.LidBlockEntity;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
-@Environment(EnvType.CLIENT)
 public class ChestEntityRenderer<T extends BlockEntity & LidBlockEntity> extends ChestRenderer<T> {
   private final SpriteGetter sprites;
   private final MultiblockChestResources<ChestModel> models;
