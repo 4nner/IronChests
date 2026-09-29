@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "ironcore",
+  "version": "${version}",
+  "name": "Iron Core",
+  "description": "Shared library for Iron mods",
+  "authors": [
+    "anner"
+  ],
+  "contact": {
+    "homepage": "https://github.com/4nner/ironchests",
+    "sources": "https://github.com/4nner/ironchests"
+  },
+  "license": "gpl-3.0",
+  "environment": "*",
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "~26.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}

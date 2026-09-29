@@ -1,59 +1,52 @@
 plugins {
-  alias(libs.plugins.fabric.loom)
+  alias(libs.plugins.neogradle.moddev)
   id 'maven-publish'
 }
 
 version = project.mod_version
-group = project.maven_group
+group = project.core_maven_group
 
 base {
-  archivesName = "IronChests"
+  archivesName = "IronCore-neoforge"
 }
 
-loom {
-  splitEnvironmentSourceSets()
+neoForge {
+  version = libs.versions.neoforge.get()
+}
 
-  mods {
-    "ironchest" {
-      sourceSet sourceSets.main
-      sourceSet sourceSets.client
-    }
+repositories {
+  maven {
+    name = "NeoForge"
+    url = "https://maven.neoforged.net/releases/"
   }
 }
 
 dependencies {
-  minecraft libs.minecraft
+  implementation libs.neoforge
 
-  implementation libs.fabric.loader
-  implementation libs.fabric.api
-
-  implementation(project(":iron-chests:common"))
-  include(project(":iron-chests:common"))
+  // implementation: compile against common; jarJar: nest common into the mod jar.
   implementation(project(":iron-core:common"))
-  implementation(project(":iron-core:fabric"))
-}
-
-sourceSets {
-  // Shared mod assets and data; loader-specific files stay in src/main/resources.
-  main {
-    resources {
-      srcDir("../resources")
-    }
-  }
+  jarJar(project(":iron-core:common"))
 }
 
 processResources {
   def version = project.version
   inputs.property "version", version
 
-  filesMatching("fabric.mod.json") {
-    expand "version": version
+  filesMatching("META-INF/neoforge.mods.toml") {
+    expand "mod_version": version
+  }
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(libs.versions.java.get().toInteger())
   }
 }
 
 jar {
   from(rootProject.file("LICENSE")) {
-    rename { "LICENSE_IronChests" }
+    rename { "LICENSE_IronCore-neoforge" }
   }
 }
 

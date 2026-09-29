@@ -4,19 +4,16 @@ plugins {
 }
 
 version = project.mod_version
-group = project.maven_group
+group = project.core_maven_group
 
 base {
-  archivesName = "IronChests"
+  archivesName = "IronCore"
 }
 
 loom {
-  splitEnvironmentSourceSets()
-
   mods {
-    "ironchest" {
+    "ironcore" {
       sourceSet sourceSets.main
-      sourceSet sourceSets.client
     }
   }
 }
@@ -27,19 +24,8 @@ dependencies {
   implementation libs.fabric.loader
   implementation libs.fabric.api
 
-  implementation(project(":iron-chests:common"))
-  include(project(":iron-chests:common"))
   implementation(project(":iron-core:common"))
-  implementation(project(":iron-core:fabric"))
-}
-
-sourceSets {
-  // Shared mod assets and data; loader-specific files stay in src/main/resources.
-  main {
-    resources {
-      srcDir("../resources")
-    }
-  }
+  include(project(":iron-core:common"))
 }
 
 processResources {
@@ -53,7 +39,7 @@ processResources {
 
 jar {
   from(rootProject.file("LICENSE")) {
-    rename { "LICENSE_IronChests" }
+    rename { "LICENSE_IronCore" }
   }
 }
 

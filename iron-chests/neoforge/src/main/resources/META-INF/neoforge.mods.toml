@@ -23,6 +23,13 @@ versionRange = "[26.2,26.3)"
 ordering = "NONE"
 side = "BOTH"
 
+[[dependencies.ironchest]]
+modId = "ironcore"
+type = "required"
+versionRange = "[${mod_version},)"
+ordering = "AFTER"
+side = "BOTH"
+
 [[accessTransformers]]
 file = "META-INF/accesstransformer.cfg"
 

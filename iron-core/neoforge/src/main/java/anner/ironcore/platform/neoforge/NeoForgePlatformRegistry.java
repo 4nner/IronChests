@@ -1,8 +1,9 @@
-package anner.ironchest.platform.neoforge;
+package anner.ironcore.platform.neoforge;
 
-import anner.ironchest.IronChestsCommon;
 import anner.ironcore.platform.PlatformRegistry;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -27,52 +28,76 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public final class NeoForgePlatformRegistry implements PlatformRegistry {
-  private final DeferredRegister<Block> blocks =
-      DeferredRegister.create(BuiltInRegistries.BLOCK, IronChestsCommon.MOD_ID);
-  private final DeferredRegister<Item> items =
-      DeferredRegister.create(BuiltInRegistries.ITEM, IronChestsCommon.MOD_ID);
-  private final DeferredRegister<BlockEntityType<?>> blockEntityTypes =
-      DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, IronChestsCommon.MOD_ID);
-  private final DeferredRegister<MenuType<?>> menuTypes =
-      DeferredRegister.create(BuiltInRegistries.MENU, IronChestsCommon.MOD_ID);
-  private final DeferredRegister<CreativeModeTab> tabs =
-      DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, IronChestsCommon.MOD_ID);
+  // One register set per mod namespace; core serves multiple content mods,
+  // each with its own namespace on its own mod event bus.
+  private record Registers(
+      DeferredRegister<Block> blocks,
+      DeferredRegister<Item> items,
+      DeferredRegister<BlockEntityType<?>> blockEntityTypes,
+      DeferredRegister<MenuType<?>> menuTypes,
+      DeferredRegister<CreativeModeTab> tabs) {}
 
-  private IEventBus modBus;
+  private final Map<String, Registers> registers = new HashMap<>();
+  private final Map<String, IEventBus> buses = new HashMap<>();
 
-  // Public no-arg constructor required by ServiceLoader; the event bus
-  // arrives via init(IEventBus) from the mod entrypoint, before any registration.
+  // Public no-arg constructor required by ServiceLoader; each content mod
+  // calls init(namespace, bus) from its entrypoint before registering.
   public NeoForgePlatformRegistry() {}
 
-  public void init(IEventBus modBus) {
-    this.modBus = modBus;
-    this.blocks.register(modBus);
-    this.items.register(modBus);
-    this.blockEntityTypes.register(modBus);
-    this.menuTypes.register(modBus);
-    this.tabs.register(modBus);
+  public void init(String namespace, IEventBus modBus) {
+    if (this.registers.containsKey(namespace)) {
+      return;
+    }
+    Registers created =
+        new Registers(
+            DeferredRegister.create(BuiltInRegistries.BLOCK, namespace),
+            DeferredRegister.create(BuiltInRegistries.ITEM, namespace),
+            DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, namespace),
+            DeferredRegister.create(BuiltInRegistries.MENU, namespace),
+            DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, namespace));
+    created.blocks.register(modBus);
+    created.items.register(modBus);
+    created.blockEntityTypes.register(modBus);
+    created.menuTypes.register(modBus);
+    created.tabs.register(modBus);
+    this.registers.put(namespace, created);
+    this.buses.put(namespace, modBus);
+  }
+
+  private Registers registersFor(Identifier id) {
+    Registers found = this.registers.get(id.getNamespace());
+    if (found == null) {
+      throw new IllegalStateException(
+          "Namespace '"
+              + id.getNamespace()
+              + "' is not initialized;"
+              + " call init(namespace, bus) from the mod entrypoint first");
+    }
+    return found;
   }
 
   @Override
   @SuppressWarnings("unchecked")
   public <T> Supplier<T> register(
       Registry<? super T> registry, Identifier id, Supplier<T> supplier) {
+    Registers target = registersFor(id);
     if (registry == BuiltInRegistries.BLOCK) {
-      return (Supplier<T>) this.blocks.register(id.getPath(), () -> (Block) supplier.get());
+      return (Supplier<T>) target.blocks.register(id.getPath(), () -> (Block) supplier.get());
     }
     if (registry == BuiltInRegistries.ITEM) {
-      return (Supplier<T>) this.items.register(id.getPath(), () -> (Item) supplier.get());
+      return (Supplier<T>) target.items.register(id.getPath(), () -> (Item) supplier.get());
     }
     if (registry == BuiltInRegistries.BLOCK_ENTITY_TYPE) {
       return (Supplier<T>)
-          this.blockEntityTypes.register(id.getPath(), () -> (BlockEntityType<?>) supplier.get());
+          target.blockEntityTypes.register(id.getPath(), () -> (BlockEntityType<?>) supplier.get());
     }
     if (registry == BuiltInRegistries.MENU) {
       return (Supplier<T>)
-          this.menuTypes.register(id.getPath(), () -> (MenuType<?>) supplier.get());
+          target.menuTypes.register(id.getPath(), () -> (MenuType<?>) supplier.get());
     }
     if (registry == BuiltInRegistries.CREATIVE_MODE_TAB) {
-      return (Supplier<T>) this.tabs.register(id.getPath(), () -> (CreativeModeTab) supplier.get());
+      return (Supplier<T>)
+          target.tabs.register(id.getPath(), () -> (CreativeModeTab) supplier.get());
     }
     throw new IllegalArgumentException("Unsupported registry: " + registry.key());
   }
@@ -92,7 +117,9 @@ public final class NeoForgePlatformRegistry implements PlatformRegistry {
   public void addTabItems(
       ResourceKey<CreativeModeTab> tab, Supplier<List<? extends ItemLike>> itemsSupplier) {
     IEventBus bus =
-        Objects.requireNonNull(this.modBus, "init(IEventBus) must be called before registering");
+        Objects.requireNonNull(
+            this.buses.get(tab.identifier().getNamespace()),
+            "Namespace '" + tab.identifier().getNamespace() + "' is not initialized");
     bus.addListener(
         (BuildCreativeModeTabContentsEvent event) -> {
           if (!event.getTabKey().equals(tab)) {
