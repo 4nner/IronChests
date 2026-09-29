@@ -6,7 +6,8 @@ license = "gpl-3.0"
 modId = "ironchest"
 version = "${mod_version}"
 displayName = "Iron Chests"
-authors = "anner"
+authors = "anner, gathertocraft"
+displayURL = "https://www.gathertocraft.com"
 description = "Bigger Chests for Minecraft"
 
 [[dependencies.ironchest]]

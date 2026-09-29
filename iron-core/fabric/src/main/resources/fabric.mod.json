@@ -5,11 +5,13 @@
   "name": "Iron Core",
   "description": "Shared library for Iron mods",
   "authors": [
-    "anner"
+    "anner",
+    "gathertocraft"
   ],
   "contact": {
     "homepage": "https://github.com/4nner/ironchests",
-    "sources": "https://github.com/4nner/ironchests"
+    "sources": "https://github.com/4nner/ironchests",
+    "website": "https://www.gathertocraft.com"
   },
   "license": "gpl-3.0",
   "environment": "*",

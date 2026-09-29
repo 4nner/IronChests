@@ -5,21 +5,23 @@
   "name": "Iron Chests",
   "description": "Bigger Chests for Minecraft",
   "authors": [
-    "anner"
+    "anner",
+    "gathertocraft"
   ],
   "contact": {
     "homepage": "https://github.com/4nner/ironchests",
-    "sources": "https://github.com/4nner/ironchests"
+    "sources": "https://github.com/4nner/ironchests",
+    "website": "https://www.gathertocraft.com"
   },
   "license": "gpl-3.0",
   "icon": "assets/ironchest/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "anner.ironchest.IronChests"
+      "com.gathertocraft.ironchest.IronChests"
     ],
     "client": [
-      "anner.ironchest.IronChestsClient"
+      "com.gathertocraft.ironchest.IronChestsClient"
     ]
   },
   "mixins": [
