@@ -67,19 +67,10 @@ processResources {
   }
 }
 
-tasks.withType(JavaCompile).configureEach {
-  it.options.release = 25
-}
-
 java {
-  withSourcesJar()
-
   toolchain {
-    languageVersion = JavaLanguageVersion.of(25)
+    languageVersion = JavaLanguageVersion.of(libs.versions.java.get().toInteger())
   }
-
-  sourceCompatibility = JavaVersion.VERSION_25
-  targetCompatibility = JavaVersion.VERSION_25
 }
 
 jar {
