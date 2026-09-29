@@ -9,6 +9,12 @@ loom {
 version = project.mod_version
 group = project.maven_group
 
+base {
+  archivesName = "ironchests-common"
+}
+
 dependencies {
   minecraft libs.minecraft
+
+  implementation(project(":iron-core:common"))
 }

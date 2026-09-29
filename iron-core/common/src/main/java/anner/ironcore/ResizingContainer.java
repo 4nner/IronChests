@@ -1,4 +1,4 @@
-package anner.ironchest.blocks.blockentities;
+package anner.ironcore;
 
 public interface ResizingContainer {
   void clampInventoryToCapacity();

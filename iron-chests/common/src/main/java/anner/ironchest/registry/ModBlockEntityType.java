@@ -4,7 +4,7 @@ import anner.ironchest.IronChestsCommon;
 import anner.ironchest.blocks.ChestTypes;
 import anner.ironchest.blocks.blockentities.CrystalChestEntity;
 import anner.ironchest.blocks.blockentities.GenericChestEntity;
-import anner.ironchest.platform.Platforms;
+import anner.ironcore.platform.Platforms;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 

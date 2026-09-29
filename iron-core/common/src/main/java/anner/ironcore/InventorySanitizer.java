@@ -1,11 +1,11 @@
-package anner.ironchest.util;
+package anner.ironcore;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 
-public final class ChestInventorySanitizer {
-  private ChestInventorySanitizer() {}
+public final class InventorySanitizer {
+  private InventorySanitizer() {}
 
   public static void sanitize(NonNullList<ItemStack> items) {
     for (int i = 0; i < items.size(); i++) {

@@ -1,6 +1,6 @@
 package anner.ironchest.platform.fabric;
 
-import anner.ironchest.platform.PlatformRegistry;
+import anner.ironcore.platform.PlatformRegistry;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;

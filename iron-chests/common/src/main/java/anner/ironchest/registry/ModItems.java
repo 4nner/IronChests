@@ -4,7 +4,7 @@ import anner.ironchest.IronChestsCommon;
 import anner.ironchest.blocks.ChestTypes;
 import anner.ironchest.items.UpgradeItem;
 import anner.ironchest.items.UpgradeTypes;
-import anner.ironchest.platform.Platforms;
+import anner.ironcore.platform.Platforms;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;

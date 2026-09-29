@@ -1,4 +1,4 @@
-package anner.ironchest.blocks;
+package anner.ironcore;
 
 public interface TierSpec {
   int size();

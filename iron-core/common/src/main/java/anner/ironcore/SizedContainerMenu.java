@@ -1,6 +1,5 @@
-package anner.ironchest.screenhandlers;
+package anner.ironcore;
 
-import anner.ironchest.blocks.TierSpec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -35,27 +34,30 @@ public class SizedContainerMenu extends AbstractContainerMenu {
     int columns = tier.rowLength();
     int rows = tier.rowCount();
     int slotIndex = 0;
-    int chestSlotX = ChestGuiLayout.chestSlotStartX(columns);
+    int containerSlotX = ContainerGuiLayout.containerSlotStartX(columns);
 
     for (int row = 0; row < rows; row++) {
-      int slotY = ChestGuiLayout.SLOT_SIZE + row * ChestGuiLayout.SLOT_SIZE;
+      int slotY = ContainerGuiLayout.SLOT_SIZE + row * ContainerGuiLayout.SLOT_SIZE;
       for (int column = 0; column < columns; column++) {
         this.addSlot(
             new Slot(
-                container, slotIndex++, chestSlotX + column * ChestGuiLayout.SLOT_SIZE, slotY));
+                container,
+                slotIndex++,
+                containerSlotX + column * ContainerGuiLayout.SLOT_SIZE,
+                slotY));
       }
     }
 
-    int playerInventoryX = ChestGuiLayout.playerInventoryX(columns);
-    int playerInventoryY = ChestGuiLayout.playerInventoryY(rows);
+    int playerInventoryX = ContainerGuiLayout.playerInventoryX(columns);
+    int playerInventoryY = ContainerGuiLayout.playerInventoryY(rows);
     for (int row = 0; row < 3; row++) {
       for (int column = 0; column < 9; column++) {
         this.addSlot(
             new Slot(
                 playerInventory,
                 column + row * 9 + 9,
-                playerInventoryX + column * ChestGuiLayout.SLOT_SIZE,
-                playerInventoryY + row * ChestGuiLayout.SLOT_SIZE));
+                playerInventoryX + column * ContainerGuiLayout.SLOT_SIZE,
+                playerInventoryY + row * ContainerGuiLayout.SLOT_SIZE));
       }
     }
     for (int column = 0; column < 9; column++) {
@@ -63,8 +65,8 @@ public class SizedContainerMenu extends AbstractContainerMenu {
           new Slot(
               playerInventory,
               column,
-              playerInventoryX + column * ChestGuiLayout.SLOT_SIZE,
-              playerInventoryY + ChestGuiLayout.HOTBAR_OFFSET));
+              playerInventoryX + column * ContainerGuiLayout.SLOT_SIZE,
+              playerInventoryY + ContainerGuiLayout.HOTBAR_OFFSET));
     }
   }
 
@@ -91,12 +93,12 @@ public class SizedContainerMenu extends AbstractContainerMenu {
     if (slot != null && slot.hasItem()) {
       ItemStack stackInSlot = slot.getItem();
       movedStack = stackInSlot.copy();
-      int chestSlots = tier.size();
-      if (slotIndex < chestSlots) {
-        if (!this.moveItemStackTo(stackInSlot, chestSlots, this.slots.size(), true)) {
+      int containerSlots = tier.size();
+      if (slotIndex < containerSlots) {
+        if (!this.moveItemStackTo(stackInSlot, containerSlots, this.slots.size(), true)) {
           return ItemStack.EMPTY;
         }
-      } else if (!this.moveItemStackTo(stackInSlot, 0, chestSlots, false)) {
+      } else if (!this.moveItemStackTo(stackInSlot, 0, containerSlots, false)) {
         return ItemStack.EMPTY;
       }
 

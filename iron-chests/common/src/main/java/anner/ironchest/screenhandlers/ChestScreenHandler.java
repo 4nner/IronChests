@@ -1,6 +1,7 @@
 package anner.ironchest.screenhandlers;
 
-import anner.ironchest.blocks.TierSpec;
+import anner.ironcore.SizedContainerMenu;
+import anner.ironcore.TierSpec;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
