@@ -1,8 +1,9 @@
 package anner.ironchest.blocks.blockentities;
 
-import anner.ironchest.blocks.TierSpec;
 import anner.ironchest.screenhandlers.ChestScreenHandler;
-import anner.ironchest.util.ChestInventorySanitizer;
+import anner.ironcore.InventorySanitizer;
+import anner.ironcore.ResizingContainer;
+import anner.ironcore.TierSpec;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -58,7 +59,7 @@ public class GenericChestEntity extends ChestBlockEntity implements ResizingCont
 
   @Override
   public void setItem(int slot, ItemStack stack) {
-    super.setItem(slot, ChestInventorySanitizer.sanitize(stack));
+    super.setItem(slot, InventorySanitizer.sanitize(stack));
   }
 
   @Override
@@ -69,7 +70,7 @@ public class GenericChestEntity extends ChestBlockEntity implements ResizingCont
 
   @Override
   protected void saveAdditional(ValueOutput output) {
-    ChestInventorySanitizer.sanitize(this.getItems());
+    InventorySanitizer.sanitize(this.getItems());
     super.saveAdditional(output);
   }
 
@@ -78,7 +79,7 @@ public class GenericChestEntity extends ChestBlockEntity implements ResizingCont
     int capacity = this.getContainerSize();
     NonNullList<ItemStack> items = this.getItems();
     if (items.size() == capacity) {
-      ChestInventorySanitizer.sanitize(items);
+      InventorySanitizer.sanitize(items);
       this.setChanged();
       return;
     }
@@ -98,7 +99,7 @@ public class GenericChestEntity extends ChestBlockEntity implements ResizingCont
     }
 
     this.setItems(clamped);
-    ChestInventorySanitizer.sanitize(clamped);
+    InventorySanitizer.sanitize(clamped);
     this.setChanged();
   }
 

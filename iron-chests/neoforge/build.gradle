@@ -21,6 +21,7 @@ neoForge {
       sourceSet sourceSets.main
       // Common classes load as part of this mod in dev runs.
       sourceSet project(":iron-chests:common").sourceSets.main
+      sourceSet project(":iron-core:common").sourceSets.main
     }
   }
 
@@ -47,6 +48,8 @@ dependencies {
   // implementation: compile against common; jarJar: nest common into the mod jar.
   implementation(project(":iron-chests:common"))
   jarJar(project(":iron-chests:common"))
+  implementation(project(":iron-core:common"))
+  jarJar(project(":iron-core:common"))
 }
 
 sourceSets {

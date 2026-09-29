@@ -1,4 +1,4 @@
-package anner.ironchest.items;
+package anner.ironcore;
 
 import net.minecraft.world.level.block.state.BlockState;
 

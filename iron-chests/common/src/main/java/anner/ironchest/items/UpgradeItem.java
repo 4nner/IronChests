@@ -1,6 +1,7 @@
 package anner.ironchest.items;
 
-import anner.ironchest.blocks.blockentities.ResizingContainer;
+import anner.ironcore.ResizingContainer;
+import anner.ironcore.UpgradeStrategy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;

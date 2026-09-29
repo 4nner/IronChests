@@ -19,3 +19,4 @@ rootProject.name = 'IronChests'
 include("iron-chests:common")
 include("iron-chests:fabric")
 include("iron-chests:neoforge")
+include("iron-core:common")

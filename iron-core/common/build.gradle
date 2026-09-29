@@ -1,0 +1,14 @@
+plugins {
+  alias(libs.plugins.fabric.loom)
+}
+
+version = project.mod_version
+group = project.core_maven_group
+
+base {
+  archivesName = "ironcore-common"
+}
+
+dependencies {
+  minecraft libs.minecraft
+}

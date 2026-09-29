@@ -4,6 +4,7 @@ import anner.ironchest.IronChestsCommon;
 import anner.ironchest.blocks.blockentities.CrystalChestEntity;
 import anner.ironchest.blocks.blockentities.GenericChestEntity;
 import anner.ironchest.screenhandlers.ChestScreenHandler;
+import anner.ironcore.TierSpec;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;

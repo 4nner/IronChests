@@ -1,7 +1,7 @@
 package anner.ironchest;
 
-import anner.ironchest.platform.Platforms;
 import anner.ironchest.platform.neoforge.NeoForgePlatformRegistry;
+import anner.ironcore.platform.Platforms;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 

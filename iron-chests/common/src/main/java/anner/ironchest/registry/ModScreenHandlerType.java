@@ -2,9 +2,9 @@ package anner.ironchest.registry;
 
 import anner.ironchest.IronChestsCommon;
 import anner.ironchest.blocks.ChestTypes;
-import anner.ironchest.platform.Platforms;
 import anner.ironchest.screenhandlers.ChestScreenHandler;
-import anner.ironchest.screenhandlers.SizedContainerMenu;
+import anner.ironcore.SizedContainerMenu;
+import anner.ironcore.platform.Platforms;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.flag.FeatureFlags;

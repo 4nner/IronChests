@@ -1,4 +1,4 @@
-package anner.ironchest.platform;
+package anner.ironcore.platform;
 
 import java.util.List;
 import java.util.function.BiFunction;

@@ -1,6 +1,7 @@
 package anner.ironchest.items;
 
 import anner.ironchest.blocks.ChestTypes;
+import anner.ironcore.UpgradeStrategy;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ChestBlock;

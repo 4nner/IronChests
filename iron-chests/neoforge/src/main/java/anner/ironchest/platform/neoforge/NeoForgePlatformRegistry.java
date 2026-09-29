@@ -1,7 +1,7 @@
 package anner.ironchest.platform.neoforge;
 
 import anner.ironchest.IronChestsCommon;
-import anner.ironchest.platform.PlatformRegistry;
+import anner.ironcore.platform.PlatformRegistry;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;

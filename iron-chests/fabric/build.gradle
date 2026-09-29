@@ -29,6 +29,8 @@ dependencies {
 
   implementation(project(":iron-chests:common"))
   include(project(":iron-chests:common"))
+  implementation(project(":iron-core:common"))
+  include(project(":iron-core:common"))
 }
 
 sourceSets {
