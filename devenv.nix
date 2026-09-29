@@ -73,6 +73,11 @@ in
   };
 
   enterShell = ''
+    # Stable JDK path for VSCode extensions (GUI launches don't inherit
+    # devenv env, and the Gradle extension won't expand env vars in paths).
+    # Settings point at this symlink, so no store hash is ever hardcoded.
+    mkdir -p "$HOME/.local/share"
+    ln -sfn "$JAVA_HOME" "$HOME/.local/share/devenv-jdk"
     echo "IronChests devenv: $(java -version 2>&1 | head -1)"
     echo "Build with './gradlew build' (or 'build'), test with './gradlew check' (or 'check')."
     echo "Run the game with './gradlew :iron-chests:fabric:runClient' (or 'run-client')."
