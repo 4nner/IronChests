@@ -1,4 +1,4 @@
-package anner.ironchest.platform.fabric;
+package anner.ironcore.platform.fabric;
 
 import anner.ironcore.platform.PlatformRegistry;
 import java.util.List;

@@ -3,6 +3,12 @@ plugins {
   id 'maven-publish'
 }
 
+// The ironcore mod mapping in neoForge.mods below reads other projects'
+// source sets; force them to evaluate first (settings order alone,
+// plus Loom's eager handling of `include`, doesn't guarantee it).
+evaluationDependsOn(":iron-core:neoforge")
+evaluationDependsOn(":iron-core:common")
+
 version = project.mod_version
 group = project.maven_group
 
@@ -21,6 +27,11 @@ neoForge {
       sourceSet sourceSets.main
       // Common classes load as part of this mod in dev runs.
       sourceSet project(":iron-chests:common").sourceSets.main
+    }
+    // Core ships as a separate mod; its content must be mapped here too:
+    // runs only load mods declared in the run-owning project.
+    ironcore {
+      sourceSet project(":iron-core:neoforge").sourceSets.main
       sourceSet project(":iron-core:common").sourceSets.main
     }
   }
@@ -48,8 +59,10 @@ dependencies {
   // implementation: compile against common; jarJar: nest common into the mod jar.
   implementation(project(":iron-chests:common"))
   jarJar(project(":iron-chests:common"))
+  // Core ships as its own mod: compile against its common classes, depend on
+  // its loader artifact for dev runs, nest nothing.
   implementation(project(":iron-core:common"))
-  jarJar(project(":iron-core:common"))
+  implementation(project(":iron-core:neoforge"))
 }
 
 sourceSets {

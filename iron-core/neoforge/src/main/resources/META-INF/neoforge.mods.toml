@@ -1,0 +1,24 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "gpl-3.0"
+
+[[mods]]
+modId = "ironcore"
+version = "${mod_version}"
+displayName = "Iron Core"
+authors = "anner"
+description = "Shared library for Iron mods"
+
+[[dependencies.ironcore]]
+modId = "neoforge"
+type = "required"
+versionRange = "[26.2.0.88,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.ironcore]]
+modId = "minecraft"
+type = "required"
+versionRange = "[26.2,26.3)"
+ordering = "NONE"
+side = "BOTH"
