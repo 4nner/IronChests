@@ -1,3 +1,21 @@
 // Aggregator only. Build logic lives in the module build files:
 // - iron-chests/common: loader-agnostic code, no loader dependencies.
 // - iron-chests/fabric: Fabric entrypoint, platform glue, resources.
+// - iron-chests/neoforge: NeoForge entrypoint, platform glue, resources.
+// - iron-core/common: shared library code for all Iron mods.
+
+// Single definition of the Java toolchain: every module compiles with
+// `release = <java>` (which implies source/target compatibility) and ships
+// a sources jar. Loader-specific bits (e.g. NeoForge's toolchain block)
+// stay in the module files.
+subprojects {
+  plugins.withId("java") {
+    java {
+      // Loom attaches the sources jar to its RemapSourcesJar task when present.
+      withSourcesJar()
+    }
+    tasks.withType(JavaCompile).configureEach {
+      it.options.release = libs.versions.java.get().toInteger()
+    }
+  }
+}
