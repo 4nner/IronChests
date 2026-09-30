@@ -29,24 +29,9 @@ dependencies {
   jarJar(project(":iron-core:common"))
 }
 
-processResources {
-  def version = project.version
-  inputs.property "version", version
-
-  filesMatching("META-INF/neoforge.mods.toml") {
-    expand "mod_version": version
-  }
-}
-
 java {
   toolchain {
     languageVersion = JavaLanguageVersion.of(libs.versions.java.get().toInteger())
-  }
-}
-
-jar {
-  from(rootProject.file("LICENSE")) {
-    rename { "LICENSE_IronCore-neoforge" }
   }
 }
 
