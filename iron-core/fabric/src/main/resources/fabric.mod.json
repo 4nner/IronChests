@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "ironcore",
   "version": "${version}",
-  "name": "Iron Core",
+  "name": "Iron Core Utilities",
   "description": "Shared library for Iron mods",
   "authors": [
     "anner",
