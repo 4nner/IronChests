@@ -5,7 +5,7 @@ license = "gpl-3.0"
 [[mods]]
 modId = "ironcore"
 version = "${mod_version}"
-displayName = "Iron Core"
+displayName = "Iron Core Utilities"
 authors = "anner, gathertocraft"
 displayURL = "https://www.gathertocraft.com"
 description = "Shared library for Iron mods"
