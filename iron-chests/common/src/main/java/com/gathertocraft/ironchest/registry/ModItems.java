@@ -2,8 +2,8 @@ package com.gathertocraft.ironchest.registry;
 
 import com.gathertocraft.ironchest.IronChestsCommon;
 import com.gathertocraft.ironchest.blocks.ChestTypes;
-import com.gathertocraft.ironchest.items.UpgradeItem;
 import com.gathertocraft.ironchest.items.UpgradeTypes;
+import com.gathertocraft.ironcore.UpgradeItem;
 import com.gathertocraft.ironcore.platform.Platforms;
 import java.util.LinkedHashMap;
 import java.util.List;

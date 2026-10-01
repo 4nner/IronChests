@@ -1,7 +1,5 @@
-package com.gathertocraft.ironchest.items;
+package com.gathertocraft.ironcore;
 
-import com.gathertocraft.ironcore.ResizingContainer;
-import com.gathertocraft.ironcore.UpgradeStrategy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
@@ -14,11 +12,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.TagValueInput;
 import net.minecraft.world.level.storage.ValueInput;
 
+/**
+ * Shift-right-click an {@link UpgradableContainer} to transform it in place.
+ *
+ * <p>The strategy decides what the item applies to and what comes out; the container keeps its
+ * inventory across the swap.
+ */
 public class UpgradeItem extends Item {
   private final UpgradeStrategy strategy;
 
@@ -51,16 +54,16 @@ public class UpgradeItem extends Item {
     }
 
     BlockEntity blockEntity = level.getBlockEntity(blockPos);
-    if (!(blockEntity instanceof ChestBlockEntity chest)) {
+    if (!(blockEntity instanceof UpgradableContainer container)) {
       return InteractionResult.PASS;
     }
 
-    if (ChestBlockEntity.getOpenCount(level, blockPos) > 0 || !chest.stillValid(player)) {
+    if (!container.isAvailableForUpgrade(player)) {
       return InteractionResult.PASS;
     }
 
     BlockState oldState = state;
-    CompoundTag oldChestTag = chest.saveWithoutMetadata(level.registryAccess());
+    CompoundTag oldChestTag = blockEntity.saveWithoutMetadata(level.registryAccess());
 
     level.removeBlockEntity(blockPos);
     level.removeBlock(blockPos, false);
