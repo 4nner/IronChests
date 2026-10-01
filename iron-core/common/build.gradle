@@ -2,7 +2,7 @@ plugins {
   alias(libs.plugins.fabric.loom)
 }
 
-version = project.mod_version
+version = project.ironcore_version
 group = project.core_maven_group
 
 base {

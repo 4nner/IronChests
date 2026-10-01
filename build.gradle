@@ -31,10 +31,12 @@ subprojects {
     project.afterEvaluate {
       tasks.named("processResources").configure {
         def version = project.version
+        def ironcoreVersion = project.property("ironcore_version")
         inputs.property "version", version
+        inputs.property "ironcore_version", ironcoreVersion
 
         filesMatching("fabric.mod.json") {
-          expand "version": version
+          expand "version": version, "ironcore_version": ironcoreVersion
         }
       }
     }
@@ -43,10 +45,12 @@ subprojects {
     project.afterEvaluate {
       tasks.named("processResources").configure {
         def version = project.version
+        def ironcoreVersion = project.property("ironcore_version")
         inputs.property "version", version
+        inputs.property "ironcore_version", ironcoreVersion
 
         filesMatching("META-INF/neoforge.mods.toml") {
-          expand "mod_version": version
+          expand "ironchest_version": version, "ironcore_version": ironcoreVersion
         }
       }
     }

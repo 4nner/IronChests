@@ -4,7 +4,7 @@ license = "gpl-3.0"
 
 [[mods]]
 modId = "ironchest"
-version = "${mod_version}"
+version = "${ironchest_version}"
 displayName = "Iron Chests"
 authors = "anner, gathertocraft"
 displayURL = "https://www.gathertocraft.com"
@@ -27,7 +27,7 @@ side = "BOTH"
 [[dependencies.ironchest]]
 modId = "ironcore"
 type = "required"
-versionRange = "[${mod_version},)"
+versionRange = "[${ironcore_version},)"
 ordering = "AFTER"
 side = "BOTH"
 

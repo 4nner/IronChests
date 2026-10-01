@@ -9,7 +9,7 @@ plugins {
 evaluationDependsOn(":iron-core:neoforge")
 evaluationDependsOn(":iron-core:common")
 
-version = project.mod_version
+version = project.ironchest_version
 group = project.maven_group
 
 base {
