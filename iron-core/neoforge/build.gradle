@@ -4,7 +4,7 @@ plugins {
 }
 
 version = project.ironcore_version
-group = project.core_maven_group
+group = project.ironcore_maven_group
 
 base {
   archivesName = "IronCore-neoforge"

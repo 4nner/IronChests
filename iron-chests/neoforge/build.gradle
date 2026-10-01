@@ -10,7 +10,7 @@ evaluationDependsOn(":iron-core:neoforge")
 evaluationDependsOn(":iron-core:common")
 
 version = project.ironchest_version
-group = project.maven_group
+group = project.ironchest_maven_group
 
 base {
   archivesName = "IronChests-neoforge"
