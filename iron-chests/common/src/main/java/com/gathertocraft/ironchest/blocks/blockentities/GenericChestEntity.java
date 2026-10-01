@@ -4,6 +4,7 @@ import com.gathertocraft.ironchest.screenhandlers.ChestScreenHandler;
 import com.gathertocraft.ironcore.InventorySanitizer;
 import com.gathertocraft.ironcore.ResizingContainer;
 import com.gathertocraft.ironcore.TierSpec;
+import com.gathertocraft.ironcore.UpgradableContainer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -12,6 +13,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +24,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
-public class GenericChestEntity extends ChestBlockEntity implements ResizingContainer {
+public class GenericChestEntity extends ChestBlockEntity
+    implements ResizingContainer, UpgradableContainer {
   private final TierSpec tier;
   private final Supplier<MenuType<ChestScreenHandler>> menuType;
   private final List<ItemStack> pendingOverflow = new ArrayList<>();
@@ -40,6 +43,20 @@ public class GenericChestEntity extends ChestBlockEntity implements ResizingCont
     this.tier = tier;
     this.menuType = menuType;
     setItems(NonNullList.withSize(tier.size(), ItemStack.EMPTY));
+  }
+
+  @Override
+  public TierSpec tier() {
+    return this.tier;
+  }
+
+  @Override
+  public boolean isAvailableForUpgrade(Player player) {
+    Level level = this.getLevel();
+    if (level == null) {
+      return false;
+    }
+    return ChestBlockEntity.getOpenCount(level, this.getBlockPos()) == 0 && this.stillValid(player);
   }
 
   @Override
