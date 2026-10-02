@@ -28,6 +28,15 @@ dependencies {
   include(project(":iron-core:common"))
 }
 
+sourceSets {
+  // Shared mod assets and data; loader-specific files stay in src/main/resources.
+  main {
+    resources {
+      srcDir("../resources")
+    }
+  }
+}
+
 // configure the maven publication
 publishing {
   publications {

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "DSD",
+    "GGG"
+  ],
+  "key": {
+    "D": "minecraft:diamond",
+    "S": "minecraft:gold_ingot",
+    "G": "minecraft:glass"
+  },
+  "result": {
+    "id": "ironcore:diamond_upgrade",
+    "count": 1
+  }
+}

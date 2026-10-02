@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OOO",
+    "ONO",
+    "OOO"
+  ],
+  "key": {
+    "O": "minecraft:obsidian",
+    "N": "minecraft:netherite_ingot"
+  },
+  "result": {
+    "id": "ironcore:netherite_upgrade",
+    "count": 1
+  }
+}

@@ -2,6 +2,9 @@
   "schemaVersion": 1,
   "id": "ironcore",
   "version": "${version}",
+  "entrypoints": {
+    "main": ["com.gathertocraft.ironcore.IronCore"]
+  },
   "name": "Iron Core Utilities",
   "description": "Shared library for Iron mods",
   "authors": [

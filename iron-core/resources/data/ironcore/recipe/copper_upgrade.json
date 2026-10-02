@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CPC",
+    "CCC"
+  ],
+  "key": {
+    "C": "minecraft:copper_ingot",
+    "P": "#minecraft:planks"
+  },
+  "result": {
+    "id": "ironcore:copper_upgrade",
+    "count": 1
+  }
+}

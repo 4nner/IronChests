@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OOO",
+    "OlO",
+    "OOO"
+  ],
+  "key": {
+    "O": "minecraft:obsidian",
+    "l": "minecraft:lapis_lazuli"
+  },
+  "result": {
+    "id": "ironcore:obsidian_upgrade",
+    "count": 1
+  }
+}

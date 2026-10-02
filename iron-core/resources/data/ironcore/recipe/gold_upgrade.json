@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "MSM",
+    "MMM"
+  ],
+  "key": {
+    "M": "minecraft:gold_ingot",
+    "S": "minecraft:iron_ingot"
+  },
+  "result": {
+    "id": "ironcore:gold_upgrade",
+    "count": 1
+  }
+}

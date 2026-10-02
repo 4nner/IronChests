@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iGi",
+    "GUG",
+    "iGi"
+  ],
+  "key": {
+    "i": "minecraft:iron_ingot",
+    "U": "minecraft:copper_ingot",
+    "G": "minecraft:glass"
+  },
+  "result": {
+    "id": "ironcore:iron_upgrade",
+    "count": 1
+  }
+}
