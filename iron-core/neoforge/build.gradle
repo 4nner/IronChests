@@ -29,6 +29,15 @@ dependencies {
   jarJar(project(":iron-core:common"))
 }
 
+sourceSets {
+  // Shared mod assets and data; loader-specific files stay in src/main/resources.
+  main {
+    resources {
+      srcDir("../resources")
+    }
+  }
+}
+
 java {
   toolchain {
     languageVersion = JavaLanguageVersion.of(libs.versions.java.get().toInteger())

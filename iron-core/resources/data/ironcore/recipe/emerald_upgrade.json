@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GEG",
+    "ESE",
+    "GEG"
+  ],
+  "key": {
+    "E": "minecraft:emerald",
+    "S": "minecraft:gold_ingot",
+    "G": "minecraft:glass"
+  },
+  "result": {
+    "id": "ironcore:emerald_upgrade",
+    "count": 1
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ggg",
+    "lgl",
+    "ggg"
+  ],
+  "key": {
+    "g": "minecraft:glass",
+    "l": "minecraft:lapis_lazuli"
+  },
+  "result": {
+    "id": "ironcore:crystal_upgrade",
+    "count": 1
+  }
+}
