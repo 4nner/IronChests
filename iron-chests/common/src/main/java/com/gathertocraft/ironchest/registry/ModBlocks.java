@@ -26,7 +26,7 @@ public class ModBlocks {
   }
 
   private static Block create(ChestTypes type) {
-    return new GenericChestBlock(blockProperties(type), type);
+    return ModUpgradeBindings.bindChest(type, new GenericChestBlock(blockProperties(type), type));
   }
 
   private static BlockBehaviour.Properties blockProperties(ChestTypes type) {

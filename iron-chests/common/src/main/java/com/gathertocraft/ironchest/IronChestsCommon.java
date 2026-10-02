@@ -5,6 +5,7 @@ import com.gathertocraft.ironchest.registry.ModBlocks;
 import com.gathertocraft.ironchest.registry.ModItemGroup;
 import com.gathertocraft.ironchest.registry.ModItems;
 import com.gathertocraft.ironchest.registry.ModScreenHandlerType;
+import com.gathertocraft.ironchest.registry.ModUpgradeBindings;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -20,6 +21,7 @@ public final class IronChestsCommon {
 
   public static void init() {
     ModBlocks.registerBlocks();
+    ModUpgradeBindings.bindVanilla();
     ModItems.registerItems();
     ModItemGroup.registerItemGroup();
     ModItems.addTabItems(TAB);
