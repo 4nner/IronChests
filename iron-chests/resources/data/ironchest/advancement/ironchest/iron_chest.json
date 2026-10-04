@@ -1,0 +1,32 @@
+{
+  "parent": "ironchest:ironchest/root",
+  "criteria": {
+    "has_iron_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironchest:iron_chest"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ironchest.iron_chest.description"
+    },
+    "frame": "task",
+    "icon": {
+      "id": "ironchest:iron_chest"
+    },
+    "title": {
+      "translate": "advancements.ironchest.iron_chest.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_iron_chest"
+    ]
+  ]
+}

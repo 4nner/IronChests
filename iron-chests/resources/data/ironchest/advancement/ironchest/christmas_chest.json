@@ -1,0 +1,32 @@
+{
+  "parent": "ironchest:ironchest/root",
+  "criteria": {
+    "has_christmas_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironchest:christmas_chest"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ironchest.christmas_chest.description"
+    },
+    "frame": "task",
+    "icon": {
+      "id": "ironchest:christmas_chest"
+    },
+    "title": {
+      "translate": "advancements.ironchest.christmas_chest.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_christmas_chest"
+    ]
+  ]
+}

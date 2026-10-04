@@ -1,0 +1,33 @@
+{
+  "criteria": {
+    "has_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:chest"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:gui/advancements/backgrounds/stone",
+    "description": {
+      "translate": "advancements.ironchest.root.description"
+    },
+    "icon": {
+      "id": "minecraft:chest"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.ironchest.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_chest"
+    ]
+  ]
+}
