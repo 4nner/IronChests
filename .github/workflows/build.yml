@@ -62,3 +62,13 @@ jobs:
         with:
           name: Artifacts-NeoForge
           path: iron-chests/neoforge/build/libs/
+      - name: capture core fabric artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: Artifacts-Core-Fabric
+          path: iron-core/fabric/build/libs/
+      - name: capture core neoforge artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: Artifacts-Core-NeoForge
+          path: iron-core/neoforge/build/libs/
