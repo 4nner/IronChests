@@ -1,0 +1,32 @@
+{
+  "parent": "ironcore:ironcore/emerald_upgrade",
+  "criteria": {
+    "has_obsidian_upgrade": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironcore:obsidian_upgrade"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ironcore.obsidian_upgrade.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "ironcore:obsidian_upgrade"
+    },
+    "title": {
+      "translate": "advancements.ironcore.obsidian_upgrade.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_obsidian_upgrade"
+    ]
+  ]
+}

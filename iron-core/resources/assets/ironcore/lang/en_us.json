@@ -23,5 +23,21 @@
   "item.ironcore.obsidian_upgrade.tooltip.size": "108 slots (12x9) -> 108 slots (12x9)",
   "item.ironcore.netherite_upgrade": "Netherite Upgrade",
   "item.ironcore.netherite_upgrade.tooltip": "Upgrades Diamond/Emerald/Obsidian containers to Netherite",
-  "item.ironcore.netherite_upgrade.tooltip.size": "108 slots (12x9) -> 126 slots (14x9)"
+  "item.ironcore.netherite_upgrade.tooltip.size": "108 slots (12x9) -> 126 slots (14x9)",
+  "advancements.ironcore.root.title": "Storage Upgrade",
+  "advancements.ironcore.root.description": "Obtain a Copper Upgrade",
+  "advancements.ironcore.iron_upgrade.title": "Iron Infusion",
+  "advancements.ironcore.iron_upgrade.description": "Obtain an Iron Upgrade",
+  "advancements.ironcore.gold_upgrade.title": "Golden Growth",
+  "advancements.ironcore.gold_upgrade.description": "Obtain a Gold Upgrade",
+  "advancements.ironcore.diamond_upgrade.title": "Diamond Division",
+  "advancements.ironcore.diamond_upgrade.description": "Obtain a Diamond Upgrade",
+  "advancements.ironcore.emerald_upgrade.title": "Emerald Expansion",
+  "advancements.ironcore.emerald_upgrade.description": "Obtain an Emerald Upgrade",
+  "advancements.ironcore.crystal_upgrade.title": "Crystal Clarity",
+  "advancements.ironcore.crystal_upgrade.description": "Obtain a Crystal Upgrade",
+  "advancements.ironcore.obsidian_upgrade.title": "Obsidian Overhaul",
+  "advancements.ironcore.obsidian_upgrade.description": "Obtain an Obsidian Upgrade",
+  "advancements.ironcore.netherite_upgrade.title": "Netherite Apex",
+  "advancements.ironcore.netherite_upgrade.description": "Obtain a Netherite Upgrade"
 }

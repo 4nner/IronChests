@@ -1,0 +1,32 @@
+{
+  "parent": "ironcore:ironcore/iron_upgrade",
+  "criteria": {
+    "has_gold_upgrade": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironcore:gold_upgrade"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ironcore.gold_upgrade.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "ironcore:gold_upgrade"
+    },
+    "title": {
+      "translate": "advancements.ironcore.gold_upgrade.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_gold_upgrade"
+    ]
+  ]
+}

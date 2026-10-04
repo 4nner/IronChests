@@ -1,0 +1,33 @@
+{
+  "criteria": {
+    "has_copper_upgrade": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironcore:copper_upgrade"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:gui/advancements/backgrounds/adventure",
+    "description": {
+      "translate": "advancements.ironcore.root.description"
+    },
+    "icon": {
+      "id": "ironcore:copper_upgrade"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.ironcore.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_copper_upgrade"
+    ]
+  ]
+}

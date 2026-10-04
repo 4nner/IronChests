@@ -1,0 +1,35 @@
+{
+  "parent": "ironcore:ironcore/obsidian_upgrade",
+  "criteria": {
+    "has_netherite_upgrade": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironcore:netherite_upgrade"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ironcore.netherite_upgrade.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "ironcore:netherite_upgrade"
+    },
+    "title": {
+      "translate": "advancements.ironcore.netherite_upgrade.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_netherite_upgrade"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  }
+}
