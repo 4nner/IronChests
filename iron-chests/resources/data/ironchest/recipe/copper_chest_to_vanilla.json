@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "ironchest:copper_chest"
+  ],
+  "result": {
+    "id": "minecraft:copper_chest",
+    "count": 1
+  }
+}
