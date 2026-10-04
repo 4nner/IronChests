@@ -7,7 +7,7 @@
   ],
   "key": {
     "M": "minecraft:iron_ingot",
-    "S": "ironchest:copper_chest",
+    "S": "#ironchest:copper_chests",
     "G": "minecraft:glass"
   },
   "result": {
