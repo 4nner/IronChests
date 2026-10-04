@@ -7,7 +7,7 @@
   ],
   "key": {
     "M": "minecraft:obsidian",
-    "S": "ironchest:diamond_chest"
+    "S": "#ironchest:diamond_emerald_chests"
   },
   "result": {
     "id": "ironchest:obsidian_chest",
