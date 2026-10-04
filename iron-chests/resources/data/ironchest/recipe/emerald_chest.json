@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "GeG",
-    "GCG",
-    "GGG"
+    "GEG",
+    "ECE",
+    "GEG"
   ],
   "key": {
-    "e": "minecraft:emerald",
+    "E": "minecraft:emerald",
     "C": "ironchest:gold_chest",
     "G": "minecraft:glass"
   },
