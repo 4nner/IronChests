@@ -19,7 +19,6 @@ public final class ModUpgradeBindings {
 
   public static void bindVanilla() {
     UpgradeBindings.bindTier(Blocks.CHEST, MaterialTier.WOOD);
-    UpgradeBindings.bindTier(Blocks.TRAPPED_CHEST, MaterialTier.WOOD);
   }
 
   public static Block bindChest(ChestTypes type, Block block) {

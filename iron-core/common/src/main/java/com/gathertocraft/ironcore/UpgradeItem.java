@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.TagValueInput;
 import net.minecraft.world.level.storage.ValueInput;
@@ -54,11 +55,16 @@ public class UpgradeItem extends Item {
     }
 
     BlockEntity blockEntity = level.getBlockEntity(blockPos);
-    if (!(blockEntity instanceof UpgradableContainer container)) {
-      return InteractionResult.PASS;
-    }
-
-    if (!container.isAvailableForUpgrade(player)) {
+    if (blockEntity instanceof UpgradableContainer container) {
+      if (!container.isAvailableForUpgrade(player)) {
+        return InteractionResult.PASS;
+      }
+    } else if (blockEntity instanceof ChestBlockEntity chest) {
+      // Vanilla Wood Chest (not trapped variant)
+      if (ChestBlockEntity.getOpenCount(level, blockPos) > 0 || !chest.stillValid(player)) {
+        return InteractionResult.PASS;
+      }
+    } else {
       return InteractionResult.PASS;
     }
 
