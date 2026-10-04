@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_copper_ingot": {
+    "has_vanilla_copper_chest": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:copper_ingot"
+            "tag": "minecraft:copper_chests"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ironchest:copper_chest"
+        "recipe": "ironchest:copper_chest_from_vanilla"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_copper_ingot"
+      "has_vanilla_copper_chest"
     ]
   ],
   "rewards": {
     "recipes": [
-      "ironchest:copper_chest"
+      "ironchest:copper_chest_from_vanilla"
     ]
   }
 }
