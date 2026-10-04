@@ -9,5 +9,8 @@
   "block.ironchest.obsidian_chest": "Obsidian Chest",
   "block.ironchest.netherite_chest": "Netherite Chest",
   "block.ironchest.christmas_chest": "Christmas Chest",
+  "tag.item.ironchest.copper_chests": "Copper Chests",
+  "tag.item.ironchest.diamond_emerald_chests": "Diamond / Emerald Chests",
+  "tag.item.ironchest.diamond_emerald_obsidian_chests": "Diamond / Emerald / Obsidian Chests",
   "itemGroup.ironchest.general": "Iron Chests"
 }
