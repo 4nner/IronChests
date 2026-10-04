@@ -7,7 +7,7 @@
   ],
   "key": {
     "G": "minecraft:glass",
-    "C": "ironchest:diamond_chest"
+    "C": "#ironchest:diamond_emerald_chests"
   },
   "result": {
     "id": "ironchest:crystal_chest",
