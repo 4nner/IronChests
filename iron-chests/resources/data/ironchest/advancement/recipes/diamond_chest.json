@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_diamond": {
+    "has_gold_chest": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:diamond"
+            "items": "ironchest:gold_chest"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_diamond"
+      "has_gold_chest"
     ]
   ],
   "rewards": {
