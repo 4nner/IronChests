@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_vanilla_copper_chest": {
+    "has_chest": {
       "conditions": {
         "items": [
           {
-            "tag": "minecraft:copper_chests"
+            "items": "minecraft:chest"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_vanilla_copper_chest"
+      "has_chest"
     ]
   ],
   "rewards": {

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_sweet_berries": {
+    "has_chest": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:sweet_berries"
+            "items": "minecraft:chest"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_sweet_berries"
+      "has_chest"
     ]
   ],
   "rewards": {
