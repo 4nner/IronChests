@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smithing_transform",
   "template": "minecraft:netherite_upgrade_smithing_template",
-  "base": "ironchest:diamond_chest",
+  "base": "#ironchest:diamond_emerald_obsidian_chests",
   "addition": "minecraft:netherite_ingot",
   "result": {
     "id": "ironchest:netherite_chest",
