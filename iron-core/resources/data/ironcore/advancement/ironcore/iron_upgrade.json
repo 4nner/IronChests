@@ -1,0 +1,32 @@
+{
+  "parent": "ironcore:ironcore/root",
+  "criteria": {
+    "has_iron_upgrade": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironcore:iron_upgrade"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ironcore.iron_upgrade.description"
+    },
+    "frame": "task",
+    "icon": {
+      "id": "ironcore:iron_upgrade"
+    },
+    "title": {
+      "translate": "advancements.ironcore.iron_upgrade.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_iron_upgrade"
+    ]
+  ]
+}

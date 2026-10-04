@@ -1,0 +1,32 @@
+{
+  "parent": "ironcore:ironcore/diamond_upgrade",
+  "criteria": {
+    "has_crystal_upgrade": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironcore:crystal_upgrade"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ironcore.crystal_upgrade.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "ironcore:crystal_upgrade"
+    },
+    "title": {
+      "translate": "advancements.ironcore.crystal_upgrade.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_crystal_upgrade"
+    ]
+  ]
+}
