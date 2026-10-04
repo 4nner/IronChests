@@ -1,0 +1,32 @@
+{
+  "parent": "ironchest:ironchest/iron_chest",
+  "criteria": {
+    "has_gold_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironchest:gold_chest"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ironchest.gold_chest.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "ironchest:gold_chest"
+    },
+    "title": {
+      "translate": "advancements.ironchest.gold_chest.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_gold_chest"
+    ]
+  ]
+}

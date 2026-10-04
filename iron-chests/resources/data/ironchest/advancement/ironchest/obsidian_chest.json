@@ -1,0 +1,32 @@
+{
+  "parent": "ironchest:ironchest/emerald_chest",
+  "criteria": {
+    "has_diamond_emerald_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#ironchest:diamond_emerald_chests"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ironchest.obsidian_chest.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "ironchest:obsidian_chest"
+    },
+    "title": {
+      "translate": "advancements.ironchest.obsidian_chest.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_diamond_emerald_chest"
+    ]
+  ]
+}

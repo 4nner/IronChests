@@ -1,0 +1,32 @@
+{
+  "parent": "ironchest:ironchest/root",
+  "criteria": {
+    "has_copper_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironchest:copper_chest"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ironchest.copper_chest.description"
+    },
+    "frame": "task",
+    "icon": {
+      "id": "ironchest:copper_chest"
+    },
+    "title": {
+      "translate": "advancements.ironchest.copper_chest.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_copper_chest"
+    ]
+  ]
+}

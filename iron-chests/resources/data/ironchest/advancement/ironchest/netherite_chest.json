@@ -1,0 +1,35 @@
+{
+  "parent": "ironchest:ironchest/obsidian_chest",
+  "criteria": {
+    "has_diamond_emerald_obsidian_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#ironchest:diamond_emerald_obsidian_chests"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ironchest.netherite_chest.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "ironchest:netherite_chest"
+    },
+    "title": {
+      "translate": "advancements.ironchest.netherite_chest.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_diamond_emerald_obsidian_chest"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  }
+}
