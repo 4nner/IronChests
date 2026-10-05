@@ -5,6 +5,9 @@ import com.gathertocraft.ironchest.blocks.blockentities.CrystalChestEntity;
 import com.gathertocraft.ironchest.blocks.blockentities.GenericChestEntity;
 import com.gathertocraft.ironchest.screenhandlers.ChestScreenHandler;
 import com.gathertocraft.ironcore.TierSpec;
+import java.util.EnumMap;
+import java.util.Locale;
+import java.util.Map;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
@@ -72,6 +75,8 @@ public enum ChestTypes implements TierSpec {
   public final String registryId;
   public final Identifier texture;
 
+  private static final Map<ChestTypes, Integer> CONFIGURED_ROWS = new EnumMap<>(ChestTypes.class);
+
   private @Nullable Supplier<Block> block;
   private @Nullable Supplier<? extends BlockEntityType<? extends ChestBlockEntity>> blockEntityType;
   private @Nullable Supplier<MenuType<ChestScreenHandler>> menuType;
@@ -85,12 +90,38 @@ public enum ChestTypes implements TierSpec {
 
   @Override
   public int size() {
-    return this.size;
+    return rowCount() * this.rowLength;
   }
 
   @Override
   public int rowLength() {
     return this.rowLength;
+  }
+
+  @Override
+  public int rowCount() {
+    return CONFIGURED_ROWS.getOrDefault(this, defaultRowCount());
+  }
+
+  /** Rows baked into the enum; the config defaults to these. */
+  public int defaultRowCount() {
+    return this.size / this.rowLength;
+  }
+
+  /** Lowercase tier name used as the key in ironchest.json. */
+  public String configKey() {
+    return name().toLowerCase(Locale.ROOT);
+  }
+
+  /** Applies row counts from the config; missing keys leave defaults in place. */
+  public static void setConfiguredRows(Map<String, Integer> rowsByKey) {
+    CONFIGURED_ROWS.clear();
+    for (ChestTypes type : PLAYABLE) {
+      Integer rows = rowsByKey.get(type.configKey());
+      if (rows != null) {
+        CONFIGURED_ROWS.put(type, rows);
+      }
+    }
   }
 
   public void bindBlock(Supplier<Block> block) {

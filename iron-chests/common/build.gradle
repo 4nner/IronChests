@@ -17,4 +17,11 @@ dependencies {
   minecraft libs.minecraft
 
   implementation(project(":iron-core:common"))
+
+  testImplementation libs.junit.jupiter
+  testRuntimeOnly libs.junit.platform.launcher
+}
+
+tasks.withType(Test).configureEach {
+  useJUnitPlatform()
 }
