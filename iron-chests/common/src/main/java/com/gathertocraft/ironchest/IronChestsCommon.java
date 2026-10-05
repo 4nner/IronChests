@@ -8,7 +8,7 @@ import com.gathertocraft.ironchest.registry.ModItemGroup;
 import com.gathertocraft.ironchest.registry.ModItems;
 import com.gathertocraft.ironchest.registry.ModScreenHandlerType;
 import com.gathertocraft.ironchest.registry.ModUpgradeBindings;
-import com.gathertocraft.ironcore.config.IntConfig;
+import com.gathertocraft.ironcore.config.JsonConfig;
 import com.mojang.logging.LogUtils;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -29,7 +29,7 @@ public final class IronChestsCommon {
 
   public static void init(Path configDir) {
     try {
-      IntConfig.LoadResult rows = ChestRows.load(configDir);
+      JsonConfig.LoadResult rows = ChestRows.load(configDir);
       for (String warning : rows.warnings()) {
         LOGGER.warn(warning);
       }

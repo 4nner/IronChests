@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.gathertocraft.ironchest.blocks.ChestTypes;
-import com.gathertocraft.ironcore.config.IntConfig;
+import com.gathertocraft.ironcore.config.JsonConfig;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -40,10 +40,10 @@ class ChestRowsTest {
 
   @Test
   void optionsCoverPlayableTiersInOrder() {
-    List<IntConfig.Option> options = ChestRows.options();
+    List<JsonConfig.Option> options = ChestRows.options();
 
-    assertEquals(EXPECTED_KEYS, options.stream().map(IntConfig.Option::key).toList());
-    for (IntConfig.Option option : options) {
+    assertEquals(EXPECTED_KEYS, options.stream().map(JsonConfig.Option::key).toList());
+    for (JsonConfig.Option option : options) {
       assertEquals(ChestRows.MIN_ROWS, option.minValue());
       assertEquals(ChestRows.MAX_ROWS, option.maxValue());
     }
@@ -51,7 +51,7 @@ class ChestRowsTest {
 
   @Test
   void defaultsMatchCurrentRows() {
-    for (IntConfig.Option option : ChestRows.options()) {
+    for (JsonConfig.Option option : ChestRows.options()) {
       assertEquals(EXPECTED_ROWS.get(option.key()), option.defaultValue());
     }
   }
@@ -92,7 +92,7 @@ class ChestRowsTest {
         """,
         StandardCharsets.UTF_8);
 
-    IntConfig.LoadResult result = ChestRows.load(dir);
+    JsonConfig.LoadResult result = ChestRows.load(dir);
 
     assertEquals(2, result.values().get("copper"));
     assertTrue(result.warnings().isEmpty());

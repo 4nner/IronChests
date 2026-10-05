@@ -1,7 +1,7 @@
 package com.gathertocraft.ironchest.config;
 
 import com.gathertocraft.ironchest.blocks.ChestTypes;
-import com.gathertocraft.ironcore.config.IntConfig;
+import com.gathertocraft.ironcore.config.JsonConfig;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -24,12 +24,12 @@ public final class ChestRows {
       """;
 
   /** One option per playable tier, in tier order. Defaults match the built-in row counts. */
-  public static List<IntConfig.Option> options() {
-    List<IntConfig.Option> options = new ArrayList<>();
+  public static List<JsonConfig.Option> options() {
+    List<JsonConfig.Option> options = new ArrayList<>();
     for (ChestTypes type : ChestTypes.PLAYABLE) {
       String name = type.name().charAt(0) + type.name().substring(1).toLowerCase(Locale.ROOT);
       options.add(
-          new IntConfig.Option(
+          new JsonConfig.Option(
               type.configKey(),
               type.defaultRowCount(),
               MIN_ROWS,
@@ -39,7 +39,7 @@ public final class ChestRows {
     return List.copyOf(options);
   }
 
-  public static IntConfig.LoadResult load(Path configDir) throws IOException {
-    return IntConfig.loadOrCreate(configDir.resolve(FILE_NAME), HEADER, options());
+  public static JsonConfig.LoadResult load(Path configDir) throws IOException {
+    return JsonConfig.loadOrCreate(configDir.resolve(FILE_NAME), HEADER, options());
   }
 }
