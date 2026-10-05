@@ -15,6 +15,7 @@ public final class ChestRows {
   public static final String FILE_NAME = "ironchest.json";
   public static final int MIN_ROWS = 1;
   public static final int MAX_ROWS = 12;
+  public static final String OPEN_UNDER_SOLID_BLOCKS = "openUnderSolidBlocks";
 
   private static final String HEADER =
       """
@@ -39,7 +40,14 @@ public final class ChestRows {
     return List.copyOf(options);
   }
 
+  /** Boolean flags in the same file; currently only openUnderSolidBlocks. */
+  public static List<JsonConfig.BoolOption> flags() {
+    return List.of(
+        new JsonConfig.BoolOption(
+            OPEN_UNDER_SOLID_BLOCKS, false, "Open chests placed under solid blocks (true/false)"));
+  }
+
   public static JsonConfig.LoadResult load(Path configDir) throws IOException {
-    return JsonConfig.loadOrCreate(configDir.resolve(FILE_NAME), HEADER, options());
+    return JsonConfig.loadOrCreate(configDir.resolve(FILE_NAME), HEADER, options(), flags());
   }
 }

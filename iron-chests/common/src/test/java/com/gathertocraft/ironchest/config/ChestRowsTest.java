@@ -1,6 +1,7 @@
 package com.gathertocraft.ironchest.config;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.gathertocraft.ironchest.blocks.ChestTypes;
@@ -81,13 +82,23 @@ class ChestRowsTest {
   }
 
   @Test
+  void flagsDeclareOpenUnderSolidBlocksDefaultFalse() {
+    List<JsonConfig.BoolOption> flags = ChestRows.flags();
+
+    assertEquals(1, flags.size());
+    assertEquals(ChestRows.OPEN_UNDER_SOLID_BLOCKS, flags.get(0).key());
+    assertFalse(flags.get(0).defaultValue());
+  }
+
+  @Test
   void loadReadsRowsFromDisk(@TempDir Path dir) throws Exception {
     Files.writeString(
         dir.resolve(ChestRows.FILE_NAME),
         """
         {
           "copper": 2, "iron": 6, "gold": 9, "diamond": 9, "emerald": 9,
-          "crystal": 9, "obsidian": 9, "netherite": 9, "christmas": 3
+          "crystal": 9, "obsidian": 9, "netherite": 9, "christmas": 3,
+          "openUnderSolidBlocks": true
         }
         """,
         StandardCharsets.UTF_8);
@@ -95,6 +106,26 @@ class ChestRowsTest {
     JsonConfig.LoadResult result = ChestRows.load(dir);
 
     assertEquals(2, result.values().get("copper"));
+    assertTrue(result.flags().get(ChestRows.OPEN_UNDER_SOLID_BLOCKS));
     assertTrue(result.warnings().isEmpty());
+  }
+
+  @Test
+  void missingFlagFallsBackToFalseWithWarning(@TempDir Path dir) throws Exception {
+    Files.writeString(
+        dir.resolve(ChestRows.FILE_NAME),
+        """
+        {
+          "copper": 5, "iron": 6, "gold": 9, "diamond": 9, "emerald": 9,
+          "crystal": 9, "obsidian": 9, "netherite": 9, "christmas": 3
+        }
+        """,
+        StandardCharsets.UTF_8);
+
+    JsonConfig.LoadResult result = ChestRows.load(dir);
+
+    assertFalse(result.flags().get(ChestRows.OPEN_UNDER_SOLID_BLOCKS));
+    assertTrue(
+        result.warnings().stream().anyMatch(w -> w.contains(ChestRows.OPEN_UNDER_SOLID_BLOCKS)));
   }
 }

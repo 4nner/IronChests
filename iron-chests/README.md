@@ -55,6 +55,8 @@ are fixed per tier and cannot change; defaults are the Rows column above.
   // Iron chest rows (1-12)
   "iron": 6,
   // ... gold, diamond, emerald, crystal, obsidian, netherite, christmas
+  // Open chests placed under solid blocks (true/false)
+  "openUnderSolidBlocks": false
 }
 ```
 
@@ -67,4 +69,8 @@ Rules:
 - Shrinking a tier is possible but messy: stacks that no longer fit refill
   empty slots first, and the rest pop out of the chest when the
   chunk loads. Same for upgrades that lead to a narrower tier.
-- Multiplayer: the config must match between server and client.
+- `openUnderSolidBlocks` (default `false`) lets chests open with a solid
+  block above them. It takes real `true`/`false` only (`0`/`1` reset to
+  default). Sitting cats still block chests. It applies on the server
+  side, so single-player and servers just work after a restart.
+- Multiplayer: the row counts must match between server and client.
