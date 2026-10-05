@@ -70,6 +70,17 @@ class ChestRowsTest {
   }
 
   @Test
+  void maxCapacityCoversPreviouslySavedInventories() {
+    // The shrink fix sizes the load list to MAX_ROWS x rowLength, so every inventory
+    // saved before the config existed (i.e. at default rows) must fit inside it.
+    for (ChestTypes tier : ChestTypes.PLAYABLE) {
+      assertTrue(
+          ChestRows.MAX_ROWS >= tier.defaultRowCount(),
+          tier.configKey() + " default exceeds MAX_ROWS");
+    }
+  }
+
+  @Test
   void loadReadsRowsFromDisk(@TempDir Path dir) throws Exception {
     Files.writeString(
         dir.resolve(ChestRows.FILE_NAME),
