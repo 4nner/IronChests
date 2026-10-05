@@ -66,6 +66,7 @@ in
     build.exec = "./gradlew build";
     check.exec = "./gradlew check";
     clean.exec = "./gradlew clean";
+    test.exec = "./gradlew test";
     run-client.exec = "./gradlew :iron-chests:fabric:runClient";
     run-server.exec = "./gradlew :iron-chests:fabric:runServer";
     run-client-neoforge.exec = "./gradlew :iron-chests:neoforge:runClient";
@@ -79,7 +80,7 @@ in
     mkdir -p "$HOME/.local/share"
     ln -sfn "$JAVA_HOME" "$HOME/.local/share/devenv-jdk"
     echo "IronChests devenv: $(java -version 2>&1 | head -1)"
-    echo "Build with './gradlew build' (or 'build'), test with './gradlew check' (or 'check')."
+    echo "Build with './gradlew build' (or 'build'), test with './gradlew test' (or 'test')."
     echo "Run the game with './gradlew :iron-chests:fabric:runClient' (or 'run-client')."
   '';
 
