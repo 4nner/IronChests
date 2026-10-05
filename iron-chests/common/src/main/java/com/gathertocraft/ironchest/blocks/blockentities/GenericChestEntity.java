@@ -1,5 +1,6 @@
 package com.gathertocraft.ironchest.blocks.blockentities;
 
+import com.gathertocraft.ironchest.config.ChestRows;
 import com.gathertocraft.ironchest.screenhandlers.ChestScreenHandler;
 import com.gathertocraft.ironcore.InventorySanitizer;
 import com.gathertocraft.ironcore.ResizingContainer;
@@ -29,6 +30,7 @@ public class GenericChestEntity extends ChestBlockEntity
   private final TierSpec tier;
   private final Supplier<MenuType<ChestScreenHandler>> menuType;
   private final List<ItemStack> pendingOverflow = new ArrayList<>();
+  private boolean sizingForLoad;
 
   // setItems() resolves to ChestBlockEntity.setItems() — a plain field assignment,
   // no virtual dispatch into subclass code. Safe to call before subclass is fully initialized.
@@ -71,6 +73,9 @@ public class GenericChestEntity extends ChestBlockEntity
 
   @Override
   public int getContainerSize() {
+    if (sizingForLoad) {
+      return maxCapacity();
+    }
     return this.tier.size();
   }
 
@@ -79,9 +84,22 @@ public class GenericChestEntity extends ChestBlockEntity
     super.setItem(slot, InventorySanitizer.sanitize(stack));
   }
 
+  /** Largest inventory this tier can ever hold; anything beyond is overflow by definition. */
+  private int maxCapacity() {
+    return ChestRows.MAX_ROWS * this.tier.rowLength();
+  }
+
   @Override
   protected void loadAdditional(ValueInput input) {
-    super.loadAdditional(input);
+    // Vanilla sizes the item list from getContainerSize(); report the largest possible
+    // inventory while loading so that shrinking rows keeps every saved stack for the clamp below
+    // instead of silently dropping them.
+    sizingForLoad = true;
+    try {
+      super.loadAdditional(input);
+    } finally {
+      sizingForLoad = false;
+    }
     this.clampInventoryToCapacity();
   }
 
