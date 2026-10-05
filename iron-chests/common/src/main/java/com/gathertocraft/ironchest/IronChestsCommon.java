@@ -1,6 +1,7 @@
 package com.gathertocraft.ironchest;
 
 import com.gathertocraft.ironchest.blocks.ChestTypes;
+import com.gathertocraft.ironchest.blocks.GenericChestBlock;
 import com.gathertocraft.ironchest.config.ChestRows;
 import com.gathertocraft.ironchest.registry.ModBlockEntityType;
 import com.gathertocraft.ironchest.registry.ModBlocks;
@@ -34,6 +35,8 @@ public final class IronChestsCommon {
         LOGGER.warn(warning);
       }
       ChestTypes.setConfiguredRows(rows.values());
+      GenericChestBlock.setOpenUnderSolidBlocks(
+          rows.flags().getOrDefault(ChestRows.OPEN_UNDER_SOLID_BLOCKS, false));
     } catch (IOException e) {
       LOGGER.error("Failed to load ironchest.json; using default chest sizes", e);
     }
