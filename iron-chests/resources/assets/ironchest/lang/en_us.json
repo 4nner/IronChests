@@ -1,5 +1,6 @@
 {
   "item.ironchest.legacy_upgrade": "Legacy Chest Upgrade (converts on pickup)",
+  "block.ironchest.dirt_chest": "Dirt Chest 9000!",
   "block.ironchest.copper_chest": "Copper Chest",
   "block.ironchest.iron_chest": "Iron Chest",
   "block.ironchest.gold_chest": "Gold Chest",
@@ -31,6 +32,8 @@
   "advancements.ironchest.obsidian_chest.description": "Obtain an Obsidian Chest",
   "advancements.ironchest.netherite_chest.title": "Netherite Vault",
   "advancements.ironchest.netherite_chest.description": "Obtain a Netherite Chest",
+  "advancements.ironchest.dirt_chest.title": "Humble Holdings",
+  "advancements.ironchest.dirt_chest.description": "Obtain a Dirt Chest 9000!",
   "advancements.ironchest.christmas_chest.title": "Season's Stockpile",
   "advancements.ironchest.christmas_chest.description": "Obtain a Christmas Chest"
 }

@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.Blocks;
  * <p>Vanilla wood binds eagerly at init (vanilla blocks always exist). Modded blocks bind in the
  * block factory: the instance exists there on both loaders (Fabric resolves eagerly, NeoForge at
  * registry-fill time), while result bindings stay lazy suppliers so init never dereferences a
- * registry. Christmas stays outside the ladder — it is craft-only.
+ * registry. Christmas and Dirt stay outside the ladder — they are craft-only.
  */
 public final class ModUpgradeBindings {
   private ModUpgradeBindings() {}
@@ -22,7 +22,7 @@ public final class ModUpgradeBindings {
   }
 
   public static Block bindChest(ChestTypes type, Block block) {
-    if (type == ChestTypes.CHRISTMAS) {
+    if (type == ChestTypes.CHRISTMAS || type == ChestTypes.DIRT) {
       return block;
     }
     MaterialTier tier = MaterialTier.valueOf(type.name());

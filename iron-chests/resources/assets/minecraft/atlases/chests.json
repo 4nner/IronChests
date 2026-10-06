@@ -5,6 +5,7 @@
       "prefix": "entity/chest/",
       "source": "entity/chest"
     },
+    { "type": "single", "resource": "ironchest:entity/chest/dirt_chest" },
     { "type": "single", "resource": "ironchest:entity/chest/copper_chest" },
     { "type": "single", "resource": "ironchest:entity/chest/iron_chest" },
     { "type": "single", "resource": "ironchest:entity/chest/gold_chest" },

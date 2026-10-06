@@ -19,6 +19,7 @@ are the defaults; see Configuration to change them.
 
 | Chest | Slots | Rows | Columns |
 | --- | --- | --- | --- |
+| Dirt 9000! | 126 | 9 | 14, dirt-only |
 | Copper | 45 | 5 | 9 |
 | Iron | 54 | 6 | 9 |
 | Gold | 81 | 9 | 9 |
@@ -54,7 +55,7 @@ are fixed per tier and cannot change; defaults are the Rows column above.
   "copper": 5,
   // Iron chest rows (1-12)
   "iron": 6,
-  // ... gold, diamond, emerald, crystal, obsidian, netherite, christmas
+  // ... dirt, gold, diamond, emerald, crystal, obsidian, netherite, christmas
   // Open chests placed under solid blocks (true/false)
   "openUnderSolidBlocks": false
 }

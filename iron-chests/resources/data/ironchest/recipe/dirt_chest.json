@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ddd",
+    "dCd",
+    "ddd"
+  ],
+  "key": {
+    "d": "minecraft:dirt",
+    "C": "minecraft:chest"
+  },
+  "result": {
+    "id": "ironchest:dirt_chest",
+    "count": 1
+  }
+}

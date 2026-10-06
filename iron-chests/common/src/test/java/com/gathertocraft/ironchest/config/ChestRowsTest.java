@@ -17,6 +17,7 @@ import org.junit.jupiter.api.io.TempDir;
 class ChestRowsTest {
   private static final List<String> EXPECTED_KEYS =
       List.of(
+          "dirt",
           "copper",
           "iron",
           "gold",
@@ -29,6 +30,7 @@ class ChestRowsTest {
 
   private static final Map<String, Integer> EXPECTED_ROWS =
       Map.of(
+          "dirt", 9,
           "copper", 5,
           "iron", 6,
           "gold", 9,
@@ -96,7 +98,7 @@ class ChestRowsTest {
         dir.resolve(ChestRows.FILE_NAME),
         """
         {
-          "copper": 2, "iron": 6, "gold": 9, "diamond": 9, "emerald": 9,
+          "dirt": 9, "copper": 2, "iron": 6, "gold": 9, "diamond": 9, "emerald": 9,
           "crystal": 9, "obsidian": 9, "netherite": 9, "christmas": 3,
           "openUnderSolidBlocks": true
         }
@@ -116,7 +118,7 @@ class ChestRowsTest {
         dir.resolve(ChestRows.FILE_NAME),
         """
         {
-          "copper": 5, "iron": 6, "gold": 9, "diamond": 9, "emerald": 9,
+          "dirt": 9, "copper": 5, "iron": 6, "gold": 9, "diamond": 9, "emerald": 9,
           "crystal": 9, "obsidian": 9, "netherite": 9, "christmas": 3
         }
         """,
