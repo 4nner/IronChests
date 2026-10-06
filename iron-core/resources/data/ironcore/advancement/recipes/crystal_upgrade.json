@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ironcore:crystal_upgrade"
+        "recipes": "ironcore:crystal_upgrade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

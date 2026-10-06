@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ironcore:diamond_upgrade"
+        "recipes": "ironcore:diamond_upgrade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

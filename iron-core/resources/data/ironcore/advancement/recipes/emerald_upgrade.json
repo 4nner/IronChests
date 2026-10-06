@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ironcore:emerald_upgrade"
+        "recipes": "ironcore:emerald_upgrade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

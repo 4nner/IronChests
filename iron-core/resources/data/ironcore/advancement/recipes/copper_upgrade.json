@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ironcore:copper_upgrade"
+        "recipes": "ironcore:copper_upgrade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

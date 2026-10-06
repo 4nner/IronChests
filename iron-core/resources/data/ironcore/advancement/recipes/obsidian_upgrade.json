@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ironcore:obsidian_upgrade"
+        "recipes": "ironcore:obsidian_upgrade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

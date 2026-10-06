@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ironchest:crystal_chest"
+        "recipes": "ironchest:crystal_chest"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

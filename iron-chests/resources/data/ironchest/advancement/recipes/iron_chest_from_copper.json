@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ironchest:iron_chest_from_copper"
+        "recipes": "ironchest:iron_chest_from_copper"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
