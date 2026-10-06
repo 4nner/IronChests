@@ -88,8 +88,20 @@ public class ChestEntityRenderer<T extends BlockEntity & LidBlockEntity> extends
         -1,
         renderState.modSprite,
         this.sprites,
-        0,
-        state.breakProgress);
+        0);
+    if (state.breakProgress != null) {
+      submitNodeCollector
+          .order(1)
+          .submitCrumblingOverlay(
+              model,
+              open,
+              poseStack,
+              renderState.modSprite.renderType(model.renderType()),
+              state.lightCoords,
+              OverlayTexture.NO_OVERLAY,
+              -1,
+              state.breakProgress);
+    }
 
     if (renderState.topStacks != null) {
       renderItems(
@@ -184,7 +196,7 @@ public class ChestEntityRenderer<T extends BlockEntity & LidBlockEntity> extends
     poseStack.pushPose();
     poseStack.scale(0.5F, 0.5F, 0.5F);
     poseStack.translate((float) x, (float) y, (float) z);
-    poseStack.mulPose(Axis.YP.rotationDegrees(rotation));
+    poseStack.rotateDegrees(Axis.YP, rotation);
     ItemStackRenderState itemRenderState = new ItemStackRenderState();
     mc.getItemModelResolver()
         .updateForTopItem(itemRenderState, item, ItemDisplayContext.GROUND, level, null, seed);
