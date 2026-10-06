@@ -1,11 +1,11 @@
 {
   "parent": "ironchest:ironchest/diamond_chest",
   "criteria": {
-    "has_diamond_emerald_chest": {
+    "has_crystal_chest": {
       "conditions": {
         "items": [
           {
-            "items": "#ironchest:diamond_emerald_chests"
+            "items": "ironchest:crystal_chest"
           }
         ]
       },
@@ -26,7 +26,7 @@
   },
   "requirements": [
     [
-      "has_diamond_emerald_chest"
+      "has_crystal_chest"
     ]
   ]
 }

@@ -1,11 +1,11 @@
 {
   "parent": "ironchest:ironchest/obsidian_chest",
   "criteria": {
-    "has_diamond_emerald_obsidian_chest": {
+    "has_netherite_chest": {
       "conditions": {
         "items": [
           {
-            "items": "#ironchest:diamond_emerald_obsidian_chests"
+            "items": "ironchest:netherite_chest"
           }
         ]
       },
@@ -26,7 +26,7 @@
   },
   "requirements": [
     [
-      "has_diamond_emerald_obsidian_chest"
+      "has_netherite_chest"
     ]
   ],
   "rewards": {
