@@ -64,10 +64,15 @@ public enum ChestTypes implements TierSpec {
       "copper_chest",
       Identifier.fromNamespaceAndPath(IronChestsCommon.MOD_ID, "entity/chest/copper_chest")),
   CHRISTMAS(27, 9, "christmas_chest", Identifier.withDefaultNamespace("entity/chest/christmas")),
+  DIRT(
+      126,
+      14,
+      "dirt_chest",
+      Identifier.fromNamespaceAndPath(IronChestsCommon.MOD_ID, "entity/chest/dirt_chest")),
   WOOD(27, 9, null, Identifier.withDefaultNamespace("entity/chest/normal"));
 
   public static final ChestTypes[] PLAYABLE = {
-    COPPER, IRON, GOLD, DIAMOND, EMERALD, CRYSTAL, OBSIDIAN, NETHERITE, CHRISTMAS
+    DIRT, COPPER, IRON, GOLD, DIAMOND, EMERALD, CRYSTAL, OBSIDIAN, NETHERITE, CHRISTMAS
   };
 
   public final int size;
@@ -191,6 +196,7 @@ public enum ChestTypes implements TierSpec {
               .requiresCorrectToolForDrops();
       case WOOD, CHRISTMAS ->
           BlockBehaviour.Properties.of().strength(3.0F, 3.0F).sound(SoundType.WOOD);
+      case DIRT -> BlockBehaviour.Properties.of().strength(2.5F, 3.0F).sound(SoundType.GRAVEL);
       default -> BlockBehaviour.Properties.of();
     };
   }

@@ -40,7 +40,7 @@ public class SizedContainerMenu extends AbstractContainerMenu {
       int slotY = ContainerGuiLayout.SLOT_SIZE + row * ContainerGuiLayout.SLOT_SIZE;
       for (int column = 0; column < columns; column++) {
         this.addSlot(
-            new Slot(
+            new ConstrainedSlot(
                 container,
                 slotIndex++,
                 containerSlotX + column * ContainerGuiLayout.SLOT_SIZE,
@@ -124,5 +124,25 @@ public class SizedContainerMenu extends AbstractContainerMenu {
 
   public static Container createClientContainer(TierSpec tier) {
     return new SimpleContainer(tier.size());
+  }
+
+  /**
+   * Chest Slot filtering {@link Container#canPlaceItem}: filters what items can be placed in a slot
+   * by clicking or shift-clicking. Hoppers are handled by {@code canPlaceItem}.
+   */
+  private static final class ConstrainedSlot extends Slot {
+    private final Container container;
+    private final int slotIndex;
+
+    ConstrainedSlot(Container container, int slotIndex, int x, int y) {
+      super(container, slotIndex, x, y);
+      this.container = container;
+      this.slotIndex = slotIndex;
+    }
+
+    @Override
+    public boolean mayPlace(ItemStack stack) {
+      return this.container.canPlaceItem(this.slotIndex, stack);
+    }
   }
 }

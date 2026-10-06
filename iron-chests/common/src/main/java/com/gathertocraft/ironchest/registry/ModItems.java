@@ -22,6 +22,7 @@ public class ModItems {
 
   private static final List<String> TAB_ORDER =
       List.of(
+          "dirt_chest",
           "copper_chest",
           "iron_chest",
           "gold_chest",
@@ -33,6 +34,9 @@ public class ModItems {
           "christmas_chest");
 
   static {
+    register(
+        "dirt_chest",
+        () -> new BlockItem(ChestTypes.DIRT.getBlock(), blockItemSettings("dirt_chest")));
     register(
         "copper_chest",
         () -> new BlockItem(ChestTypes.COPPER.getBlock(), blockItemSettings("copper_chest")));

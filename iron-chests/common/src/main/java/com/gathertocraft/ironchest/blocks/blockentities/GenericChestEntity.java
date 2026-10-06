@@ -1,5 +1,6 @@
 package com.gathertocraft.ironchest.blocks.blockentities;
 
+import com.gathertocraft.ironchest.blocks.ChestTypes;
 import com.gathertocraft.ironchest.config.ChestRows;
 import com.gathertocraft.ironchest.screenhandlers.ChestScreenHandler;
 import com.gathertocraft.ironcore.InventorySanitizer;
@@ -12,6 +13,7 @@ import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -82,6 +84,15 @@ public class GenericChestEntity extends ChestBlockEntity
   @Override
   public void setItem(int slot, ItemStack stack) {
     super.setItem(slot, InventorySanitizer.sanitize(stack));
+  }
+
+  /** The Dirt Chest 9000 only stores block under the {@code minecraft:dirt} tag. */
+  @Override
+  public boolean canPlaceItem(int slot, ItemStack stack) {
+    if (this.tier == ChestTypes.DIRT && !stack.is(ItemTags.DIRT)) {
+      return false;
+    }
+    return super.canPlaceItem(slot, stack);
   }
 
   /** Largest inventory this tier can ever hold; anything beyond is overflow by definition. */

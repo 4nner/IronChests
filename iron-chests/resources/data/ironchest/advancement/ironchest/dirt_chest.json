@@ -1,0 +1,32 @@
+{
+  "parent": "ironchest:ironchest/root",
+  "criteria": {
+    "has_dirt_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironchest:dirt_chest"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.ironchest.dirt_chest.description"
+    },
+    "frame": "task",
+    "icon": {
+      "id": "ironchest:dirt_chest"
+    },
+    "title": {
+      "translate": "advancements.ironchest.dirt_chest.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_dirt_chest"
+    ]
+  ]
+}
