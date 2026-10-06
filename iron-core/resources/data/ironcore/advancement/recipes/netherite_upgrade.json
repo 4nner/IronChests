@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "ironcore:netherite_upgrade"
+        "recipes": "ironcore:netherite_upgrade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
