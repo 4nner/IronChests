@@ -2,6 +2,7 @@ package com.gathertocraft.ironchest.registry;
 
 import com.gathertocraft.ironchest.IronChestsCommon;
 import com.gathertocraft.ironchest.blocks.ChestTypes;
+import com.gathertocraft.ironchest.items.ChestBlockItem;
 import com.gathertocraft.ironcore.platform.Platforms;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -11,7 +12,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 
@@ -34,39 +34,9 @@ public class ModItems {
           "christmas_chest");
 
   static {
-    register(
-        "dirt_chest",
-        () -> new BlockItem(ChestTypes.DIRT.getBlock(), blockItemSettings("dirt_chest")));
-    register(
-        "copper_chest",
-        () -> new BlockItem(ChestTypes.COPPER.getBlock(), blockItemSettings("copper_chest")));
-    register(
-        "iron_chest",
-        () -> new BlockItem(ChestTypes.IRON.getBlock(), blockItemSettings("iron_chest")));
-    register(
-        "gold_chest",
-        () -> new BlockItem(ChestTypes.GOLD.getBlock(), blockItemSettings("gold_chest")));
-    register(
-        "diamond_chest",
-        () -> new BlockItem(ChestTypes.DIAMOND.getBlock(), blockItemSettings("diamond_chest")));
-    register(
-        "emerald_chest",
-        () -> new BlockItem(ChestTypes.EMERALD.getBlock(), blockItemSettings("emerald_chest")));
-    register(
-        "crystal_chest",
-        () -> new BlockItem(ChestTypes.CRYSTAL.getBlock(), blockItemSettings("crystal_chest")));
-    register(
-        "obsidian_chest",
-        () -> new BlockItem(ChestTypes.OBSIDIAN.getBlock(), blockItemSettings("obsidian_chest")));
-    register(
-        "netherite_chest",
-        () ->
-            new BlockItem(
-                ChestTypes.NETHERITE.getBlock(),
-                blockItemSettings("netherite_chest").fireResistant()));
-    register(
-        "christmas_chest",
-        () -> new BlockItem(ChestTypes.CHRISTMAS.getBlock(), blockItemSettings("christmas_chest")));
+    for (ChestTypes type : ChestTypes.PLAYABLE) {
+      registerChest(type);
+    }
   }
 
   public static void registerItems() {
@@ -88,6 +58,18 @@ public class ModItems {
 
   private static void register(String id, Supplier<Item> item) {
     ITEMS.put(id, item);
+  }
+
+  private static void registerChest(ChestTypes type) {
+    register(
+        type.registryId,
+        () -> {
+          Item.Properties properties = blockItemSettings(type.registryId);
+          if (type == ChestTypes.NETHERITE) {
+            properties = properties.fireResistant();
+          }
+          return new ChestBlockItem(type, properties);
+        });
   }
 
   private static Item.Properties settings(String name) {
