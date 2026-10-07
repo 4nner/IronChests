@@ -43,7 +43,7 @@
   "menu.ironcore.key_editor.add": "Add",
   "menu.ironcore.key_editor.done": "Done",
   "menu.ironcore.key_editor.hint": "Trusted players for this key (scroll for more)",
-  "title.ironcore.linked_chest": "%s - Locked with '%s' #%s",
+  "title.ironcore.linked_container": "%s - Locked with '%s' #%s",
   "title.ironcore.unnamed_key": "Key",
   "advancements.ironcore.root.title": "Storage Upgrade",
   "advancements.ironcore.root.description": "Obtain a Copper Upgrade",
