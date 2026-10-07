@@ -3,7 +3,8 @@
   "id": "ironcore",
   "version": "${version}",
   "entrypoints": {
-    "main": ["com.gathertocraft.ironcore.IronCore"]
+    "main": ["com.gathertocraft.ironcore.IronCore"],
+    "client": ["com.gathertocraft.ironcore.IronCoreClient"]
   },
   "name": "Iron Core Utilities",
   "description": "Shared library for Iron mods",

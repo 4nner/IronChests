@@ -10,9 +10,12 @@ base {
 }
 
 loom {
+  splitEnvironmentSourceSets()
+
   mods {
     "ironcore" {
       sourceSet sourceSets.main
+      sourceSet sourceSets.client
     }
   }
 }
