@@ -4,17 +4,26 @@ import com.gathertocraft.ironchest.blocks.ChestTypes;
 import com.gathertocraft.ironchest.config.ChestRows;
 import com.gathertocraft.ironchest.screenhandlers.ChestScreenHandler;
 import com.gathertocraft.ironcore.InventorySanitizer;
+import com.gathertocraft.ironcore.LockableContainer;
 import com.gathertocraft.ironcore.ResizingContainer;
 import com.gathertocraft.ironcore.TierSpec;
 import com.gathertocraft.ironcore.UpgradableContainer;
+import com.gathertocraft.ironcore.lock.KeyItem;
+import com.gathertocraft.ironcore.lock.KeyLinkable;
+import com.gathertocraft.ironcore.lock.KeyRegistry;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Containers;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -28,11 +37,16 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
 public class GenericChestEntity extends ChestBlockEntity
-    implements ResizingContainer, UpgradableContainer {
+    implements ResizingContainer,
+        UpgradableContainer,
+        LockableContainer,
+        KeyLinkable,
+        WorldlyContainer {
   private final TierSpec tier;
   private final Supplier<MenuType<ChestScreenHandler>> menuType;
   private final List<ItemStack> pendingOverflow = new ArrayList<>();
   private boolean sizingForLoad;
+  private UUID lockKeyId;
 
   // setItems() resolves to ChestBlockEntity.setItems() — a plain field assignment,
   // no virtual dispatch into subclass code. Safe to call before subclass is fully initialized.
@@ -64,6 +78,88 @@ public class GenericChestEntity extends ChestBlockEntity
   }
 
   @Override
+  public UUID getLockKeyId() {
+    return this.lockKeyId;
+  }
+
+  @Override
+  public void link(UUID keyId) {
+    this.lockKeyId = keyId;
+    this.setChanged();
+  }
+
+  @Override
+  public void unlink() {
+    this.lockKeyId = null;
+    this.setChanged();
+  }
+
+  /** Live registry entry, or null when unlinked, off-server, or missing. */
+  public KeyRegistry.Entry linkedEntry() {
+    if (this.lockKeyId == null) {
+      return null;
+    }
+    Level level = getLevel();
+    if (!(level instanceof ServerLevel serverLevel)) {
+      return null;
+    }
+    MinecraftServer server = serverLevel.getServer();
+    if (server == null) {
+      return null;
+    }
+    return KeyRegistry.get(server).get(this.lockKeyId);
+  }
+
+  @Override
+  public boolean isLocked() {
+    return this.lockKeyId != null;
+  }
+
+  @Override
+  public boolean isAuthorized(Player player) {
+    if (!isLocked() || player == null) {
+      return !isLocked();
+    }
+    KeyRegistry.Entry entry = linkedEntry();
+    return entry != null && entry.isAuthorized(player);
+  }
+
+  public String getOwnerName() {
+    KeyRegistry.Entry entry = linkedEntry();
+    return entry != null ? entry.ownerName() : "";
+  }
+
+  @Override
+  public boolean canOpen(Player player) {
+    return isAuthorized(player);
+  }
+
+  @Override
+  public boolean stillValid(Player player) {
+    return super.stillValid(player) && isAuthorized(player);
+  }
+
+  @Override
+  public int[] getSlotsForFace(Direction side) {
+    int size = getContainerSize();
+    int[] slots = new int[size];
+    for (int i = 0; i < size; i++) {
+      slots[i] = i;
+    }
+    return slots;
+  }
+
+  @Override
+  public boolean canPlaceItemThroughFace(int slot, ItemStack stack, Direction dir) {
+    return !isLocked() && canPlaceItem(slot, stack);
+  }
+
+  @Override
+  public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction dir) {
+    return !isLocked();
+  }
+
+  @Override
   protected AbstractContainerMenu createMenu(int syncId, Inventory inventory) {
     return new ChestScreenHandler(this.menuType.get(), this.tier, syncId, inventory, this);
   }
@@ -71,6 +167,23 @@ public class GenericChestEntity extends ChestBlockEntity
   @Override
   protected Component getDefaultName() {
     return Component.translatable(this.getBlockState().getBlock().getDescriptionId());
+  }
+
+  @Override
+  public Component getDisplayName() {
+    if (this.lockKeyId != null
+        && getLevel() instanceof ServerLevel serverLevel
+        && serverLevel.getServer() != null) {
+      KeyRegistry.Entry entry = KeyRegistry.get(serverLevel.getServer()).get(this.lockKeyId);
+      if (entry != null) {
+        return Component.translatable(
+            "title.ironcore.linked_container",
+            super.getDisplayName(),
+            KeyItem.keyDisplayName(entry),
+            entry.code());
+      }
+    }
+    return super.getDisplayName();
   }
 
   @Override
@@ -112,12 +225,26 @@ public class GenericChestEntity extends ChestBlockEntity
       sizingForLoad = false;
     }
     this.clampInventoryToCapacity();
+    this.lockKeyId = null;
+    input
+        .getString("LockKeyId")
+        .ifPresent(
+            raw -> {
+              try {
+                this.lockKeyId = UUID.fromString(raw);
+              } catch (IllegalArgumentException ignored) {
+                this.lockKeyId = null;
+              }
+            });
   }
 
   @Override
   protected void saveAdditional(ValueOutput output) {
     InventorySanitizer.sanitize(this.getItems());
     super.saveAdditional(output);
+    if (this.lockKeyId != null) {
+      output.putString("LockKeyId", this.lockKeyId.toString());
+    }
   }
 
   @Override
