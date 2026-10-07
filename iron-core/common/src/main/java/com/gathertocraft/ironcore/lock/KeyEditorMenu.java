@@ -13,9 +13,7 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 import org.jspecify.annotations.Nullable;
 
-/**
- * Server menu for a key registry entry editor.
- */
+/** Server menu for a key registry entry editor. */
 public final class KeyEditorMenu extends AbstractContainerMenu {
   private final InteractionHand hand;
   private final Player player;

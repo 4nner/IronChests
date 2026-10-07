@@ -1,5 +1,6 @@
 package com.gathertocraft.ironcore.lock;
 
+import com.gathertocraft.ironcore.config.CoreConfig;
 import java.util.UUID;
 import java.util.function.Consumer;
 import net.minecraft.ChatFormatting;
@@ -138,6 +139,10 @@ public class KeyItem extends Item {
     if (player == null) {
       return InteractionResult.PASS;
     }
+    if (!CoreConfig.locksEnabled()) {
+      player.sendOverlayMessage(Component.translatable("message.ironcore.locks_disabled"));
+      return InteractionResult.SUCCESS_SERVER;
+    }
     BlockEntity entity = level.getBlockEntity(context.getClickedPos());
     if (!(entity instanceof KeyLinkable target)) {
       return InteractionResult.PASS;
@@ -214,6 +219,10 @@ public class KeyItem extends Item {
   public InteractionResult use(Level level, Player player, InteractionHand hand) {
     if (level.isClientSide()) {
       return InteractionResult.SUCCESS;
+    }
+    if (!CoreConfig.locksEnabled()) {
+      player.sendOverlayMessage(Component.translatable("message.ironcore.locks_disabled"));
+      return InteractionResult.SUCCESS_SERVER;
     }
     // pick() returns a BlockHitResult even for a miss (typed MISS): test the hit type, not the
     // class, or every air-click is silently swallowed.
@@ -327,6 +336,11 @@ public class KeyItem extends Item {
       Consumer<Component> lines,
       TooltipFlag flag) {
     super.appendHoverText(stack, context, display, lines, flag);
+    if (!CoreConfig.locksEnabled()) {
+      lines.accept(
+          Component.translatable("tooltip.ironcore.locks_disabled").withStyle(ChatFormatting.RED));
+      return;
+    }
     int code = readKeyCode(stack);
     if (code >= 0) {
       lines.accept(

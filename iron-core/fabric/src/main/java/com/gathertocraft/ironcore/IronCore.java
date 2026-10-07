@@ -4,11 +4,12 @@ import com.gathertocraft.ironcore.lock.KeyEditorPayloads;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.loader.api.FabricLoader;
 
 public class IronCore implements ModInitializer {
   @Override
   public void onInitialize() {
-    IronCoreCommon.init();
+    IronCoreCommon.init(FabricLoader.getInstance().getConfigDir());
     PayloadTypeRegistry.serverboundPlay()
         .register(KeyEditorPayloads.Add.TYPE, KeyEditorPayloads.Add.CODEC);
     PayloadTypeRegistry.serverboundPlay()
