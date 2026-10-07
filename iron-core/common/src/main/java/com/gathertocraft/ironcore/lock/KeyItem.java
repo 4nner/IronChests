@@ -279,6 +279,9 @@ public class KeyItem extends Item {
                     KeyEditorMenus.getType(), syncId, inventory, handOf(player, entryId), entryId),
             Component.translatable(
                 "menu.ironcore.key_editor_named", keyDisplayName(entry), entry.code())));
+    // The menu carries no slots, so vanilla inventory sync never pushes changes back. Push the
+    // entry explicitly so the fresh screen paints current data.
+    KeyEditorPayloads.sendSync(player, entry.trustedView());
   }
 
   private static InteractionHand handOf(ServerPlayer player, UUID entryId) {
