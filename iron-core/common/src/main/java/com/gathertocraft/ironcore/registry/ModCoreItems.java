@@ -4,6 +4,7 @@ import com.gathertocraft.ironcore.IronCoreCommon;
 import com.gathertocraft.ironcore.MaterialTier;
 import com.gathertocraft.ironcore.TieredUpgradeStrategy;
 import com.gathertocraft.ironcore.UpgradeItem;
+import com.gathertocraft.ironcore.lock.KeyItem;
 import com.gathertocraft.ironcore.platform.Platforms;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -34,7 +35,8 @@ public class ModCoreItems {
           "emerald_upgrade",
           "crystal_upgrade",
           "obsidian_upgrade",
-          "netherite_upgrade");
+          "netherite_upgrade",
+          "container_key");
 
   static {
     register("copper_upgrade", MaterialTier.COPPER);
@@ -45,6 +47,17 @@ public class ModCoreItems {
     register("crystal_upgrade", MaterialTier.CRYSTAL);
     register("obsidian_upgrade", MaterialTier.OBSIDIAN);
     register("netherite_upgrade", MaterialTier.NETHERITE);
+    ITEMS.put(
+        "container_key",
+        () ->
+            new KeyItem(
+                new Item.Properties()
+                    .setId(
+                        ResourceKey.create(
+                            Registries.ITEM,
+                            Identifier.fromNamespaceAndPath(
+                                IronCoreCommon.MOD_ID, "container_key")))
+                    .stacksTo(1)));
   }
 
   public static void registerItems() {
