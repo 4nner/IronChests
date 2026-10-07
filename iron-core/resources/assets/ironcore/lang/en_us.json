@@ -35,6 +35,8 @@
   "message.ironcore.relinked": "Linked to '%s' #%s",
   "message.ironcore.relink_warning": "Warning: you are not on this key's trusted list.",
   "message.ironcore.key_not_yours": "Only the key owner can edit this key.",
+  "message.ironcore.locks_disabled": "Container Key locks are disabled on this server.",
+  "tooltip.ironcore.locks_disabled": "Locking is disabled on this server",
   "message.ironcore.key_trusted_added": "Added %s to this key",
   "message.ironcore.key_already_listed": "%s is already on this key",
   "menu.ironcore.key_editor": "Container Key",

@@ -8,6 +8,7 @@ import com.gathertocraft.ironcore.LockableContainer;
 import com.gathertocraft.ironcore.ResizingContainer;
 import com.gathertocraft.ironcore.TierSpec;
 import com.gathertocraft.ironcore.UpgradableContainer;
+import com.gathertocraft.ironcore.config.CoreConfig;
 import com.gathertocraft.ironcore.lock.KeyItem;
 import com.gathertocraft.ironcore.lock.KeyLinkable;
 import com.gathertocraft.ironcore.lock.KeyRegistry;
@@ -112,7 +113,7 @@ public class GenericChestEntity extends ChestBlockEntity
 
   @Override
   public boolean isLocked() {
-    return this.lockKeyId != null;
+    return CoreConfig.locksEnabled() && this.lockKeyId != null;
   }
 
   @Override
