@@ -248,6 +248,31 @@ public class KeyItem extends Item {
   }
 
   /**
+   * Pushes an anvil rename into the entry by finding the linked key anywhere in the player's
+   * inventory. Lets chest titles pick up renames on open without requiring a key gesture first.
+   */
+  public static void refreshEntryName(Player player, UUID keyId) {
+    if (!(player instanceof ServerPlayer serverPlayer)
+        || serverPlayer.level().getServer() == null
+        || keyId == null) {
+      return;
+    }
+    KeyRegistry registry = KeyRegistry.get(serverPlayer.level().getServer());
+    KeyRegistry.Entry entry = registry.get(keyId);
+    if (entry == null) {
+      return;
+    }
+    var inventory = serverPlayer.getInventory();
+    for (int i = 0; i < inventory.getContainerSize(); i++) {
+      ItemStack stack = inventory.getItem(i);
+      if (stack.getItem() instanceof KeyItem && keyId.equals(readKeyId(stack))) {
+        syncNameFromStack(registry, stack, entry);
+        return;
+      }
+    }
+  }
+
+  /**
    * Editor for a locked container's linked entry. Unlinked targets fall back to a deny: their lock
    * belongs to another system.
    */
@@ -263,6 +288,7 @@ public class KeyItem extends Item {
               .withStyle(ChatFormatting.RED));
       return;
     }
+    refreshEntryName(serverPlayer, entryId);
     openEntryEditor(serverPlayer, entryId);
   }
 

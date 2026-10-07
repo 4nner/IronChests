@@ -161,6 +161,9 @@ public class GenericChestEntity extends ChestBlockEntity
 
   @Override
   protected AbstractContainerMenu createMenu(int syncId, Inventory inventory) {
+    if (this.lockKeyId != null) {
+      KeyItem.refreshEntryName(inventory.player, this.lockKeyId);
+    }
     return new ChestScreenHandler(this.menuType.get(), this.tier, syncId, inventory, this);
   }
 
