@@ -2,6 +2,10 @@ plugins {
   alias(libs.plugins.fabric.loom)
 }
 
+loom {
+  accessWidenerPath = file("src/main/resources/ironcore.accesswidener")
+}
+
 version = project.ironcore_version
 group = project.ironcore_maven_group
 

@@ -1,5 +1,6 @@
 package com.gathertocraft.ironcore;
 
+import com.gathertocraft.ironcore.lock.KeyEditorMenus;
 import com.gathertocraft.ironcore.registry.ModCoreItemGroup;
 import com.gathertocraft.ironcore.registry.ModCoreItems;
 import net.minecraft.core.registries.Registries;
@@ -19,5 +20,6 @@ public final class IronCoreCommon {
     ModCoreItems.registerItems();
     ModCoreItemGroup.registerItemGroup();
     ModCoreItems.addTabItems(TAB);
+    KeyEditorMenus.registerScreenHandlers();
   }
 }
