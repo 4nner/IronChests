@@ -1,14 +1,21 @@
 package com.gathertocraft.ironchest.blocks;
 
+import com.gathertocraft.ironcore.lock.KeyItem;
+import com.gathertocraft.ironcore.lock.LockGuards;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.animal.feline.Cat;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.ChestBlock;
@@ -19,6 +26,7 @@ import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
 
 public class GenericChestBlock extends ChestBlock {
   private final ChestTypes type;
@@ -64,6 +72,46 @@ public class GenericChestBlock extends ChestBlock {
       }
     }
     return super.getMenuProvider(state, level, pos);
+  }
+
+  /** Deny opening for players outside the lock. Key holders defer to the key item. */
+  @Override
+  protected InteractionResult useWithoutItem(
+      BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+    if (!level.isClientSide() && LockGuards.isLockedFor(level, pos, player)) {
+      LockGuards.denyLocked(level, pos, player);
+      return InteractionResult.FAIL;
+    }
+    return super.useWithoutItem(state, level, pos, player, hit);
+  }
+
+  @Override
+  protected InteractionResult useItemOn(
+      ItemStack stack,
+      BlockState state,
+      Level level,
+      BlockPos pos,
+      Player player,
+      InteractionHand hand,
+      BlockHitResult hit) {
+    if (stack.getItem() instanceof KeyItem) {
+      return InteractionResult.PASS;
+    }
+    if (!level.isClientSide() && LockGuards.isLockedFor(level, pos, player)) {
+      LockGuards.denyLocked(level, pos, player);
+      return InteractionResult.FAIL;
+    }
+    return super.useItemOn(stack, state, level, pos, player, hand, hit);
+  }
+
+  /** Stall survival mining for outsiders. Creative breaks stop at the loader break events. */
+  @Override
+  protected float getDestroyProgress(
+      BlockState state, Player player, BlockGetter level, BlockPos pos) {
+    if (LockGuards.isLockedFor(level, pos, player)) {
+      return 0.0F;
+    }
+    return super.getDestroyProgress(state, player, level, pos);
   }
 
   /**
