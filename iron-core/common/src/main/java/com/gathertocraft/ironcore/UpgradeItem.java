@@ -55,6 +55,11 @@ public class UpgradeItem extends Item {
     }
 
     BlockEntity blockEntity = level.getBlockEntity(blockPos);
+    if (blockEntity instanceof LockableContainer lockable && lockable.isLocked()) {
+      if (!lockable.isAuthorized(player)) {
+        return InteractionResult.PASS;
+      }
+    }
     if (blockEntity instanceof UpgradableContainer container) {
       if (!container.isAvailableForUpgrade(player)) {
         return InteractionResult.PASS;
