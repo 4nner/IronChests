@@ -4,6 +4,7 @@ import com.gathertocraft.ironcore.config.CoreConfig;
 import com.gathertocraft.ironcore.lock.KeyEditorMenus;
 import com.gathertocraft.ironcore.registry.ModCoreItemGroup;
 import com.gathertocraft.ironcore.registry.ModCoreItems;
+import com.gathertocraft.ironcore.registry.ModDataComponents;
 import com.gathertocraft.ironcore.registry.ModRecipeSerializers;
 import com.mojang.logging.LogUtils;
 import java.io.IOException;
@@ -35,6 +36,7 @@ public final class IronCoreCommon {
     ModCoreItems.registerItems();
     ModCoreItemGroup.registerItemGroup();
     ModCoreItems.addTabItems(TAB);
+    ModDataComponents.registerComponents();
     ModRecipeSerializers.registerSerializers();
     KeyEditorMenus.registerScreenHandlers();
   }
