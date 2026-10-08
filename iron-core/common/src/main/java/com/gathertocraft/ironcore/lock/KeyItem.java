@@ -1,8 +1,9 @@
 package com.gathertocraft.ironcore.lock;
 
 import com.gathertocraft.ironcore.config.CoreConfig;
+import com.gathertocraft.ironcore.registry.ModDataComponents;
+import java.util.List;
 import java.util.UUID;
-import java.util.function.Consumer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -16,9 +17,6 @@ import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.CustomData;
-import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -36,49 +34,32 @@ public class KeyItem extends Item {
     super(properties);
   }
 
-  private static final String TAG_KEY_ID = "LockKeyId";
-  private static final String TAG_KEY_CODE = "LockKeyCode";
-
   /** Key id carried by this stack, or null for a fresh (unminted) key. */
   public static @Nullable UUID readKeyId(ItemStack stack) {
     if (!(stack.getItem() instanceof KeyItem)) {
       return null;
     }
-    CustomData data = stack.get(DataComponents.CUSTOM_DATA);
-    if (data == null) {
-      return null;
-    }
-    String raw = data.copyTag().getStringOr(TAG_KEY_ID, "");
-    if (raw.isEmpty()) {
-      return null;
-    }
-    try {
-      return UUID.fromString(raw);
-    } catch (IllegalArgumentException ignored) {
-      return null;
-    }
-  }
-
-  /** Short registry code cached on the stack for tooltips, or -1 when unminted. */
-  public static int readKeyCode(ItemStack stack) {
-    if (!(stack.getItem() instanceof KeyItem)) {
-      return -1;
-    }
-    CustomData data = stack.get(DataComponents.CUSTOM_DATA);
-    if (data == null) {
-      return -1;
-    }
-    return data.copyTag().getIntOr(TAG_KEY_CODE, -1);
+    KeyData data = stack.get(ModDataComponents.lockData());
+    return data == null ? null : data.id();
   }
 
   private static void writeKeyBinding(ItemStack stack, UUID id, int code) {
-    CustomData.update(
-        DataComponents.CUSTOM_DATA,
-        stack,
-        tag -> {
-          tag.putString(TAG_KEY_ID, id.toString());
-          tag.putInt(TAG_KEY_CODE, code);
-        });
+    stack.set(ModDataComponents.lockData(), new KeyData(id, code));
+  }
+
+  /** Dynamic tooltip lines for a key stack: the code line, or the disabled line when off. */
+  public static List<Component> tooltipLines(ItemStack stack) {
+    if (!CoreConfig.locksEnabled()) {
+      return List.of(
+          Component.translatable("tooltip.ironcore.locks_disabled").withStyle(ChatFormatting.RED));
+    }
+    KeyData data = stack.get(ModDataComponents.lockData());
+    if (data == null) {
+      return List.of();
+    }
+    return List.of(
+        Component.translatable("tooltip.ironcore.container_key.code", data.code())
+            .withStyle(ChatFormatting.GOLD));
   }
 
   /**
@@ -326,35 +307,5 @@ public class KeyItem extends Item {
       }
     }
     return InteractionHand.MAIN_HAND;
-  }
-
-  @Override
-  public void appendHoverText(
-      ItemStack stack,
-      TooltipContext context,
-      TooltipDisplay display,
-      Consumer<Component> lines,
-      TooltipFlag flag) {
-    super.appendHoverText(stack, context, display, lines, flag);
-    if (!CoreConfig.locksEnabled()) {
-      lines.accept(
-          Component.translatable("tooltip.ironcore.locks_disabled").withStyle(ChatFormatting.RED));
-      return;
-    }
-    int code = readKeyCode(stack);
-    if (code >= 0) {
-      lines.accept(
-          Component.translatable("tooltip.ironcore.container_key.code", code)
-              .withStyle(ChatFormatting.GOLD));
-    }
-    lines.accept(
-        Component.translatable("tooltip.ironcore.container_key.edit")
-            .withStyle(ChatFormatting.GRAY));
-    lines.accept(
-        Component.translatable("tooltip.ironcore.container_key.lock")
-            .withStyle(ChatFormatting.GRAY));
-    lines.accept(
-        Component.translatable("tooltip.ironcore.container_key.rename")
-            .withStyle(ChatFormatting.DARK_GRAY));
   }
 }
