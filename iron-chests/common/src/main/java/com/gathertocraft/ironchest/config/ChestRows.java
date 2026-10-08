@@ -16,6 +16,7 @@ public final class ChestRows {
   public static final int MIN_ROWS = 1;
   public static final int MAX_ROWS = 12;
   public static final String OPEN_UNDER_SOLID_BLOCKS = "openUnderSolidBlocks";
+  public static final String COPPER_GOLEM_INTERACTION = "copperGolemInteraction";
 
   private static final String HEADER =
       """
@@ -40,11 +41,15 @@ public final class ChestRows {
     return List.copyOf(options);
   }
 
-  /** Boolean flags in the same file; currently only openUnderSolidBlocks. */
+  /** Boolean flags in the same file: lid behavior plus copper golem interaction. */
   public static List<JsonConfig.BoolOption> flags() {
     return List.of(
         new JsonConfig.BoolOption(
-            OPEN_UNDER_SOLID_BLOCKS, false, "Open chests placed under solid blocks (true/false)"));
+            OPEN_UNDER_SOLID_BLOCKS, false, "Open chests placed under solid blocks (true/false)"),
+        new JsonConfig.BoolOption(
+            COPPER_GOLEM_INTERACTION,
+            true,
+            "Allow copper golems to store items in these chests (true/false)"));
   }
 
   public static JsonConfig.LoadResult load(Path configDir) throws IOException {
