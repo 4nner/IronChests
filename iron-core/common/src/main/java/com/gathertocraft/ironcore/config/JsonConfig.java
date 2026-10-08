@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.Strictness;
 import com.google.gson.stream.JsonReader;
 import java.io.IOException;
 import java.io.StringReader;
@@ -255,7 +256,7 @@ public final class JsonConfig {
     }
     try {
       JsonReader reader = new JsonReader(new StringReader(text));
-      reader.setLenient(true);
+      reader.setStrictness(Strictness.LENIENT);
       JsonElement parsed = JsonParser.parseReader(reader);
       if (!parsed.isJsonObject()) {
         warnings.add("Config is not a JSON object; using defaults.");
