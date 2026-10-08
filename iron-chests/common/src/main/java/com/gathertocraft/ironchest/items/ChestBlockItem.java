@@ -9,11 +9,8 @@ import net.minecraft.world.item.BlockItem;
 import org.jspecify.annotations.Nullable;
 
 public class ChestBlockItem extends BlockItem {
-  private final ChestTypes tier;
-
   public ChestBlockItem(ChestTypes tier, Properties properties) {
     super(tier.getBlock(), properties);
-    this.tier = tier;
   }
 
   public static List<Component> tooltipLines(ChestTypes tier) {
