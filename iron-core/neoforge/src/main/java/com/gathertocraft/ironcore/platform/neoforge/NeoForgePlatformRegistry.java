@@ -110,7 +110,7 @@ public final class NeoForgePlatformRegistry implements PlatformRegistry {
 
   @Override
   public CreativeModeTab creativeTab(Supplier<ItemStack> icon, Component title) {
-    return CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0).title(title).icon(icon).build();
+    return new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 0).title(title).icon(icon).build();
   }
 
   @Override
