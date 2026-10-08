@@ -1,13 +1,11 @@
 package com.gathertocraft.ironchest.items;
 
 import com.gathertocraft.ironchest.blocks.ChestTypes;
-import java.util.function.Consumer;
+import java.util.ArrayList;
+import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import org.jspecify.annotations.Nullable;
 
 public class ChestBlockItem extends BlockItem {
@@ -18,24 +16,16 @@ public class ChestBlockItem extends BlockItem {
     this.tier = tier;
   }
 
-  @Override
-  public void appendHoverText(
-      ItemStack stack,
-      TooltipContext context,
-      TooltipDisplay display,
-      Consumer<Component> lines,
-      TooltipFlag flag) {
-    super.appendHoverText(stack, context, display, lines, flag);
-    lines.accept(
+  public static List<Component> tooltipLines(ChestTypes tier) {
+    List<Component> lines = new ArrayList<>();
+    lines.add(
         Component.translatable(
-            "tooltip.ironchest.chest.size",
-            this.tier.size(),
-            this.tier.rowCount(),
-            this.tier.rowLength()));
-    String trait = traitKey(this.tier);
+            "tooltip.ironchest.chest.size", tier.size(), tier.rowCount(), tier.rowLength()));
+    String trait = traitKey(tier);
     if (trait != null) {
-      lines.accept(Component.translatable(trait).withStyle(ChatFormatting.GRAY));
+      lines.add(Component.translatable(trait).withStyle(ChatFormatting.GRAY));
     }
+    return lines;
   }
 
   private static @Nullable String traitKey(ChestTypes tier) {
