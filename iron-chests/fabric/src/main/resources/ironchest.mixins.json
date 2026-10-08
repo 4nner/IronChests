@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_25",
   "mixins": [
     "ChestBlockEntityOpenersCounterAccessor",
-    "ChestBlockEntityViewerCountMixin"
+    "ChestBlockEntityViewerCountMixin",
+    "CopperGolemInteractionMixin"
   ],
   "client": [],
   "injectors": {
