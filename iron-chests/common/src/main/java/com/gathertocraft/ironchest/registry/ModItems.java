@@ -8,12 +8,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.ItemLore;
 
 public class ModItems {
 
@@ -64,7 +66,11 @@ public class ModItems {
     register(
         type.registryId,
         () -> {
-          Item.Properties properties = blockItemSettings(type.registryId);
+          Item.Properties properties =
+              blockItemSettings(type.registryId)
+                  .component(
+                      DataComponents.LORE,
+                      new ItemLore(List.of(), ChestBlockItem.tooltipLines(type)));
           if (type == ChestTypes.NETHERITE) {
             properties = properties.fireResistant();
           }
