@@ -84,12 +84,14 @@ class ChestRowsTest {
   }
 
   @Test
-  void flagsDeclareOpenUnderSolidBlocksDefaultFalse() {
+  void flagsDeclareDefaults() {
     List<JsonConfig.BoolOption> flags = ChestRows.flags();
 
-    assertEquals(1, flags.size());
-    assertEquals(ChestRows.OPEN_UNDER_SOLID_BLOCKS, flags.get(0).key());
+    assertEquals(
+        List.of(ChestRows.OPEN_UNDER_SOLID_BLOCKS, ChestRows.COPPER_GOLEM_INTERACTION),
+        flags.stream().map(JsonConfig.BoolOption::key).toList());
     assertFalse(flags.get(0).defaultValue());
+    assertTrue(flags.get(1).defaultValue());
   }
 
   @Test
@@ -100,7 +102,8 @@ class ChestRowsTest {
         {
           "dirt": 9, "copper": 2, "iron": 6, "gold": 9, "diamond": 9, "emerald": 9,
           "crystal": 9, "obsidian": 9, "netherite": 9, "christmas": 3,
-          "openUnderSolidBlocks": true
+          "openUnderSolidBlocks": true,
+          "copperGolemInteraction": false
         }
         """,
         StandardCharsets.UTF_8);
@@ -109,6 +112,7 @@ class ChestRowsTest {
 
     assertEquals(2, result.values().get("copper"));
     assertTrue(result.flags().get(ChestRows.OPEN_UNDER_SOLID_BLOCKS));
+    assertFalse(result.flags().get(ChestRows.COPPER_GOLEM_INTERACTION));
     assertTrue(result.warnings().isEmpty());
   }
 
@@ -129,5 +133,25 @@ class ChestRowsTest {
     assertFalse(result.flags().get(ChestRows.OPEN_UNDER_SOLID_BLOCKS));
     assertTrue(
         result.warnings().stream().anyMatch(w -> w.contains(ChestRows.OPEN_UNDER_SOLID_BLOCKS)));
+  }
+
+  @Test
+  void missingGolemFlagDefaultsToTrueWithWarning(@TempDir Path dir) throws Exception {
+    Files.writeString(
+        dir.resolve(ChestRows.FILE_NAME),
+        """
+        {
+          "dirt": 9, "copper": 5, "iron": 6, "gold": 9, "diamond": 9, "emerald": 9,
+          "crystal": 9, "obsidian": 9, "netherite": 9, "christmas": 3,
+          "openUnderSolidBlocks": false
+        }
+        """,
+        StandardCharsets.UTF_8);
+
+    JsonConfig.LoadResult result = ChestRows.load(dir);
+
+    assertTrue(result.flags().get(ChestRows.COPPER_GOLEM_INTERACTION));
+    assertTrue(
+        result.warnings().stream().anyMatch(w -> w.contains(ChestRows.COPPER_GOLEM_INTERACTION)));
   }
 }

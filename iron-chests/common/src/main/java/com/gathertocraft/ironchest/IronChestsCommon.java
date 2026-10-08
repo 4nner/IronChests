@@ -9,6 +9,7 @@ import com.gathertocraft.ironchest.registry.ModItemGroup;
 import com.gathertocraft.ironchest.registry.ModItems;
 import com.gathertocraft.ironchest.registry.ModScreenHandlerType;
 import com.gathertocraft.ironchest.registry.ModUpgradeBindings;
+import com.gathertocraft.ironchest.support.CopperGolemSupport;
 import com.gathertocraft.ironcore.config.JsonConfig;
 import com.mojang.logging.LogUtils;
 import java.io.IOException;
@@ -37,6 +38,8 @@ public final class IronChestsCommon {
       ChestTypes.setConfiguredRows(rows.values());
       GenericChestBlock.setOpenUnderSolidBlocks(
           rows.flags().getOrDefault(ChestRows.OPEN_UNDER_SOLID_BLOCKS, false));
+      CopperGolemSupport.setEnabled(
+          rows.flags().getOrDefault(ChestRows.COPPER_GOLEM_INTERACTION, true));
     } catch (IOException e) {
       LOGGER.error("Failed to load ironchest.json; using default chest sizes", e);
     }
