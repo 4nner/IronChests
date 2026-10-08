@@ -4,7 +4,6 @@ import com.gathertocraft.ironchest.blocks.ChestTypes;
 import com.gathertocraft.ironchest.config.ChestRows;
 import com.gathertocraft.ironchest.screenhandlers.ChestScreenHandler;
 import com.gathertocraft.ironcore.InventorySanitizer;
-import com.gathertocraft.ironcore.LockableContainer;
 import com.gathertocraft.ironcore.ResizingContainer;
 import com.gathertocraft.ironcore.TierSpec;
 import com.gathertocraft.ironcore.UpgradableContainer;
@@ -38,11 +37,7 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
 public class GenericChestEntity extends ChestBlockEntity
-    implements ResizingContainer,
-        UpgradableContainer,
-        LockableContainer,
-        KeyLinkable,
-        WorldlyContainer {
+    implements ResizingContainer, UpgradableContainer, KeyLinkable, WorldlyContainer {
   private final TierSpec tier;
   private final Supplier<MenuType<ChestScreenHandler>> menuType;
   private final List<ItemStack> pendingOverflow = new ArrayList<>();
