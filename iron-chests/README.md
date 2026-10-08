@@ -37,6 +37,26 @@ into the next tier. The chest keeps its inventory. No need to break it and
 move everything by hand. Upgrades work step by step from a vanilla chest all
 the way up.
 
+## Locks
+
+Craft a Container Key (gold ingot over a stick) and **Shift + Right-Click**
+a chest to lock it. Only you, players on the key, and operators can open,
+break, or upgrade it. Locked chests show who holds the key in their title.
+
+- **Right-Click** with the key (air or locked chest): edit that key's
+  trusted list. Editing a key updates every linked chest at once.
+- **Shift + Right-Click** a locked chest with its own key: unlock it.
+- **Shift + Right-Click** a locked chest with a different key: link the
+  chest to that key instead, staying locked.
+- Rename a key in an anvil to label it; the label shows in chest titles.
+- Operators can reset any chest with two clicks: shift-click with a blank
+  key, then shift-click again with that same key.
+- Locked chests accept no hopper or other automation input or output,
+  regardless of who placed it.
+- Set `enableLocks` to `false` in `config/ironcore.json` (restart required)
+  to disable locking: locked chests behave as unlocked while off, with no
+  data lost, and existing locks resume when re-enabled.
+
 ## Configuration
 
 Chest height is configurable per tier in `config/ironchest.json`, inside
