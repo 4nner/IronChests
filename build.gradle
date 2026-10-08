@@ -15,11 +15,13 @@ subprojects {
       it.options.release = libs.versions.java.get().toInteger()
     }
 
-    // Every jar ships the license. The name derives from archivesName, read
-    // lazily so it picks up each module's value (e.g. LICENSE_IronChests).
+    // Every jar ships the license. The provider is captured at configuration time so the
+    // execution-time rename closure never touches Task.project.
     tasks.named("jar").configure {
-      from(rootProject.file("LICENSE")) {
-        rename { "LICENSE_" + project.base.archivesName.get() }
+      def licenseFile = rootProject.file("LICENSE")
+      def archivesName = project.base.archivesName
+      from(licenseFile) {
+        rename { "LICENSE_" + archivesName.get() }
       }
     }
   }
