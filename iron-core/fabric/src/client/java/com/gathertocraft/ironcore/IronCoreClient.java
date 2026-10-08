@@ -4,7 +4,9 @@ import com.gathertocraft.ironcore.client.KeyEditorScreen;
 import com.gathertocraft.ironcore.lock.KeyEditorMenus;
 import com.gathertocraft.ironcore.lock.KeyEditorNet;
 import com.gathertocraft.ironcore.lock.KeyEditorPayloads;
+import com.gathertocraft.ironcore.lock.KeyItem;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.minecraft.client.Minecraft;
@@ -15,6 +17,12 @@ public class IronCoreClient implements ClientModInitializer {
   public void onInitializeClient() {
     MenuScreens.register(KeyEditorMenus.getType(), KeyEditorScreen::new);
     KeyEditorNet.init(ClientPlayNetworking::send);
+    ItemTooltipCallback.EVENT.register(
+        (stack, context, flag, lines) -> {
+          if (stack.getItem() instanceof KeyItem) {
+            lines.addAll(KeyItem.tooltipLines(stack));
+          }
+        });
     PayloadTypeRegistry.clientboundPlay()
         .register(KeyEditorPayloads.Sync.TYPE, KeyEditorPayloads.Sync.CODEC);
     ClientPlayNetworking.registerGlobalReceiver(

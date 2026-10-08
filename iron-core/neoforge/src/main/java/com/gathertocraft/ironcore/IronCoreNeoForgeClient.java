@@ -4,11 +4,16 @@ import com.gathertocraft.ironcore.client.KeyEditorScreen;
 import com.gathertocraft.ironcore.lock.KeyEditorMenus;
 import com.gathertocraft.ironcore.lock.KeyEditorNet;
 import com.gathertocraft.ironcore.lock.KeyEditorPayloads;
+import com.gathertocraft.ironcore.lock.KeyItem;
+import com.mojang.datafixers.util.Either;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.RenderTooltipEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 @Mod(value = IronCoreCommon.MOD_ID, dist = Dist.CLIENT)
@@ -24,6 +29,14 @@ public class IronCoreNeoForgeClient {
                 .send(
                     new net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket(
                         payload)));
+    NeoForge.EVENT_BUS.addListener(
+        (RenderTooltipEvent.GatherComponents event) -> {
+          if (event.getItemStack().getItem() instanceof KeyItem) {
+            for (Component line : KeyItem.tooltipLines(event.getItemStack())) {
+              event.getTooltipElements().add(Either.left(line));
+            }
+          }
+        });
     modBus.addListener(
         (RegisterPayloadHandlersEvent event) ->
             event
