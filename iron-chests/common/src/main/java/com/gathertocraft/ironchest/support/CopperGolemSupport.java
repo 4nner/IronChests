@@ -2,6 +2,7 @@ package com.gathertocraft.ironchest.support;
 
 import com.gathertocraft.ironchest.blocks.ChestTypes;
 import com.gathertocraft.ironchest.blocks.GenericChestBlock;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -10,8 +11,9 @@ import net.minecraft.world.level.block.state.BlockState;
  *
  * <p>Vanilla golems only deposit into {@code minecraft:chest} and {@code minecraft:trapped_chest}.
  * Loader mixins consult this helper so every tier behaves as a deposit target. Golems never take
- * from these chests: an empty-handed golem reports no match. The Dirt chest is excluded: its
- * dirt-only rule is enforced in {@code canPlaceItem}, which the golem deposit path bypasses.
+ * from these chests: an empty-handed golem reports no match. The Dirt chest only accepts golems
+ * carrying dirt: its dirt-only rule is enforced in {@code canPlaceItem}, which the golem deposit
+ * path bypasses, so the held item is checked here before the golem commits.
  */
 public final class CopperGolemSupport {
   private CopperGolemSupport() {}
@@ -31,14 +33,16 @@ public final class CopperGolemSupport {
    * deposit target.
    */
   public static boolean shouldInteract(PathfinderMob mob, BlockState state) {
-    if (!enabled || !isEligibleChest(state)) {
+    if (!enabled || !(state.getBlock() instanceof GenericChestBlock chest)) {
       return false;
     }
-    return !mob.getMainHandItem().isEmpty();
+    if (mob.getMainHandItem().isEmpty()) {
+      return false;
+    }
+    return !isDirtChest(chest) || mob.getMainHandItem().is(ItemTags.DIRT);
   }
 
-  private static boolean isEligibleChest(BlockState state) {
-    return state.getBlock() instanceof GenericChestBlock chest
-        && chest.getType() != ChestTypes.DIRT;
+  private static boolean isDirtChest(GenericChestBlock chest) {
+    return chest.getType() == ChestTypes.DIRT;
   }
 }
