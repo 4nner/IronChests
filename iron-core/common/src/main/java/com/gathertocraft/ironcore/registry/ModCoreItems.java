@@ -57,7 +57,18 @@ public class ModCoreItems {
                             Registries.ITEM,
                             Identifier.fromNamespaceAndPath(
                                 IronCoreCommon.MOD_ID, "container_key")))
-                    .stacksTo(1)));
+                    .stacksTo(1)
+                    .component(
+                        DataComponents.LORE,
+                        new ItemLore(
+                            List.of(),
+                            List.of(
+                                Component.translatable("tooltip.ironcore.container_key.edit")
+                                    .withStyle(ChatFormatting.GRAY),
+                                Component.translatable("tooltip.ironcore.container_key.lock")
+                                    .withStyle(ChatFormatting.GRAY),
+                                Component.translatable("tooltip.ironcore.container_key.rename")
+                                    .withStyle(ChatFormatting.DARK_GRAY))))));
   }
 
   public static void registerItems() {
