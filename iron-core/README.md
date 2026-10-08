@@ -22,3 +22,9 @@ Loader API only (Fabric API on Fabric, nothing extra on NeoForge).
   register under their own namespace.
 - **Inventory helpers**: capacity clamping and sanitizing when containers
   change size.
+- **Container Key locks**: key-linked container locking any mod can adopt.
+  A `Container Key` mints a registry entry on first use; locked containers
+  store the key id and resolve the live entry on every check, so edits apply
+  to all linked containers instantly. Implement `KeyLinkable` on a block
+  entity and delegate open/break guards to `LockGuards`. OP level 2+
+  bypasses everything.
