@@ -1,7 +1,9 @@
 package com.gathertocraft.ironcore;
 
+import com.gathertocraft.ironcore.handtruck.HandTruckEffects;
 import com.gathertocraft.ironcore.lock.KeyEditorPayloads;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
@@ -20,5 +22,11 @@ public class IronCore implements ModInitializer {
     ServerPlayNetworking.registerGlobalReceiver(
         KeyEditorPayloads.Remove.TYPE,
         (payload, context) -> KeyEditorPayloads.handleRemove(context.player(), payload));
+    ServerTickEvents.END_SERVER_TICK.register(
+        server -> {
+          for (var player : server.getPlayerList().getPlayers()) {
+            HandTruckEffects.tickPlayer(player);
+          }
+        });
   }
 }
