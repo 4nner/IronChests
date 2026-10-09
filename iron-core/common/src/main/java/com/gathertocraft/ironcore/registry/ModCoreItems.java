@@ -38,7 +38,8 @@ public class ModCoreItems {
           "obsidian_upgrade",
           "netherite_upgrade",
           "container_key",
-          "hand_truck");
+          "hand_truck",
+          "enhanced_hand_truck");
 
   static {
     register("copper_upgrade", MaterialTier.COPPER);
@@ -72,6 +73,9 @@ public class ModCoreItems {
                                 Component.translatable("tooltip.ironcore.container_key.rename")
                                     .withStyle(ChatFormatting.DARK_GRAY))))));
     ITEMS.put("hand_truck", () -> new HandTruckItem(handTruckSettings("hand_truck", 25), false));
+    ITEMS.put(
+        "enhanced_hand_truck",
+        () -> new HandTruckItem(handTruckSettings("enhanced_hand_truck", 30), true));
   }
 
   public static void registerItems() {

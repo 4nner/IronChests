@@ -26,6 +26,7 @@
   "item.ironcore.netherite_upgrade.tooltip.size": "108 slots (12x9) -> 126 slots (14x9)",
   "item.ironcore.container_key": "Container Key",
   "item.ironcore.hand_truck": "Hand Truck",
+  "item.ironcore.enhanced_hand_truck": "Enhanced Hand Truck",
   "tooltip.ironcore.hand_truck.empty": "Sneak + Right-Click a container to lift it",
   "tooltip.ironcore.hand_truck.carrying": "Carrying: %s",
   "message.ironcore.hand_truck.not_movable": "That cannot be lifted with a hand truck.",

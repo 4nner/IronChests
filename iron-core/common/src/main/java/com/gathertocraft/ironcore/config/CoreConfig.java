@@ -19,14 +19,14 @@ public final class CoreConfig {
       """;
 
   private static volatile boolean locksEnabled = true;
-  private static volatile boolean handTruckMovesSpawners = false;
+  private static volatile boolean handTruckMovesSpawners = true;
 
   public static List<JsonConfig.BoolOption> flags() {
     return List.of(
         new JsonConfig.BoolOption(ENABLE_LOCKS, true, "Enable Container Key locks (true/false)"),
         new JsonConfig.BoolOption(
             HAND_TRUCK_SPAWNERS,
-            false,
+            true,
             "Allow the Enhanced Hand Truck to lift spawners (true/false)"));
   }
 
@@ -34,7 +34,7 @@ public final class CoreConfig {
     JsonConfig.LoadResult result =
         JsonConfig.loadOrCreate(configDir.resolve(FILE_NAME), HEADER, List.of(), flags());
     locksEnabled = result.flags().getOrDefault(ENABLE_LOCKS, true);
-    handTruckMovesSpawners = result.flags().getOrDefault(HAND_TRUCK_SPAWNERS, false);
+    handTruckMovesSpawners = result.flags().getOrDefault(HAND_TRUCK_SPAWNERS, true);
     return result;
   }
 

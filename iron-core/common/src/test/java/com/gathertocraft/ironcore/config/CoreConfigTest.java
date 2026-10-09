@@ -16,7 +16,7 @@ class CoreConfigTest {
     assertEquals(CoreConfig.ENABLE_LOCKS, flags.get(0).key());
     assertTrue(flags.get(0).defaultValue());
     assertEquals(CoreConfig.HAND_TRUCK_SPAWNERS, flags.get(1).key());
-    assertFalse(flags.get(1).defaultValue());
+    assertTrue(flags.get(1).defaultValue());
   }
 
   @Test
@@ -44,7 +44,7 @@ class CoreConfigTest {
   void parseFallsBackToDefault() {
     JsonConfig.LoadResult missing = JsonConfig.parse("{}", List.of(), CoreConfig.flags());
     assertTrue(missing.flags().get("enableLocks"));
-    assertFalse(missing.flags().get("handTruckCanMoveSpawners"));
+    assertTrue(missing.flags().get("handTruckCanMoveSpawners"));
     assertTrue(missing.corrected());
 
     JsonConfig.LoadResult invalid =
@@ -53,7 +53,7 @@ class CoreConfigTest {
             List.of(),
             CoreConfig.flags());
     assertTrue(invalid.flags().get("enableLocks"));
-    assertFalse(invalid.flags().get("handTruckCanMoveSpawners"));
+    assertTrue(invalid.flags().get("handTruckCanMoveSpawners"));
     assertTrue(invalid.corrected());
     assertFalse(invalid.warnings().isEmpty());
   }
