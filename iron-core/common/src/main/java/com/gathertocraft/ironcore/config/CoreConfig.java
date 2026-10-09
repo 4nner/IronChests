@@ -10,6 +10,7 @@ public final class CoreConfig {
 
   public static final String FILE_NAME = "ironcore.json";
   public static final String ENABLE_LOCKS = "enableLocks";
+  public static final String HAND_TRUCK_SPAWNERS = "handTruckCanMoveSpawners";
 
   private static final String HEADER =
       """
@@ -18,20 +19,30 @@ public final class CoreConfig {
       """;
 
   private static volatile boolean locksEnabled = true;
+  private static volatile boolean handTruckMovesSpawners = false;
 
   public static List<JsonConfig.BoolOption> flags() {
     return List.of(
-        new JsonConfig.BoolOption(ENABLE_LOCKS, true, "Enable Container Key locks (true/false)"));
+        new JsonConfig.BoolOption(ENABLE_LOCKS, true, "Enable Container Key locks (true/false)"),
+        new JsonConfig.BoolOption(
+            HAND_TRUCK_SPAWNERS,
+            false,
+            "Allow the Enhanced Hand Truck to lift spawners (true/false)"));
   }
 
   public static JsonConfig.LoadResult load(Path configDir) throws IOException {
     JsonConfig.LoadResult result =
         JsonConfig.loadOrCreate(configDir.resolve(FILE_NAME), HEADER, List.of(), flags());
     locksEnabled = result.flags().getOrDefault(ENABLE_LOCKS, true);
+    handTruckMovesSpawners = result.flags().getOrDefault(HAND_TRUCK_SPAWNERS, false);
     return result;
   }
 
   public static boolean locksEnabled() {
     return locksEnabled;
+  }
+
+  public static boolean handTruckMovesSpawners() {
+    return handTruckMovesSpawners;
   }
 }
