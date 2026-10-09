@@ -8,6 +8,7 @@ import com.gathertocraft.ironcore.ResizingContainer;
 import com.gathertocraft.ironcore.TierSpec;
 import com.gathertocraft.ironcore.UpgradableContainer;
 import com.gathertocraft.ironcore.config.CoreConfig;
+import com.gathertocraft.ironcore.handtruck.HandTruckSupport;
 import com.gathertocraft.ironcore.lock.KeyItem;
 import com.gathertocraft.ironcore.lock.KeyLinkable;
 import com.gathertocraft.ironcore.lock.KeyRegistry;
@@ -201,6 +202,9 @@ public class GenericChestEntity extends ChestBlockEntity
   /** The Dirt Chest 9000 only stores block under the {@code minecraft:dirt} tag. */
   @Override
   public boolean canPlaceItem(int slot, ItemStack stack) {
+    if (HandTruckSupport.isLoaded(stack)) {
+      return false;
+    }
     if (this.tier == ChestTypes.DIRT && !stack.is(ItemTags.DIRT)) {
       return false;
     }

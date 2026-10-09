@@ -36,6 +36,7 @@
   "message.ironcore.hand_truck.spawner_basic": "Only the Enhanced Hand Truck can lift spawners.",
   "message.ironcore.hand_truck.spawner_disabled": "Moving spawners is disabled on this server.",
   "message.ironcore.hand_truck.no_room": "No room to set that down here.",
+  "message.ironcore.hand_truck.not_in_containers": "A loaded hand truck must stay in your inventory.",
   "tooltip.ironcore.container_key.code": "Key #%s",
   "tooltip.ironcore.container_key.edit": "Right-Click to edit trusted list",
   "tooltip.ironcore.container_key.lock": "Shift+Right-Click container to lock",

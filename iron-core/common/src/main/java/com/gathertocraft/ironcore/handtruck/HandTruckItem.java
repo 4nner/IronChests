@@ -45,6 +45,16 @@ public class HandTruckItem extends Item {
     this.enhanced = enhanced;
   }
 
+  /**
+   * Hand trucks never fit inside container items (bundles, shulker-box items). The method takes no
+   * stack, so empty trucks are excluded too; block inventories are unaffected and handled by the
+   * loaded-truck guards instead.
+   */
+  @Override
+  public boolean canFitInsideContainerItems() {
+    return false;
+  }
+
   @Override
   public InteractionResult useOn(UseOnContext context) {
     Level level = context.getLevel();
