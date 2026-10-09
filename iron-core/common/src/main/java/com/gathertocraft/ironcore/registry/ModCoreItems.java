@@ -4,6 +4,7 @@ import com.gathertocraft.ironcore.IronCoreCommon;
 import com.gathertocraft.ironcore.MaterialTier;
 import com.gathertocraft.ironcore.TieredUpgradeStrategy;
 import com.gathertocraft.ironcore.UpgradeItem;
+import com.gathertocraft.ironcore.handtruck.HandTruckItem;
 import com.gathertocraft.ironcore.lock.KeyItem;
 import com.gathertocraft.ironcore.platform.Platforms;
 import java.util.LinkedHashMap;
@@ -36,7 +37,8 @@ public class ModCoreItems {
           "crystal_upgrade",
           "obsidian_upgrade",
           "netherite_upgrade",
-          "container_key");
+          "container_key",
+          "hand_truck");
 
   static {
     register("copper_upgrade", MaterialTier.COPPER);
@@ -69,6 +71,7 @@ public class ModCoreItems {
                                     .withStyle(ChatFormatting.GRAY),
                                 Component.translatable("tooltip.ironcore.container_key.rename")
                                     .withStyle(ChatFormatting.DARK_GRAY))))));
+    ITEMS.put("hand_truck", () -> new HandTruckItem(handTruckSettings("hand_truck"), false));
   }
 
   public static void registerItems() {
@@ -94,6 +97,14 @@ public class ModCoreItems {
 
   private static void register(String id, MaterialTier target) {
     ITEMS.put(id, () -> new UpgradeItem(new TieredUpgradeStrategy(target), settings(id)));
+  }
+
+  private static Item.Properties handTruckSettings(String name) {
+    return new Item.Properties()
+        .setId(
+            ResourceKey.create(
+                Registries.ITEM, Identifier.fromNamespaceAndPath(IronCoreCommon.MOD_ID, name)))
+        .stacksTo(1);
   }
 
   private static Item.Properties settings(String name) {

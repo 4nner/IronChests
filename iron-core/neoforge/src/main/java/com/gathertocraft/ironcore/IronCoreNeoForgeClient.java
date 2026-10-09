@@ -1,6 +1,7 @@
 package com.gathertocraft.ironcore;
 
 import com.gathertocraft.ironcore.client.KeyEditorScreen;
+import com.gathertocraft.ironcore.handtruck.HandTruckItem;
 import com.gathertocraft.ironcore.lock.KeyEditorMenus;
 import com.gathertocraft.ironcore.lock.KeyEditorNet;
 import com.gathertocraft.ironcore.lock.KeyEditorPayloads;
@@ -33,6 +34,10 @@ public class IronCoreNeoForgeClient {
         (RenderTooltipEvent.GatherComponents event) -> {
           if (event.getItemStack().getItem() instanceof KeyItem) {
             for (Component line : KeyItem.tooltipLines(event.getItemStack())) {
+              event.getTooltipElements().add(Either.left(line));
+            }
+          } else if (event.getItemStack().getItem() instanceof HandTruckItem) {
+            for (Component line : HandTruckItem.tooltipLines(event.getItemStack())) {
               event.getTooltipElements().add(Either.left(line));
             }
           }

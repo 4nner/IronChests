@@ -1,6 +1,7 @@
 package com.gathertocraft.ironcore;
 
 import com.gathertocraft.ironcore.client.KeyEditorScreen;
+import com.gathertocraft.ironcore.handtruck.HandTruckItem;
 import com.gathertocraft.ironcore.lock.KeyEditorMenus;
 import com.gathertocraft.ironcore.lock.KeyEditorNet;
 import com.gathertocraft.ironcore.lock.KeyEditorPayloads;
@@ -21,6 +22,8 @@ public class IronCoreClient implements ClientModInitializer {
         (stack, context, flag, lines) -> {
           if (stack.getItem() instanceof KeyItem) {
             lines.addAll(KeyItem.tooltipLines(stack));
+          } else if (stack.getItem() instanceof HandTruckItem) {
+            lines.addAll(HandTruckItem.tooltipLines(stack));
           }
         });
     PayloadTypeRegistry.clientboundPlay()
