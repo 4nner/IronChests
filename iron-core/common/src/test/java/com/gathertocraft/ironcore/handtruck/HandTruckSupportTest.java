@@ -10,6 +10,8 @@ import static com.gathertocraft.ironcore.handtruck.HandTruckSupport.Deny.SPAWNER
 import static com.gathertocraft.ironcore.handtruck.HandTruckSupport.Deny.SPAWNER_WRONG_TRUCK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.Identifier;
 import org.junit.jupiter.api.Test;
 
 class HandTruckSupportTest {
@@ -71,5 +73,29 @@ class HandTruckSupportTest {
   @Test
   void spawnerAllowed() {
     assertEquals(ALLOW, check(true, false, false, false, false, false, true, true));
+  }
+
+  @Test
+  void containerMoveCostsOne() {
+    assertEquals(
+        1,
+        HandTruckSupport.moveCost(
+            new CarriedBlock(
+                Identifier.withDefaultNamespace("chest"),
+                new CompoundTag(),
+                new CompoundTag(),
+                false)));
+  }
+
+  @Test
+  void spawnerMoveCostsTen() {
+    assertEquals(
+        10,
+        HandTruckSupport.moveCost(
+            new CarriedBlock(
+                Identifier.withDefaultNamespace("chest"),
+                new CompoundTag(),
+                new CompoundTag(),
+                true)));
   }
 }

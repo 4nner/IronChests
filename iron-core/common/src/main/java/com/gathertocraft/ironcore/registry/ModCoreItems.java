@@ -71,7 +71,7 @@ public class ModCoreItems {
                                     .withStyle(ChatFormatting.GRAY),
                                 Component.translatable("tooltip.ironcore.container_key.rename")
                                     .withStyle(ChatFormatting.DARK_GRAY))))));
-    ITEMS.put("hand_truck", () -> new HandTruckItem(handTruckSettings("hand_truck"), false));
+    ITEMS.put("hand_truck", () -> new HandTruckItem(handTruckSettings("hand_truck", 25), false));
   }
 
   public static void registerItems() {
@@ -99,12 +99,13 @@ public class ModCoreItems {
     ITEMS.put(id, () -> new UpgradeItem(new TieredUpgradeStrategy(target), settings(id)));
   }
 
-  private static Item.Properties handTruckSettings(String name) {
+  private static Item.Properties handTruckSettings(String name, int durability) {
     return new Item.Properties()
         .setId(
             ResourceKey.create(
                 Registries.ITEM, Identifier.fromNamespaceAndPath(IronCoreCommon.MOD_ID, name)))
-        .stacksTo(1);
+        .stacksTo(1)
+        .durability(durability);
   }
 
   private static Item.Properties settings(String name) {

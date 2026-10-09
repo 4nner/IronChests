@@ -172,6 +172,9 @@ public class HandTruckItem extends Item {
         oriented.getSoundType().getPitch());
 
     stack.remove(ModDataComponents.carriedBlock());
+    if (!player.getAbilities().instabuild) {
+      stack.hurtAndBreak(HandTruckSupport.moveCost(carried), player, context.getHand());
+    }
     return InteractionResult.SUCCESS_SERVER;
   }
 

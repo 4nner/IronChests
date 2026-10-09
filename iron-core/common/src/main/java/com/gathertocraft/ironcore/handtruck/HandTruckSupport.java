@@ -75,6 +75,11 @@ public final class HandTruckSupport {
     return Deny.ALLOW;
   }
 
+  /** Durability cost of completing a move: containers 1, spawner moves 10. */
+  public static int moveCost(CarriedBlock carried) {
+    return carried.spawnerMove() ? 10 : 1;
+  }
+
   /** True for vanilla spawners and trial spawners, the only spawner kinds trucks handle. */
   public static boolean isSpawner(BlockEntity entity) {
     return entity instanceof SpawnerBlockEntity || entity instanceof TrialSpawnerBlockEntity;
