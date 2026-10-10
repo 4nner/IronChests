@@ -4,7 +4,6 @@ import com.gathertocraft.ironcore.client.KeyEditorScreen;
 import com.gathertocraft.ironcore.handtruck.HandTruckItem;
 import com.gathertocraft.ironcore.lock.KeyEditorMenus;
 import com.gathertocraft.ironcore.lock.KeyEditorNet;
-import com.gathertocraft.ironcore.lock.KeyEditorPayloads;
 import com.gathertocraft.ironcore.lock.KeyItem;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.client.Minecraft;
@@ -15,7 +14,6 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RenderTooltipEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 @Mod(value = IronCoreCommon.MOD_ID, dist = Dist.CLIENT)
 public class IronCoreNeoForgeClient {
@@ -42,21 +40,5 @@ public class IronCoreNeoForgeClient {
             }
           }
         });
-    modBus.addListener(
-        (RegisterPayloadHandlersEvent event) ->
-            event
-                .registrar(IronCoreCommon.MOD_ID)
-                .playToClient(
-                    KeyEditorPayloads.Sync.TYPE,
-                    KeyEditorPayloads.Sync.CODEC,
-                    (payload, context) ->
-                        Minecraft.getInstance()
-                            .execute(
-                                () -> {
-                                  if (Minecraft.getInstance().gui.screen()
-                                      instanceof KeyEditorScreen screen) {
-                                    screen.applySync(payload.decode());
-                                  }
-                                })));
   }
 }
