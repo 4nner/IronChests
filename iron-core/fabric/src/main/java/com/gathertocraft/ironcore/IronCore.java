@@ -16,6 +16,8 @@ public class IronCore implements ModInitializer {
         .register(KeyEditorPayloads.Add.TYPE, KeyEditorPayloads.Add.CODEC);
     PayloadTypeRegistry.serverboundPlay()
         .register(KeyEditorPayloads.Remove.TYPE, KeyEditorPayloads.Remove.CODEC);
+    PayloadTypeRegistry.clientboundPlay()
+        .register(KeyEditorPayloads.Sync.TYPE, KeyEditorPayloads.Sync.CODEC);
     ServerPlayNetworking.registerGlobalReceiver(
         KeyEditorPayloads.Add.TYPE,
         (payload, context) -> KeyEditorPayloads.handleAdd(context.player(), payload));

@@ -1,9 +1,11 @@
 package com.gathertocraft.ironcore;
 
+import com.gathertocraft.ironcore.client.KeyEditorScreen;
 import com.gathertocraft.ironcore.handtruck.HandTruckEffects;
 import com.gathertocraft.ironcore.lock.KeyEditorPayloads;
 import com.gathertocraft.ironcore.platform.Platforms;
 import com.gathertocraft.ironcore.platform.neoforge.NeoForgePlatformRegistry;
+import net.minecraft.client.Minecraft;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -43,6 +45,18 @@ public class IronCoreNeoForge {
                   context.enqueueWork(() -> KeyEditorPayloads.handleRemove(player, payload));
                 }
               });
+          registrar.playToClient(
+              KeyEditorPayloads.Sync.TYPE,
+              KeyEditorPayloads.Sync.CODEC,
+              (payload, context) ->
+                  Minecraft.getInstance()
+                      .execute(
+                          () -> {
+                            if (Minecraft.getInstance().gui.screen()
+                                instanceof KeyEditorScreen screen) {
+                              screen.applySync(payload.decode());
+                            }
+                          }));
         });
   }
 }
