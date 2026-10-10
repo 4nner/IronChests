@@ -4,6 +4,7 @@ import com.gathertocraft.ironcore.ResizingContainer;
 import com.gathertocraft.ironcore.config.CoreConfig;
 import com.gathertocraft.ironcore.lock.LockGuards;
 import com.gathertocraft.ironcore.registry.ModDataComponents;
+import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -219,17 +220,27 @@ public class HandTruckItem extends Item {
     };
   }
 
-  /** Tooltip lines: hint when empty, carried block name when loaded. */
+  /** Tooltip lines: purpose first, then state hint; enhanced trucks note spawners. */
   public static List<Component> tooltipLines(ItemStack stack) {
+    List<Component> lines = new ArrayList<>();
+    lines.add(
+        Component.translatable("tooltip.ironcore.hand_truck.desc").withStyle(ChatFormatting.GOLD));
     CarriedBlock carried = stack.get(ModDataComponents.carriedBlock());
     if (carried == null) {
-      return List.of(
+      lines.add(
           Component.translatable("tooltip.ironcore.hand_truck.empty")
               .withStyle(ChatFormatting.GRAY));
+    } else {
+      Block block = BuiltInRegistries.BLOCK.getValue(carried.blockId());
+      lines.add(
+          Component.translatable("tooltip.ironcore.hand_truck.carrying", block.getName())
+              .withStyle(ChatFormatting.GOLD));
     }
-    Block block = BuiltInRegistries.BLOCK.getValue(carried.blockId());
-    return List.of(
-        Component.translatable("tooltip.ironcore.hand_truck.carrying", block.getName())
-            .withStyle(ChatFormatting.GOLD));
+    if (stack.getItem() instanceof HandTruckItem truck && truck.enhanced) {
+      lines.add(
+          Component.translatable("tooltip.ironcore.hand_truck.spawner")
+              .withStyle(ChatFormatting.GOLD));
+    }
+    return List.copyOf(lines);
   }
 }
