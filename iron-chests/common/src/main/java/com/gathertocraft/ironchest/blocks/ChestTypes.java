@@ -180,7 +180,7 @@ public enum ChestTypes implements TierSpec {
               .requiresCorrectToolForDrops();
       case CRYSTAL ->
           BlockBehaviour.Properties.of()
-              .strength(3.0F, 3.0F)
+              .strength(0.3F, 0.3F)
               .sound(SoundType.AMETHYST)
               .noOcclusion()
               .requiresCorrectToolForDrops();
