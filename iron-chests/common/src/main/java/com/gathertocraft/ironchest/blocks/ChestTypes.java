@@ -195,8 +195,8 @@ public enum ChestTypes implements TierSpec {
               .sound(SoundType.NETHERITE_BLOCK)
               .requiresCorrectToolForDrops();
       case WOOD, CHRISTMAS ->
-          BlockBehaviour.Properties.of().strength(3.0F, 3.0F).sound(SoundType.WOOD);
-      case DIRT -> BlockBehaviour.Properties.of().strength(2.5F, 3.0F).sound(SoundType.GRAVEL);
+          BlockBehaviour.Properties.of().strength(2.5F, 2.5F).sound(SoundType.WOOD);
+      case DIRT -> BlockBehaviour.Properties.of().strength(0.5F, 0.5F).sound(SoundType.GRAVEL);
       default -> BlockBehaviour.Properties.of();
     };
   }
