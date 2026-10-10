@@ -9,7 +9,6 @@ import com.gathertocraft.ironcore.lock.KeyItem;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 
@@ -26,8 +25,6 @@ public class IronCoreClient implements ClientModInitializer {
             lines.addAll(HandTruckItem.tooltipLines(stack));
           }
         });
-    PayloadTypeRegistry.clientboundPlay()
-        .register(KeyEditorPayloads.Sync.TYPE, KeyEditorPayloads.Sync.CODEC);
     ClientPlayNetworking.registerGlobalReceiver(
         KeyEditorPayloads.Sync.TYPE,
         (payload, context) -> {

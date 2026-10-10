@@ -63,7 +63,18 @@ in
 
   # https://devenv.sh/scripts/
   scripts = {
-    build.exec = "./gradlew build";
+    # Builds everything, then collects the 4 distributable jars
+    build.exec = ''
+      ./gradlew build
+      rm -rf dist && mkdir dist
+      chest=$(sed -n 's/^ironchest_version=//p' gradle.properties)
+      core=$(sed -n 's/^ironcore_version=//p' gradle.properties)
+      cp iron-chests/fabric/build/libs/IronChests-"$chest".jar "dist/IronChests-$chest-Fabric.jar"
+      cp iron-chests/neoforge/build/libs/IronChests-neoforge-"$chest".jar "dist/IronChests-$chest-NeoForge.jar"
+      cp iron-core/fabric/build/libs/IronCore-"$core".jar "dist/IronCore-$core-Fabric.jar"
+      cp iron-core/neoforge/build/libs/IronCore-neoforge-"$core".jar "dist/IronCore-$core-NeoForge.jar"
+      ls dist
+    '';
     check.exec = "./gradlew check";
     clean.exec = "./gradlew clean";
     test.exec = "./gradlew test";

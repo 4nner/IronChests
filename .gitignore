@@ -33,6 +33,9 @@ bin/
 run/
 manifest.json
 
+# devenv build script output (collected mod jars, see devenv.nix)
+/dist/
+
 # java
 
 hs_err_*.log
