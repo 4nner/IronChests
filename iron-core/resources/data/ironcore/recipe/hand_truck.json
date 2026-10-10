@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  F",
+    "  F",
+    "IIC"
+  ],
+  "key": {
+    "F": "#minecraft:fences",
+    "C": "minecraft:coal_block",
+    "I": "minecraft:iron_ingot"
+  },
+  "result": {
+    "id": "ironcore:hand_truck",
+    "count": 1
+  }
+}

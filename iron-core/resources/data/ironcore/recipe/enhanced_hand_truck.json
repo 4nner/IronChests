@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " D ",
+    "DHD",
+    " D "
+  ],
+  "key": {
+    "D": "minecraft:diamond",
+    "H": "ironcore:hand_truck"
+  },
+  "result": {
+    "id": "ironcore:enhanced_hand_truck",
+    "count": 1
+  }
+}

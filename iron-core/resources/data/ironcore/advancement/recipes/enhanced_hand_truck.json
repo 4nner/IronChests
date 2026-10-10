@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_hand_truck": {
+      "conditions": {
+        "items": [
+          {
+            "items": "ironcore:hand_truck"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "ironcore:enhanced_hand_truck"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_hand_truck"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "ironcore:enhanced_hand_truck"
+    ]
+  }
+}
