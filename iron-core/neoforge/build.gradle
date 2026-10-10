@@ -2,6 +2,9 @@ plugins {
   alias(libs.plugins.neogradle.moddev)
 }
 
+// The jar task below reads common's classes; evaluate it first.
+evaluationDependsOn(":iron-core:common")
+
 version = project.ironcore_version
 group = project.ironcore_maven_group
 
@@ -23,9 +26,15 @@ repositories {
 dependencies {
   implementation libs.neoforge
 
-  // implementation: compile against common; jarJar: nest common into the mod jar.
+  // Compile against common; its classes are inlined into this jar below.
   implementation(project(":iron-core:common"))
-  jarJar(project(":iron-core:common"))
+}
+
+// Fat-jar common classes: nested Jar-in-Jar jars load as plugin-layer
+// libraries, which cannot reference Minecraft code.
+tasks.named("jar") {
+  from(project(":iron-core:common").sourceSets.main.output.classesDirs)
+  duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.EXCLUDE
 }
 
 sourceSets {
