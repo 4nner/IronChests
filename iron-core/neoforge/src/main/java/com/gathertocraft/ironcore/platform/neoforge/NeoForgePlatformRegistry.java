@@ -10,6 +10,7 @@ import java.util.function.BiFunction;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -18,6 +19,7 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -35,7 +37,9 @@ public final class NeoForgePlatformRegistry implements PlatformRegistry {
       DeferredRegister<Item> items,
       DeferredRegister<BlockEntityType<?>> blockEntityTypes,
       DeferredRegister<MenuType<?>> menuTypes,
-      DeferredRegister<CreativeModeTab> tabs) {}
+      DeferredRegister<CreativeModeTab> tabs,
+      DeferredRegister<DataComponentType<?>> dataComponents,
+      DeferredRegister<RecipeSerializer<?>> recipeSerializers) {}
 
   private final Map<String, Registers> registers = new HashMap<>();
   private final Map<String, IEventBus> buses = new HashMap<>();
@@ -54,12 +58,16 @@ public final class NeoForgePlatformRegistry implements PlatformRegistry {
             DeferredRegister.create(BuiltInRegistries.ITEM, namespace),
             DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, namespace),
             DeferredRegister.create(BuiltInRegistries.MENU, namespace),
-            DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, namespace));
+            DeferredRegister.create(BuiltInRegistries.CREATIVE_MODE_TAB, namespace),
+            DeferredRegister.create(BuiltInRegistries.DATA_COMPONENT_TYPE, namespace),
+            DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER, namespace));
     created.blocks.register(modBus);
     created.items.register(modBus);
     created.blockEntityTypes.register(modBus);
     created.menuTypes.register(modBus);
     created.tabs.register(modBus);
+    created.dataComponents.register(modBus);
+    created.recipeSerializers.register(modBus);
     this.registers.put(namespace, created);
     this.buses.put(namespace, modBus);
   }
@@ -98,6 +106,15 @@ public final class NeoForgePlatformRegistry implements PlatformRegistry {
     if (registry == BuiltInRegistries.CREATIVE_MODE_TAB) {
       return (Supplier<T>)
           target.tabs.register(id.getPath(), () -> (CreativeModeTab) supplier.get());
+    }
+    if (registry == BuiltInRegistries.DATA_COMPONENT_TYPE) {
+      return (Supplier<T>)
+          target.dataComponents.register(id.getPath(), () -> (DataComponentType<?>) supplier.get());
+    }
+    if (registry == BuiltInRegistries.RECIPE_SERIALIZER) {
+      return (Supplier<T>)
+          target.recipeSerializers.register(
+              id.getPath(), () -> (RecipeSerializer<?>) supplier.get());
     }
     throw new IllegalArgumentException("Unsupported registry: " + registry.key());
   }
