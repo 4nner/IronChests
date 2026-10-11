@@ -26,6 +26,17 @@ Supports Minecraft 26.x. See each mod's README for details.
 
 Maintained by [GatherToCraft](https://www.gathertocraft.com), a team-finder portal that matches Minecraft players by playstyle, edition, schedule, and modpacks.
 
+## Showcase
+
+![All tiers, left to right: Christmas, Dirt 9000!, Copper, Iron, Gold, Diamond, Emerald, Crystal, Obsidian, Netherite](./docs/images/chests-lineup.png)
+![Chest upgrades](./docs/images/chest-upgrades.png)
+![Crystal chest shows its contents](./docs/images/crystal-chest.png)
+![Copper golem depositing into a copper chest](./docs/images/copper-golem.png)
+![Locked chest denying access](./docs/images/container-key.png)
+![Loaded hand truck in hand](./docs/images/hand-truck.png)
+
+Store-page copy lives in [`docs/store/`](./docs/store/).
+
 ## For developers
 
 Layout:
