@@ -4,6 +4,7 @@ import com.gathertocraft.ironchest.blocks.ChestTypes;
 import com.gathertocraft.ironchest.config.ChestRows;
 import com.gathertocraft.ironchest.screenhandlers.ChestScreenHandler;
 import com.gathertocraft.ironcore.InventorySanitizer;
+import com.gathertocraft.ironcore.ItemMigration;
 import com.gathertocraft.ironcore.ResizingContainer;
 import com.gathertocraft.ironcore.TierSpec;
 import com.gathertocraft.ironcore.UpgradableContainer;
@@ -24,6 +25,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Containers;
+import net.minecraft.world.ItemStackWithSlot;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -226,6 +228,14 @@ public class GenericChestEntity extends ChestBlockEntity
       super.loadAdditional(input);
     } finally {
       sizingForLoad = false;
+    }
+    if (this.getLootTable() == null) {
+      // Pre-1.21.5 items would otherwise load with enchantments silently stripped.
+      // Repair those slots in place; hand-truck and block-item restores come through here too.
+      // TODO(4.0): remove this repair block with ItemMigration — the conversion window closes.
+      for (ItemStackWithSlot entry : ItemMigration.repairedItems(input, maxCapacity())) {
+        this.setItem(entry.slot(), entry.stack());
+      }
     }
     this.clampInventoryToCapacity();
     this.lockKeyId = null;
