@@ -29,7 +29,7 @@
   ],
   "depends": {
     "fabricloader": ">=0.19.5",
-    "minecraft": "~26.3",
+    "minecraft": "${minecraft_constraint}",
     "java": ">=25",
     "fabric-api": "*",
     "ironcore": ">=${ironcore_version}"

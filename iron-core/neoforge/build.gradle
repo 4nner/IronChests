@@ -2,10 +2,10 @@ plugins {
   alias(libs.plugins.neogradle.moddev)
 }
 
-// The jar task below reads common's classes; evaluate it first.
-evaluationDependsOn(":iron-core:common")
+// Stonecutter node id, e.g. `26.1` (common sources compile in, see below).
+def mcNode = stonecutter.current.project
 
-version = project.ironcore_version
+version = "${project.ironcore_version}+${mcNode}"
 group = project.ironcore_maven_group
 
 base {
@@ -13,7 +13,7 @@ base {
 }
 
 neoForge {
-  version = libs.versions.neoforge.get()
+  version = property("mc.${mcNode}.neoforge")
 }
 
 repositories {
@@ -24,24 +24,18 @@ repositories {
 }
 
 dependencies {
-  implementation libs.neoforge
-
-  // Compile against common; its classes are inlined into this jar below.
-  implementation(project(":iron-core:common"))
-}
-
-// Fat-jar common classes: nested Jar-in-Jar jars load as plugin-layer
-// libraries, which cannot reference Minecraft code.
-tasks.named("jar") {
-  from(project(":iron-core:common").sourceSets.main.output.classesDirs)
-  duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.EXCLUDE
+  implementation "net.neoforged:neoforge:${property("mc.${mcNode}.neoforge")}"
 }
 
 sourceSets {
   // Shared mod assets and data; loader-specific files stay in src/main/resources.
+  // Common sources compile in, so no fat-jarring (nested jars can't use
+  // Minecraft code).
   main {
+    // Post-Stonecutter common sources: branch sources skip preprocessing.
+    java.srcDir(file("../../../common/versions/${mcNode}/build/generated/stonecutter/main/java"))
     resources {
-      srcDir("../resources")
+      srcDir("../../../resources")
     }
   }
 }
@@ -50,4 +44,18 @@ java {
   toolchain {
     languageVersion = JavaLanguageVersion.of(libs.versions.java.get().toInteger())
   }
+}
+
+// Stonecutter generates the versioned sources ModDevGradle's artifact
+// creation reads; order the two explicitly.
+tasks.named("createMinecraftArtifacts") {
+  dependsOn("stonecutterGenerate")
+}
+
+// The wired common sources come from the same-version common node's generation.
+tasks.named("compileJava") {
+  dependsOn(":iron-core:common:${mcNode}:stonecutterGenerate")
+}
+tasks.named("sourcesJar") {
+  dependsOn(":iron-core:common:${mcNode}:stonecutterGenerate")
 }

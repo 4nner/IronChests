@@ -2,7 +2,10 @@ plugins {
   alias(libs.plugins.fabric.loom)
 }
 
-version = project.ironcore_version
+// Stonecutter node id, e.g. `26.1` (common sources compile in, see below).
+def mcNode = stonecutter.current.project
+
+version = "${project.ironcore_version}+${mcNode}"
 group = project.ironcore_maven_group
 
 base {
@@ -10,6 +13,7 @@ base {
 }
 
 loom {
+  accessWidenerPath = project(":iron-core:common").file("src/main/resources/ironcore.accesswidener")
   splitEnvironmentSourceSets()
 
   mods {
@@ -21,20 +25,41 @@ loom {
 }
 
 dependencies {
-  minecraft libs.minecraft
+  minecraft "com.mojang:minecraft:${property("mc.${mcNode}.minecraft")}"
 
   implementation libs.fabric.loader
-  implementation libs.fabric.api
-
-  implementation(project(":iron-core:common"))
-  include(project(":iron-core:common"))
+  implementation "net.fabricmc.fabric-api:fabric-api:${property("mc.${mcNode}.fabric_api")}+${property("mc.${mcNode}.minecraft")}"
 }
 
 sourceSets {
   // Shared mod assets and data; loader-specific files stay in src/main/resources.
   main {
+    java {
+      // Post-Stonecutter common sources: branch sources skip preprocessing.
+      srcDir(file("../../../common/versions/${mcNode}/build/generated/stonecutter/main/java"))
+      // Client-only common code (*/client/*) compiles in the client source set.
+      exclude("**/client/**")
+    }
     resources {
-      srcDir("../resources")
+      srcDir("../../../resources")
     }
   }
+  client {
+    java {
+      // Package-rooted: include filters apply per source root, and the
+      // default roots have no `client/` segment.
+      srcDir(file("../../../common/versions/${mcNode}/build/generated/stonecutter/main/java/com/gathertocraft/ironcore/client"))
+    }
+  }
+}
+
+// The wired common sources come from the same-version common node's generation.
+tasks.named("compileJava") {
+  dependsOn(":iron-core:common:${mcNode}:stonecutterGenerate")
+}
+tasks.named("compileClientJava") {
+  dependsOn(":iron-core:common:${mcNode}:stonecutterGenerate")
+}
+tasks.named("sourcesJar") {
+  dependsOn(":iron-core:common:${mcNode}:stonecutterGenerate")
 }

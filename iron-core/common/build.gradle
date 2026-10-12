@@ -2,11 +2,14 @@ plugins {
   alias(libs.plugins.fabric.loom)
 }
 
+// Stonecutter node (e.g. `26.1`): per-version deps (mc.*) and matching cross-mod refs.
+def mcNode = stonecutter.current.project
+
 loom {
-  accessWidenerPath = file("src/main/resources/ironcore.accesswidener")
+  accessWidenerPath = project(":iron-core:common").file("src/main/resources/ironcore.accesswidener")
 }
 
-version = project.ironcore_version
+version = "${project.ironcore_version}+${mcNode}"
 group = project.ironcore_maven_group
 
 base {
@@ -14,8 +17,8 @@ base {
 }
 
 dependencies {
-  minecraft libs.minecraft
-  implementation libs.gson
+  minecraft "com.mojang:minecraft:${property("mc.${mcNode}.minecraft")}"
+  implementation "com.google.code.gson:gson:${property("mc.${mcNode}.gson")}"
   testImplementation libs.junit.jupiter
   testRuntimeOnly libs.junit.platform.launcher
 }
