@@ -27,7 +27,7 @@ stonecutter {
   // Node `26.1` builds the latest 26.1.x patch; same pattern for later versions.
   // Versions live only in branches (no root-branch nodes, which would only
   // produce junk jars).
-  def mcVersions = ['26.3': '26.3']
+  def mcVersions = ['26.1': '26.1.2', '26.2': '26.2', '26.3': '26.3']
   create('iron-chests') {
     vcsVersion = '26.3'
     branch('common') { versions(mcVersions) }
