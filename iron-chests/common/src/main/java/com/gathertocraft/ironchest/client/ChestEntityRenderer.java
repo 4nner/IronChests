@@ -79,6 +79,7 @@ public class ChestEntityRenderer<T extends BlockEntity & LidBlockEntity> extends
     open = 1.0F - open;
     open = 1.0F - open * open * open;
     ChestModel model = this.models.select(state.type);
+    /*? if >=26.3 { */
     submitNodeCollector.submitModel(
         model,
         open,
@@ -102,7 +103,24 @@ public class ChestEntityRenderer<T extends BlockEntity & LidBlockEntity> extends
               -1,
               state.breakProgress);
     }
+    /*?} */
+    /*? if <26.3 { */
+    /*// 26.1-26.2 fold the crumbling overlay into submitModel (possibly null).
+    submitNodeCollector.submitModel(
+        model,
+        open,
+        poseStack,
+        renderState.modSprite.renderType(model.renderType()),
+        state.lightCoords,
+        OverlayTexture.NO_OVERLAY,
+        -1,
+        this.sprites.get(renderState.modSprite),
+        0,
+        state.breakProgress);
 
+
+    */
+    /*?} */
     if (renderState.topStacks != null) {
       renderItems(
           poseStack,

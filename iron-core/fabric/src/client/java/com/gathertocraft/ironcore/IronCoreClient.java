@@ -28,7 +28,10 @@ public class IronCoreClient implements ClientModInitializer {
     ClientPlayNetworking.registerGlobalReceiver(
         KeyEditorPayloads.Sync.TYPE,
         (payload, context) -> {
+          /*? if >=26.2 { */
           if (Minecraft.getInstance().gui.screen() instanceof KeyEditorScreen screen) {
+            /*?} else */
+            // if (Minecraft.getInstance().screen instanceof KeyEditorScreen screen) {
             screen.applySync(payload.decode());
           }
         });

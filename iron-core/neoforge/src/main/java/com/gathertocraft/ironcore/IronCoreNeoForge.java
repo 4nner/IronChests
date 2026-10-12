@@ -52,7 +52,10 @@ public class IronCoreNeoForge {
                   Minecraft.getInstance()
                       .execute(
                           () -> {
+                            /*? if >=26.2 { */
                             if (Minecraft.getInstance().gui.screen()
+                                /*?} else */
+                                // if (Minecraft.getInstance().screen
                                 instanceof KeyEditorScreen screen) {
                               screen.applySync(payload.decode());
                             }

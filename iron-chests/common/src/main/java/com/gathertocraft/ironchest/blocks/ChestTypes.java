@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.BlockEntityTypes;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -158,7 +157,13 @@ public enum ChestTypes implements TierSpec {
   }
 
   public BlockEntityType<? extends ChestBlockEntity> getBlockEntityType() {
-    return this.blockEntityType != null ? this.blockEntityType.get() : BlockEntityTypes.CHEST;
+    /*? if >=26.2 { */
+    // Plural holder only exists on 26.2+; fully qualified to keep imports contiguous.
+    return this.blockEntityType != null
+        ? this.blockEntityType.get()
+        : net.minecraft.world.level.block.entity.BlockEntityTypes.CHEST;
+    /*?} else */
+    // return this.blockEntityType != null ? this.blockEntityType.get() : BlockEntityType.CHEST;
   }
 
   public BlockBehaviour.Properties blockProperties() {
