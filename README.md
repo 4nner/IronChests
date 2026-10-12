@@ -79,11 +79,33 @@ Then build/test with:
 game launches from any devenv shell:
 
 ```sh
-./gradlew :iron-chests:fabric:runClient      # or: run-client
-./gradlew :iron-chests:neoforge:runClient    # or: run-client-neoforge
-./gradlew :iron-chests:fabric:runServer      # or: run-server
-./gradlew :iron-chests:neoforge:runServer    # or: run-server-neoforge
+./gradlew :iron-chests:fabric:26.3:runClient      # or: run-client
+./gradlew :iron-chests:neoforge:26.3:runClient    # or: run-client-neoforge
+./gradlew :iron-chests:fabric:26.3:runServer      # or: run-server
+./gradlew :iron-chests:neoforge:26.3:runServer    # or: run-server-neoforge
 ```
+
+The `run-*` scripts default to the active version; pass `--version` for
+another one: `run-client --version 26.1`.
+
+### Multi-version development
+
+[Stonecutter](https://stonecutter.kikugie.dev/) builds every supported
+Minecraft version (`26.1`, `26.2`, `26.3`) from one branch:
+`./gradlew build` compiles all versions, and CI does the same in detached
+mode. Per-version dependencies live in `gradle.properties` as `mc.<version>.*`.
+
+```sh
+# work on a version: shared sources switch to its state (one target per run)
+./gradlew iron-chests:stonecutterSwitchTo26.1 iron-core:stonecutterSwitchTo26.1
+```
+
+Version differences use `/*? if >=<version> */` conditions in sources (block
+comments only: the formatter rewrites `//?`) and `replacements` in
+`iron-chests/stonecutter.gradle` / `iron-core/stonecutter.gradle`. Two
+rules: a replacement's target string must not occur in authored sources
+(breaks switching back), and never edit anything under
+`*/versions/*/build/generated/`.
 
 ### Conventions for Contributions
 
