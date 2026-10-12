@@ -51,24 +51,31 @@ jobs:
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
       - name: build
+        # GitHub sets CI=true, which switches Stonecutter to detached mode:
+        # all Minecraft lines build from generated sources in one invocation.
         run: ./gradlew build
+      - name: resolve run classpaths
+        # `build` compiles but never resolves run classpaths; this catches
+        # strict runtime conflicts (e.g. NeoForge's per-line Gson pin) without
+        # launching the game.
+        run: ./gradlew resolveRuntimeClasspaths
       - name: capture fabric artifacts
         uses: actions/upload-artifact@v7
         with:
           name: Artifacts-Fabric
-          path: iron-chests/fabric/build/libs/
+          path: iron-chests/fabric/versions/*/build/libs/*.jar
       - name: capture neoforge artifacts
         uses: actions/upload-artifact@v7
         with:
           name: Artifacts-NeoForge
-          path: iron-chests/neoforge/build/libs/
+          path: iron-chests/neoforge/versions/*/build/libs/*.jar
       - name: capture core fabric artifacts
         uses: actions/upload-artifact@v7
         with:
           name: Artifacts-Core-Fabric
-          path: iron-core/fabric/build/libs/
+          path: iron-core/fabric/versions/*/build/libs/*.jar
       - name: capture core neoforge artifacts
         uses: actions/upload-artifact@v7
         with:
           name: Artifacts-Core-NeoForge
-          path: iron-core/neoforge/build/libs/
+          path: iron-core/neoforge/versions/*/build/libs/*.jar
