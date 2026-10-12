@@ -2,13 +2,19 @@ plugins {
   alias(libs.plugins.neogradle.moddev)
 }
 
-// The ironcore mod mapping in neoForge.mods below reads other projects'
-// source sets; force them to evaluate first (settings order alone,
-// plus Loom's eager handling of `include`, doesn't guarantee it).
-evaluationDependsOn(":iron-core:neoforge")
-evaluationDependsOn(":iron-core:common")
+// Stonecutter node id, e.g. `26.1`. Same-version refs only: same-named
+// nodes share Gradle module coordinates (common compiles in, see below).
+def mcNode = stonecutter.current.project
 
-version = project.ironchest_version
+// project() inside dependencies{} returns a dependency; evaluate it here.
+def coreNeoForgeJar = project(":iron-core:neoforge:${mcNode}").tasks.named("jar")
+
+// The ironcore mod mapping in neoForge.mods below reads other projects'
+// source sets; force them to evaluate first.
+evaluationDependsOn(":iron-core:neoforge:${mcNode}")
+evaluationDependsOn(":iron-core:common:${mcNode}")
+
+version = "${project.ironchest_version}+${mcNode}"
 group = project.ironchest_maven_group
 
 base {
@@ -16,7 +22,7 @@ base {
 }
 
 neoForge {
-  version = libs.versions.neoforge.get()
+  version = property("mc.${mcNode}.neoforge")
 
   // Fail the build on invalid AT targets instead of silently ignoring them.
   validateAccessTransformers = true
@@ -24,14 +30,12 @@ neoForge {
   mods {
     ironchest {
       sourceSet sourceSets.main
-      // Common classes load as part of this mod in dev runs.
-      sourceSet project(":iron-chests:common").sourceSets.main
     }
     // Core ships as a separate mod; its content must be mapped here too:
     // runs only load mods declared in the run-owning project.
     ironcore {
-      sourceSet project(":iron-core:neoforge").sourceSets.main
-      sourceSet project(":iron-core:common").sourceSets.main
+      sourceSet project(":iron-core:neoforge:${mcNode}").sourceSets.main
+      sourceSet project(":iron-core:common:${mcNode}").sourceSets.main
     }
   }
 
@@ -53,28 +57,22 @@ repositories {
 }
 
 dependencies {
-  implementation libs.neoforge
+  implementation "net.neoforged:neoforge:${property("mc.${mcNode}.neoforge")}"
 
-  // Compile against common; its classes are inlined into this jar below.
-  implementation(project(":iron-chests:common"))
-  // Core ships as its own mod: compile against its common classes, depend on
-  // its loader artifact for dev runs, nest nothing.
-  implementation(project(":iron-core:common"))
-  implementation(project(":iron-core:neoforge"))
-}
-
-// Fat-jar common classes: nested Jar-in-Jar jars load as plugin-layer
-// libraries, which cannot reference Minecraft code.
-tasks.named("jar") {
-  from(project(":iron-chests:common").sourceSets.main.output.classesDirs)
-  duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.EXCLUDE
+  // Core ships as its own mod: file dependency (same reason as above).
+  implementation(project(":iron-core:common:${mcNode}"))
+  implementation(files(coreNeoForgeJar))
 }
 
 sourceSets {
   // Shared mod assets and data; loader-specific files stay in src/main/resources.
+  // Common sources compile in, so no fat-jarring (nested jars can't use
+  // Minecraft code).
   main {
+    // Post-Stonecutter common sources: branch sources skip preprocessing.
+    java.srcDir(file("../../../common/versions/${mcNode}/build/generated/stonecutter/main/java"))
     resources {
-      srcDir("../resources")
+      srcDir("../../../resources")
     }
   }
 }
@@ -83,4 +81,18 @@ java {
   toolchain {
     languageVersion = JavaLanguageVersion.of(libs.versions.java.get().toInteger())
   }
+}
+
+// Stonecutter generates the versioned sources ModDevGradle's artifact
+// creation reads; order the two explicitly.
+tasks.named("createMinecraftArtifacts") {
+  dependsOn("stonecutterGenerate")
+}
+
+// The wired common sources come from the same-version common node's generation.
+tasks.named("compileJava") {
+  dependsOn(":iron-chests:common:${mcNode}:stonecutterGenerate")
+}
+tasks.named("sourcesJar") {
+  dependsOn(":iron-chests:common:${mcNode}:stonecutterGenerate")
 }

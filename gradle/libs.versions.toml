@@ -1,23 +1,15 @@
 [versions]
-minecraft = "26.3"
 java = "25"
 fabric-loader = "0.19.5"
 fabric-loom = "1.18-SNAPSHOT"
-fabric-api = "0.162.0+26.3"
-gson = "2.14.0"
 junit-jupiter = "5.14.4"
 junit-platform-launcher = "1.14.4"
-neoforge = "26.3.0.67-beta"
 neogradle-moddev = "2.0.147"
 
 [libraries]
-minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
 fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric-loader" }
-fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api" }
-gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit-platform-launcher" }
-neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
 
 [plugins]
 fabric-loom = { id = "net.fabricmc.fabric-loom", version.ref = "fabric-loom" }

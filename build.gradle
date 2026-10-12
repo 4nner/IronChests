@@ -24,37 +24,82 @@ subprojects {
         rename { "LICENSE_" + archivesName.get() }
       }
     }
+
+    // Guard block for `resolveRuntimeClasspaths` below: always runs, resolves
+    // in its action (input snapshots go stale across version changes).
+    tasks.register("resolveRuntimeClasspath") {
+      group = "verification"
+      description = "Resolves this module's runtime classpath to catch dependency conflicts early."
+      outputs.upToDateWhen { false }
+      doLast {
+        def cp = project.configurations.findByName("runtimeClasspath")
+        if (cp != null && cp.canBeResolved) {
+          logger.lifecycle("Resolved ${project.path} runtimeClasspath (${cp.files.size()} files)")
+        }
+      }
+    }
   }
 
   // Version expansion for loader metadata. afterEvaluate: modules assign
   // `version` in their own scripts, so it must be read late.
+  // Per-version values (mc.*) live in the root gradle.properties.
   // NOTE: match Loom by its short plugin id.
   plugins.withId("fabric-loom") {
     project.afterEvaluate {
+      def mcLine = stonecutter.current.project
       tasks.named("processResources").configure {
         def version = project.version
         def ironcoreVersion = project.property("ironcore_version")
+        def mcConstraint = project.property("mc.${mcLine}.constraint")
         inputs.property "version", version
         inputs.property "ironcore_version", ironcoreVersion
+        inputs.property "minecraft_constraint", mcConstraint
 
         filesMatching("fabric.mod.json") {
-          expand "version": version, "ironcore_version": ironcoreVersion
+          expand "version": version, "ironcore_version": ironcoreVersion, "minecraft_constraint": mcConstraint
+        }
+
+        // Below 26.3 the trigger key is `recipe`, not `recipes`.
+        if (stonecutter.current.parsed.matches('<26.3')) {
+          filesMatching("**/advancement/recipes/*.json") {
+            filter { String line -> line.replace('"recipes": "', '"recipe": "') }
+          }
         }
       }
     }
   }
   plugins.withId("net.neoforged.moddev") {
     project.afterEvaluate {
+      def mcLine = stonecutter.current.project
       tasks.named("processResources").configure {
         def version = project.version
         def ironcoreVersion = project.property("ironcore_version")
+        def mcRange = project.property("mc.${mcLine}.range")
+        def nfRange = project.property("mc.${mcLine}.neoforge_range")
         inputs.property "version", version
         inputs.property "ironcore_version", ironcoreVersion
+        inputs.property "minecraft_range", mcRange
+        inputs.property "neoforge_range", nfRange
 
         filesMatching("META-INF/neoforge.mods.toml") {
-          expand "ironchest_version": version, "ironcore_version": ironcoreVersion
+          expand "ironchest_version": version, "ironcore_version": ironcoreVersion, "minecraft_range": mcRange, "neoforge_range": nfRange
+        }
+
+        // Below 26.3 the trigger key is `recipe`, not `recipes`.
+        if (stonecutter.current.parsed.matches('<26.3')) {
+          filesMatching("**/advancement/recipes/*.json") {
+            filter { String line -> line.replace('"recipes": "', '"recipe": "') }
+          }
         }
       }
     }
   }
+}
+
+// `build` never resolves run classpaths; this catches strict conflicts
+// (e.g. NeoForge's Gson pin) without launching the game. Runs in CI.
+tasks.register("resolveRuntimeClasspaths") {
+  group = "verification"
+  description = "Resolves all versioned modules' runtime classpaths to catch dependency conflicts early."
+  dependsOn(subprojects.collectMany { p -> p.tasks.matching { it.name == "resolveRuntimeClasspath" } })
 }

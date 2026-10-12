@@ -4,21 +4,42 @@ pluginManagement {
 			name = 'Fabric'
 			url = 'https://maven.fabricmc.net/'
 		}
+		maven {
+			name = 'NeoForge'
+			url = 'https://maven.neoforged.net/releases/'
+		}
 		mavenCentral()
 		gradlePluginPortal()
 	}
 }
 
 plugins {
+  id 'dev.kikugie.stonecutter' version '0.9.8'
   // Auto-provision Java toolchains (ModDevGradle run tasks need one).
   id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
 }
 
-rootProject.name = 'IronChests'
+stonecutter {
+  // Enable Groovy DSL, as Stonecutter uses Kotlin by default
+  kotlinController = false
+  centralScript = "build.gradle"
 
-include("iron-chests:common")
-include("iron-chests:fabric")
-include("iron-chests:neoforge")
-include("iron-core:common")
-include("iron-core:fabric")
-include("iron-core:neoforge")
+  // Node `26.1` builds the latest 26.1.x patch; same pattern for later versions.
+  // Versions live only in branches (no root-branch nodes, which would only
+  // produce junk jars).
+  def mcVersions = ['26.3': '26.3']
+  create('iron-chests') {
+    vcsVersion = '26.3'
+    branch('common') { versions(mcVersions) }
+    branch('fabric') { versions(mcVersions) }
+    branch('neoforge') { versions(mcVersions) }
+  }
+  create('iron-core') {
+    vcsVersion = '26.3'
+    branch('common') { versions(mcVersions) }
+    branch('fabric') { versions(mcVersions) }
+    branch('neoforge') { versions(mcVersions) }
+  }
+}
+
+rootProject.name = 'IronChests'

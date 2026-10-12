@@ -13,14 +13,14 @@ description = "Shared library for Iron mods"
 [[dependencies.ironcore]]
 modId = "neoforge"
 type = "required"
-versionRange = "[26.3.0.52-beta,)"
+versionRange = "${neoforge_range}"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.ironcore]]
 modId = "minecraft"
 type = "required"
-versionRange = "[26.3,26.4)"
+versionRange = "${minecraft_range}"
 ordering = "NONE"
 side = "BOTH"
 
