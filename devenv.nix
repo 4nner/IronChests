@@ -63,25 +63,68 @@ in
 
   # https://devenv.sh/scripts/
   scripts = {
-    # Builds everything, then collects the 4 distributable jars
+    # Builds everything, then collects the distributable jars (per version).
     build.exec = ''
+      set -eu
       ./gradlew build
       rm -rf dist && mkdir dist
       chest=$(sed -n 's/^ironchest_version=//p' gradle.properties)
       core=$(sed -n 's/^ironcore_version=//p' gradle.properties)
-      cp iron-chests/fabric/build/libs/IronChests-"$chest".jar "dist/IronChests-$chest-Fabric.jar"
-      cp iron-chests/neoforge/build/libs/IronChests-neoforge-"$chest".jar "dist/IronChests-$chest-NeoForge.jar"
-      cp iron-core/fabric/build/libs/IronCore-"$core".jar "dist/IronCore-$core-Fabric.jar"
-      cp iron-core/neoforge/build/libs/IronCore-neoforge-"$core".jar "dist/IronCore-$core-NeoForge.jar"
+      # Supported versions, derived from the mc.* keys in gradle.properties.
+      lines=$(cut -d. -f1-3 gradle.properties | grep '^mc[.]' | cut -d. -f2- | sort -uV)
+      for line in $lines; do
+        cp "iron-chests/fabric/versions/$line/build/libs/IronChests-$chest+$line.jar" "dist/IronChests-$chest+$line-Fabric.jar"
+        cp "iron-chests/neoforge/versions/$line/build/libs/IronChests-neoforge-$chest+$line.jar" "dist/IronChests-$chest+$line-NeoForge.jar"
+        cp "iron-core/fabric/versions/$line/build/libs/IronCore-$core+$line.jar" "dist/IronCore-$core+$line-Fabric.jar"
+        cp "iron-core/neoforge/versions/$line/build/libs/IronCore-neoforge-$core+$line.jar" "dist/IronCore-$core+$line-NeoForge.jar"
+      done
       ls dist
     '';
     check.exec = "./gradlew check";
     clean.exec = "./gradlew clean";
     test.exec = "./gradlew test";
-    run-client.exec = "./gradlew :iron-chests:fabric:runClient";
-    run-server.exec = "./gradlew :iron-chests:fabric:runServer";
-    run-client-neoforge.exec = "./gradlew :iron-chests:neoforge:runClient";
-    run-server-neoforge.exec = "./gradlew :iron-chests:neoforge:runServer";
+    # Resolves [--version <version>] to a supported Minecraft version for run tasks.
+    # Defaults to the Stonecutter active version.
+    mc-version.exec = ''
+      set -eu
+      version=""
+      while [ $# -gt 0 ]; do
+        case "$1" in
+          --version)
+            [ $# -ge 2 ] || { echo "--version needs a value" >&2; exit 1; }
+            version="$2"
+            shift 2
+            ;;
+          *)
+            echo "usage: $0 [--version <version>]" >&2
+            exit 1
+            ;;
+        esac
+      done
+      lines=$(cut -d. -f1-3 gradle.properties | grep '^mc[.]' | cut -d. -f2- | sort -uV)
+      if [ -z "$version" ]; then
+        version=$(grep -F '[SC]' iron-chests/stonecutter.gradle | head -1 | sed "s/.*active '//;s/'.*//")
+      fi
+      if printf '%s\n' "$lines" | grep -qxF "$version"; then
+        echo "$version"
+      else
+        echo "unknown version '$version' (available: $(printf '%s ' $lines))" >&2
+        exit 1
+      fi
+    '';
+    # Game runs default to the active version; pass --version to override.
+    run-client.exec = ''
+      active=$(mc-version "$@") && ./gradlew ":iron-chests:fabric:$active:runClient"
+    '';
+    run-server.exec = ''
+      active=$(mc-version "$@") && ./gradlew ":iron-chests:fabric:$active:runServer"
+    '';
+    run-client-neoforge.exec = ''
+      active=$(mc-version "$@") && ./gradlew ":iron-chests:neoforge:$active:runClient"
+    '';
+    run-server-neoforge.exec = ''
+      active=$(mc-version "$@") && ./gradlew ":iron-chests:neoforge:$active:runServer"
+    '';
   };
 
   enterShell = ''
