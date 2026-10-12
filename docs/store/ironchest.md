@@ -43,5 +43,3 @@ Craft a Container Key and **Shift + Right-Click** a chest to lock it. Only you, 
 Copper golems deposit carried items into any tier. They will only deposit dirt into the Dirt Chest 9000! Deposits can be switched off with `copperGolemInteraction` in `config/ironchest.json`.
 
 ![Copper golem](https://raw.githubusercontent.com/4nner/ironchests/main/docs/images/copper-golem.png)
-
-
