@@ -14,7 +14,16 @@ import net.minecraft.world.entity.player.Inventory;
 public class ChestScreen extends AbstractContainerScreen<ChestScreenHandler> {
   private final int containerRows;
   private final int containerColumns;
+  private final int playerRows;
+  private final boolean extendedInventory;
   private final LayoutKind layoutKind;
+
+  // Segments of generic_54.png's 96px player panel (V=126): 14px top padding, 18px rows,
+  // 4px gap, 18px hotbar, 6px bottom padding. Extra rows repeat the first inventory row.
+  private static final int PLAYER_TOP_HEIGHT = 14;
+  private static final int PLAYER_GAP_HEIGHT = 4;
+  private static final int PLAYER_HOTBAR_HEIGHT = 18;
+  private static final int PLAYER_BOTTOM_HEIGHT = 6;
 
   public ChestScreen(ChestScreenHandler menu, Inventory inventory, Component title) {
     super(
@@ -22,9 +31,11 @@ public class ChestScreen extends AbstractContainerScreen<ChestScreenHandler> {
         inventory,
         title,
         ContainerGuiLayout.panelWidth(menu.getChestColumns()),
-        ContainerGuiLayout.screenHeight(menu.getChestRows()));
+        ContainerGuiLayout.screenHeight(menu.getChestRows(), menu.getPlayerRows()));
     this.containerRows = menu.getChestRows();
     this.containerColumns = menu.getChestColumns();
+    this.playerRows = menu.getPlayerRows();
+    this.extendedInventory = menu.isExtendedInventory();
     this.layoutKind = ContainerGuiLayout.layoutKind(this.containerColumns, this.containerRows);
     this.inventoryLabelY = this.imageHeight - 94;
     if (this.layoutKind == LayoutKind.WIDE_STRIPS) {
@@ -49,8 +60,7 @@ public class ChestScreen extends AbstractContainerScreen<ChestScreenHandler> {
   private void blitVanillaFullPanel(GuiGraphicsExtractor graphics, int xo, int yo) {
     int bodyHeight = bodyHeight();
     blitVanillaRegion(graphics, xo, yo, this.imageWidth, bodyHeight, 0.0F, 0.0F);
-    blitVanillaPlayerFooter(
-        graphics, xo, yo + bodyHeight, this.imageWidth, this.imageHeight - bodyHeight);
+    blitPlayerFooter(graphics, xo, yo + bodyHeight, this.imageWidth);
   }
 
   private void renderTallVanillaLayout(GuiGraphicsExtractor graphics, int xo, int yo) {
@@ -114,12 +124,8 @@ public class ChestScreen extends AbstractContainerScreen<ChestScreenHandler> {
 
   private void blitTallPlayerFooter(GuiGraphicsExtractor graphics, int xo, int yo) {
     int bodyHeight = bodyHeight();
-    blitVanillaPlayerFooter(
-        graphics,
-        playerFooterX(xo),
-        yo + bodyHeight,
-        ContainerGuiLayout.VANILLA_PANEL_WIDTH,
-        this.imageHeight - bodyHeight);
+    blitPlayerFooter(
+        graphics, playerFooterX(xo), yo + bodyHeight, ContainerGuiLayout.VANILLA_PANEL_WIDTH);
   }
 
   private int bodyHeight() {
@@ -151,6 +157,47 @@ public class ChestScreen extends AbstractContainerScreen<ChestScreenHandler> {
         height,
         ContainerGuiLayout.TEXTURE_SIZE,
         ContainerGuiLayout.TEXTURE_SIZE);
+  }
+
+  private void blitPlayerFooter(GuiGraphicsExtractor graphics, int x, int y, int width) {
+    if (!this.extendedInventory) {
+      blitVanillaPlayerFooter(
+          graphics, x, y, width, ContainerGuiLayout.playerPanelHeight(this.playerRows));
+      return;
+    }
+    float panelV = ContainerGuiLayout.PLAYER_PANEL_V;
+    float rowV = panelV + PLAYER_TOP_HEIGHT;
+    float gapV = rowV + 3 * ContainerGuiLayout.ROW_HEIGHT;
+    blitVanillaRegion(graphics, x, y, width, PLAYER_TOP_HEIGHT, 0.0F, panelV);
+    int rowY = y + PLAYER_TOP_HEIGHT;
+    for (int row = 0; row < this.playerRows; row++) {
+      blitVanillaRegion(
+          graphics,
+          x,
+          rowY + row * ContainerGuiLayout.ROW_HEIGHT,
+          width,
+          ContainerGuiLayout.ROW_HEIGHT,
+          0.0F,
+          rowV);
+    }
+    int afterRows = rowY + this.playerRows * ContainerGuiLayout.ROW_HEIGHT;
+    blitVanillaRegion(graphics, x, afterRows, width, PLAYER_GAP_HEIGHT, 0.0F, gapV);
+    blitVanillaRegion(
+        graphics,
+        x,
+        afterRows + PLAYER_GAP_HEIGHT,
+        width,
+        PLAYER_HOTBAR_HEIGHT,
+        0.0F,
+        gapV + PLAYER_GAP_HEIGHT);
+    blitVanillaRegion(
+        graphics,
+        x,
+        afterRows + PLAYER_GAP_HEIGHT + PLAYER_HOTBAR_HEIGHT,
+        width,
+        PLAYER_BOTTOM_HEIGHT,
+        0.0F,
+        gapV + PLAYER_GAP_HEIGHT + PLAYER_HOTBAR_HEIGHT);
   }
 
   private static void blitVanillaPlayerFooter(
