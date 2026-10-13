@@ -15,6 +15,7 @@ import org.jspecify.annotations.Nullable;
 public class SizedContainerMenu extends AbstractContainerMenu {
   private final Container container;
   private final TierSpec tier;
+  private final int playerRows;
   private final @Nullable BlockPos chestBlockPos;
 
   public SizedContainerMenu(
@@ -26,6 +27,7 @@ public class SizedContainerMenu extends AbstractContainerMenu {
     super(menuType, syncId);
     checkContainerSize(container, tier.size());
     this.tier = tier;
+    this.playerRows = ExtendedInventory.playerRows(playerInventory);
     this.container = container;
     this.chestBlockPos =
         container instanceof ChestBlockEntity blockEntity ? blockEntity.getBlockPos() : null;
@@ -50,7 +52,8 @@ public class SizedContainerMenu extends AbstractContainerMenu {
 
     int playerInventoryX = ContainerGuiLayout.playerInventoryX(columns);
     int playerInventoryY = ContainerGuiLayout.playerInventoryY(rows);
-    for (int row = 0; row < 3; row++) {
+    int hotbarOffset = ContainerGuiLayout.hotbarOffset(this.playerRows);
+    for (int row = 0; row < this.playerRows; row++) {
       for (int column = 0; column < 9; column++) {
         this.addSlot(
             new Slot(
@@ -66,8 +69,16 @@ public class SizedContainerMenu extends AbstractContainerMenu {
               playerInventory,
               column,
               playerInventoryX + column * ContainerGuiLayout.SLOT_SIZE,
-              playerInventoryY + ContainerGuiLayout.HOTBAR_OFFSET));
+              playerInventoryY + hotbarOffset));
     }
+  }
+
+  public int getPlayerRows() {
+    return this.playerRows;
+  }
+
+  public boolean isExtendedInventory() {
+    return this.playerRows > ExtendedInventory.VANILLA_PLAYER_ROWS;
   }
 
   public int getChestRows() {
