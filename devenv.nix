@@ -43,7 +43,7 @@ in
   # https://devenv.sh/languages/java/
   languages.java = {
     enable = true;
-    jdk.package = pkgs.jdk25;
+    jdk.package = pkgs.jdk21;
     # Keep off: the Gradle wrapper pins the build's Gradle version, see
     # gradle/wrapper/gradle-wrapper.properties.
     gradle.enable = false;
@@ -70,8 +70,8 @@ in
       rm -rf dist && mkdir dist
       chest=$(sed -n 's/^ironchest_version=//p' gradle.properties)
       core=$(sed -n 's/^ironcore_version=//p' gradle.properties)
-      # Supported versions, derived from the mc.* keys in gradle.properties.
-      lines=$(cut -d. -f1-3 gradle.properties | grep '^mc[.]' | cut -d. -f2- | sort -uV)
+      # Supported versions: the <version> of each mc.<version>.minecraft key.
+      lines=$(sed -n 's/^mc\.\(.*\)\.minecraft=.*/\1/p' gradle.properties | sort -uV)
       for line in $lines; do
         cp "iron-chests/fabric/versions/$line/build/libs/IronChests-$chest+$line.jar" "dist/IronChests-$chest+$line-Fabric.jar"
         cp "iron-chests/neoforge/versions/$line/build/libs/IronChests-neoforge-$chest+$line.jar" "dist/IronChests-$chest+$line-NeoForge.jar"
@@ -101,7 +101,7 @@ in
             ;;
         esac
       done
-      lines=$(cut -d. -f1-3 gradle.properties | grep '^mc[.]' | cut -d. -f2- | sort -uV)
+      lines=$(sed -n 's/^mc\.\(.*\)\.minecraft=.*/\1/p' gradle.properties | sort -uV)
       if [ -z "$version" ]; then
         version=$(grep -F '[SC]' iron-chests/stonecutter.gradle | head -1 | sed "s/.*active '//;s/'.*//")
       fi
