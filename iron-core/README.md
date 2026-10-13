@@ -5,7 +5,7 @@ Iron Chests stands on it; future Iron mods will too.
 
 - Modrinth: <https://modrinth.com/mod/iron-core-utilities>
 - CurseForge: <https://www.curseforge.com/minecraft/mc-mods/iron-core-utilities>
-- Mod id: `ironcore`; Minecraft 26.x, client and server
+- Mod id: `ironcore`; Minecraft 1.21.1-1.21.4, client and server
 - License: GPL-3.0
 
 ## Requires

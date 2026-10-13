@@ -2,8 +2,8 @@
 
 ![Fabric](https://img.shields.io/static/v1?label=modloader&message=fabric&color=yellowgreen)
 ![NeoForge](https://img.shields.io/static/v1?label=modloader&message=neoforge&color=orange)
-![Minecraft](https://img.shields.io/static/v1?label=minecraft&message=26.x&color=brightgreen)
-![Java](https://img.shields.io/static/v1?label=java&message=25&color=red)
+![Minecraft](https://img.shields.io/static/v1?label=minecraft&message=1.21.x&color=brightgreen)
+![Java](https://img.shields.io/static/v1?label=java&message=21&color=red)
 ![Mod Environment](https://img.shields.io/static/v1?label=environment&message=client%2Fserver&color=yellow)
 [![License](https://img.shields.io/static/v1?label=licence&message=GPL-3.0&color=blue)](./LICENSE)
 
@@ -23,7 +23,7 @@ Install **both** jars. Iron Chests will not run without Iron Core Utilities.
 - Iron Chests: [Modrinth](https://modrinth.com/mod/ironchest) / [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ironchest) (mod id `ironchest`)
 - Iron Core Utilities: [Modrinth](https://modrinth.com/mod/iron-core-utilities) / [CurseForge](https://www.curseforge.com/minecraft/mc-mods/iron-core-utilities) (mod id `ironcore`)
 
-Supports Minecraft 26.x and requires Java 25. See each mod's README for details.
+Supports Minecraft 1.21.1 and 1.21.4 and requires Java 21. See each mod's README for details.
 
 Maintained by [GatherToCraft](https://www.gathertocraft.com), a team-finder portal that matches Minecraft players by playstyle, edition, schedule, and modpacks.
 
@@ -32,7 +32,6 @@ Maintained by [GatherToCraft](https://www.gathertocraft.com), a team-finder port
 ![All tiers, left to right: Christmas, Dirt 9000!, Copper, Iron, Gold, Diamond, Emerald, Crystal, Obsidian, Netherite](./docs/images/chests-lineup.png)
 ![Chest upgrades](./docs/images/chest-upgrades.png)
 ![Crystal chest shows its contents](./docs/images/crystal-chest.png)
-![Copper golem depositing into a copper chest](./docs/images/copper-golem.png)
 ![Locked chest denying access](./docs/images/container-key.png)
 ![Loaded hand truck in hand](./docs/images/hand-truck.png)
 
@@ -80,25 +79,25 @@ Then build/test with:
 game launches from any devenv shell:
 
 ```sh
-./gradlew :iron-chests:fabric:26.3:runClient      # or: run-client
-./gradlew :iron-chests:neoforge:26.3:runClient    # or: run-client-neoforge
-./gradlew :iron-chests:fabric:26.3:runServer      # or: run-server
-./gradlew :iron-chests:neoforge:26.3:runServer    # or: run-server-neoforge
+./gradlew :iron-chests:fabric:1.21.4:runClient      # or: run-client
+./gradlew :iron-chests:neoforge:1.21.4:runClient    # or: run-client-neoforge
+./gradlew :iron-chests:fabric:1.21.4:runServer      # or: run-server
+./gradlew :iron-chests:neoforge:1.21.4:runServer    # or: run-server-neoforge
 ```
 
 The `run-*` scripts default to the active version; pass `--version` for
-another one: `run-client --version 26.1`.
+another one: `run-client --version 1.21.1`.
 
 ### Multi-version development
 
 [Stonecutter](https://stonecutter.kikugie.dev/) builds every supported
-Minecraft version (`26.1`, `26.2`, `26.3`) from one branch:
+Minecraft version (`1.21.1`, `1.21.4`) from one branch:
 `./gradlew build` compiles all versions, and CI does the same in detached
 mode. Per-version dependencies live in `gradle.properties` as `mc.<version>.*`.
 
 ```sh
 # work on a version: shared sources switch to its state (one target per run)
-./gradlew iron-chests:stonecutterSwitchTo26.1 iron-core:stonecutterSwitchTo26.1
+./gradlew iron-chests:stonecutterSwitchTo1.21.1 iron-core:stonecutterSwitchTo1.21.1
 ```
 
 Version differences use `/*? if >=<version> */` conditions in sources (block

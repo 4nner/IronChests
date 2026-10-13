@@ -4,7 +4,7 @@ Bigger, upgradable chests for Minecraft, on Fabric and NeoForge.
 
 - Modrinth: <https://modrinth.com/mod/ironchest>
 - CurseForge: <https://www.curseforge.com/minecraft/mc-mods/ironchest>
-- Mod id: `ironchest`; Minecraft 26.x, client and server
+- Mod id: `ironchest`; Minecraft 1.21.1-1.21.4, client and server
 - License: GPL-3.0
 
 ## Requires
