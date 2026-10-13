@@ -9,6 +9,7 @@ public final class ContainerGuiLayout {
   public static final int RIGHT_INSET = 6;
   public static final int PLAYER_INVENTORY_GAP = 13;
   public static final int HOTBAR_OFFSET = 58;
+  public static final int EXTENDED_HOTBAR_OFFSET = 112;
   public static final int NARROW_CENTER_OFFSET = 9;
 
   public static final int TITLE_HEIGHT = 17;
@@ -50,7 +51,25 @@ public final class ContainerGuiLayout {
   }
 
   public static int screenHeight(int rows) {
-    return 114 + rows * ROW_HEIGHT;
+    return screenHeight(rows, ExtendedInventory.VANILLA_PLAYER_ROWS);
+  }
+
+  public static int screenHeight(int chestRows, int playerRows) {
+    return 114
+        + chestRows * ROW_HEIGHT
+        + Math.max(0, playerRows - ExtendedInventory.VANILLA_PLAYER_ROWS) * ROW_HEIGHT;
+  }
+
+  public static int hotbarOffset(int playerRows) {
+    if (playerRows <= ExtendedInventory.VANILLA_PLAYER_ROWS) {
+      return HOTBAR_OFFSET;
+    }
+    return HOTBAR_OFFSET + (playerRows - ExtendedInventory.VANILLA_PLAYER_ROWS) * ROW_HEIGHT;
+  }
+
+  public static int playerPanelHeight(int playerRows) {
+    return PLAYER_PANEL_HEIGHT
+        + Math.max(0, playerRows - ExtendedInventory.VANILLA_PLAYER_ROWS) * ROW_HEIGHT;
   }
 
   public static int containerSlotStartX(int columns) {
