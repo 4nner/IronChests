@@ -146,7 +146,7 @@ in
   # https://devenv.sh/git-hooks/
   git-hooks.hooks = {
     convco.enable = true;
-    nixfmt-rfc-style.enable = true;
+    nixfmt.enable = true;
     google-java-format.enable = true;
     end-of-file-fixer.enable = true;
     trim-trailing-whitespace.enable = true;
