@@ -3,6 +3,7 @@
 ![Fabric](https://img.shields.io/static/v1?label=modloader&message=fabric&color=yellowgreen)
 ![NeoForge](https://img.shields.io/static/v1?label=modloader&message=neoforge&color=orange)
 ![Minecraft](https://img.shields.io/static/v1?label=minecraft&message=26.x&color=brightgreen)
+![Java](https://img.shields.io/static/v1?label=java&message=25&color=red)
 ![Mod Environment](https://img.shields.io/static/v1?label=environment&message=client%2Fserver&color=yellow)
 [![License](https://img.shields.io/static/v1?label=licence&message=GPL-3.0&color=blue)](./LICENSE)
 
@@ -22,7 +23,7 @@ Install **both** jars. Iron Chests will not run without Iron Core Utilities.
 - Iron Chests: [Modrinth](https://modrinth.com/mod/ironchest) / [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ironchest) (mod id `ironchest`)
 - Iron Core Utilities: [Modrinth](https://modrinth.com/mod/iron-core-utilities) / [CurseForge](https://www.curseforge.com/minecraft/mc-mods/iron-core-utilities) (mod id `ironcore`)
 
-Supports Minecraft 26.x. See each mod's README for details.
+Supports Minecraft 26.x and requires Java 25. See each mod's README for details.
 
 Maintained by [GatherToCraft](https://www.gathertocraft.com), a team-finder portal that matches Minecraft players by playstyle, edition, schedule, and modpacks.
 
