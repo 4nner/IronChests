@@ -107,12 +107,7 @@ public class ChestScreen extends AbstractContainerScreen<ChestScreenHandler> {
 
   private void renderWidePlayerFooter(
       GuiGraphicsExtractor graphics, int xo, int footerY, int panelWidth) {
-    blitVanillaPlayerFooter(
-        graphics,
-        playerFooterX(xo),
-        footerY,
-        ContainerGuiLayout.VANILLA_PANEL_WIDTH,
-        ContainerGuiLayout.PLAYER_PANEL_HEIGHT);
+    blitPlayerFooter(graphics, playerFooterX(xo), footerY, ContainerGuiLayout.VANILLA_PANEL_WIDTH);
     blitWideStrip(
         graphics,
         ContainerGuiLayout.widePlayerTexture(IronChestsCommon.MOD_ID, this.containerColumns),
